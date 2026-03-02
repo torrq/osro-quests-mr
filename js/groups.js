@@ -148,6 +148,9 @@ function renderGroupContentCore() {
             </div>
             <button class="btn btn-sm btn-danger" onclick="deleteSubgroup(${groupIdx}, ${subIdx})">Delete</button>
           </div>
+          <div class="subgroup-edit-caption-row">
+            <input type="text" class="subgroup-edit-caption-input" placeholder="Caption (optional)" value="${subgroup.caption || ''}" onchange="updateSubgroupCaption(${groupIdx}, ${subIdx}, this.value)">
+          </div>
         </div>
       `;
     });
@@ -251,6 +254,12 @@ function updateSubgroupName(groupIdx, subIdx, value) {
   render();
 }
 
+function updateSubgroupCaption(groupIdx, subIdx, value) {
+  const groups = groupsTabMode === 'quests' ? DATA.groups : DATA.shopGroups;
+  groups[groupIdx].subgroups[subIdx].caption = value.trim() || undefined;
+  render();
+}
+
 function moveSubgroup(groupIdx, subIdx, direction) {
   const groups = groupsTabMode === 'quests' ? DATA.groups : DATA.shopGroups;
   const group = groups[groupIdx];
@@ -324,6 +333,7 @@ window.moveGroup = moveGroup;
 // Subgroup management
 window.addSubgroup = addSubgroup;
 window.updateSubgroupName = updateSubgroupName;
+window.updateSubgroupCaption = updateSubgroupCaption;
 window.moveSubgroup = moveSubgroup;
 window.deleteSubgroup = deleteSubgroup;
 window.setGroupsTabMode = setGroupsTabMode;

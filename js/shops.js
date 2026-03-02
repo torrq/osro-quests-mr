@@ -200,7 +200,10 @@ function createShopSubgroupHeader(subgroup, groupIdx, subIdx, isSubExpanded) {
   subHeader.onclick = () => toggleShopSubgroup(groupIdx, subIdx);
   subHeader.innerHTML = `
     <span class="expand-icon ${isSubExpanded ? "expanded" : ""}">▷</span>
-    <span class="subgroup-name-readonly">${subgroup.name}</span>
+    <div class="group-name-container">
+      <span class="subgroup-name-readonly">${subgroup.name}</span>
+      ${subgroup.caption ? `<span class="subgroup-caption">${subgroup.caption}</span>` : ""}
+    </div>
   `;
   return subHeader;
 }

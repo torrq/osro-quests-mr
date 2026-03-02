@@ -674,6 +674,15 @@ textarea {
   color: var(--accent);
 }
 
+.subgroup-caption {
+  font-size: 11pt;
+  font-style: italic;
+  font-family: monospace;
+  text-align: right;
+  padding: 0 8px 0 0;
+  color: var(--accent);
+}
+
 /* Material Tree */
 .material-tree {
   background: var(--panel);
@@ -770,6 +779,40 @@ textarea {
   font-style: italic;
   font-family: monospace;
   color: var(--accent);
+}
+
+.subgroup-edit-caption {
+  font-size: 10pt;
+  font-style: italic;
+  font-family: monospace;
+  color: var(--text-muted);
+}
+
+.subgroup-edit-caption-row {
+  padding: 4px 0 2px;
+}
+
+.subgroup-edit-caption-input {
+  width: 100%;
+  font-size: 11px;
+  font-style: italic;
+  color: var(--text-muted);
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  padding: 2px 6px;
+  box-sizing: border-box;
+}
+
+.subgroup-edit-caption-input:focus {
+  border-color: var(--border);
+  background: var(--bg);
+  color: var(--text);
+  outline: none;
+}
+
+.subgroup-edit-caption-input::placeholder {
+  opacity: 0.5;
 }
 
 /* =========================================

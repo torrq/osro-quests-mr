@@ -155,7 +155,10 @@ function createSubgroupHeader(subgroup, groupIdx, subIdx, isSubExpanded) {
   subHeader.onclick = () => toggleSubgroup(groupIdx, subIdx);
   subHeader.innerHTML = `
     <span class="expand-icon ${isSubExpanded ? "expanded" : ""}">▷</span>
-    <span class="subgroup-name-readonly">${subgroup.name}</span>
+    <div class="group-name-container">
+      <span class="subgroup-name-readonly">${subgroup.name}</span>
+      ${subgroup.caption ? `<span class="subgroup-caption">${subgroup.caption}</span>` : ""}
+    </div>
   `;
   return subHeader;
 }
@@ -393,7 +396,7 @@ function renderTotalsHeader(questIndex) {
   if (!hasNestedQuests(questIndex)) return '<span class="item-label">Value:</span>';
 
   // Only show the toggle if including sub-quests actually changes the total
-  const { totalZeny: directZeny } = calculateDirectRequirements();
+  const { totalZeny: directZeny } = calculateDirectRequirements(questIndex);
   const { totalZeny: fullZeny }   = calculateFullRequirements(questIndex, {});
   if (directZeny === fullZeny) return '<span class="item-label">Value:</span>';
 
@@ -731,7 +734,7 @@ function _fmtSuffix(val, div, suffix) {
 // ===== SUMMARY RENDERING =====
 
 function renderSummary(questIndex) {
-  if (!state.showFullTotals) return renderDirectRequirements();
+  if (!state.showFullTotals) return renderDirectRequirements(questIndex);
 
   const multiQuestItems = findMultiQuestItems(questIndex);
 
@@ -832,8 +835,8 @@ function generateTabLabel(combo) {
   return labels.join(" | ");
 }
 
-function renderDirectRequirements() {
-  const { totals, totalZeny } = calculateDirectRequirements();
+function renderDirectRequirements(questIndex = null) {
+  const { totals, totalZeny } = calculateDirectRequirements(questIndex);
   const entries = sortTotalEntries(totals);
   
   if (entries.length === 0) {
@@ -843,13 +846,48 @@ function renderDirectRequirements() {
   return renderSummaryItems(entries, totalZeny);
 }
 
-function calculateDirectRequirements() {
+function shopZenyCostPerUnit(shop) {
+  let zeny = 0;
+  if (!Array.isArray(shop.requirements)) return 0;
+  shop.requirements.forEach(req => {
+    zeny += calculateZenyValue(req, Number(req.amount) || 0);
+  });
+  return zeny;
+}
+
+function calculateDirectRequirements(questIndex = null) {
   const quest = state.selectedQuest;
   let totalZeny = 0;
   const totals = {};
 
   quest.requirements.forEach(req => {
     const effectiveAmount = Number(req.amount) || 0;
+
+    if (req.type === 'item' && questIndex && questIndex.has(req.id)) {
+      const sources = questIndex.get(req.id);
+      const shopSrc = sources.find(s => s.type === 'shop');
+      if (shopSrc) {
+        const shopZenyPerUnit = shopZenyCostPerUnit(shopSrc.source);
+        if (shopZenyPerUnit > 0) {
+          totalZeny += shopZenyPerUnit * effectiveAmount;
+          const item = getItem(req.id);
+          const key = `item_${req.id}`;
+          if (!totals[key]) {
+            totals[key] = {
+              name: item?.name || 'Unknown',
+              amount: 0,
+              type: 'item',
+              itemId: req.id,
+              slot: Number(item?.slot) || 0,
+              value: shopZenyPerUnit
+            };
+          }
+          totals[key].amount += effectiveAmount;
+          return;
+        }
+      }
+    }
+
     totalZeny += calculateZenyValue(req, effectiveAmount);
     accumulateRequirement(totals, req, effectiveAmount);
   });

@@ -1086,6 +1086,50 @@
       "caption": "@npc 13"
     },
     {
+      "name": "Branch Merchant",
+      "subgroups": [
+        {
+          "name": "Shop",
+          "shops": [
+            {
+              "name": "Poring Box",
+              "producesId": 12109,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 50000
+                }
+              ]
+            },
+            {
+              "name": "Dead Branch",
+              "producesId": 604,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 100000
+                }
+              ]
+            },
+            {
+              "name": "Bloody Branch",
+              "producesId": 12103,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 1000000
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "caption": "@npc 15"
+    },
+    {
       "name": "Monster Arena Shop",
       "subgroups": [
         {
@@ -7234,48 +7278,201 @@
       "caption": "@token"
     },
     {
-      "name": "Branch Merchant",
+      "name": "Vanilla NPCs",
       "subgroups": [
         {
-          "name": "Shop",
+          "name": "Aldebaran Tool Dealer",
           "shops": [
             {
-              "name": "Poring Box",
-              "producesId": 12109,
+              "name": "Yggdrasil Leaf",
+              "producesId": 610,
               "accountBound": false,
               "requirements": [
                 {
                   "type": "zeny",
-                  "amount": 50000
-                }
-              ]
-            },
-            {
-              "name": "Dead Branch",
-              "producesId": 604,
-              "accountBound": false,
-              "requirements": [
-                {
-                  "type": "zeny",
-                  "amount": 100000
-                }
-              ]
-            },
-            {
-              "name": "Bloody Branch",
-              "producesId": 12103,
-              "accountBound": false,
-              "requirements": [
-                {
-                  "type": "zeny",
-                  "amount": 1000000
+                  "amount": 4000
                 }
               ]
             }
-          ]
+          ],
+          "caption": "@navi aldeba_in 94 56"
+        },
+        {
+          "name": "Blacksmith Miner",
+          "shops": [
+            {
+              "name": "3carat Diamond",
+              "producesId": 732,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 55000
+                }
+              ]
+            }
+          ],
+          "caption": "@navi mjolnir_02 85 362"
+        },
+        {
+          "name": "Geffen Tool Dealer (NW)",
+          "shops": [
+            {
+              "name": "Empty Test Tube",
+              "producesId": 1092,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 3
+                }
+              ]
+            },
+            {
+              "name": "Empty Potion Bottle",
+              "producesId": 1093,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 10
+                }
+              ]
+            }
+          ],
+          "caption": "@navi geffen_in 171 123"
+        },
+        {
+          "name": "Morroc Ruins: Butcher",
+          "shops": [
+            {
+              "name": "Meat",
+              "producesId": 517,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 50
+                }
+              ]
+            }
+          ],
+          "caption": "@navi moc_ruins 87 109"
+        },
+        {
+          "name": "Morroc Ruins: Jeweler 1",
+          "shops": [
+            {
+              "name": "Emerald",
+              "producesId": 721,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 6000
+                }
+              ]
+            },
+            {
+              "name": "Ruby",
+              "producesId": 723,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 6000
+                }
+              ]
+            },
+            {
+              "name": "Sapphire",
+              "producesId": 726,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 6000
+                }
+              ]
+            },
+            {
+              "name": "Topaz",
+              "producesId": 728,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 6000
+                }
+              ]
+            },
+            {
+              "name": "Zircon",
+              "producesId": 729,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 6000
+                }
+              ]
+            }
+          ],
+          "caption": "@navi moc_ruins 110 105"
+        },
+        {
+          "name": "Morroc Ruins: Jeweler 2",
+          "shops": [
+            {
+              "name": "1carat Diamond",
+              "producesId": 730,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 10000
+                }
+              ]
+            }
+          ],
+          "caption": "@navi moc_ruins 52 85"
+        },
+        {
+          "name": "Morroc Ruins: Trader 1",
+          "shops": [
+            {
+              "name": "Witherless Rose",
+              "producesId": 748,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 25000
+                }
+              ]
+            }
+          ],
+          "caption": "@navi moc_ruins 131 138"
+        },
+        {
+          "name": "Morroc Ruins: Trader 2",
+          "shops": [
+            {
+              "name": "Crystal Mirror",
+              "producesId": 747,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 15000
+                }
+              ]
+            }
+          ],
+          "caption": "@navi moc_ruins 113 126"
         }
       ],
-      "caption": "DB Rooms"
+      "caption": ""
     }
   ]
 }
