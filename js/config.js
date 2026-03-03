@@ -2,7 +2,7 @@
 // OSRO Quest Helper - Configuration
 // ============================================================================
 
-const VERSION = 114;
+const VERSION = 115;
 const FLAVOR = 'Midrate';
 
 // === DATA SOURCE CONFIGURATION ===
@@ -13,35 +13,25 @@ const USE_LOCAL_SERVER = false;
 // Auto-import data on page load (disable if you want to manually import)
 const AUTO_IMPORT_ON_FIRST_LOAD = true;
 
-// GitHub Pages URLs (Production)
-const REMOTE_URLS = {
-  items: "https://torrq.github.io/osro-quest-helper/data/osromr_items.json",
-  newItems: "https://torrq.github.io/osro-quest-helper/data/osromr_items_new.json",
-  values: "https://torrq.github.io/osro-quest-helper/data/osromr_item_values.json",
-  quests: "https://torrq.github.io/osro-quest-helper/data/osromr_quests.json",
-  shops: "https://torrq.github.io/osro-quest-helper/data/osromr_shops.json",
-  icons: "https://torrq.github.io/osro-quest-helper/data/osromr_item_icons.json",
-  searchIndexName: "https://torrq.github.io/osro-quest-helper/data/osromr_search_index_name.json",
-  searchIndexDesc: "https://torrq.github.io/osro-quest-helper/data/osromr_search_index_desc.json",
-  spriteMap: "https://torrq.github.io/osro-quest-helper/data/osromr_sprite_map.json"
+const REMOTE_PREFIX = "https://torrq.github.io/osro-quest-helper/data/";
+const LOCAL_PREFIX  = "http://10.0.0.20:8298/data/";
+
+const FILES = {
+  items:           "osromr_items.json",
+  newItems:        "osromr_items_new.json",
+  values:          "osromr_item_values.json",
+  quests:          "osromr_quests.json",
+  shops:           "osromr_shops.json",
+  icons:           "osromr_item_icons.json",
+  searchIndexName: "osromr_search_index_name.json",
+  searchIndexDesc: "osromr_search_index_desc.json",
+  spriteMap:       "osromr_sprite_map.json",
 };
 
-// Local Development URLs (for testing with local server)
-// Run with: python -m http.server 8000
-const LOCAL_URLS = {
-  items: "http://127.0.0.1:8298/data/osromr_items.json",
-  newItems: "http://127.0.0.1:8298/data/osromr_items_new.json",
-  values: "http://127.0.0.1:8298/data/osromr_item_values.json",
-  quests: "http://127.0.0.1:8298/data/osromr_quests.json",
-  shops: "http://127.0.0.1:8298/data/osromr_shops.json",
-  icons: "http://127.0.0.1:8298/data/osromr_item_icons.json",
-  searchIndexName: "http://127.0.0.1:8298/data/osromr_search_index_name.json",
-  searchIndexDesc: "http://127.0.0.1:8298/data/osromr_search_index_desc.json",
-  spriteMap: "http://127.0.0.1:8298/data/osromr_sprite_map.json"
-};
-
-// Active URLs based on USE_LOCAL_SERVER toggle
-const AUTO_IMPORT_URLS = USE_LOCAL_SERVER ? LOCAL_URLS : REMOTE_URLS;
+const prefix = USE_LOCAL_SERVER ? LOCAL_PREFIX : REMOTE_PREFIX;
+const AUTO_IMPORT_URLS = Object.fromEntries(
+  Object.entries(FILES).map(([k, f]) => [k, prefix + f])
+);
 
 // === SPECIAL ITEM IDS ===
 

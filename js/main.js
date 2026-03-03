@@ -612,9 +612,7 @@ function renderItemIcon(id, size = 24) {
   let html;
 
   // Special handling for Zeny (ID 1) and Points (ID 2)
-  if (id === 1) {
-    html = `<div class="item-icon-placeholder-zeny ${sizeClass}"></div>`;
-  } else if (id === 2) {
+  if (id === 2) {
     html = `<div class="item-icon-placeholder-points ${sizeClass}"></div>`;
   } else if (DATA.spriteMap && DATA.spriteMap.map[id]) {
     // Use sprite sheet if available
