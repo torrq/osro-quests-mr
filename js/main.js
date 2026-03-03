@@ -1541,7 +1541,7 @@ function renderUsageSection(itemId, { excludeQuest = null, excludeShop = null } 
           <div class="mat-row">
             ${iconHtml}
             <span class="mat-name"><a class="item-link tree-item-name" href="${questUrl(u.quest.producesId)}" onclick="event.preventDefault(); navigateToQuest(${u.groupIdx},${u.subIdx},${u.questIdx})">${u.quest.name}</a></span>
-            <span class="quest-badge">Quest</span>
+            ${renderItemIcon(3, 24)}
             ${amtHtml}
           </div>
           <div class="mat-row-sub mat-row-sub--loc">${u.group.name} \u203a ${u.subgroup.name}</div>
@@ -1552,7 +1552,7 @@ function renderUsageSection(itemId, { excludeQuest = null, excludeShop = null } 
           <div class="mat-row">
             ${iconHtml}
             <span class="mat-name"><a class="item-link tree-item-name" href="${shopUrl(u.shop.producesId)}" onclick="event.preventDefault(); navigateToShop(${u.groupIdx},${u.subIdx},${u.shopIdx})">${u.shop.name}</a></span>
-            <span class="shop-badge">Shop</span>
+            ${renderItemIcon(5, 24)}
             ${amtHtml}
           </div>
           <div class="mat-row-sub mat-row-sub--loc">${u.group.name} \u203a ${u.subgroup.name}</div>

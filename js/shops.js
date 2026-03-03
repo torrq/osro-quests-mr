@@ -796,6 +796,13 @@ function renderShopSummaryItems(entries, totalZeny) {
     return '<div class="tot-empty">No zeny-valued materials</div>';
   }
 
+  // If the only cost is zeny and totalZeny equals that zeny requirement,
+  // the value section would just repeat the requirement — suppress it.
+  const onlyZeny = valued.length === 1 && valued[0].type === "zeny";
+  if (onlyZeny && valued[0].amount === totalZeny) {
+    return '<div class="tot-empty">No zeny-valued materials</div>';
+  }
+
   let html = "";
 
   if (totalZeny > 0) {

@@ -612,7 +612,7 @@ function _matSourceItem(req, questIndex, eff, immuneHtml, itemKey, expanded, dep
     const q = questSources[0];
     const meta = questMeta.get(q) || { gi: -1, si: -1, qi: -1, loc: '' };
     const xbtn  = _matXbtn(itemKey, expanded);
-    const badge = `<span class="quest-badge">Quest</span>`;
+    const badge = renderItemIcon(3, 24);
     const name  = `<a class="item-link tree-item-name" href="${questUrl(q.producesId)}" onclick="event.preventDefault(); navigateToQuest(${meta.gi},${meta.si},${meta.qi})">${rawName}</a>`;
     const children = expanded
       ? `<div class="mat-children">${walkQuest(q, depth + 1, eff, questPath, itemKey)}</div>`
@@ -624,7 +624,7 @@ function _matSourceItem(req, questIndex, eff, immuneHtml, itemKey, expanded, dep
   if (questSources.length === 0 && shopSources.length === 1) {
     const sh = shopSources[0];
     const meta = shopMeta.get(sh) || { gi: -1, si: -1, shi: -1, loc: '' };
-    const badge = `<span class="shop-badge">Shop</span>`;
+    const badge = renderItemIcon(5, 24);
     const name  = `<a class="item-link tree-item-name" href="${shopUrl(sh.producesId)}" onclick="event.preventDefault(); navigateToShop(${meta.gi},${meta.si},${meta.shi})">${rawName}</a>`;
     return `<div class="mat-node">${_matRow({ badge, icon, name, slot, amt: eff, aside: meta.loc, asideType: 'loc', immune: immuneHtml })}</div>`;
   }
@@ -643,7 +643,7 @@ function _matSourceItem(req, questIndex, eff, immuneHtml, itemKey, expanded, dep
       const sub = walkQuest(q, depth + 2, eff, questPath, optKey);
       optRows += `
         <div class="mat-opt-row">
-          <span class="quest-badge">Quest</span>
+          ${renderItemIcon(3, 24)}
           <a class="item-link" href="${questUrl(q.producesId)}" onclick="event.preventDefault(); navigateToQuest(${meta.gi},${meta.si},${meta.qi})">${meta.loc}</a>
           <span class="mat-aside">${q.successRate}% success</span>
         </div>
@@ -653,7 +653,7 @@ function _matSourceItem(req, questIndex, eff, immuneHtml, itemKey, expanded, dep
       const meta = shopMeta.get(sh) || { gi: -1, si: -1, shi: -1, loc: '?' };
       optRows += `
         <div class="mat-opt-row">
-          <span class="shop-badge">Shop</span>
+          ${renderItemIcon(5, 24)}
           <a class="item-link" href="${shopUrl(sh.producesId)}" onclick="event.preventDefault(); navigateToShop(${meta.gi},${meta.si},${meta.shi})">${meta.loc}</a>
         </div>`;
     });
