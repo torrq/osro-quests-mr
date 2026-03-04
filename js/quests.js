@@ -291,14 +291,20 @@ function renderQuestContentCore() {
       ${renderRequirementsSection(quest)}
 
       ${descriptionHtml ? `
-        <span class="item-label">Description:</span>
-        <div class="item-description-box">${descriptionHtml}</div>
+        <span class="item-label sec-label" onclick="toggleSection('desc')">
+          <span class="sec-chevron${state.sections.desc ? '' : ' sec-chevron--closed'}">▾</span>Description:</span>
+        ${state.sections.desc ? `<div class="item-description-box">${descriptionHtml}</div>` : ''}
       ` : ""}
-      
-      <span class="item-label">Requirements:</span>
-      <div class="material-tree">${renderMaterialTree(questIndex)}</div>
+
+      <span class="item-label sec-label" onclick="toggleSection('reqs')">
+        <span class="sec-chevron${state.sections.reqs ? '' : ' sec-chevron--closed'}">▾</span>Requirements:</span>
+      ${state.sections.reqs ? `<div class="material-tree">${renderMaterialTree(questIndex)}</div>` : ''}
 
       ${(() => {
+        if (!state.sections.value) {
+          return `<span class="item-label sec-label" onclick="toggleSection('value')">
+            <span class="sec-chevron sec-chevron--closed">▾</span>Value:</span>`;
+        }
         const summaryHtml = renderSummary(questIndex);
         if (summaryHtml.includes('tot-empty')) return '';
         return `<div id="totals-header-container">${renderTotalsHeader(questIndex)}</div>
@@ -393,16 +399,16 @@ function renderRequirementsSection(quest) {
 }
 
 function renderTotalsHeader(questIndex) {
-  if (!hasNestedQuests(questIndex)) return '<span class="item-label">Value:</span>';
+  if (!hasNestedQuests(questIndex)) return `<span class="item-label sec-label" onclick="toggleSection('value')"><span class="sec-chevron${state.sections.value ? '' : ' sec-chevron--closed'}">▾</span>Value:</span>`;
 
   // Only show the toggle if including sub-quests actually changes the total
   const { totalZeny: directZeny } = calculateDirectRequirements(questIndex);
   const { totalZeny: fullZeny }   = calculateFullRequirements(questIndex, {});
-  if (directZeny === fullZeny) return '<span class="item-label">Value:</span>';
+  if (directZeny === fullZeny) return `<span class="item-label sec-label" onclick="toggleSection('value')"><span class="sec-chevron${state.sections.value ? '' : ' sec-chevron--closed'}">▾</span>Value:</span>`;
 
   return `
     <div class="totals-header">
-      <span class="item-label">Value:</span>
+      <span class="item-label sec-label" onclick="toggleSection('value')"><span class="sec-chevron${state.sections.value ? '' : ' sec-chevron--closed'}">▾</span>Value:</span>
       <button class="btn-toggle-totals" onclick="toggleTotals()">
         ${state.showFullTotals
           ? '<span>⊖</span> This Quest Only'

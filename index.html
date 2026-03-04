@@ -33,23 +33,23 @@
           <div id="settingsPanel">
             <div class="settings-row">
               <div>
-                <div class="settings-label">Editor Mode</div>
-                <div class="settings-sublabel">Show editing controls</div>
-              </div>
-              <label class="setting-toggle">
-                <input type="checkbox" id="settingEditorMode" onchange="settingSetEditorMode(this.checked)">
-                <span class="setting-toggle-slider"></span>
-              </label>
-            </div>
-            <div class="settings-row">
-              <div>
                 <div class="settings-label">Show Location</div>
-                <div class="settings-sublabel">Show group / subgroup under rows</div>
+                <div class="settings-sublabel">Group / subgroup under rows</div>
               </div>
               <label class="setting-toggle">
                 <input type="checkbox" id="settingShowLocation" checked onchange="settingSetShowLocation(this.checked)">
                 <span class="setting-toggle-slider"></span>
               </label>
+            </div>
+            <div class="settings-row">
+              <div class="settings-label">Sections</div>
+              <div class="sec-btn-group">
+                <button id="secBtn_desc"       class="sec-btn" onclick="toggleSection('desc')">Desc</button>
+                <button id="secBtn_reqs"       class="sec-btn" onclick="toggleSection('reqs')">Reqs</button>
+                <button id="secBtn_value"      class="sec-btn" onclick="toggleSection('value')">Value</button>
+                <button id="secBtn_producedby" class="sec-btn" onclick="toggleSection('producedby')">Produced</button>
+                <button id="secBtn_requiredby" class="sec-btn" onclick="toggleSection('requiredby')">Required</button>
+              </div>
             </div>
             <div class="settings-row">
               <a href="https://github.com/torrq/osro-quest-helper" class="settings-link" target="_blank" rel="noopener">

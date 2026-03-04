@@ -359,14 +359,20 @@ function renderShopContentCore() {
         ${renderShopViewerHeader(shop, item)}
 
         ${descriptionHtml ? `
-          <span class="item-label">Description:</span>
-          <div class="item-description-box">${descriptionHtml}</div>
+          <span class="item-label sec-label" onclick="toggleSection('desc')">
+            <span class="sec-chevron${state.sections.desc ? '' : ' sec-chevron--closed'}">▾</span>Description:</span>
+          ${state.sections.desc ? `<div class="item-description-box">${descriptionHtml}</div>` : ''}
         ` : ""}
 
-        <span class="item-label">Requirements:</span>
-        <div class="material-tree">${renderShopRequirementsFlat(shop)}</div>
+        <span class="item-label sec-label" onclick="toggleSection('reqs')">
+          <span class="sec-chevron${state.sections.reqs ? '' : ' sec-chevron--closed'}">▾</span>Requirements:</span>
+        ${state.sections.reqs ? `<div class="material-tree">${renderShopRequirementsFlat(shop)}</div>` : ''}
 
         ${(() => {
+            if (!state.sections.value) {
+              return `<span class="item-label sec-label" onclick="toggleSection('value')">
+                <span class="sec-chevron sec-chevron--closed">▾</span>Value:</span>`;
+            }
             const summaryHtml = renderShopSummary();
             if (summaryHtml.includes('tot-empty')) return '';
             return `${shopRenderTotalsHeader()}
@@ -496,17 +502,17 @@ function shopRenderRequirementsSection(shop) {
 }
 
 function shopRenderTotalsHeader() {
-  if (!hasNestedShops()) return '<span class="item-label">Value:</span>';
+  if (!hasNestedShops()) return `<span class="item-label sec-label" onclick="toggleSection('value')"><span class="sec-chevron${state.sections.value ? '' : ' sec-chevron--closed'}">▾</span>Value:</span>`;
 
   // Only show the toggle if including sub-shops actually changes the total
   const shopIndex = buildShopIndex();
   const { totalZeny: directZeny } = shopCalculateDirectRequirements();
   const { totalZeny: fullZeny }   = shopCalculateFullRequirements(shopIndex, {});
-  if (directZeny === fullZeny) return '<span class="item-label">Value:</span>';
+  if (directZeny === fullZeny) return `<span class="item-label sec-label" onclick="toggleSection('value')"><span class="sec-chevron${state.sections.value ? '' : ' sec-chevron--closed'}">▾</span>Value:</span>`;
 
   return `
     <div class="totals-header">
-      <span class="item-label">Value:</span>
+      <span class="item-label sec-label" onclick="toggleSection('value')"><span class="sec-chevron${state.sections.value ? '' : ' sec-chevron--closed'}">▾</span>Value:</span>
       <button class="btn-toggle-totals" onclick="shopToggleTotals()">
         ${state.showFullTotals
           ? '<span>⊖</span> This Shop Only'

@@ -26,6 +26,13 @@ window.state = {
   questSearchFilter: "",
   editorMode: false,
   showLocation: true,
+  sections: {
+    desc:       true,
+    reqs:       true,
+    value:      true,
+    requiredby: true,
+    producedby: true,
+  },
   expandedTreeItems: new Set(),
   showFullTotals: false,
   autolootData: JSON.parse(localStorage.getItem("osro_autoloot_v1")) || {},
@@ -137,20 +144,28 @@ function saveConfig(patch) {
   localStorage.setItem(CONFIG_KEY, JSON.stringify({ ...current, ...patch }));
 }
 
+const SECTION_KEYS = ['desc', 'reqs', 'value', 'requiredby', 'producedby'];
+
 function initSettings() {
   const cfg = loadConfig();
-  if (cfg.editorMode !== undefined) {
-    state.editorMode = cfg.editorMode;
-    document.body.classList.toggle('viewer-mode', !cfg.editorMode);
-  }
   if (cfg.showLocation !== undefined) {
     state.showLocation = cfg.showLocation;
   }
-  // Sync checkboxes
-  const em = document.getElementById('settingEditorMode');
-  if (em) em.checked = state.editorMode;
+  if (cfg.sections) {
+    SECTION_KEYS.forEach(k => {
+      if (cfg.sections[k] !== undefined) state.sections[k] = cfg.sections[k];
+    });
+  }
   const sl = document.getElementById('settingShowLocation');
   if (sl) sl.checked = state.showLocation;
+  syncSectionButtons();
+}
+
+function syncSectionButtons() {
+  SECTION_KEYS.forEach(k => {
+    const btn = document.getElementById(`secBtn_${k}`);
+    if (btn) btn.classList.toggle('sec-btn--off', !state.sections[k]);
+  });
 }
 
 function toggleSettingsPanel() {
@@ -162,9 +177,13 @@ function toggleSettingsPanel() {
   gear?.classList.toggle('settings-gear--active', open);
 }
 
-function settingSetEditorMode(enabled) {
-  toggleEditorMode(enabled);
-  saveConfig({ editorMode: enabled });
+function toggleSection(key) {
+  state.sections[key] = !state.sections[key];
+  const saved = {};
+  SECTION_KEYS.forEach(k => saved[k] = state.sections[k]);
+  saveConfig({ sections: saved });
+  syncSectionButtons();
+  render();
 }
 
 function settingSetShowLocation(enabled) {
@@ -173,10 +192,10 @@ function settingSetShowLocation(enabled) {
   render();
 }
 
-window.toggleSettingsPanel  = toggleSettingsPanel;
-window.settingSetEditorMode = settingSetEditorMode;
+window.toggleSettingsPanel    = toggleSettingsPanel;
+window.toggleSection          = toggleSection;
 window.settingSetShowLocation = settingSetShowLocation;
-window.toggleTheme = toggleTheme;
+window.toggleTheme            = toggleTheme;
 
 // ===== THEME MANAGEMENT =====
 
@@ -1623,22 +1642,32 @@ function renderUsageSection(itemId, { excludeQuest = null, excludeShop = null } 
 
   if (showProduces.length > 0) {
     const label = (excludeQuest || excludeShop) ? 'Also Produced By' : 'Produced By';
-    html += `<span class="item-label">${label}:</span><div class="mat-tree">`;
-    html += showProduces.map(u => usageRow(u, '')).join('');
-    html += '</div>';
+    const pbVisible = state.sections.producedby;
+    html += `<span class="item-label sec-label" onclick="toggleSection('producedby')">`
+          + `<span class="sec-chevron${pbVisible ? '' : ' sec-chevron--closed'}">▾</span>${label}:</span>`;
+    if (pbVisible) {
+      html += `<div class="mat-tree">`;
+      html += showProduces.map(u => usageRow(u, '')).join('');
+      html += '</div>';
+    }
   }
 
   if (requires.length > 0) {
-    html += `<span class="item-label">Required By:</span><div class="mat-tree">`;
-    html += requires.map(u => {
-      const amt = u.requirement?.amount
-        ? (Number(u.requirement.amount) >= 1000
-            ? Number(u.requirement.amount).toLocaleString()
-            : String(u.requirement.amount))
-        : '';
-      return usageRow(u, amt);
-    }).join('');
-    html += '</div>';
+    const rbVisible = state.sections.requiredby;
+    html += `<span class="item-label sec-label" onclick="toggleSection('requiredby')">`
+          + `<span class="sec-chevron${rbVisible ? '' : ' sec-chevron--closed'}">▾</span>Required By:</span>`;
+    if (rbVisible) {
+      html += `<div class="mat-tree">`;
+      html += requires.map(u => {
+        const amt = u.requirement?.amount
+          ? (Number(u.requirement.amount) >= 1000
+              ? Number(u.requirement.amount).toLocaleString()
+              : String(u.requirement.amount))
+          : '';
+        return usageRow(u, amt);
+      }).join('');
+      html += '</div>';
+    }
   }
 
   html += '</div>';

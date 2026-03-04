@@ -102,3 +102,9 @@
   --mat-opts-text:   #7a4d00;
   --mat-opts-border: #c8860a;
 }
+
+/* Invert white-on-black icons for light theme */
+.settings-link img,
+.github-link img {
+  filter: invert(1);
+}

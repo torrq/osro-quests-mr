@@ -2987,3 +2987,65 @@ body.viewer-mode .editor-quest select {
   background: #fff;
 }
 
+
+/* ── Section toggle headers ── */
+.sec-label {
+  cursor: pointer;
+  user-select: none;
+}
+
+.sec-label:hover {
+  color: var(--accent);
+}
+
+.sec-chevron {
+  display: inline-block;
+  margin-right: 4px;
+  font-style: normal;
+  transition: transform 0.15s ease;
+  color: var(--text-muted);
+}
+
+.sec-chevron--closed {
+  transform: rotate(-90deg);
+}
+
+/* ── Section pill buttons in settings ── */
+.sec-btn-group {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.sec-btn {
+  font-size: 10px;
+  padding: 2px 8px;
+  border-radius: 10px;
+  border: 1px solid var(--accent);
+  background: var(--accent-bg);
+  color: var(--accent);
+  cursor: pointer;
+  transition: all 0.15s;
+  font-weight: 500;
+}
+
+.sec-btn:hover {
+  background: var(--accent);
+  color: var(--btn-text);
+}
+
+.sec-btn--off {
+  background: transparent;
+  color: var(--text-muted);
+  border-color: var(--border);
+  text-decoration: line-through;
+  opacity: 0.6;
+}
+
+.sec-btn--off:hover {
+  background: var(--panel-hover);
+  color: var(--text);
+  text-decoration: none;
+  opacity: 1;
+}
