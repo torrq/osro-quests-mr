@@ -584,8 +584,7 @@ function _matRow({ xbtn, badge, icon, name, slot, amt, aside, asideType, immune 
     ? amt.toLocaleString()
     : amt;
   const subClass = asideType === 'loc' ? 'mat-row-sub mat-row-sub--loc' : 'mat-row-sub mat-row-sub--val';
-  const showAside = aside && (asideType !== 'loc' || state.showLocation);
-  const subLine = showAside
+  const subLine = aside
     ? `<div class="${subClass}">${aside}</div>`
     : '';
   return `
@@ -633,7 +632,8 @@ function _matSourceItem(req, questIndex, eff, immuneHtml, itemKey, expanded, dep
   // ---- CASES 3 & 4: multiple options (quests and/or shops) ----
   const total = questSources.length + shopSources.length;
   const xbtn  = _matXbtn(itemKey, expanded);
-  const badge  = `<span class="mat-badge-opts">⚠ ${total} opts</span>`;
+  const badge  = (questSources.length > 0 ? renderItemIcon(3, 24) : '')
+               + (shopSources.length  > 0 ? renderItemIcon(5, 24) : '');
   const name   = `<a class="item-link tree-item-name" href="${itemUrl(req.id)}" onclick="event.preventDefault(); navigateToItem(${req.id})">${rawName}</a>`;
 
   let optRows = '';
