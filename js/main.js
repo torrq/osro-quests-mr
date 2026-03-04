@@ -25,6 +25,7 @@ window.state = {
   itemSearchFilter: "",
   questSearchFilter: "",
   editorMode: false,
+  showLocation: true,
   expandedTreeItems: new Set(),
   showFullTotals: false,
   autolootData: JSON.parse(localStorage.getItem("osro_autoloot_v1")) || {},
@@ -120,25 +121,82 @@ function initSecretEditorToggle() {
   });
 }
 
+
+// ===== SETTINGS =====
+
+const CONFIG_KEY = 'osromr_config_v1';
+
+function loadConfig() {
+  try {
+    return JSON.parse(localStorage.getItem(CONFIG_KEY)) || {};
+  } catch { return {}; }
+}
+
+function saveConfig(patch) {
+  const current = loadConfig();
+  localStorage.setItem(CONFIG_KEY, JSON.stringify({ ...current, ...patch }));
+}
+
+function initSettings() {
+  const cfg = loadConfig();
+  if (cfg.editorMode !== undefined) {
+    state.editorMode = cfg.editorMode;
+    document.body.classList.toggle('viewer-mode', !cfg.editorMode);
+  }
+  if (cfg.showLocation !== undefined) {
+    state.showLocation = cfg.showLocation;
+  }
+  // Sync checkboxes
+  const em = document.getElementById('settingEditorMode');
+  if (em) em.checked = state.editorMode;
+  const sl = document.getElementById('settingShowLocation');
+  if (sl) sl.checked = state.showLocation;
+}
+
+function toggleSettingsPanel() {
+  const panel = document.getElementById('settingsPanel');
+  const gear  = document.getElementById('settingsGearBtn');
+  if (!panel) return;
+  const open = panel.style.display === 'none' || panel.style.display === '';
+  panel.style.display = open ? 'block' : 'none';
+  gear?.classList.toggle('settings-gear--active', open);
+}
+
+function settingSetEditorMode(enabled) {
+  toggleEditorMode(enabled);
+  saveConfig({ editorMode: enabled });
+}
+
+function settingSetShowLocation(enabled) {
+  state.showLocation = enabled;
+  saveConfig({ showLocation: enabled });
+  render();
+}
+
+window.toggleSettingsPanel  = toggleSettingsPanel;
+window.settingSetEditorMode = settingSetEditorMode;
+window.settingSetShowLocation = settingSetShowLocation;
+window.toggleTheme = toggleTheme;
+
 // ===== THEME MANAGEMENT =====
 
 function initTheme() {
   const savedTheme = localStorage.getItem('osro-theme') || 'dark';
-  const isDark = savedTheme === 'dark';
-  
-  // Update the toggle checkbox
-  const toggle = document.getElementById('themeModeToggle');
-  if (toggle) {
-    toggle.checked = !isDark; // Unchecked = dark, checked = light
-  }
-  
   applyTheme(savedTheme);
+  updateThemeIcon(savedTheme);
 }
 
-function toggleTheme(isLight) {
-  const theme = isLight ? 'light' : 'dark';
-  applyTheme(theme);
-  localStorage.setItem('osro-theme', theme);
+function updateThemeIcon(theme) {
+  const btn = document.getElementById('themeToggleBtn');
+  if (btn) btn.textContent = theme === 'dark' ? '☀' : '🌙';
+}
+
+function toggleTheme() {
+  const current = localStorage.getItem('osro-theme') || 'dark';
+  const next = current === 'dark' ? 'light' : 'dark';
+  applyTheme(next);
+  localStorage.setItem('osro-theme', next);
+  updateThemeIcon(next);
 }
 
 function applyTheme(theme) {
@@ -1408,6 +1466,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // START APPLICATION
   // Trigger initialization only after DOM is fully ready.
   initTheme();
+  initSettings();
   initializeData();
   initSecretEditorToggle();
 });
@@ -1544,7 +1603,7 @@ function renderUsageSection(itemId, { excludeQuest = null, excludeShop = null } 
             ${renderItemIcon(3, 24)}
             ${amtHtml}
           </div>
-          <div class="mat-row-sub mat-row-sub--loc">${u.group.name} \u203a ${u.subgroup.name}</div>
+          ${state.showLocation ? `<div class="mat-row-sub mat-row-sub--loc">${u.group.name} \u203a ${u.subgroup.name}</div>` : ''}
         </div>`;
     } else {
       return `
@@ -1555,7 +1614,7 @@ function renderUsageSection(itemId, { excludeQuest = null, excludeShop = null } 
             ${renderItemIcon(5, 24)}
             ${amtHtml}
           </div>
-          <div class="mat-row-sub mat-row-sub--loc">${u.group.name} \u203a ${u.subgroup.name}</div>
+          ${state.showLocation ? `<div class="mat-row-sub mat-row-sub--loc">${u.group.name} \u203a ${u.subgroup.name}</div>` : ''}
         </div>`;
     }
   }

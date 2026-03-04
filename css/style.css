@@ -2855,3 +2855,135 @@ body.viewer-mode .editor-quest select {
   from { opacity: 1; transform: translateX(0); }
   to   { opacity: 0; transform: translateX(20px); }
 }
+
+/* =========================================
+   SETTINGS PANEL
+   ========================================= */
+.header-icon-btn {
+  width: 28px;
+  height: 28px;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  transition: color 0.15s, border-color 0.15s, background 0.15s;
+  flex-shrink: 0;
+}
+
+.header-icon-btn:hover {
+  color: var(--text);
+  border-color: var(--border-light);
+  background: var(--panel-hover);
+}
+
+.settings-gear--active {
+  color: var(--accent) !important;
+  border-color: var(--accent) !important;
+  background: var(--accent-bg) !important;
+}
+
+#settingsPanel {
+  display: none;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-secondary);
+  animation: contentFadeIn 0.15s ease-out;
+}
+
+.settings-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 9px 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+.settings-row:last-child {
+  border-bottom: none;
+}
+
+.settings-label {
+  font-size: 12px;
+  color: var(--text);
+  font-weight: 500;
+}
+
+.settings-sublabel {
+  font-size: 10px;
+  color: var(--text-muted);
+  margin-top: 1px;
+}
+
+.settings-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 12px;
+  transition: color 0.15s;
+}
+
+.settings-link:hover {
+  color: var(--accent);
+}
+
+.settings-link img {
+  opacity: 0.6;
+  transition: opacity 0.15s;
+}
+
+.settings-link:hover img {
+  opacity: 1;
+}
+
+/* Reusable inline toggle for settings rows */
+.setting-toggle {
+  position: relative;
+  display: inline-block;
+  width: 36px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+.setting-toggle input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.setting-toggle-slider {
+  position: absolute;
+  inset: 0;
+  background: var(--border);
+  border-radius: 20px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.setting-toggle-slider:before {
+  content: '';
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  left: 3px;
+  bottom: 3px;
+  background: var(--text-muted);
+  border-radius: 50%;
+  transition: 0.2s;
+}
+
+.setting-toggle input:checked + .setting-toggle-slider {
+  background: var(--accent);
+}
+
+.setting-toggle input:checked + .setting-toggle-slider:before {
+  transform: translateX(16px);
+  background: #fff;
+}
+

@@ -17,20 +17,8 @@
             <div class="header-right-group">
               <!-- Remove the old editor toggle div, keep only the github link -->
               <div class="header-controls-row">
-                <div class="theme-toggle" title="Toggle light/dark mode">
-                  <label class="toggle-switch">
-                    <input
-                      type="checkbox"
-                      id="themeModeToggle"
-                      onchange="toggleTheme(this.checked)"
-                    />
-                    <span class="toggle-slider"></span>
-                  </label>
-                </div>
-                <a href="https://github.com/torrq/osro-quest-helper"
-                  class="github-link" title="GitHub Page" target="_blank" rel="noopener">
-                  <img src="image/github.png" alt="GitHub" width="32" height="32" />
-                </a>
+                <button class="header-icon-btn" id="themeToggleBtn" title="Toggle theme" onclick="toggleTheme()">☀</button>
+                <button class="header-icon-btn" id="settingsGearBtn" title="Settings" onclick="toggleSettingsPanel()">⚙</button>
               </div>
               <div id="header-version-tag"></div>
             </div>
@@ -41,6 +29,34 @@
             <div class="tab" onclick="switchTab('items')">Items</div>
             <div class="tab" onclick="switchTab('groups')">Groups</div>
             <div class="tab" onclick="switchTab('autoloot')">Autoloot</div>
+          </div>
+          <div id="settingsPanel">
+            <div class="settings-row">
+              <div>
+                <div class="settings-label">Editor Mode</div>
+                <div class="settings-sublabel">Show editing controls</div>
+              </div>
+              <label class="setting-toggle">
+                <input type="checkbox" id="settingEditorMode" onchange="settingSetEditorMode(this.checked)">
+                <span class="setting-toggle-slider"></span>
+              </label>
+            </div>
+            <div class="settings-row">
+              <div>
+                <div class="settings-label">Show Location</div>
+                <div class="settings-sublabel">Show group / subgroup under rows</div>
+              </div>
+              <label class="setting-toggle">
+                <input type="checkbox" id="settingShowLocation" checked onchange="settingSetShowLocation(this.checked)">
+                <span class="setting-toggle-slider"></span>
+              </label>
+            </div>
+            <div class="settings-row">
+              <a href="https://github.com/torrq/osro-quest-helper" class="settings-link" target="_blank" rel="noopener">
+                <img src="image/github.png" alt="GitHub" width="20" height="20" />
+                GitHub
+              </a>
+            </div>
           </div>
           <div id="questsSearch" class="search-section">
             <div class="search-row">
