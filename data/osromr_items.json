@@ -25920,119 +25920,119 @@
   },
   "9201": {
     "name": "Amon Ra Egg",
-    "desc": "An egg in which a Amon Ra Pet rests.\n--------------------------\n[ ^996600Loyal Bonus^000000 ]\nEarth Resist +5%\nVit +3\nFire Pillar Damage +8%\n--------------------------\nCan be hatched by using a ^33CC33Pet Incubator^000000.\nClass:^6666CC Monster Egg ^000000"
+    "desc": "An egg in which a Amon Ra Pet rests.\n--------------------------\n[ ^996600Loyal Bonus^000000 ]\nEarth Resist +5%\nVit +3\nFire Pillar Damage +8%\n--------------------------\n[ ^008000Deposit Effect^000000 ]\nEarth Resist +1%\n--------------------------\nCan be hatched by using a ^33CC33Pet Incubator^000000.\nClass:^6666CC Monster Egg ^000000"
   },
   "9202": {
     "name": "Atroce Egg",
-    "desc": "An egg in which a Atroce Pet rests.\n--------------------------\n[ ^996600Loyal Bonus^000000 ]\nAttack +20\nAttack Speed +10%\n--------------------------\nCan be hatched by using a ^33CC33Pet Incubator^000000.\nClass:^6666CC Monster Egg ^000000"
+    "desc": "An egg in which a Atroce Pet rests.\n--------------------------\n[ ^996600Loyal Bonus^000000 ]\nAttack +20\nAttack Speed +10%\n--------------------------\n[ ^008000Deposit Effect^000000 ]\nAttack Speed + 1%\n--------------------------\nCan be hatched by using a ^33CC33Pet Incubator^000000.\nClass:^6666CC Monster Egg ^000000"
   },
   "9203": {
     "name": "Baphomet Egg",
-    "desc": "An egg in which a Baphomet Pet rests.\n--------------------------\n[ ^996600Loyal Bonus^000000 ]\nDemon Resist +5%\nHit +5\nSplash Damage +1 Cell\n--------------------------\nCan be hatched by using a ^33CC33Pet Incubator^000000.\nClass:^6666CC Monster Egg ^000000"
+    "desc": "An egg in which a Baphomet Pet rests.\n--------------------------\n[ ^996600Loyal Bonus^000000 ]\nDemon Resist +5%\nHit +5\nSplash Damage +1 Cell\n--------------------------\n[ ^008000Deposit Effect^000000 ]\nDeomn Resist +1%\n--------------------------\nCan be hatched by using a ^33CC33Pet Incubator^000000.\nClass:^6666CC Monster Egg ^000000"
   },
   "9204": {
     "name": "Dark Lord Egg",
-    "desc": "An egg in which a Dark Lord Pet rests.\n--------------------------\n[ ^996600Loyal Bonus^000000 ]\nUndead Resist +5%\nInt +3\nMeteor Storm Damage +3%\n--------------------------\nCan be hatched by using a ^33CC33Pet Incubator^000000.\nClass:^6666CC Monster Egg ^000000"
+    "desc": "An egg in which a Dark Lord Pet rests.\n--------------------------\n[ ^996600Loyal Bonus^000000 ]\nUndead Resist +5%\nInt +3\nMeteor Storm Damage +3%\n--------------------------\n[ ^008000Deposit Effect^000000 ]\nMeteor Storm damage + 1%\n--------------------------\nCan be hatched by using a ^33CC33Pet Incubator^000000.\nClass:^6666CC Monster Egg ^000000"
   },
   "9205": {
     "name": "Doppelganger Egg",
-    "desc": "An egg in which a Doppelganger Pet rests.\n--------------------------\n[ ^996600Loyal Bonus^000000 ]\nDemihuman Damage +3%\nAttack Speed -5%\n--------------------------\nCan be hatched by using a ^33CC33Pet Incubator^000000.\nClass:^6666CC Monster Egg ^000000"
+    "desc": "An egg in which a Doppelganger Pet rests.\n--------------------------\n[ ^996600Loyal Bonus^000000 ]\nDemihuman Damage +3%\nAttack Speed -5%\n--------------------------\n[ ^008000Deposit Effect^000000 ]\nDemihuman damage +1%\n--------------------------\nCan be hatched by using a ^33CC33Pet Incubator^000000.\nClass:^6666CC Monster Egg ^000000"
   },
   "9206": {
     "name": "Dracula Egg",
-    "desc": "An egg in which a Dracula Pet rests.\n--------------------------\n[ ^996600Loyal Bonus^000000 ]\nMagic Resist +3%\nSP +300\n--------------------------\nCan be hatched by using a ^33CC33Pet Incubator^000000.\nClass:^6666CC Monster Egg ^000000"
+    "desc": "An egg in which a Dracula Pet rests.\n--------------------------\n[ ^996600Loyal Bonus^000000 ]\nMagic Resist +3%\nSP +300\n--------------------------\n[ ^008000Deposit Effect^000000 ]\nMDEF +2\n--------------------------\nCan be hatched by using a ^33CC33Pet Incubator^000000.\nClass:^6666CC Monster Egg ^000000"
   },
   "9207": {
     "name": "Drake Egg",
-    "desc": "An egg in which a Drake Pet rests.\n--------------------------\n[ ^996600Loyal Bonus^000000 ]\nAll Size Damage +3%\nFlee -10\n--------------------------\nCan be hatched by using a ^33CC33Pet Incubator^000000.\nClass:^6666CC Monster Egg ^000000"
+    "desc": "An egg in which a Drake Pet rests.\n--------------------------\n[ ^996600Loyal Bonus^000000 ]\nAll Size Damage +3%\nFlee -10\n--------------------------\n[ ^008000Deposit Effect^000000 ]\nAll Size damage +1%\n--------------------------\nCan be hatched by using a ^33CC33Pet Incubator^000000.\nClass:^6666CC Monster Egg ^000000"
   },
   "9208": {
     "name": "Eddga Egg",
-    "desc": "An egg in which a Eddga Pet rests.\n--------------------------\n[ ^996600Loyal Bonus^000000 ]\nHP +800\nHas 8% chance to cast Level 1 Endure skill.\n--------------------------\nCan be hatched by using a ^33CC33Pet Incubator^000000.\nClass:^6666CC Monster Egg ^000000"
+    "desc": "An egg in which a Eddga Pet rests.\n--------------------------\n[ ^996600Loyal Bonus^000000 ]\nHP +800\nHas 8% chance to cast Level 1 Endure skill.\n--------------------------\n[ ^008000Deposit Effect^000000 ]\nHP + 300\n--------------------------\nCan be hatched by using a ^33CC33Pet Incubator^000000.\nClass:^6666CC Monster Egg ^000000"
   },
   "9209": {
     "name": "Fallen Bishop Egg",
-    "desc": "An egg in which a Fallen Bishop Pet rests.\n--------------------------\n[ ^996600Loyal Bonus^000000 ]\nMagic Attack +4%\n--------------------------\nCan be hatched by using a ^33CC33Pet Incubator^000000.\nClass:^6666CC Monster Egg ^000000"
+    "desc": "An egg in which a Fallen Bishop Pet rests.\n--------------------------\n[ ^996600Loyal Bonus^000000 ]\nMagic Attack +4%\n--------------------------\n[ ^008000Deposit Effect^000000 ]\nMagic Attack +1%\n--------------------------\nCan be hatched by using a ^33CC33Pet Incubator^000000.\nClass:^6666CC Monster Egg ^000000"
   },
   "9210": {
     "name": "Garm Egg",
-    "desc": "An egg in which a Garm Pet rests.\n--------------------------\n[ ^996600Loyal Bonus^000000 ]\nCold Bolt Damage +3%\nStorm Gust Damage +3%\n--------------------------\nCan be hatched by using a ^33CC33Pet Incubator^000000.\nClass:^6666CC Monster Egg ^000000"
+    "desc": "An egg in which a Garm Pet rests.\n--------------------------\n[ ^996600Loyal Bonus^000000 ]\nCold Bolt Damage +3%\nStorm Gust Damage +3%\n--------------------------\n[ ^008000Deposit Effect^000000 ]\nAdds 1% damage when using ^777777Water Element^000000.\n--------------------------\nCan be hatched by using a ^33CC33Pet Incubator^000000.\nClass:^6666CC Monster Egg ^000000"
   },
   "9211": {
     "name": "Golden Thief Bug Egg",
-    "desc": "An egg in which a Golden Thief Bug Pet rests.\n--------------------------\n[ ^996600Loyal Bonus^000000 ]\nMDEF +5\nReflect single target attack Magic back at the caster by 3%.\n--------------------------\nCan be hatched by using a ^33CC33Pet Incubator^000000.\nClass:^6666CC Monster Egg ^000000"
+    "desc": "An egg in which a Golden Thief Bug Pet rests.\n--------------------------\n[ ^996600Loyal Bonus^000000 ]\nMDEF +5\nReflect single target attack Magic back at the caster by 3%.\n--------------------------\n[ ^008000Deposit Effect^000000 ]\nNullify magic attack by 1%\n--------------------------\nCan be hatched by using a ^33CC33Pet Incubator^000000.\nClass:^6666CC Monster Egg ^000000"
   },
   "9212": {
     "name": "Ifrit Egg",
-    "desc": "An egg in which a Ifrit Pet rests.\n--------------------------\n[ ^996600Loyal Bonus^000000 ]\nFire Resist +5%\nFire Damage +5%\nFire Bolt Damage +5%\n--------------------------\nCan be hatched by using a ^33CC33Pet Incubator^000000.\nClass:^6666CC Monster Egg ^000000"
+    "desc": "An egg in which a Ifrit Pet rests.\n--------------------------\n[ ^996600Loyal Bonus^000000 ]\nFire Resist +5%\nFire Damage +5%\nFire Bolt Damage +5%\n--------------------------\n[ ^008000Deposit Effect^000000 ]\nFire Resist +1%\n--------------------------\nCan be hatched by using a ^33CC33Pet Incubator^000000.\nClass:^6666CC Monster Egg ^000000"
   },
   "9213": {
     "name": "Incantation Samura Egg",
-    "desc": "An egg in which a Incantation Samura Pet rests.\n--------------------------\n[ ^996600Loyal Bonus^000000 ]\nHIT +2\nPerfect Hit (which never miss its target) + 2%\n--------------------------\nCan be hatched by using a ^33CC33Pet Incubator^000000.\nClass:^6666CC Monster Egg ^000000"
+    "desc": "An egg in which a Incantation Samura Pet rests.\n--------------------------\n[ ^996600Loyal Bonus^000000 ]\nHIT +2\nPerfect Hit (which never miss its target) + 2%\n--------------------------\n[ ^008000Deposit Effect^000000 ]\nShadow Resist +1%\n--------------------------\nCan be hatched by using a ^33CC33Pet Incubator^000000.\nClass:^6666CC Monster Egg ^000000"
   },
   "9214": {
     "name": "Kiel Egg",
-    "desc": "An egg in which a Kiel Pet rests.\n--------------------------\n[ ^996600Loyal Bonus^000000 ]\nReduce Aftercast Delay of all skills by 10%\n--------------------------\nCan be hatched by using a ^33CC33Pet Incubator^000000.\nClass:^6666CC Monster Egg ^000000"
+    "desc": "An egg in which a Kiel Pet rests.\n--------------------------\n[ ^996600Loyal Bonus^000000 ]\nReduce Aftercast Delay of all skills by 10%\n--------------------------\n[ ^008000Deposit Effect^000000 ]\nReduces all skill's after-cast delay by 1%.\n--------------------------\nCan be hatched by using a ^33CC33Pet Incubator^000000.\nClass:^6666CC Monster Egg ^000000"
   },
   "9215": {
     "name": "Stormy Knight Egg",
-    "desc": "An egg in which a Stormy Knight Pet rests.\n--------------------------\n[ ^996600Loyal Bonus^000000 ]\nWind Resist +5%\nIncrease Jupitel Thunder Damage +4%\n--------------------------\nCan be hatched by using a ^33CC33Pet Incubator^000000.\nClass:^6666CC Monster Egg ^000000"
+    "desc": "An egg in which a Stormy Knight Pet rests.\n--------------------------\n[ ^996600Loyal Bonus^000000 ]\nWind Resist +5%\nIncrease Jupitel Thunder Damage +4%\n--------------------------\n[ ^008000Deposit Effect^000000 ]\nJupitel Thunder damage +1%\n--------------------------\nCan be hatched by using a ^33CC33Pet Incubator^000000.\nClass:^6666CC Monster Egg ^000000"
   },
   "9216": {
     "name": "Lady Tanee Egg",
-    "desc": "An egg in which a Lady Tanee Pet rests.\n--------------------------\n[ ^996600Loyal Bonus^000000 ]\nResist to all Elements +5% (except neutral).\n--------------------------\nCan be hatched by using a ^33CC33Pet Incubator^000000.\nClass:^6666CC Monster Egg ^000000"
+    "desc": "An egg in which a Lady Tanee Pet rests.\n--------------------------\n[ ^996600Loyal Bonus^000000 ]\nResist to all Elements +5% (except neutral).\n--------------------------\n[ ^008000Deposit Effect^000000 ]\nMax SP + 1%\n--------------------------\nCan be hatched by using a ^33CC33Pet Incubator^000000.\nClass:^6666CC Monster Egg ^000000"
   },
   "9217": {
     "name": "Lord Of Death Egg",
-    "desc": "An egg in which a Lord Of Death Pet rests.\n--------------------------\n[ ^996600Loyal Bonus^000000 ]\nMaximum SP & HP +3%\n--------------------------\nCan be hatched by using a ^33CC33Pet Incubator^000000.\nClass:^6666CC Monster Egg ^000000"
+    "desc": "An egg in which a Lord Of Death Pet rests.\n--------------------------\n[ ^996600Loyal Bonus^000000 ]\nMaximum SP & HP +3%\n--------------------------\n[ ^008000Deposit Effect^000000 ]\nUndead Resist +1%\n--------------------------\nCan be hatched by using a ^33CC33Pet Incubator^000000.\nClass:^6666CC Monster Egg ^000000"
   },
   "9218": {
     "name": "Maya Egg",
-    "desc": "An egg in which a Maya Pet rests.\n--------------------------\n[ ^996600Loyal Bonus^000000 ]\nEarth Damage +5%\n--------------------------\nCan be hatched by using a ^33CC33Pet Incubator^000000.\nClass:^6666CC Monster Egg ^000000"
+    "desc": "An egg in which a Maya Pet rests.\n--------------------------\n[ ^996600Loyal Bonus^000000 ]\nEarth Damage +5%\n--------------------------\n[ ^008000Deposit Effect^000000 ]\nDex + 1\n--------------------------\nCan be hatched by using a ^33CC33Pet Incubator^000000.\nClass:^6666CC Monster Egg ^000000"
   },
   "9219": {
     "name": "Mistress Egg",
-    "desc": "An egg in which a Mistress Pet rests.\n--------------------------\n[ ^996600Loyal Bonus^000000 ]\nNullify the Gemstone requirement.\n--------------------------\nCan be hatched by using a ^33CC33Pet Incubator^000000.\nClass:^6666CC Monster Egg ^000000"
+    "desc": "An egg in which a Mistress Pet rests.\n--------------------------\n[ ^996600Loyal Bonus^000000 ]\nNullify the Gemstone requirement.\n--------------------------\n[ ^008000Deposit Effect^000000 ]\nWind Resist +1%\n--------------------------\nCan be hatched by using a ^33CC33Pet Incubator^000000.\nClass:^6666CC Monster Egg ^000000"
   },
   "9220": {
     "name": "Moonlight Flower Egg",
-    "desc": "An egg in which a Moonlight Flower Pet rests.\n--------------------------\n[ ^996600Loyal Bonus^000000 ]\nDemon Damage +5%\nMovespeed Rate +5%\n--------------------------\nCan be hatched by using a ^33CC33Pet Incubator^000000.\nClass:^6666CC Monster Egg ^000000"
+    "desc": "An egg in which a Moonlight Flower Pet rests.\n--------------------------\n[ ^996600Loyal Bonus^000000 ]\nDemon Damage +5%\nMovespeed Rate +5%\n--------------------------\n[ ^008000Deposit Effect^000000 ]\nMovespeed Rate +1%\n--------------------------\nCan be hatched by using a ^33CC33Pet Incubator^000000.\nClass:^6666CC Monster Egg ^000000"
   },
   "9221": {
     "name": "Orc Hero Egg",
-    "desc": "An egg in which a Orc Hero Pet rests.\n--------------------------\n[ ^996600Loyal Bonus^000000 ]\nStr +3\nLarge Monster Resist +5%\n--------------------------\nCan be hatched by using a ^33CC33Pet Incubator^000000.\nClass:^6666CC Monster Egg ^000000"
+    "desc": "An egg in which a Orc Hero Pet rests.\n--------------------------\n[ ^996600Loyal Bonus^000000 ]\nStr +3\nLarge Monster Resist +5%\n--------------------------\n[ ^008000Deposit Effect^000000 ]\nStr + 1\n--------------------------\nCan be hatched by using a ^33CC33Pet Incubator^000000.\nClass:^6666CC Monster Egg ^000000"
   },
   "9222": {
     "name": "Orc Lord Egg",
-    "desc": "An egg in which a Orc Lord Pet rests.\n--------------------------\n[ ^996600Loyal Bonus^000000 ]\nVit +3\nStr -1\nDemihuman Resist +3%\n--------------------------\nCan be hatched by using a ^33CC33Pet Incubator^000000.\nClass:^6666CC Monster Egg ^000000"
+    "desc": "An egg in which a Orc Lord Pet rests.\n--------------------------\n[ ^996600Loyal Bonus^000000 ]\nVit +3\nStr -1\nDemihuman Resist +3%\n--------------------------\n[ ^008000Deposit Effect^000000 ]\nVit + 1\n--------------------------\nCan be hatched by using a ^33CC33Pet Incubator^000000.\nClass:^6666CC Monster Egg ^000000"
   },
   "9223": {
     "name": "Osiris Egg",
-    "desc": "An egg in which a Osiris Pet rests.\n--------------------------\n[ ^996600Loyal Bonus^000000 ]\nInt +3\nMedium Monster Resist +3%\n--------------------------\nCan be hatched by using a ^33CC33Pet Incubator^000000.\nClass:^6666CC Monster Egg ^000000"
+    "desc": "An egg in which a Osiris Pet rests.\n--------------------------\n[ ^996600Loyal Bonus^000000 ]\nInt +3\nMedium Monster Resist +3%\n--------------------------\n[ ^008000Deposit Effect^000000 ]\nInt + 1\n--------------------------\nCan be hatched by using a ^33CC33Pet Incubator^000000.\nClass:^6666CC Monster Egg ^000000"
   },
   "9224": {
     "name": "Pharaoh Egg",
-    "desc": "An egg in which a Pharaoh Pet rests.\n--------------------------\n[ ^996600Loyal Bonus^000000 ]\nFlee +10\nPerfect Dodge +1\nSP Consumption -10%\n--------------------------\nCan be hatched by using a ^33CC33Pet Incubator^000000.\nClass:^6666CC Monster Egg ^000000"
+    "desc": "An egg in which a Pharaoh Pet rests.\n--------------------------\n[ ^996600Loyal Bonus^000000 ]\nFlee +10\nPerfect Dodge +1\nSP Consumption -10%\n--------------------------\n[ ^008000Deposit Effect^000000 ]\nMATK + 5\n--------------------------\nCan be hatched by using a ^33CC33Pet Incubator^000000.\nClass:^6666CC Monster Egg ^000000"
   },
   "9225": {
     "name": "Phreeoni Egg",
-    "desc": "An egg in which a Phreeoni Pet rests.\n--------------------------\n[ ^996600Loyal Bonus^000000 ]\nHit +10, Dex +3\n--------------------------\nCan be hatched by using a ^33CC33Pet Incubator^000000.\nClass:^6666CC Monster Egg ^000000"
+    "desc": "An egg in which a Phreeoni Pet rests.\n--------------------------\n[ ^996600Loyal Bonus^000000 ]\nHit +10, Dex +3\n--------------------------\n[ ^008000Deposit Effect^000000 ]\nHit + 5\n--------------------------\nCan be hatched by using a ^33CC33Pet Incubator^000000.\nClass:^6666CC Monster Egg ^000000"
   },
   "9226": {
     "name": "Tao Gunka Egg",
-    "desc": "An egg in which a Tao Gunka Pet rests.\n--------------------------\n[ ^996600Loyal Bonus^000000 ]\nVit +3\nNeutral Resist +3%\n--------------------------\nCan be hatched by using a ^33CC33Pet Incubator^000000.\nClass:^6666CC Monster Egg ^000000"
+    "desc": "An egg in which a Tao Gunka Pet rests.\n--------------------------\n[ ^996600Loyal Bonus^000000 ]\nVit +3\nNeutral Resist +3%\n--------------------------\n[ ^008000Deposit Effect^000000 ]\nMax HP + 1%\n--------------------------\nCan be hatched by using a ^33CC33Pet Incubator^000000.\nClass:^6666CC Monster Egg ^000000"
   },
   "9227": {
     "name": "Thanatos Egg",
-    "desc": "An egg in which a Thanatos Pet rests.\n--------------------------\n[ ^996600Loyal Bonus^000000 ]\nAttack +3%\nMagic Attack +3%\n--------------------------\nCan be hatched by using a ^33CC33Pet Incubator^000000.\nClass:^6666CC Monster Egg ^000000"
+    "desc": "An egg in which a Thanatos Pet rests.\n--------------------------\n[ ^996600Loyal Bonus^000000 ]\nAttack +3%\nMagic Attack +3%\n--------------------------\n[ ^008000Deposit Effect^000000 ]\nAttack +1%\nMagic Attack +1%\n--------------------------\nCan be hatched by using a ^33CC33Pet Incubator^000000.\nClass:^6666CC Monster Egg ^000000"
   },
   "9228": {
     "name": "Turtle General Egg",
-    "desc": "An egg in which a Turtle General Pet rests.\n--------------------------\n[ ^996600Loyal Bonus^000000 ]\nBoss Damage +5%\nEnable use of Level 3 Magnum Break\n--------------------------\nCan be hatched by using a ^33CC33Pet Incubator^000000.\nClass:^6666CC Monster Egg ^000000"
+    "desc": "An egg in which a Turtle General Pet rests.\n--------------------------\n[ ^996600Loyal Bonus^000000 ]\nBoss Damage +5%\nEnable use of Level 3 Magnum Break\n--------------------------\n[ ^008000Deposit Effect^000000 ]\nBoss monster damage +1%\n--------------------------\nCan be hatched by using a ^33CC33Pet Incubator^000000.\nClass:^6666CC Monster Egg ^000000"
   },
   "9229": {
     "name": "Valkyrie Randgris Egg",
-    "desc": "An egg in which a Valkyrie Randgris Pet rests.\n--------------------------\n[ ^996600Loyal Bonus^000000 ]\nAdds .25% chance\nof autocasting Lv. 1\nDispell with each normal attack.\n--------------------------\nCan be hatched by using a ^33CC33Pet Incubator^000000.\nClass:^6666CC Monster Egg ^000000"
+    "desc": "An egg in which a Valkyrie Randgris Pet rests.\n--------------------------\n[ ^996600Loyal Bonus^000000 ]\nAdds .25% chance\nof autocasting Lv. 1\nDispell with each normal attack.\n--------------------------\n[ ^008000Deposit Effect^000000 ]\nATK + 5, MATK + 5\n--------------------------\nCan be hatched by using a ^33CC33Pet Incubator^000000.\nClass:^6666CC Monster Egg ^000000"
   },
   "10001": {
     "name": "Skull Helm",
@@ -43961,7 +43961,7 @@
   },
   "18865": {
     "name": "Sword Saint Crown",
-    "desc": "A crown given to sword saint whose master of any weapons.\nClass:^6666CC Headgear^000000\nLocation:^6666CC Upper^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000",
+    "desc": "A crown given to sword saint whose master of any weapons.\nMax HP +3%\nDecrease Chance of being hit by Critical by 3%.\nReduce Damage from elemental attacks by 10%.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nDecreases Chance of being hit by critical by 1%\n------------------------\nClass:^6666CC Headgear^000000\nLocation:^6666CC Upper^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000",
     "slot": 1
   },
   "18866": {
@@ -48321,7 +48321,7 @@
   },
   "20196": {
     "name": "Leopard Ear Hat",
-    "desc": "Class:^6666CC Headgear^000000\nLocation:^6666CC Upper^000000\nWeight:^009900 0^000000\nLevel Requirement:^009900 1^000000\nJobs:^6666CC All^000000"
+    "desc": "Source:^777777 Lotti Girl^000000\nClass:^6666CC Headgear^000000\nLocation:^6666CC Upper^000000\nWeight:^009900 0^000000\nLevel Requirement:^009900 1^000000\nJobs:^6666CC All^000000"
   },
   "20197": {
     "name": "Amistr Beret",
@@ -49317,7 +49317,7 @@
   },
   "20450": {
     "name": "Gram Peony",
-    "desc": "A beautiful magician hat with flower on it.\nClass:^6666CC Headgear^000000\nLocation:^6666CC Upper^000000\nWeight:^009900 0^000000\nLevel Requirement:^009900 1^000000\nJobs:^6666CC All^000000"
+    "desc": "A beautiful magician hat with flower on it.\nSource:^777777 Lotti Girl^000000\nClass:^6666CC Headgear^000000\nLocation:^6666CC Upper^000000\nWeight:^009900 0^000000\nLevel Requirement:^009900 1^000000\nJobs:^6666CC All^000000"
   },
   "20451": {
     "name": "Sky of Memory",
@@ -49521,7 +49521,7 @@
   },
   "20509": {
     "name": "Wings of Uriel",
-    "desc": "A replica wings of Angel of Destruction, Uriel. The Uriel name has a meaning of \\\"Flame of God\\\".\nClass:^6666CC Garment^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000"
+    "desc": "A replica wings of Angel of Destruction, Uriel. The Uriel name has a meaning of \\\"Flame of God\\\".\n-------------------------\nMax Weight + 500\nGives +1 random stat when equipped.\nDrop Rate of any items and cards increased by 10%.\n-------------------------\n[ ^008000Deposit Effect^000000 ]\nDrop Rate of any items and cards increased by 1%.\n------------------------\nSource:^777777 Lotti Girl^000000\nClass:^6666CC Garment^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000"
   },
   "20510": {
     "name": "Wings of Sword",
@@ -50195,7 +50195,7 @@
   },
   "20798": {
     "name": "Grim Reaper Protection",
-    "desc": "A costume that resemble the grim reaper whos waiting to take someone's soul.\nClass:^6666CC Headgear^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 0^000000\nLevel Requirement:^009900 1^000000\nJobs:^6666CC All^000000"
+    "desc": "A costume that resemble the grim reaper whos waiting to take someone's soul.\n-------------------------\nMax Weight + 500\nIncrease Damage to Angel Monsters by 5%.\n-------------------------\n[ ^008000Deposit Effect^000000 ]\nShadow Resist +1%\n------------------------\nSource:^777777 Lotti Girl^000000\nClass:^6666CC Headgear^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 0^000000\nLevel Requirement:^009900 1^000000\nJobs:^6666CC All^000000"
   },
   "20799": {
     "name": "Element Towel",
@@ -60637,7 +60637,7 @@
   },
   "31178": {
     "name": "Fire Muffler",
-    "desc": "Muffler made from the feathers of KASA.\nBe cautious! It's very hot!\nSource:^777777 Bonus Point Shop^000000\nClass:^6666CC Headgear^000000\nLocation:^6666CC Mid^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000"
+    "desc": "Muffler made from the feathers of KASA.\nBe cautious! It's very hot!\nSource:^777777 Bonus Point Shop^000000\nClass:^6666CC Headgear^000000\nLocation:^6666CC Lower^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000"
   },
   "31179": {
     "name": "Wolf Masquerade",
@@ -61165,7 +61165,7 @@
   },
   "31314": {
     "name": "Ghost Holiday",
-    "desc": "Costume horns decorated with cute flowers and ribbons.\nDesigned to decorate the horns that yoma who want to go out are proud of.\nClass:^6666CC Headgear^000000\nLocation:^6666CC Upper^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000"
+    "desc": "Costume horns decorated with cute flowers and ribbons.\nDesigned to decorate the horns that yoma who want to go out are proud of.\nSource:^777777 Lotti Girl^000000\nClass:^6666CC Headgear^000000\nLocation:^6666CC Upper^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000"
   },
   "31315": {
     "name": "Stall of Angel",
@@ -61277,7 +61277,7 @@
   },
   "31380": {
     "name": "Crow",
-    "desc": "A crow which won't stop talking all day long.\nClass:^6666CC Headgear^000000\nLocation:^6666CC Middle^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000"
+    "desc": "A crow which won't stop talking all day long.\n-------------------------\nMax Weight + 500\nIncrease Damage to Angel Monsters by 5%.\n-------------------------\n[ ^008000Deposit Effect^000000 ]\nShadow Resist +1%\n------------------------\nSource:^777777 Lotti Girl^000000\nClass:^6666CC Headgear^000000\nLocation:^6666CC Middle^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000"
   },
   "31381": {
     "name": "Diabolic Lapel",
@@ -62113,7 +62113,7 @@
   },
   "31737": {
     "name": "Lucifer's Wings",
-    "desc": "Lucifer's wings were expelled for anger.\nThe meaning of the name is 'the one who brings light'\nClass:^6666CC Garment^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000"
+    "desc": "Lucifer's wings were expelled for anger.\nThe meaning of the name is 'the one who brings light'\n-------------------------\nMax Weight + 500\nGives +1 random stat when equipped.\nDrop Rate of any items and cards increased by 10%.\n-------------------------\n[ ^008000Deposit Effect^000000 ]\nDrop Rate of any items and cards increased by 1%.\n------------------------\nSource:^777777 Lotti Girl^000000\nClass:^6666CC Garment^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000"
   },
   "31765": {
     "name": "Garnet Tiara",
@@ -62747,6 +62747,18 @@
     "name": "Rainbow Stocking 2025",
     "desc": "A Christmas rainbow stocking from which presents were stolen through a hole made in the bottom..\n^FFFFFF_^000000\nSource:^777777 2025 Christmas^000000\nWeight:^006600 0.1^000000"
   },
+  "40048": {
+    "name": "SVIP Ticket [1D]",
+    "desc": "Exclusive SVIP Ticket that can be obtained from '^CC5500Donation Promo^000000' and other Events.\nConsume this ticket and you will receive a special benefits.\n-------------------------\n- Exp Rate +150%\n- Drop Rate +15%\n- Unlock Rate +100%\n- Helpful VIP Commands\n- Extra Buffs and Soul Link on Healer\n-------------------------\nDuration:^009900 1^000000 day\nWeight:^009900 1^000000"
+  },
+  "40049": {
+    "name": "SVIP Ticket [7D]",
+    "desc": "Exclusive SVIP Ticket that can be obtained from '^CC5500Donation Promo^000000' and other Events.\nConsume this ticket and you will receive a special benefits.\n-------------------------\n- Exp Rate +150%\n- Drop Rate +15%\n- Unlock Rate +100%\n- Helpful VIP Commands\n- Extra Buffs and Soul Link on Healer\n-------------------------\nDuration:^009900 7^000000 day\nWeight:^009900 1^000000"
+  },
+  "40050": {
+    "name": "Unlock Bubble Gum",
+    "desc": "Very sweet and tasty\ncard unlock bubble gum.\n^FFFFFF_^000000\nUsable:^6666CC Supportive^000000\nEffect:^006600 Unlock rate +100%^000000\nDuration:^006600 60^000000 minutes\nWeight:^006600 1^000000"
+  },
   "40051": {
     "name": "War Badge",
     "desc": "Awarded to players who have participated in the Battleground Instance.\n^FFFFFF_^000000\nWeight:^009900 0.1^000000"
@@ -62820,7 +62832,7 @@
     "desc": "A card that allows you to reset your auto-attack timer. Please use it wisely..\n^FFFFFF_^000000\nWeight:^009900 3^000000"
   },
   "40069": {
-    "name": "VIP Ticket",
+    "name": "VIP Ticket [1D]",
     "desc": "Exclusive VIP Ticket that can be obtained from '^CC5500Donation Ticket Shop^000000' and other Events.\nConsume this ticket and you will receive a special benefits.\n-------------------------\n- Exp Rate +100%\n- Drop Rate +10%\n- Helpful VIP Commands\n- Extra Buffs and Soul Link on Healer\n-------------------------\nDuration:^009900 1^000000 day\nWeight:^009900 1^000000"
   },
   "40070": {
@@ -65057,32 +65069,32 @@
   },
   "42801": {
     "name": "STR Necklace I",
-    "desc": "A gemmed necklace made of magical blue crystals.\nStr +6\nSource:^777777 Quest^000000\nClass:^6666CC Accessory^000000\nDefense:^0000FF 0^000000\nWeight:^009900 10^000000\nLevel Requirement:^009900 100^000000\nJobs:^6666CC All except Novice^000000",
+    "desc": "A gemmed necklace made of magical blue crystals.\nStr +6\n--------------------------\n[ ^008000Deposit Effect^000000 ]\nATK + 1\n--------------------------\nSource:^777777 Quest^000000\nClass:^6666CC Accessory^000000\nDefense:^0000FF 0^000000\nWeight:^009900 10^000000\nLevel Requirement:^009900 100^000000\nJobs:^6666CC All except Novice^000000",
     "slot": 1
   },
   "42802": {
     "name": "AGI Statue I",
-    "desc": "A seal imbued with the power of agility from the stars.\nAgi +6, Flee +3\nSource:^777777 Quest^000000\nClass:^6666CC Accessory^000000\nDefense:^0000FF 0^000000\nWeight:^009900 10^000000\nLevel Requirement:^009900 100^000000\nJobs:^6666CC All except Novice^000000",
+    "desc": "A seal imbued with the power of agility from the stars.\nAgi +6, Flee +3\n--------------------------\n[ ^008000Deposit Effect^000000 ]\nFlee + 1\n--------------------------\nSource:^777777 Quest^000000\nClass:^6666CC Accessory^000000\nDefense:^0000FF 0^000000\nWeight:^009900 10^000000\nLevel Requirement:^009900 100^000000\nJobs:^6666CC All except Novice^000000",
     "slot": 1
   },
   "42803": {
     "name": "VIT Ring I",
-    "desc": "A gold ring that exudes an air of cuteness.\nVit +6\nSource:^777777 Quest^000000\nClass:^6666CC Accessory^000000\nDefense:^0000FF 0^000000\nWeight:^009900 10^000000\nLevel Requirement:^009900 100^000000\nJobs:^6666CC All except Novice^000000",
+    "desc": "A gold ring that exudes an air of cuteness.\nVit +6\n--------------------------\n[ ^008000Deposit Effect^000000 ]\nHP + 20\n--------------------------\nSource:^777777 Quest^000000\nClass:^6666CC Accessory^000000\nDefense:^0000FF 0^000000\nWeight:^009900 10^000000\nLevel Requirement:^009900 100^000000\nJobs:^6666CC All except Novice^000000",
     "slot": 1
   },
   "42804": {
     "name": "INT Earrings I",
-    "desc": "These lovely plush earrings have a faint blue luster.\nInt +6\nSource:^777777 Quest^000000\nClass:^6666CC Accessory^000000\nDefense:^0000FF 0^000000\nWeight:^009900 10^000000\nLevel Requirement:^009900 100^000000\nJobs:^6666CC All except Novice^000000",
+    "desc": "These lovely plush earrings have a faint blue luster.\nInt +6\n--------------------------\n[ ^008000Deposit Effect^000000 ]\nMATK + 1\n--------------------------\nSource:^777777 Quest^000000\nClass:^6666CC Accessory^000000\nDefense:^0000FF 0^000000\nWeight:^009900 10^000000\nLevel Requirement:^009900 100^000000\nJobs:^6666CC All except Novice^000000",
     "slot": 1
   },
   "42805": {
     "name": "DEX Brooch I",
-    "desc": "A sapphire brooch in the shape of a sky-blue Lunatic silhouette.\nDex +6\nSource:^777777 Quest^000000\nClass:^6666CC Accessory^000000\nDefense:^0000FF 0^000000\nWeight:^009900 10^000000\nLevel Requirement:^009900 100^000000\nJobs:^6666CC All except Novice^000000",
+    "desc": "A sapphire brooch in the shape of a sky-blue Lunatic silhouette.\nDex +6\n--------------------------\n[ ^008000Deposit Effect^000000 ]\nHit + 1\n--------------------------\nSource:^777777 Quest^000000\nClass:^6666CC Accessory^000000\nDefense:^0000FF 0^000000\nWeight:^009900 10^000000\nLevel Requirement:^009900 100^000000\nJobs:^6666CC All except Novice^000000",
     "slot": 1
   },
   "42806": {
     "name": "LUK Pendant I",
-    "desc": "A pendant in the shape of a Toad in twilight.\nLuk +6, Critical +6\nSource:^777777 Quest^000000\nClass:^6666CC Accessory^000000\nDefense:^0000FF 0^000000\nWeight:^009900 10^000000\nLevel Requirement:^009900 100^000000\nJobs:^6666CC All except Novice^000000",
+    "desc": "A pendant in the shape of a Toad in twilight.\nLuk +6, Critical +6\n--------------------------\n[ ^008000Deposit Effect^000000 ]\nCritical + 1\n--------------------------\nSource:^777777 Quest^000000\nClass:^6666CC Accessory^000000\nDefense:^0000FF 0^000000\nWeight:^009900 10^000000\nLevel Requirement:^009900 100^000000\nJobs:^6666CC All except Novice^000000",
     "slot": 1
   },
   "42807": {
@@ -65161,7 +65173,7 @@
   },
   "42822": {
     "name": "Elite Armor",
-    "desc": "Armor used by technical engineers on the battlefield.\nAll Stats +1\nMaximum HP +1500\nIncreases experience gained from defeating monsters by 5%.\n[^0000BB Elite Armor, Manteau & Boots Combo ^000000]\nIncreases experience gained from defeating monsters by 5%.\nIncreases damage against ^FF0000Large^000000 enemies size by 5%.\n^FF0000Cannot be Traded.^000000\nSource:^777777 Activity Shop^000000\nClass:^6666CC Armor^000000\nDefense:^0000FF 2^000000\nWeight:^009900 10^000000\nLevel Requirement:^009900 1^000000\nJobs:^6666CC All^000000",
+    "desc": "Armor used by technical engineers on the battlefield.\nAll Stats +1\nMaximum HP +1500\nIncreases experience gained from defeating monsters by 5%.\n[^0000BB Elite Armor, Manteau & Boots Combo ^000000]\nIncreases experience gained from defeating monsters by 5%.\n^FF0000This item does NOT work in PVP and GVG maps.^000000\nIncrease magic and physical damage on ALL monsters by 10%.\n^FF0000Cannot be Traded.^000000\nSource:^777777 Activity Shop^000000\nClass:^6666CC Armor^000000\nDefense:^0000FF 2^000000\nWeight:^009900 10^000000\nLevel Requirement:^009900 1^000000\nJobs:^6666CC All^000000",
     "slot": 1
   },
   "42823": {
@@ -65221,7 +65233,7 @@
   },
   "42834": {
     "name": "Deviruchi Brooch I",
-    "desc": "--------------------------\nSTR + 6\nPerfect Hit (which never miss its target) + 6%\n--------------------------\nSource:^777777 Quest^000000\nClass:^6666CC Accessory^000000\nDefense:^0000FF 0^000000\nWeight:^009900 10^000000\nLevel Requirement:^009900 100^000000\nJobs:^6666CC All^000000",
+    "desc": "--------------------------\nSTR + 6\nPerfect Hit (which never miss its target) + 6%\n--------------------------\n[ ^008000Deposit Effect^000000 ]\nPerfect Dodge + 1\n--------------------------\nSource:^777777 Quest^000000\nClass:^6666CC Accessory^000000\nDefense:^0000FF 0^000000\nWeight:^009900 10^000000\nLevel Requirement:^009900 100^000000\nJobs:^6666CC All^000000",
     "slot": 1
   },
   "42835": {
@@ -66509,11 +66521,11 @@
   },
   "45051": {
     "name": "MVP Trophy Box",
-    "desc": "Awarded to the Top MVP Hunter in OldschoolRO.\n^FFFFFF_^000000\nDuration:^009900 15^000000 days\nWeight:^009900 1^000000"
+    "desc": "Awarded to the Top MVP Hunter in OldschoolRO.\n^FFFFFF_^000000\nDuration:^009900 7^000000 days\nWeight:^009900 1^000000"
   },
   "45052": {
     "name": "Royalty Wings",
-    "desc": "Showcase your prominence in being the top hunter.\nWeight limit increase +2500\nItem drop rate increase by 10%.\nSource:^777777 MvP Rank^000000\nClass:^6666CC Garment^000000\nDefense:^0000FF 0^000000\nWeight:^009900 20^000000\nLevel Requirement:^009900 1^000000\nJobs:^6666CC All^000000"
+    "desc": "Showcase your prominence in being the top hunter.\n------------------------\nWeight +2500\nGives All Stats +1\nDrop rate increase by 10%.\n------------------------\nSource:^777777 MvP Ranking^000000\nClass:^6666CC Garment^000000\nDefense:^0000FF 0^000000\nWeight:^009900 20^000000\nLevel Requirement:^009900 1^000000\nJobs:^6666CC All^000000"
   },
   "45053": {
     "name": "PK Trophy Box",
@@ -73312,6 +73324,14 @@
   "48660": {
     "name": "Chibi Love Synom",
     "desc": "Level up your look with OldschoolRO's exclusive headgear!\n-------------------------\nMax Weight + 750\nDrop Rate of any items and cards increased by 5%.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nDrop Rate of any items and cards increased by 1%.\n------------------------\nSource:^777777 Valentine Event^000000\nClass:^6666CC Costume Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 10^000000\nJobs:^6666CC All^000000"
+  },
+  "48661": {
+    "name": "Royals Aura",
+    "desc": "^008800[ GOTM Season 14 ]^000000\n--------------------------\nMax Weight + 500\nAn exclusive customized headgear made for Royals guild.\n--------------------------\nSource:^777777 Donation Exclusive^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Low^000000\nWeight:^009900 10^000000\nRequired Level :^777777 1^000000\nJobs:^6666CC All^000000"
+  },
+  "48662": {
+    "name": "Royals Crown",
+    "desc": "^008800[ GOTM Season 15 ]^000000\n--------------------------\nMax Weight + 500\nAn exclusive customized headgear made for Royals guild.\n--------------------------\nSource:^777777 Donation Exclusive^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Top^000000\nWeight:^009900 10^000000\nRequired Level :^777777 1^000000\nJobs:^6666CC All^000000"
   },
   "49000": {
     "name": "Angelic Valkyrie Wings Dark",
