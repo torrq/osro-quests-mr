@@ -641,6 +641,99 @@
               ]
             }
           ]
+        },
+        {
+          "name": "Instance Points",
+          "shops": [
+            {
+              "name": "VIP Ticket (1 Day)",
+              "producesId": 40027,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "instance_points",
+                  "amount": 20
+                }
+              ]
+            },
+            {
+              "name": "AS Reset Card",
+              "producesId": 40075,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "instance_points",
+                  "amount": 25
+                }
+              ]
+            },
+            {
+              "name": "AA Reset Card",
+              "producesId": 40068,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "instance_points",
+                  "amount": 30
+                }
+              ]
+            },
+            {
+              "name": "Battle Manual 300%",
+              "producesId": 14545,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "instance_points",
+                  "amount": 40
+                }
+              ]
+            },
+            {
+              "name": "HE Bubble Gum",
+              "producesId": 12412,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "instance_points",
+                  "amount": 50
+                }
+              ]
+            },
+            {
+              "name": "Costume Ticket",
+              "producesId": 40004,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "instance_points",
+                  "amount": 60
+                }
+              ]
+            },
+            {
+              "name": "Job Ticket",
+              "producesId": 40005,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "instance_points",
+                  "amount": 100
+                }
+              ]
+            },
+            {
+              "name": "Race Ticket",
+              "producesId": 40041,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "instance_points",
+                  "amount": 200
+                }
+              ]
+            }
+          ]
         }
       ],
       "caption": "@npc 13"
