@@ -2532,7 +2532,7 @@
           "name": "Miscelleneous",
           "shops": [
             {
-              "name": "VIP Ticket",
+              "name": "VIP Ticket [1D]",
               "producesId": 40069,
               "successRate": 100,
               "description": "",
@@ -2633,6 +2633,18 @@
               "producesId": 12210,
               "successRate": 100,
               "description": "",
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "item",
+                  "id": 40003,
+                  "amount": 3
+                }
+              ]
+            },
+            {
+              "name": "Unlock Bubble Gum",
+              "producesId": 40050,
               "accountBound": false,
               "requirements": [
                 {
