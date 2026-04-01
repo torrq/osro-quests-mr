@@ -7597,6 +7597,23 @@
             }
           ],
           "caption": "@navi moc_ruins 113 126"
+        },
+        {
+          "name": "Yuno: Scroll Merchant",
+          "shops": [
+            {
+              "name": "Blank Scroll",
+              "producesId": 7433,
+              "accountBound": false,
+              "requirements": [
+                {
+                  "type": "zeny",
+                  "amount": 4000
+                }
+              ]
+            }
+          ],
+          "caption": "@navi yuno_in03 176 22"
         }
       ],
       "caption": ""
