@@ -28,6 +28,7 @@ window.state = {
   showLocation: true,
   sections: {
     desc:       true,
+    notes:      true,
     reqs:       true,
     value:      true,
     requiredby: true,
@@ -35,8 +36,8 @@ window.state = {
   },
   expandedTreeItems: new Set(),
   showFullTotals: false,
-  autolootData: JSON.parse(localStorage.getItem("osro_autoloot_v1")) || {},
-  autolootNames: JSON.parse(localStorage.getItem("osro_autoloot_names_v1")) || {},
+  autolootData: JSON.parse(localStorage.getItem(LOCAL_STORAGE.autoloot_data)) || {},
+  autolootNames: JSON.parse(localStorage.getItem(LOCAL_STORAGE.autoloot_names)) || {},
   selectedAutolootSlot: 1,
   selectedItemId: null,
   showValuesOnly: false,
@@ -131,20 +132,18 @@ function initSecretEditorToggle() {
 
 // ===== SETTINGS =====
 
-const CONFIG_KEY = 'osromr_config_v1';
-
 function loadConfig() {
   try {
-    return JSON.parse(localStorage.getItem(CONFIG_KEY)) || {};
+    return JSON.parse(localStorage.getItem(LOCAL_STORAGE.config)) || {};
   } catch { return {}; }
 }
 
 function saveConfig(patch) {
   const current = loadConfig();
-  localStorage.setItem(CONFIG_KEY, JSON.stringify({ ...current, ...patch }));
+  localStorage.setItem(LOCAL_STORAGE.config, JSON.stringify({ ...current, ...patch }));
 }
 
-const SECTION_KEYS = ['desc', 'reqs', 'value', 'requiredby', 'producedby'];
+const SECTION_KEYS = ['desc', 'notes', 'reqs', 'value', 'requiredby', 'producedby'];
 
 function initSettings() {
   const cfg = loadConfig();
@@ -200,7 +199,7 @@ window.toggleTheme            = toggleTheme;
 // ===== THEME MANAGEMENT =====
 
 function initTheme() {
-  const savedTheme = localStorage.getItem('osro-theme') || 'dark';
+  const savedTheme = localStorage.getItem(LOCAL_STORAGE.theme) || 'dark';
   applyTheme(savedTheme);
   updateThemeIcon(savedTheme);
 }
@@ -211,10 +210,10 @@ function updateThemeIcon(theme) {
 }
 
 function toggleTheme() {
-  const current = localStorage.getItem('osro-theme') || 'dark';
+  const current = localStorage.getItem(LOCAL_STORAGE.theme) || 'dark';
   const next = current === 'dark' ? 'light' : 'dark';
   applyTheme(next);
-  localStorage.setItem('osro-theme', next);
+  localStorage.setItem(LOCAL_STORAGE.theme, next);
   updateThemeIcon(next);
 }
 
@@ -308,7 +307,7 @@ function loadItems(items) {
 }
 
 function loadItemValuesFromStorage() {
-  const stored = localStorage.getItem("osro_item_values_v1");
+  const stored = localStorage.getItem(LOCAL_STORAGE.item_values);
   
   if (stored) {
     // Load from localStorage
@@ -322,7 +321,7 @@ function loadItemValuesFromStorage() {
       console.error("[Init] Failed to parse stored item values:", err);
       console.warn("[Init] Corrupt localStorage detected. Attempting to load from remote...");
       // Clear corrupt data
-      localStorage.removeItem("osro_item_values_v1");
+      localStorage.removeItem(LOCAL_STORAGE.item_values);
       // Load from remote and return the promise
       return loadItemValuesFromRemote();
     }
@@ -372,13 +371,13 @@ function saveItemValuesToStorage() {
   Object.entries(DATA.items).forEach(([id, item]) => {
     if (item.value > 0) values[id] = item.value;
   });
-  localStorage.setItem("osro_item_values_v1", JSON.stringify(values));
+  localStorage.setItem(LOCAL_STORAGE.item_values, JSON.stringify(values));
 }
 
 function saveAutolootData() {
   try {
-    localStorage.setItem("osro_autoloot_v1", JSON.stringify(state.autolootData));
-    localStorage.setItem("osro_autoloot_names_v1", JSON.stringify(state.autolootNames));
+    localStorage.setItem(LOCAL_STORAGE.autoloot_data, JSON.stringify(state.autolootData));
+    localStorage.setItem(LOCAL_STORAGE.autoloot_names, JSON.stringify(state.autolootNames));
     console.log("[Autoloot] Saved autoloot data to localStorage");
   } catch (error) {
     console.error("[Autoloot] Failed to save autoloot data:", error);
@@ -822,7 +821,7 @@ function parseDescription(desc) {
     }
     
     // Check current theme
-    const currentTheme = localStorage.getItem('osro-theme') || 'dark';
+    const currentTheme = localStorage.getItem(LOCAL_STORAGE.theme) || 'dark';
     const isDarkTheme = currentTheme === 'dark';
     
     // RO color handling - only adjust for dark theme

@@ -2073,7 +2073,7 @@ body.viewer-mode .shop-item .shop-name {
 }
 
 body.viewer-mode .editor-quest input[type="text"],
-body.viewer-mode .editor-quest input[type="number"]:not(.zeny-input-large),
+body.viewer-mode .editor-quest input[type="number"]:not(.zeny-input-large):not(#craft-amount),
 body.viewer-mode .editor-quest select {
   pointer-events: none;
   background: var(--bg);

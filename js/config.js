@@ -28,6 +28,14 @@ const FILES = {
   spriteMap:       "osromr_sprite_map.json",
 };
 
+const LOCAL_STORAGE = {
+  "config": "osromr_config_v1",
+  "theme": "osro-theme",
+  "autoloot_data": "osro_autoloot_v1",
+  "autoloot_names": "osro_autoloot_names_v1",
+  "item_values":   "osro_item_values_v1"
+};
+
 const prefix = USE_LOCAL_SERVER ? LOCAL_PREFIX : REMOTE_PREFIX;
 const AUTO_IMPORT_URLS = Object.fromEntries(
   Object.entries(FILES).map(([k, f]) => [k, prefix + f])

@@ -34,6 +34,7 @@ function selectQuest(group, subgroup, quest, pushToHistory = true) {
   state.selectedQuest = quest;
   state.selectedGroup = group;
   state.selectedSubgroup = subgroup;
+  state.craftMultiplier = 1;
   
   // Update URL with quest ID for sharing and browser history
   // Only push to history if this is a user-initiated click (not browser navigation)
@@ -290,14 +291,36 @@ function renderQuestContentCore() {
 
       ${renderRequirementsSection(quest)}
 
+      ${state.editorMode ? `
+        <div class="form-group" style="margin-top: 15px;">
+          <span class="item-label label-block">Notes:</span>
+          <textarea style="width: 100%; min-height: 60px; background: var(--bg-card); color: var(--text-color); border: 1px solid var(--border-color); border-radius: 4px; padding: 8px; resize: vertical; font-family: inherit; font-size: 0.9em;" placeholder="Quest notes... HTML/Markdown allowed" onchange="updateQuestNotes(this.value)">${quest.notes || ""}</textarea>
+        </div>
+      ` : ''}
+
       ${descriptionHtml ? `
         <span class="item-label sec-label" onclick="toggleSection('desc')">
           <span class="sec-chevron${state.sections.desc ? '' : ' sec-chevron--closed'}">▾</span>Description:</span>
         ${state.sections.desc ? `<div class="item-description-box">${descriptionHtml}</div>` : ''}
       ` : ""}
 
-      <span class="item-label sec-label" onclick="toggleSection('reqs')">
-        <span class="sec-chevron${state.sections.reqs ? '' : ' sec-chevron--closed'}">▾</span>Requirements:</span>
+      ${quest.notes ? `
+        <span class="item-label sec-label" onclick="toggleSection('notes')">
+          <span class="sec-chevron${state.sections.notes ? '' : ' sec-chevron--closed'}">▾</span>Notes:</span>
+        ${state.sections.notes ? `<div class="item-description-box item-notes-box">${parseDescription(quest.notes)}</div>` : ''}
+      ` : ""}
+
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2px;">
+        <span class="item-label sec-label" onclick="toggleSection('reqs')" style="margin-bottom: 0;">
+          <span class="sec-chevron${state.sections.reqs ? '' : ' sec-chevron--closed'}">▾</span>Requirements:</span>
+        ${!state.editorMode && state.sections.reqs ? `
+          <div class="craft-multiplier">
+            <label for="craft-amount" class="text-muted-xs" style="margin-right: 6px;">Crafts:</label>
+            <input type="number" id="craft-amount" class="input-width-sm" style="text-align: right; margin-right: 1px;" value="${state.craftMultiplier || 1}" min="1" max="99999" 
+                   onchange="updateCraftMultiplier(this.value)">
+          </div>
+        ` : ''}
+      </div>
       ${state.sections.reqs ? `<div class="material-tree">${renderMaterialTree(questIndex)}</div>` : ''}
 
       ${(() => {
@@ -572,7 +595,7 @@ function renderMaterialTree(questIndex) {
     return html;
   }
 
-  const inner = walkQuest(state.selectedQuest, 0, 1, new Set(), '');
+  const inner = walkQuest(state.selectedQuest, 0, state.craftMultiplier || 1, new Set(), '');
   return inner
     ? `<div class="mat-tree">${inner}</div>`
     : '<div class="tree-line">No requirements</div>';
@@ -866,7 +889,7 @@ function calculateDirectRequirements(questIndex = null) {
   const totals = {};
 
   quest.requirements.forEach(req => {
-    const effectiveAmount = Number(req.amount) || 0;
+    const effectiveAmount = (Number(req.amount) || 0) * (state.craftMultiplier || 1);
 
     if (req.type === 'item' && questIndex && questIndex.has(req.id)) {
       const sources = questIndex.get(req.id);
@@ -947,7 +970,7 @@ function calculateFullRequirements(questIndex, questChoices) {
     questPath.delete(quest);
   }
 
-  accumulate(state.selectedQuest, 1);
+  accumulate(state.selectedQuest, state.craftMultiplier || 1);
   return { totals, totalZeny };
 }
 
@@ -1448,6 +1471,26 @@ window.updateReqType = updateReqType;
 window.updateReqId = updateReqId;
 window.updateReqAmount = updateReqAmount;
 window.updateReqImmune = updateReqImmune;
+window.updateQuestNotes = updateQuestNotes;
+window.updateCraftMultiplier = updateCraftMultiplier;
+
+function updateQuestNotes(value) {
+  const trimmed = value.trim();
+  if (trimmed) {
+    state.selectedQuest.notes = trimmed;
+  } else {
+    delete state.selectedQuest.notes;
+  }
+  render();
+}
+
+function updateCraftMultiplier(value) {
+  let val = parseInt(value, 10);
+  if (isNaN(val) || val < 1) val = 1;
+  if (val > 99999) val = 99999;
+  state.craftMultiplier = val;
+  renderQuestContent();
+}
 
 // Autocomplete
 window.setupProducesSearch = setupProducesSearch;
