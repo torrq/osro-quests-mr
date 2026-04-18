@@ -506,7 +506,10 @@ function renderItemContentCore() {
     return;
   }
 
-  const descriptionHtml = parseDescription(item.desc);
+  const rawDesc = state.itemSearchFilter && state.searchDescriptions
+    ? highlightSearchTerm(item.desc, state.itemSearchFilter)
+    : item.desc;
+  const descriptionHtml = parseDescription(rawDesc);
 
   container.innerHTML = `
     <div class="editor-item">
@@ -516,11 +519,7 @@ function renderItemContentCore() {
       <div class="panel-section">
         ${descriptionHtml ? `
           <span class="item-label">Description:</span>
-          <div class="item-description-box">${
-            state.itemSearchFilter && state.searchDescriptions
-              ? highlightSearchTerm(descriptionHtml, state.itemSearchFilter)
-              : descriptionHtml
-          }</div>` : ""}
+          <div class="item-description-box">${descriptionHtml}</div>` : ""}
       </div>
 
       <div class="panel-section">
