@@ -1898,6 +1898,7 @@ div.quest-bound, div.shop-bound {
 }
 
 .input-width-sm { width: 90px; }
+.input-craft-amount { width: 60px; padding: 4px 0; text-align: center; font-weight: bold; margin: 5px 0 0 0; }
 .w-full { width: 100% !important; }
 .ml-auto { margin-left: auto; }
 

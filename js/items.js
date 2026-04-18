@@ -397,62 +397,35 @@ function selectItemById(itemId, pushToHistory = true) {
 
 function highlightSearchTerm(text, searchQuery) {
   if (!searchQuery || !text) return text;
-  
-  // Helper to strip color codes
-  const stripColorCodes = (str) => str.replace(/\^[0-9A-Fa-f]{6}/g, '');
-  
-  // Parse search query into terms (excluding exclusion terms)
+
   const phrases = [];
   const words = [];
-  
+
   // Extract quoted phrases (but not those prefixed with -)
   let remaining = searchQuery.replace(/-?"([^"]+)"/g, (match, phrase) => {
-    if (!match.startsWith('-')) {
-      phrases.push(phrase);
-    }
+    if (!match.startsWith('-')) phrases.push(phrase);
     return '';
   });
-  
+
   // Extract words (but not those prefixed with -)
   remaining.split(/\s+/).forEach(word => {
-    if (word.length > 0 && !word.startsWith('-')) {
-      words.push(word);
-    }
+    if (word.length > 0 && !word.startsWith('-')) words.push(word);
   });
-  
-  let result = text;
-  
-  // Highlight full phrases first (so they take precedence over individual words)
-  // Create regex that allows color codes between characters
-  phrases.forEach(phrase => {
-    // Build a pattern that allows ^RRGGBB color codes between any characters
-    const chars = phrase.split('');
-    const pattern = chars
-      .map(char => {
-        const escaped = char.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-        return escaped;
-      })
-      .join('(\\^[0-9A-Fa-f]{6})*'); // Allow color codes between chars
-    
-    const regex = new RegExp(`(${pattern})`, 'gi');
-    result = result.replace(regex, '<span class="search-highlight">$1</span>');
+
+  if (phrases.length === 0 && words.length === 0) return text;
+
+  const escRe = str => str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
+  // Phrases first (higher priority), then words — all in ONE pass.
+  // (<[^>]*>) matches any HTML tag and skips it unchanged, so the
+  // highlighter never fires inside a tag name or attribute value.
+  const termPatterns = [...phrases, ...words].map(escRe);
+  const combined = new RegExp(`(<[^>]*>)|(${termPatterns.join('|')})`, 'gi');
+
+  return text.replace(combined, (match, tag, term) => {
+    if (tag) return tag; // preserve HTML tags unchanged
+    return `<span class="search-highlight">${term}</span>`;
   });
-  
-  // Then highlight individual words (also allowing color codes within)
-  words.forEach(word => {
-    const chars = word.split('');
-    const pattern = chars
-      .map(char => {
-        const escaped = char.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-        return escaped;
-      })
-      .join('(\\^[0-9A-Fa-f]{6})*');
-    
-    const regex = new RegExp(`(${pattern})`, 'gi');
-    result = result.replace(regex, '<span class="search-highlight">$1</span>');
-  });
-  
-  return result;
 }
 
 function renderItemViewerHeader(id, item) {
@@ -506,10 +479,7 @@ function renderItemContentCore() {
     return;
   }
 
-  const rawDesc = state.itemSearchFilter && state.searchDescriptions
-    ? highlightSearchTerm(item.desc, state.itemSearchFilter)
-    : item.desc;
-  const descriptionHtml = parseDescription(rawDesc);
+  const descriptionHtml = parseDescription(item.desc);
 
   container.innerHTML = `
     <div class="editor-item">
@@ -519,7 +489,11 @@ function renderItemContentCore() {
       <div class="panel-section">
         ${descriptionHtml ? `
           <span class="item-label">Description:</span>
-          <div class="item-description-box">${descriptionHtml}</div>` : ""}
+          <div class="item-description-box">${
+            state.itemSearchFilter && state.searchDescriptions
+              ? highlightSearchTerm(descriptionHtml, state.itemSearchFilter)
+              : descriptionHtml
+          }</div>` : ""}
       </div>
 
       <div class="panel-section">

@@ -316,7 +316,7 @@ function renderQuestContentCore() {
         ${!state.editorMode && state.sections.reqs ? `
           <div class="craft-multiplier">
             <label for="craft-amount" class="text-muted-xs" style="margin-right: 6px;">Crafts:</label>
-            <input type="number" id="craft-amount" class="input-width-sm" style="text-align: right; margin-right: 1px;" value="${state.craftMultiplier || 1}" min="1" max="99999" 
+            <input type="number" id="craft-amount" class="input-craft-amount" value="${state.craftMultiplier || 1}" min="1" max="99999" 
                    onchange="updateCraftMultiplier(this.value)">
           </div>
         ` : ''}
