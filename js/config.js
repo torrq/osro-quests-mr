@@ -13,7 +13,7 @@ const USE_LOCAL_SERVER = false;
 // Auto-import data on page load (disable if you want to manually import)
 const AUTO_IMPORT_ON_FIRST_LOAD = true;
 
-const REMOTE_PREFIX = "https://torrq.github.io/osro-quest-helper/data/";
+const REMOTE_PREFIX = "https://torrq.github.io/osro-quests-mr/data/";
 const LOCAL_PREFIX  = "http://10.0.0.20:8298/data/";
 
 const FILES = {
