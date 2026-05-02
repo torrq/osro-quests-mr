@@ -1,103 +1,81 @@
 /* =========================================
-   OSRO Quests - MR Dark Theme (Deep Black)
-   Near-black base, restrained red accents
+   OSRO Quests - MR Dark Theme (Final Balance)
+   Red = state/selection
+   Amber = interaction/text highlights
    ========================================= */
 
 :root {
-  /* Base backgrounds - almost black, slight red bias */
+  /* Base (unchanged good values) */
   --bg: #030101;
   --bg-dark: #020000;
   --bg-secondary: #0a0505;
   --bg-tertiary: #120808;
-  
-  /* Header background image */
-  --header-bg-image: url("../image/osromr_dark.jpg");
 
-  /* Panel colors */
   --panel: #080303;
   --panel-hover: #140707;
-  
-  /* Borders - visible but subtle */
+
   --border: #2a1414;
   --border-light: #3a1c1c;
   --group-border: #140707;
-  
-  /* Text colors */
+
   --text: #e6edf3;
   --text-muted: #9a7f7f;
-  
-  /* Accent colors - bright, luminous red (HR-equivalent energy) */
-  --accent: #ff5a5a;              /* brighter, less muddy */
-  --accent-hover: #ff7a7a;        /* clear hover step */
-  --accent-bg: rgba(255, 90, 90, 0.16);
-  
-  /* Expand icon */
-  --expand-icon: rgb(255, 170, 170);
-  
-  /* Success hover */
-  --success-hover-bright: #4ade80;
 
-  /* Status colors */
+  /* 🔴 RED — structure + selection */
+  --accent: #e23b3b;
+  --accent-hover: #ff5a5a;
+  --accent-bg: rgba(226, 59, 59, 0.12);
+
+  /* Selected item / active row (IMPORTANT) */
+  --active-quest-bg: rgba(226, 59, 59, 0.22);
+
+  /* 🟡 AMBER — interaction + readability */
+  --amber: #ffcc33;
+  --amber-hover: #ffd966;
+  --amber-soft: rgba(255, 204, 51, 0.18);
+
+  /* Links + item names */
+  --link: #ffcc33;
+  --link-hover: #ffd966;
+
+  /* Expand / UI icons */
+  --expand-icon: rgb(255, 210, 120);
+
+  /* Header label (matches MR tag vibe) */
+  --version-tag: #ffcc33;
+
+  /* Status */
   --danger: #ff4d4d;
   --danger-hover: #ff6a6a;
+
   --success: #3fb950;
   --success-hover: #4ade80;
-  --success-shadow: rgba(63, 185, 80, 0.4);
+
   --warning: #d29922;
   --warning-bg: rgba(210, 153, 34, 0.15);
 
-  /* Account Bound */
+  /* Bound text still gold */
   --bound-text: #ffd900;
   --bound-shadow: #bd9102;
-  
-  /* Shadows - stronger depth */
-  --shadow: rgba(0, 0, 0, 0.7);
-  --shadow-strong: rgba(0, 0, 0, 0.98);
-  --subtle-overlay: rgba(255, 255, 255, 0.04);
-  
-  /* Buttons */
-  --btn-text: #000;
-  --tab-active-text: #000;
-  
-  /* Special */
-  --version-tag: #ff3b3b;
-  --active-quest-bg: rgba(255, 90, 90, 0.20);
-  
-  /* Code */
-  --code-bg: #080303;
-  --code-block-bg: rgba(0, 0, 0, 0.45);
-  --code-text: #ff7b72;
-  --autocomplete-bg: #0f0606;
-  
-  /* Placeholders */
-  --placeholder-bg: #3a3a3a;
-  --placeholder-text: #888;
-  --placeholder-border: #555;
-  --placeholder-icon: #999;
-  
-  /* Semantic colors unchanged */
-  --zeny-bg: #062b09;
-  --zeny-border: #2a7537;
-  --zeny-icon: #00ff22;
-  
+
+  /* Code (slightly warm) */
+  --code-text: #ffb86c;
+
+  /* Points */
   --points-bg: #2a0000;
   --points-border: #ff4d9a;
   --points-icon: #ffd0ff;
-  
-  /* Highlight */
-  --highlight-bg: #ffeb3b;
-  --highlight-text: #000;
-  
-  /* Badge */
-  --badge-gradient: linear-gradient(135deg, #ff5a5a 0%, #c81e1e 100%);
-  --badge-shadow: rgba(255, 90, 90, 0.35);
 
-  /* Material Tree */
-  --mat-connector:      #2a1414;
+  /* Badge */
+  --badge-gradient: linear-gradient(135deg, #ffcc33 0%, #e23b3b 100%);
+  --badge-shadow: rgba(255, 140, 0, 0.35);
+
+  /* Material tree */
+  --mat-connector: #2a1414;
   --mat-connector-opts: #2a1414;
 
-  /* Options badge */
-  --mat-opts-bg:     rgba(210, 153, 34, 0.12);
-  --mat-opts-text:   #d29922;
+  --mat-opts-bg: rgba(210, 153, 34, 0.12);
+  --mat-opts-text: #d29922;
   --mat-opts-border: rgba(210, 153, 34, 0.4);
 }
+
