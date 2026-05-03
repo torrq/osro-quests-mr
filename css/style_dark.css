@@ -1,11 +1,11 @@
 /* =========================================
-   OSRO Quests - MR Dark Theme (Final Balance)
+   OSRO Quests - MR Dark Theme
    Red = state/selection
    Amber = interaction/text highlights
    ========================================= */
 
 :root {
-  /* Base (unchanged good values) */
+  /* Base */
   --bg: #030101;
   --bg-dark: #020000;
   --bg-secondary: #0a0505;
@@ -21,28 +21,24 @@
   --text: #e6edf3;
   --text-muted: #9a7f7f;
 
-  /* 🔴 RED — structure + selection */
+  /* 🔴 Red — structure / state */
   --accent: #e23b3b;
   --accent-hover: #ff5a5a;
   --accent-bg: rgba(226, 59, 59, 0.12);
-
-  /* Selected item / active row (IMPORTANT) */
   --active-quest-bg: rgba(226, 59, 59, 0.22);
 
-  /* 🟡 AMBER — interaction + readability */
+  /* 🟡 Amber — interaction */
   --amber: #ffcc33;
   --amber-hover: #ffd966;
   --amber-soft: rgba(255, 204, 51, 0.18);
 
-  /* Links + item names */
-  --link: #ffcc33;
-  --link-hover: #ffd966;
+  /* Use amber for links/items */
+  --link: var(--amber);
+  --link-hover: var(--amber-hover);
 
-  /* Expand / UI icons */
+  /* UI elements */
   --expand-icon: rgb(255, 210, 120);
-
-  /* Header label (matches MR tag vibe) */
-  --version-tag: #ffcc33;
+  --version-tag: var(--amber);
 
   /* Status */
   --danger: #ff4d4d;
@@ -54,19 +50,16 @@
   --warning: #d29922;
   --warning-bg: rgba(210, 153, 34, 0.15);
 
-  /* Bound text still gold */
+  /* Misc */
   --bound-text: #ffd900;
   --bound-shadow: #bd9102;
 
-  /* Code (slightly warm) */
   --code-text: #ffb86c;
 
-  /* Points */
   --points-bg: #2a0000;
   --points-border: #ff4d9a;
   --points-icon: #ffd0ff;
 
-  /* Badge */
   --badge-gradient: linear-gradient(135deg, #ffcc33 0%, #e23b3b 100%);
   --badge-shadow: rgba(255, 140, 0, 0.35);
 
@@ -80,21 +73,16 @@
 }
 
 /* =========================================
-   Item name + link color override (MR)
+   Item names / links (override required)
    ========================================= */
 
 .qvh-item-name,
 .item-link {
   color: var(--link) !important;
+  text-shadow: 0 0 3px rgba(255, 204, 51, 0.15);
 }
 
-/* Hover state */
 .qvh-item-name:hover,
 .item-link:hover {
   color: var(--link-hover) !important;
-}
-
-.qvh-item-name,
-.item-link {
-  text-shadow: 0 0 3px rgba(255, 204, 51, 0.15);
 }
