@@ -11,6 +11,9 @@
   --bg-secondary: #0a0505;
   --bg-tertiary: #120808;
 
+  /* Header background image */
+  --header-bg-image: url("../image/osromr_dark.jpg");
+
   --panel: #080303;
   --panel-hover: #140707;
 
