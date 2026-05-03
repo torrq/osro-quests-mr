@@ -1,10 +1,10 @@
 /* =========================================
-   OSRO Quests - Light Theme
-   Cool professional light mode with blue tint
+   OSRO Quests - MR Light Theme
+   Red-centric, clean contrast
    ========================================= */
 
 :root {
-  /* Base backgrounds - cool blue-gray tones */
+  /* Base backgrounds - neutral light */
   --bg: #f6f8fa;
   --bg-dark: #eef2f5;
   --bg-secondary: #ffffff;
@@ -15,7 +15,7 @@
 
   /* Panel colors */
   --panel: #ffffff;
-  --panel-hover: #e8ecf0;
+  --panel-hover: #eceff3;
   
   /* Borders */
   --border: #d0d7de;
@@ -26,66 +26,67 @@
   --text: #24292f;
   --text-muted: #57606a;
   
-  /* Accent colors - darker blue for light backgrounds */
-  --accent: #0969da;
-  --accent-hover: #0550ae;
-  --accent-bg: rgba(9, 105, 218, 0.1);
+  /* 🔴 Red — primary accent everywhere */
+  --accent: #d1242f;
+  --accent-hover: #a40e26;
+  --accent-bg: rgba(209, 36, 47, 0.10);
+
+  /* Selection */
+  --active-quest-bg: rgba(209, 36, 47, 0.10);
   
   /* Expand icon */
-  --expand-icon: #0969da;
+  --expand-icon: var(--accent);
   
-  /* Success hover (copy link button) */
-  --success-hover-bright: #2da44e;
-
-  /* Status colors */
+  /* Status */
   --danger: #d1242f;
   --danger-hover: #a40e26;
+
   --success: #1a7f37;
   --success-hover: #2da44e;
   --success-shadow: rgba(26, 127, 55, 0.3);
+
   --warning: #bf8700;
   --warning-bg: rgba(191, 135, 0, 0.1);
 
-  /* Account Bound name styling — darker gold so it reads on light bg */
+  /* Bound text */
   --bound-text: #2b2b2b;
-  --bound-shadow: rgba(255, 238, 0, 0.966);
+  --bound-shadow: rgba(255, 238, 0, 0.9);
   
-  /* Shadows and overlays */
+  /* Shadows */
   --shadow: rgba(31, 35, 40, 0.15);
   --shadow-strong: rgba(31, 35, 40, 0.5);
   --subtle-overlay: rgba(175, 184, 193, 0.2);
   
-  /* Button text colors */
+  /* Buttons */
   --btn-text: #ffffff;
   --tab-active-text: #ffffff;
   
-  /* Toggle colors */
+  /* Special */
+  --version-tag: var(--accent);
   
-  /* Special elements */
-  --version-tag: #ff4213;
-  --active-quest-bg: rgba(9, 105, 218, 0.1);
-  
-  /* Code blocks */
+  /* Code */
   --code-bg: #f6f8fa;
   --code-block-bg: rgba(175, 184, 193, 0.2);
-  --code-text: #0550ae;
+  --code-text: #a40e26;
   --autocomplete-bg: #ffffff;
   
-  /* Item placeholders */
-  --placeholder-bg: #e8ecf0;
+  /* Placeholders */
+  --placeholder-bg: #eceff3;
   --placeholder-text: #57606a;
   --placeholder-border: #d0d7de;
   --placeholder-icon: #8c959f;
   
+  /* Zeny (semantic, unchanged) */
   --zeny-bg: #ddf4ff;
   --zeny-border: #54aeff;
   --zeny-icon: #0969da;
   
+  /* Points */
   --points-bg: #ffeff7;
   --points-border: #ff80c8;
   --points-icon: #d1242f;
   
-  /* Search highlight */
+  /* Highlight */
   --highlight-bg: #fff8c5;
   --highlight-text: #24292f;
   
@@ -93,17 +94,30 @@
   --badge-gradient: linear-gradient(135deg, #f85149 0%, #d1242f 100%);
   --badge-shadow: rgba(209, 36, 47, 0.25);
 
-  /* Material Tree - warm parchment palette */
-  --mat-connector:      #c4b89a;   /* warm tan spine lines */
-  --mat-connector-opts: #c4b89a;   /* same, dashed for options */
+  /* Material Tree */
+  --mat-connector: #c4b89a;
+  --mat-connector-opts: #c4b89a;
 
-  /* ⚠ options badge — warm amber */
-  --mat-opts-bg:     #fff4e0;
-  --mat-opts-text:   #7a4d00;
+  --mat-opts-bg: #fff4e0;
+  --mat-opts-text: #7a4d00;
   --mat-opts-border: #c8860a;
 }
 
-/* Invert white-on-black icons for light theme */
+/* =========================================
+   Item names / links (force red)
+   ========================================= */
+
+.qvh-item-name,
+.item-link {
+  color: var(--accent) !important;
+}
+
+.qvh-item-name:hover,
+.item-link:hover {
+  color: var(--accent-hover) !important;
+}
+
+/* Invert icons */
 .settings-link img,
 .github-link img {
   filter: invert(1);
