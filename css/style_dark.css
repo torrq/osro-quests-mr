@@ -79,3 +79,22 @@
   --mat-opts-border: rgba(210, 153, 34, 0.4);
 }
 
+/* =========================================
+   Item name + link color override (MR)
+   ========================================= */
+
+.qvh-item-name,
+.item-link {
+  color: var(--link) !important;
+}
+
+/* Hover state */
+.qvh-item-name:hover,
+.item-link:hover {
+  color: var(--link-hover) !important;
+}
+
+.qvh-item-name,
+.item-link {
+  text-shadow: 0 0 3px rgba(255, 204, 51, 0.15);
+}
