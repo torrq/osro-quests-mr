@@ -648,7 +648,7 @@
             {
               "name": "VIP Ticket [1D]",
               "producesId": 40069,
-              "accountBound": false,
+              "accountBound": true,
               "requirements": [
                 {
                   "type": "instance_points",
@@ -659,7 +659,7 @@
             {
               "name": "AS Reset Card",
               "producesId": 40075,
-              "accountBound": false,
+              "accountBound": true,
               "requirements": [
                 {
                   "type": "instance_points",
@@ -670,7 +670,7 @@
             {
               "name": "AA Reset Card",
               "producesId": 40068,
-              "accountBound": false,
+              "accountBound": true,
               "requirements": [
                 {
                   "type": "instance_points",
@@ -681,7 +681,7 @@
             {
               "name": "Battle Manual 300%",
               "producesId": 14545,
-              "accountBound": false,
+              "accountBound": true,
               "requirements": [
                 {
                   "type": "instance_points",
@@ -692,7 +692,7 @@
             {
               "name": "HE Bubble Gum",
               "producesId": 12412,
-              "accountBound": false,
+              "accountBound": true,
               "requirements": [
                 {
                   "type": "instance_points",
@@ -703,7 +703,7 @@
             {
               "name": "Costume Ticket",
               "producesId": 40004,
-              "accountBound": false,
+              "accountBound": true,
               "requirements": [
                 {
                   "type": "instance_points",
@@ -714,7 +714,7 @@
             {
               "name": "Job Ticket",
               "producesId": 40005,
-              "accountBound": false,
+              "accountBound": true,
               "requirements": [
                 {
                   "type": "instance_points",
@@ -725,7 +725,7 @@
             {
               "name": "Race Ticket",
               "producesId": 40041,
-              "accountBound": false,
+              "accountBound": true,
               "requirements": [
                 {
                   "type": "instance_points",
