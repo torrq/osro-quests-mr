@@ -49109,7 +49109,7 @@
   },
   "20398": {
     "name": "Niffleheim Bunny Hat",
-    "desc": "A hat with a motif of Hylozoist's bunny.\nSource:^777777 ?^000000\nClass:^6666CC Headgear^000000\nLocation:^6666CC Upper^000000\nWeight:^009900 0^000000\nLevel Requirement:^009900 1^000000\nJobs:^6666CC All^000000"
+    "desc": "A hat with a motif of Hylozoist's bunny.\nSource:^777777 Lotti Girl^000000\nClass:^6666CC Headgear^000000\nLocation:^6666CC Upper^000000\nWeight:^009900 0^000000\nLevel Requirement:^009900 1^000000\nJobs:^6666CC All^000000"
   },
   "20399": {
     "name": "Crow Tengu Mask",
@@ -59963,6 +59963,14 @@
     "name": "Wandermins Stone(Garment)",
     "desc": "..."
   },
+  "30000": {
+    "name": "Zeny",
+    "desc": "Zeny"
+  },
+  "30001": {
+    "name": "Cash",
+    "desc": "Cash"
+  },
   "31000": {
     "name": "Rudo Card",
     "desc": "..."
@@ -60353,7 +60361,7 @@
   },
   "31097": {
     "name": "Minnie Doe Alma's Bunny Ears",
-    "desc": "A colaboration headdress of ECOxRO. It's imitate the bunny ears of Minnie Doe Alma.\nClass:^6666CC Headgear^000000\nLocation:^6666CC Upper^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000"
+    "desc": "A colaboration headdress of ECOxRO. It's imitate the bunny ears of Minnie Doe Alma.\nSource:^777777 Lotti Girl^000000\nClass:^6666CC Headgear^000000\nLocation:^6666CC Upper^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000"
   },
   "31098": {
     "name": "Tamamo Loa's Fox Ears",
@@ -61109,7 +61117,7 @@
   },
   "31299": {
     "name": "White Rabbit",
-    "desc": "This white rabbit took a liking to you and now it won't leave you alone. Aren't you lucky!\nClass:^6666CC Headgear^000000\nLocation:^6666CC Middle^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000"
+    "desc": "This white rabbit took a liking to you and now it won't leave you alone. Aren't you lucky!\nSource:^777777 Lotti Girl^000000\nClass:^6666CC Headgear^000000\nLocation:^6666CC Middle^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000"
   },
   "31300": {
     "name": "Warm Cat Muffler",
@@ -62169,7 +62177,7 @@
   },
   "31815": {
     "name": "Angora Rabbit Hat",
-    "desc": "A fluffy Angora rabbit hat.\nThe hair is overgrown, and it is made with a design that covers the bangs.\nClass:^6666CC Headgear^000000\nLocation:^6666CC Upper^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000"
+    "desc": "A fluffy Angora rabbit hat.\nThe hair is overgrown, and it is made with a design that covers the bangs.\nMax Weight + 500\nGives +1 random stat when equipped.\nIncreases experience gained from defeating monsters by 10%.\nSource:^777777 Monthsary Giveaway^000000\nClass:^6666CC Headgear^000000\nLocation:^6666CC Upper^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000"
   },
   "31816": {
     "name": "Moon Lion's Wings",
@@ -63051,6 +63059,10 @@
     "name": "Dried Seed Box [10]",
     "desc": "A box containing (10) Dried Yggdrasil Seed.\n^FFFFFF_^000000\nWeight:^009900 1^000000"
   },
+  "40171": {
+    "name": "Gold Treasure Box",
+    "desc": "A box containing (5,000) Golds.\n^FFFFFF_^000000\nWeight:^009900 1^000000"
+  },
   "40201": {
     "name": "Streamer Box",
     "desc": "Given to Streamers who have shown constant support for the server.\n^FFFFFF_^000000\nWeight:^009900 1^000000"
@@ -63157,11 +63169,11 @@
   },
   "40260": {
     "name": "Knight Talisman",
-    "desc": "Soul Links to Knights and Lord Knights.\n- Allowing those who have ^33CC00Two-Hand Quicken^000000 LV 10 to use ^33CC00One-Hand Quicken^000000 for the skill's duration.\n- Enable to use Level 10 ^33CC00Parrying^000000 with One-Hand Weapon with a block chance of 2*SkillLV%.\n- All skills have their after delay reduced by 40%.\n- Increase ^33CC00Spear Boomerang^000000 damage by 200%.\n- Increase ^33CC00Spiral Pierce^000000 range by 1 cell.\n^FFFFFF_^000000\nWeight:^009900 1^000000"
+    "desc": "Soul Links to Knights and Lord Knights.\n- Allowing those who have ^33CC00Two-Hand Quicken^000000 LV 10 to use ^33CC00One-Hand Quicken^000000 for the skill's duration.\n- Enable to use Level 10 ^33CC00Parrying^000000 with One-Hand Weapon with a block chance of 2*SkillLV%.\n- All skills have their after delay reduced by 40%.\n- Increase ^33CC00Spear Boomerang^000000 damage by 200%.\n- Increase ^33CC00Spiral Pierce^000000 range by 1 cell.\n- Has a 10% chance to autocast ^33CC00Spiral Pierce^000000 using ^33CC00Spear Boomerang^000000.\n^FFFFFF_^000000\nWeight:^009900 1^000000"
   },
   "40261": {
     "name": "Hunter Talisman",
-    "desc": "Soul Links to Hunters and Snipers.\n- Effectiveness of ^33CC00Beast Bane^000000 is increased by Hunters/Snipers STR.\n- If ^33CC00Double Strafing^000000 is Level 10, a new skill, ^33CC00Beast Strafing^000000, will be available.\n- There is a low chance of ^33CC00Falcon Assault^000000 occurring automatically per shot with a bow.\n- Increase ^33CC00Double Strafing^000000 damage by 20%.\n^FFFFFF_^000000\nWeight:^009900 1^000000"
+    "desc": "Soul Links to Hunters and Snipers.\n- Effectiveness of ^33CC00Beast Bane^000000 is increased by Hunters/Snipers STR.\n- If ^33CC00Double Strafing^000000 is Level 10, a new skill, ^33CC00Beast Strafing^000000, will be available.\n- There is a low chance of ^33CC00Falcon Assault^000000 occurring automatically per shot with a bow.\n- Has a 10% chance to Trap(Ankle Snare) the target using ^33CC00Charge Arrow^000000.\n- Increase ^33CC00Double Strafing^000000 damage by 20%.\n^FFFFFF_^000000\nWeight:^009900 1^000000"
   },
   "40262": {
     "name": "Monk Talisman",
@@ -65113,32 +65125,32 @@
   },
   "42810": {
     "name": "STR Necklace II",
-    "desc": "A gemmed necklace made of magical blue crystals.\nStr +7\nSource:^777777 Quest^000000\nClass:^6666CC Accessory^000000\nDefense:^0000FF 0^000000\nWeight:^009900 10^000000\nLevel Requirement:^009900 100^000000\nJobs:^6666CC All except Novice^000000",
+    "desc": "A gemmed necklace made of magical blue crystals.\nStr +7\n--------------------------\n[ ^008000Deposit Effect^000000 ]\nATK + 2\n--------------------------\nSource:^777777 Quest^000000\nClass:^6666CC Accessory^000000\nDefense:^0000FF 0^000000\nWeight:^009900 10^000000\nLevel Requirement:^009900 100^000000\nJobs:^6666CC All except Novice^000000",
     "slot": 1
   },
   "42811": {
     "name": "AGI Statue II",
-    "desc": "A seal imbued with the power of agility from the stars.\nAgi +7, Flee +4\nSource:^777777 Quest^000000\nClass:^6666CC Accessory^000000\nDefense:^0000FF 0^000000\nWeight:^009900 10^000000\nLevel Requirement:^009900 100^000000\nJobs:^6666CC All except Novice^000000",
+    "desc": "A seal imbued with the power of agility from the stars.\nAgi +7, Flee +4\n--------------------------\n[ ^008000Deposit Effect^000000 ]\nFlee + 2\n--------------------------\nSource:^777777 Quest^000000\nClass:^6666CC Accessory^000000\nDefense:^0000FF 0^000000\nWeight:^009900 10^000000\nLevel Requirement:^009900 100^000000\nJobs:^6666CC All except Novice^000000",
     "slot": 1
   },
   "42812": {
     "name": "VIT Ring II",
-    "desc": "A gold ring that exudes an air of cuteness.\nVit +7\nSource:^777777 Quest^000000\nClass:^6666CC Accessory^000000\nDefense:^0000FF 0^000000\nWeight:^009900 10^000000\nLevel Requirement:^009900 100^000000\nJobs:^6666CC All except Novice^000000",
+    "desc": "A gold ring that exudes an air of cuteness.\nVit +7\n--------------------------\n[ ^008000Deposit Effect^000000 ]\nHP + 40\n--------------------------\nSource:^777777 Quest^000000\nClass:^6666CC Accessory^000000\nDefense:^0000FF 0^000000\nWeight:^009900 10^000000\nLevel Requirement:^009900 100^000000\nJobs:^6666CC All except Novice^000000",
     "slot": 1
   },
   "42813": {
     "name": "INT Earrings II",
-    "desc": "These lovely plush earrings have a faint blue luster.\nInt +7\nSource:^777777 Quest^000000\nClass:^6666CC Accessory^000000\nDefense:^0000FF 0^000000\nWeight:^009900 10^000000\nLevel Requirement:^009900 100^000000\nJobs:^6666CC All except Novice^000000",
+    "desc": "These lovely plush earrings have a faint blue luster.\nInt +7\n--------------------------\n[ ^008000Deposit Effect^000000 ]\nMATK + 2\n--------------------------\nSource:^777777 Quest^000000\nClass:^6666CC Accessory^000000\nDefense:^0000FF 0^000000\nWeight:^009900 10^000000\nLevel Requirement:^009900 100^000000\nJobs:^6666CC All except Novice^000000",
     "slot": 1
   },
   "42814": {
     "name": "DEX Brooch II",
-    "desc": "A sapphire brooch in the shape of a sky-blue Lunatic silhouette.\nDex +7\nSource:^777777 Quest^000000\nClass:^6666CC Accessory^000000\nDefense:^0000FF 0^000000\nWeight:^009900 10^000000\nLevel Requirement:^009900 100^000000\nJobs:^6666CC All except Novice^000000",
+    "desc": "A sapphire brooch in the shape of a sky-blue Lunatic silhouette.\nDex +7\n--------------------------\n[ ^008000Deposit Effect^000000 ]\nHit + 2\n--------------------------\nSource:^777777 Quest^000000\nClass:^6666CC Accessory^000000\nDefense:^0000FF 0^000000\nWeight:^009900 10^000000\nLevel Requirement:^009900 100^000000\nJobs:^6666CC All except Novice^000000",
     "slot": 1
   },
   "42815": {
     "name": "LUK Pendant II",
-    "desc": "A pendant in the shape of a Toad in twilight.\nLuk +7, Critical +7\nSource:^777777 Quest^000000\nClass:^6666CC Accessory^000000\nDefense:^0000FF 0^000000\nWeight:^009900 10^000000\nLevel Requirement:^009900 100^000000\nJobs:^6666CC All except Novice^000000",
+    "desc": "A pendant in the shape of a Toad in twilight.\nLuk +7, Critical +7\n--------------------------\n[ ^008000Deposit Effect^000000 ]\nCritical + 1\n--------------------------\nSource:^777777 Quest^000000\nClass:^6666CC Accessory^000000\nDefense:^0000FF 0^000000\nWeight:^009900 10^000000\nLevel Requirement:^009900 100^000000\nJobs:^6666CC All except Novice^000000",
     "slot": 1
   },
   "42816": {
@@ -65399,6 +65411,44 @@
     "name": "Gigantic Baphomet Horns I",
     "desc": "An upgraded headgear forged from the horns of the Unsealed Baphomet.\nStr +12\nHit +10\nDecreases damage taken from ^FF0000Demi-Human^000000 by 10%.\nEndow a weapon with damage that will splash around the character with each attack.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nATK + 5, HIT + 1\n------------------------\nSource:^777777 Monster Arena^000000\nClass:^6666CC Headgear^000000\nDefense:^0000FF 2^000000\nLocation:^6666CC Upper^000000\nWeight:^009900 20^000000\nJobs:^6666CC All^000000",
     "slot": 1
+  },
+  "42872": {
+    "name": "Medal of STR I",
+    "desc": "A medal rewarded to honorable warriors.\nMaximum HP + 3%\nAllStats +5, Str +3\nAdds ATK +2 per refine.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nATK + 3, MATK + 3\n------------------------\nSource:^777777 Quest/Donate^000000\nClass:^6666CC Accessory^000000\nDefense:^0000FF 1^000000\nWeight:^009900 30^000000\nLevel Requirement:^009900 70^000000\nJobs:^6666CC All^000000",
+    "slot": 1
+  },
+  "42873": {
+    "name": "Medal of AGI I",
+    "desc": "A medal rewarded to honorable warriors.\nMaximum HP + 3%\nAllStats +5, Agi +3\nPerfect Dodge + 2\nAdds Flee +2 per refine.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nAGI +1\n------------------------\nSource:^777777 Quest/Donate^000000\nClass:^6666CC Accessory^000000\nDefense:^0000FF 1^000000\nWeight:^009900 30^000000\nLevel Requirement:^009900 70^000000\nJobs:^6666CC All^000000",
+    "slot": 1
+  },
+  "42874": {
+    "name": "Medal of VIT I",
+    "desc": "A medal rewarded to honorable warriors.\nMaximum HP + 3%\nAllStats +5, Vit +3\nAdds HP +150 per refine.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nHP +100\n------------------------\nSource:^777777 Quest/Donate^000000\nClass:^6666CC Accessory^000000\nDefense:^0000FF 1^000000\nWeight:^009900 30^000000\nLevel Requirement:^009900 70^000000\nJobs:^6666CC All^000000",
+    "slot": 1
+  },
+  "42875": {
+    "name": "Medal of INT I",
+    "desc": "A medal rewarded to honorable warriors.\nMaximum HP + 3%\nAllStats +5, Int +3\nAdds MATK +2 per refine.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nATK + 3, MATK + 3\n------------------------\nSource:^777777 Quest/Donate^000000\nClass:^6666CC Accessory^000000\nDefense:^0000FF 1^000000\nWeight:^009900 30^000000\nLevel Requirement:^009900 70^000000\nJobs:^6666CC All^000000",
+    "slot": 1
+  },
+  "42876": {
+    "name": "Medal of DEX I",
+    "desc": "A medal rewarded to honorable warriors.\nMaximum HP + 3%\nAllStats +5, Dex +3\nAdds 2% Range Damage.\nAdds ATK +2 per refine.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nATK +2, HIT +1\n------------------------\nSource:^777777 Quest/Donate^000000\nClass:^6666CC Accessory^000000\nDefense:^0000FF 1^000000\nWeight:^009900 30^000000\nLevel Requirement:^009900 70^000000\nJobs:^6666CC All^000000",
+    "slot": 1
+  },
+  "42877": {
+    "name": "Medal of LUK I",
+    "desc": "A medal rewarded to honorable warriors.\nMaximum HP + 3%\nAllStats +5, Luk +3\nCrit +3, Crit Damage +2%.\nAdds ATK +2 per refine.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nLUK +1\n------------------------\nSource:^777777 Quest/Donate^000000\nClass:^6666CC Accessory^000000\nDefense:^0000FF 1^000000\nWeight:^009900 30^000000\nLevel Requirement:^009900 70^000000\nJobs:^6666CC All^000000",
+    "slot": 1
+  },
+  "42878": {
+    "name": "Frontslide Talent Ring",
+    "desc": "Frontslide Talent Skill\n------------------------\nQuickly dash forward to close gaps, reposition aggressively, or evade incoming danger with swift movement.\n------------------------\nClass :^777777 Left Costume Accessory^000000\nCool Down: ^7777775 Seconds^000000\nClass :^777777 Accessory^000000\nDefense :^777777 0^000000\nWeight :^777777 10^000000\nApplicable Job :^777777 All^000000"
+  },
+  "42879": {
+    "name": "Backslide Talent Ring",
+    "desc": "Backslide Talent Skill\n------------------------\nQuickly move backwards to position yourself safely away from threats while maintaining combat readiness.\n------------------------\nClass :^777777 Left Costume Accessory^000000\nCool Down: ^7777775 Seconds^000000\nClass :^777777 Accessory^000000\nDefense :^777777 0^000000\nWeight :^777777 10^000000\nApplicable Job :^777777 All^000000"
   },
   "43001": {
     "name": "Buff Scroll",
@@ -65914,6 +65964,10 @@
   "43819": {
     "name": "Infused Memory of Thanatos Card",
     "desc": "Hit -30\nMaximum HP -10%\nEach attack drains 1 SP.\nEnchants compounded weapon with the ^008800Infiltration^000000 skill effect.\nIncrease magic and physical damage on ALL monsters by 2%.\n^FF0000This card is part of the 2-Cards Max Deadly Combo restriction.^000000\nClass:^6666CC Card^000000\nCompound on:^FF0000 Weapon^000000\nWeight:^009900 1^000000"
+  },
+  "43820": {
+    "name": "SVIP Buff Scroll",
+    "desc": "Exclusive scroll that only works for SVIP users.\n-------------------------\n- All Status +10\n- Blessing\n- Increased Agility\n- Soul Link\n- Full Chem Protection\n-------------------------\n^FF0000Cannot be used on PvP/GvG maps.^000000\n-------------------------\nWeight: ^00990010^000000"
   },
   "43901": {
     "name": "Dark Thanatos Card",
@@ -66664,7 +66718,7 @@
   },
   "45133": {
     "name": "LV Captain Hat",
-    "desc": "An exclusive custom made headgear from one of the most luxurious fashion brand.\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Upper^000000\nWeight:^009900 5^000000\nJobs:^6666CC All^000000"
+    "desc": "An exclusive custom made headgear from one of the most luxurious fashion brand.\nSource:^777777 Lotti Girl^000000\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Upper^000000\nWeight:^009900 5^000000\nJobs:^6666CC All^000000"
   },
   "45134": {
     "name": "LV Coppola",
@@ -70039,7 +70093,7 @@
   },
   "46930": {
     "name": "Circle Aura GRN",
-    "desc": "Level up your look with OldschoolRO's exclusive headgear!\n-------------------------\nMax Weight + 500\nDrop Rate of any items and cards increased by 5%.\n-------------------------\nSource:^777777 Lotti Girl^000000\nClass :^777777 Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Mid^000000\nWeight:^009900 10^000000\nJobs:^6666CC All^000000"
+    "desc": "Level up your look with OldschoolRO's exclusive headgear!\n-------------------------\nMax Weight + 500\nDrop Rate of any items and cards increased by 5%.\n-------------------------\n[ ^008000Deposit Effect^000000 ]\nReduce damage from Medium monster by 1%.\n------------------------\nSource:^777777 Lotti Girl^000000\nClass :^777777 Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Mid^000000\nWeight:^009900 10^000000\nJobs:^6666CC All^000000"
   },
   "46931": {
     "name": "Circle Aura PNK",
@@ -70047,7 +70101,7 @@
   },
   "46932": {
     "name": "Circle Aura PRP",
-    "desc": "Level up your look with OldschoolRO's exclusive headgear!\n-------------------------\nMax Weight + 500\nDrop Rate of any items and cards increased by 5%.\n-------------------------\nSource:^777777 Lotti Girl^000000\nClass :^777777 Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Mid^000000\nWeight:^009900 10^000000\nJobs:^6666CC All^000000"
+    "desc": "Level up your look with OldschoolRO's exclusive headgear!\n-------------------------\nMax Weight + 500\nDrop Rate of any items and cards increased by 5%.\n-------------------------\n[ ^008000Deposit Effect^000000 ]\nReduce damage from Medium monster by 1%.\n------------------------\nSource:^777777 Lotti Girl^000000\nClass :^777777 Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Mid^000000\nWeight:^009900 10^000000\nJobs:^6666CC All^000000"
   },
   "46933": {
     "name": "Circle Aura YLW",
@@ -73516,7 +73570,7 @@
   },
   "400225": {
     "name": "Fluffy Rabbit Cape",
-    "desc": "Fluffy costume cape in the shape of a rabbit.\nClass:^6666CC Headgear^000000\nLocation:^6666CC Upper^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000"
+    "desc": "Fluffy costume cape in the shape of a rabbit.\n-------------------------\nMax Weight + 500\nGives +1 random stat when equipped.\nATK and MATK + 1%.\n-------------------------\n[ ^008000Deposit Effect^000000 ]\nReduce damage from range attacks by 1%.\n------------------------\nSource:^777777 Lotti Girl^000000\nClass:^6666CC Headgear^000000\nLocation:^6666CC Upper^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000"
   },
   "400226": {
     "name": "Rune Knight Helm of Faith",
@@ -73569,7 +73623,7 @@
   },
   "400253": {
     "name": "Macaron Bunny Headdress",
-    "desc": "A costume headdress full of cuteness.\nHow about putting macarons on your head!\nClass:^6666CC Headgear^000000\nLocation:^6666CC Upper^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000"
+    "desc": "A costume headdress full of cuteness.\nHow about putting macarons on your head!\nSource:^777777 Lotti Girl^000000\nClass:^6666CC Headgear^000000\nLocation:^6666CC Upper^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000"
   },
   "400272": {
     "name": "Hakuba's Wish",
@@ -74170,7 +74224,7 @@
   },
   "480095": {
     "name": "Giant White Rabbit",
-    "desc": "A very large stuffed toy for clothes.\nIt feels like being healed by the soft energy flowing from the white rabbit.\nClass:^6666CC Garment^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000"
+    "desc": "A very large stuffed toy for clothes.\nIt feels like being healed by the soft energy flowing from the white rabbit.\n-------------------------\nMax Weight + 500\nGives +1 random stat when equipped.\nATK and MATK + 1%.\n-------------------------\n[ ^008000Deposit Effect^000000 ]\nReduce damage from near attacks by 1%.\n------------------------\nSource:^777777 Lotti Girl^000000\nClass:^6666CC Garment^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000"
   },
   "480096": {
     "name": "Winter Coat",
