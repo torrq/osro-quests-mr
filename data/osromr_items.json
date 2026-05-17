@@ -69833,7 +69833,7 @@
   },
   "46865": {
     "name": "Divine Cape",
-    "desc": "Level up your look with OldschoolRO's exclusive headgear!\n-------------------------\nMax Weight + 500\nIncrease damage on Boss monsters by 5%.\nSource:^777777 Lotti Girl^000000\nClass :^777777 Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Low^000000\nWeight:^009900 10^000000\nJobs:^6666CC All^000000"
+    "desc": "Level up your look with OldschoolRO's exclusive headgear!\n-------------------------\nMax Weight + 500\nIncrease damage on Boss monsters by 5%.\n--------------------------\n[ ^008000Deposit Effect^000000 ]\nAdds 1% damage when using ^777777Holy Element^000000.\n--------------------------\nSource:^777777 Lotti Girl^000000\nClass :^777777 Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Low^000000\nWeight:^009900 10^000000\nJobs:^6666CC All^000000"
   },
   "46866": {
     "name": "Electrifying Aura Black",
@@ -69869,7 +69869,7 @@
   },
   "46874": {
     "name": "Frozen Cape",
-    "desc": "Level up your look with OldschoolRO's exclusive headgear!\n-------------------------\nMax Weight + 500\nIncreases physical damage inflicted on Large size monsters by 5%.\nSource:^777777 Lotti Girl^000000\nClass :^777777 Costume Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Low^000000\nWeight:^009900 10^000000\nJobs:^6666CC All^000000"
+    "desc": "Level up your look with OldschoolRO's exclusive headgear!\n-------------------------\nMax Weight + 500\nIncreases physical damage inflicted on Large size monsters by 5%.\n--------------------------\n[ ^008000Deposit Effect^000000 ]\nAdds 1% damage when using ^777777Water Element^000000.\n--------------------------\nSource:^777777 Lotti Girl^000000\nClass :^777777 Costume Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Low^000000\nWeight:^009900 10^000000\nJobs:^6666CC All^000000"
   },
   "46875": {
     "name": "Heist Mask",
@@ -74144,7 +74144,7 @@
   },
   "420156": {
     "name": "Loose Braids of Star Flowers",
-    "desc": "A costume wig that makes you feel like you've changed into a different hairstyle when you wear it.\nLong hair decorated with star-shaped flowers in a neat feeling that is long and loosely tied.\nClass:^6666CC Headgear^000000\nLocation:^6666CC Lower^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000"
+    "desc": "A costume wig that makes you feel like you've changed into a different hairstyle when you wear it.\nLong hair decorated with star-shaped flowers in a neat feeling that is long and loosely tied.\nMax Weight + 500\nGives +1 random stat when equipped.\nIncreases experience gained from defeating monsters by 10%.\nSource:^777777 Monthsary Giveaway^000000\nClass:^6666CC Costume Headgear^000000\nLocation:^6666CC Upper^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000"
   },
   "420161": {
     "name": "Starry Sky Long Wave",
@@ -74244,7 +74244,7 @@
   },
   "480111": {
     "name": "Flower Wings",
-    "desc": "Costume wings adorned with beautiful flowers.\nIt is fantastically beautiful like a flower garden dyed in the evening sunset.\nClass:^6666CC Garment^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000"
+    "desc": "Costume wings adorned with beautiful flowers.\nIt is fantastically beautiful like a flower garden dyed in the evening sunset.\nMax Weight + 500\nGives +1 random stat when equipped.\nIncreases experience gained from defeating monsters by 10%.\nSource:^777777 Monthsary Giveaway^000000\nClass:^6666CC Garment^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000"
   },
   "480118": {
     "name": "General Daehyon Falchion",
