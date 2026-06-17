@@ -23,6 +23,7 @@ window.state = {
   draggedQuest: null,
   draggedFrom: null,
   itemSearchFilter: "",
+  selectedItemList: -1, // -1 = All, 0+ = index into DATA.itemLists
   questSearchFilter: "",
   editorMode: false,
   showLocation: true,
@@ -50,7 +51,12 @@ window.state = {
   selectedGroupForShopEdit: null,
   shopSearchFilter: "",
   expandedShopGroups: new Set(),
-  expandedShopSubgroups: new Set()
+  expandedShopSubgroups: new Set(),
+  discount: 0,        // 0 = off, 0.24 = merchant, 0.25 = stalker
+  valueMode: 'mixed', // 'zeny' | 'credit' | 'mixed'
+  valueSource: 'default', // 'default' | 'custom'
+  forceMobileView: false,
+  activeLabExperiment: null,   // last active lab sub-tab (e.g. 'lab-credit')
 };
 
 // Ensure all 10 autoloot slots exist
@@ -130,6 +136,32 @@ function initSecretEditorToggle() {
 }
 
 
+
+// ===== VALUE / DISCOUNT HELPERS =====
+
+function getDiscountMult() {
+  return 1 - (state.discount || 0);
+}
+
+function applyDiscount(zeny) {
+  if (!state.discount) return zeny;
+  return Math.floor(zeny * getDiscountMult());
+}
+
+// Format a zeny total according to current value display mode
+function formatValue(zeny) {
+  const v = state.valueMode;
+  if (v === 'credit' || (v === 'mixed' && zeny >= MIXED_CREDIT_THRESHOLD)) {
+    const credits = zeny / getCreditValue();
+    const fmt = formatZenyCompact(credits);
+    return fmt + (credits === 1 ? ' credit' : ' credits');
+  }
+  return formatZenyCompact(zeny) + ' zeny';
+}
+
+window.applyDiscount = applyDiscount;
+window.formatValue   = formatValue;
+
 // ===== SETTINGS =====
 
 function loadConfig() {
@@ -155,10 +187,88 @@ function initSettings() {
       if (cfg.sections[k] !== undefined) state.sections[k] = cfg.sections[k];
     });
   }
+  if (cfg.discount !== undefined)    state.discount    = cfg.discount;
+  if (cfg.valueMode !== undefined)   state.valueMode   = cfg.valueMode;
+  if (cfg.valueSource !== undefined) state.valueSource = cfg.valueSource;
+  if (cfg.forceMobileView !== undefined) state.forceMobileView = !!cfg.forceMobileView;
   const sl = document.getElementById('settingShowLocation');
   if (sl) sl.checked = state.showLocation;
+  const fmv = document.getElementById('settingForceMobileView');
+  if (fmv) fmv.checked = state.forceMobileView;
+  applyMobileLayoutPreference();
   syncSectionButtons();
+  syncValueButtons();
 }
+
+function syncValueButtons() {
+  ['off','24','25'].forEach(v => {
+    const btn = document.getElementById(`discBtn_${v}`);
+    const active = v === 'off' ? !state.discount : state.discount === parseFloat('0.' + v);
+    if (btn) btn.classList.toggle('sec-btn--off', !active);
+  });
+  ['zeny','credit','mixed'].forEach(v => {
+    const btn = document.getElementById(`vmBtn_${v}`);
+    if (btn) btn.classList.toggle('sec-btn--off', state.valueMode !== v);
+  });
+  ['default','custom'].forEach(v => {
+    const btn = document.getElementById(`vsBtn_${v}`);
+    if (btn) btn.classList.toggle('sec-btn--off', state.valueSource !== v);
+  });
+}
+
+function settingSetDiscount(val) {
+  state.discount = val;
+  saveConfig({ discount: val });
+  syncValueButtons();
+  render();
+}
+
+function settingSetValueMode(mode) {
+  state.valueMode = mode;
+  saveConfig({ valueMode: mode });
+  syncValueButtons();
+  render();
+}
+
+function settingSetValueSource(source) {
+  state.valueSource = source === 'custom' ? 'custom' : 'default';
+  saveConfig({ valueSource: state.valueSource });
+  syncValueButtons();
+
+  // Keep Values Manager source toggle in sync
+  if (typeof window.setValuesManagerSource === 'function') {
+    window.setValuesManagerSource(state.valueSource);
+  }
+
+  // Reload values according to the new source, then re-render
+  loadItemValuesFromStorage()
+    .then(() => {
+      render();
+      if (typeof window.renderValuesManagerPane === 'function') window.renderValuesManagerPane();
+    })
+    .catch(() => render());
+}
+
+function applyMobileLayoutPreference() {
+  document.body.classList.toggle('force-mobile-view', !!state.forceMobileView);
+  if (state.forceMobileView) {
+    const sidebar = document.getElementById('sidebar');
+    if (sidebar) sidebar.classList.remove('open');
+  }
+}
+
+function settingSetForceMobileView(enabled) {
+  state.forceMobileView = !!enabled;
+  saveConfig({ forceMobileView: state.forceMobileView });
+  const toggle = document.getElementById('settingForceMobileView');
+  if (toggle) toggle.checked = state.forceMobileView;
+  applyMobileLayoutPreference();
+}
+
+window.settingSetDiscount  = settingSetDiscount;
+window.settingSetValueMode = settingSetValueMode;
+window.settingSetValueSource = settingSetValueSource;
+window.settingSetForceMobileView = settingSetForceMobileView;
 
 function syncSectionButtons() {
   SECTION_KEYS.forEach(k => {
@@ -257,9 +367,11 @@ function initializeData() {
     fetchJSON(AUTO_IMPORT_URLS.searchIndexName),
     fetchJSON(AUTO_IMPORT_URLS.searchIndexDesc),
     fetchJSON(AUTO_IMPORT_URLS.newItems),
-    fetchJSON(AUTO_IMPORT_URLS.spriteMap)
+    fetchJSON(AUTO_IMPORT_URLS.spriteMap),
+    fetchJSON(AUTO_IMPORT_URLS.itemLists).catch(() => []),
+    fetchJSON(AUTO_IMPORT_URLS.pointLinks).catch(() => ({}))
   ])
-    .then(([items, quests, shops, icons, searchName, searchDesc, newItems, spriteMap]) => {
+    .then(([items, quests, shops, icons, searchName, searchDesc, newItems, spriteMap, itemLists, pointLinks]) => {
       loadItems(items);
       loadQuests(quests);
       loadShops(shops);
@@ -267,6 +379,8 @@ function initializeData() {
       loadSearchIndices(searchName, searchDesc);
       loadNewItems(newItems);
       loadSpriteMap(spriteMap);
+      DATA.itemLists = Array.isArray(itemLists) ? itemLists : [];
+      loadPointLinks(pointLinks);
       return loadItemValuesFromStorage();
     })
     .then(() => {
@@ -307,52 +421,47 @@ function loadItems(items) {
 }
 
 function loadItemValuesFromStorage() {
-  const stored = localStorage.getItem(LOCAL_STORAGE.item_values);
-  
-  if (stored) {
-    // Load from localStorage
-    try {
-      const values = JSON.parse(stored);
-      applyItemValues(values);
-      initState.valuesLoaded = true;
-      console.log(`[Init] Loaded ${Object.keys(values).length} item values from localStorage`);
-      return Promise.resolve();
-    } catch (err) {
-      console.error("[Init] Failed to parse stored item values:", err);
-      console.warn("[Init] Corrupt localStorage detected. Attempting to load from remote...");
-      // Clear corrupt data
-      localStorage.removeItem(LOCAL_STORAGE.item_values);
-      // Load from remote and return the promise
-      return loadItemValuesFromRemote();
-    }
-  } else {
-    // No localStorage, load from remote
-    console.log("[Init] No stored item values found. Loading from remote...");
-    return loadItemValuesFromRemote();
+  // Default mode: always use the canonical remote JSON, never read/write localStorage for values
+  if (state.valueSource === 'default') {
+    console.log("[Init] Default value source — loading from remote");
+    return loadItemValuesFromRemote(false); // false = don't save to localStorage
   }
+
+  // Custom mode: load canonical remote defaults, then overlay localStorage (if any)
+  return loadItemValuesFromRemote(false)
+    .then(() => {
+      const stored = localStorage.getItem(LOCAL_STORAGE.item_values);
+      if (!stored) return;
+      try {
+        const values = JSON.parse(stored);
+        applyItemValues(values);
+        initState.valuesLoaded = true;
+        console.log(`[Init] Overlayed ${Object.keys(values).length} custom item values from localStorage`);
+      } catch (err) {
+        console.error("[Init] Failed to parse stored item values:", err);
+        localStorage.removeItem(LOCAL_STORAGE.item_values);
+      }
+    });
 }
 
-function loadItemValuesFromRemote() {
+function loadItemValuesFromRemote(saveToStorage = true) {
   return fetchJSON(AUTO_IMPORT_URLS.values)
     .then(values => {
       if (values) {
-        // Check if user has already edited values during initialization
-        if (initState.userHasEditedValues) {
+        if (saveToStorage && initState.userHasEditedValues) {
           console.warn("[Init] User has already edited values. Skipping remote import to preserve user changes.");
           return;
         }
-        
         applyItemValues(values);
-        saveItemValuesToStorage();
+        if (saveToStorage) saveItemValuesToStorage();
         initState.valuesLoaded = true;
-        console.log(`[Init] Loaded ${Object.keys(values).length} item values from remote and saved to localStorage`);
+        console.log(`[Init] Loaded ${Object.keys(values).length} item values from remote${saveToStorage ? " and saved to localStorage" : ""}`);
       } else {
         console.warn("[Init] No item values data received from remote");
       }
     })
     .catch(err => {
       console.error("[Init] Failed to load item values from remote:", err);
-      // Don't throw - allow app to continue with no values
     });
 }
 
@@ -365,6 +474,22 @@ function applyItemValues(values) {
     }
   });
 }
+
+
+function loadDefaultValuesIntoCustom() {
+  return fetchJSON(AUTO_IMPORT_URLS.values).then(remote => {
+    if (!remote) { showToast('Could not reach default values', 'error'); return; }
+    // Merge: remote values overwrite matching ids, custom-only items are preserved
+    const stored = localStorage.getItem(LOCAL_STORAGE.item_values);
+    let existing = {};
+    try { existing = stored ? JSON.parse(stored) : {}; } catch { existing = {}; }
+    const merged = { ...existing, ...remote };
+    applyItemValues(merged);
+    localStorage.setItem(LOCAL_STORAGE.item_values, JSON.stringify(merged));
+    showToast(`Loaded ${Object.keys(remote).length} default values`, 'success');
+  }).catch(() => showToast('Failed to load default values', 'error'));
+}
+window.loadDefaultValuesIntoCustom = loadDefaultValuesIntoCustom;
 
 function saveItemValuesToStorage() {
   const values = {};
@@ -413,6 +538,45 @@ function importItemValues() {
   };
   
   input.click();
+}
+
+async function resetItemValuesToDefaults() {
+  const ok = window.confirm('Reset item values to server defaults? This will overwrite your current values.');
+  if (!ok) return;
+
+  try {
+    const defaults = await fetchJSON(AUTO_IMPORT_URLS.values);
+    if (!defaults) {
+      showToast('Failed to load default values from server', 'error', 5000);
+      return;
+    }
+
+    // Clear all existing values first, then apply the defaults set.
+    Object.values(DATA.items || {}).forEach((item) => {
+      if (item) item.value = 0;
+    });
+
+    applyItemValues(defaults);
+    saveItemValuesToStorage();
+
+    if (window.initState) {
+      window.initState.userHasEditedValues = true;
+    }
+
+    showToast(`Restored ${Object.keys(defaults).length} default item values`, 'success');
+
+    if (state.currentTab === 'items') {
+      renderItems();
+      if (state.selectedItemId) renderItemContent();
+    }
+
+    if (typeof window.renderValuesManagerPane === 'function') {
+      window.renderValuesManagerPane();
+    }
+  } catch (err) {
+    console.error('[Values] Reset to defaults failed:', err);
+    showToast('Failed to reset values to defaults', 'error', 5000);
+  }
 }
 
 function toggleValuesFilter(checked) {
@@ -499,6 +663,25 @@ function loadSpriteMap(spriteMap) {
     console.warn("[Init] No sprite map data received - falling back to individual icons");
   }
 }
+
+function loadPointLinks(raw) {
+  const links = raw && typeof raw === 'object' ? raw : {};
+  const typeToTicket = {};
+  Object.entries(links).forEach(([ticketIdStr, type]) => {
+    const ticketId = Number(ticketIdStr);
+    if (!Number.isFinite(ticketId) || ticketId <= 0) return;
+    if (typeof type !== 'string' || !type) return;
+    typeToTicket[type] = ticketId;
+  });
+  DATA.pointTicketLinks = links;
+  DATA.pointTypeToTicket = typeToTicket;
+}
+
+function getTicketIdForRequirementType(reqType) {
+  return DATA.pointTypeToTicket?.[reqType] || null;
+}
+
+window.getTicketIdForRequirementType = getTicketIdForRequirementType;
 
 function handleInitError(err) {
   console.error("[Init] Auto-import failed:", err);
@@ -865,36 +1048,83 @@ const TAB_ELEMENTS = {
   autoloot: {
     sidebar: "autolootList",
     render: ["renderAutolootSidebar", "renderAutolootMain"]
+  },
+  lab: {
+    sidebar: "labList",
+    render: ["renderLabSidebar", "renderLabMain"]
+  },
+  'lab-gc': {
+    sidebar: "labList",
+    render: ["renderLabSidebar", "renderLabMain"]
+  },
+  'lab-credit': {
+    sidebar: "labList",
+    render: ["renderLabSidebar", "renderLabMain"]
+  },
+  'lab-gem': {
+    sidebar: "labList",
+    render: ["renderLabSidebar", "renderLabMain"]
   }
 };
 
 function switchTab(tabName, pushState = true) {
+  // 'lab' is a namespace — redirect to the active experiment tab
+  if (tabName === 'lab') {
+      tabName = state.activeLabExperiment || (window.LAB_DEFAULT_EXPERIMENT) || 'lab-gc';
+  }
+  if (tabName.startsWith('lab-')) {
+      state.activeLabExperiment = tabName;
+  }
   const previousTab = state.currentTab;
   state.currentTab = tabName;
   updateTabButtons(tabName);
   hideAllElements();
   showTabElements(tabName);
+
+  // Close the Values Manager when leaving Items tab
+  if (tabName !== 'items' && typeof window.closeValuesManager === 'function') {
+    window.closeValuesManager(false);
+  }
   
-  // Auto-select first item when switching to a tab with no selection
-  // This ensures browser history works properly
-  if (pushState) {
-    setTimeout(() => {
-      if (previousTab !== tabName) {
-        // Tab switched but item already selected - still update URL
-        updateURL(null, null, pushState);
-      }
-    }, 50);
+  // Update URL when switching tabs (avoid racing user clicks)
+  if (pushState && previousTab !== tabName && typeof updateURL === 'function') {
+    let entityType = null;
+    let entityId = null;
+
+    if (tabName === 'quests' && state.selectedQuest?.producesId) {
+      entityType = 'quest';
+      entityId = state.selectedQuest.producesId.toString();
+    } else if (tabName === 'shops' && state.selectedShop?.producesId) {
+      entityType = 'shop';
+      entityId = state.selectedShop.producesId.toString();
+    } else if (tabName === 'items' && state.selectedItemId) {
+      entityType = 'item';
+      entityId = state.selectedItemId.toString();
+    } else if (tabName === 'autoloot' && state.selectedAutolootSlot) {
+      entityType = 'autoloot';
+      entityId = state.selectedAutolootSlot.toString();
+    }
+
+    updateURL(entityId, entityType, true);
   }
 }
 
 function updateTabButtons(tabName) {
   document.querySelectorAll(".tab").forEach(tab => {
-    tab.classList.toggle("active", tab.textContent.toLowerCase().includes(tabName));
+    const dataTab = tab.getAttribute('data-tab');
+    let matches;
+    if (dataTab) {
+      // 'lab' button should be active for any lab-* subtab
+      matches = dataTab === tabName || (dataTab === 'lab' && tabName.startsWith('lab-'));
+    } else {
+      matches = tab.textContent.toLowerCase().includes(tabName);
+    }
+    tab.classList.toggle("active", matches);
   });
 }
 
 function hideAllElements() {
-  ["treeContainer", "shopsTreeContainer", "itemsList", "groupsList", "autolootList"].forEach(id => {
+  ["treeContainer", "shopsTreeContainer", "itemsList", "groupsList", "autolootList", "labList"].forEach(id => {
     const el = document.getElementById(id);
     if (el) el.classList.add("hidden");
   });
@@ -958,6 +1188,10 @@ function render() {
 
 function toggleSidebar() {
   document.getElementById("sidebar").classList.toggle("open");
+}
+
+function isMobileSidebarMode() {
+  return window.innerWidth <= 768 || !!state.forceMobileView;
 }
 
 // ── Mobile FAB: hide on scroll-down, show on scroll-up ──────────────────────
@@ -1030,7 +1264,7 @@ function exportQuests() {
     }))
   }));
 
-  downloadJSON({ groups: cleanedGroups }, "osromr_quests.json");
+  downloadJSON({ groups: cleanedGroups }, "osrohr_quests.json");
 }
 
 function exportShops() {
@@ -1049,7 +1283,7 @@ function exportShops() {
     }))
   }));
 
-  downloadJSON({ groups: cleanedGroups }, "osromr_shops.json");
+  downloadJSON({ groups: cleanedGroups }, "osrohr_shops.json");
 }
 
 function exportValues() {
@@ -1057,7 +1291,7 @@ function exportValues() {
   Object.entries(DATA.items).forEach(([id, item]) => {
     if (item.value > 0) values[id] = item.value;
   });
-  downloadJSON(values, "osromr_item_values.json");
+  downloadJSON(values, "osrohr_item_values.json");
 }
 
 function exportAll() {
@@ -1148,6 +1382,15 @@ function handleURLNavigation() {
   const itemId = urlParams.get('item');
   const autolootSlot = urlParams.get('autoloot');
   const tab = urlParams.get('tab');
+  const ilParam = urlParams.get('il');
+  if (ilParam !== null) {
+    const idx = parseInt(ilParam);
+    state.selectedItemList = Number.isFinite(idx) ? idx : -1;
+  }
+  if (urlParams.get('ia') === '1') state.showAllItems = true;
+  if (urlParams.get('in') === '1') state.showNewItemsOnly = true;
+  if (urlParams.get('iv') === '1') state.showValuesOnly = true;
+  if (urlParams.get('id') === '1') state.searchDescriptions = true;
   
   // Helper to ensure tab is active before selection
   const ensureTab = (tabName) => {
@@ -1186,7 +1429,14 @@ function handleURLNavigation() {
   }
   // Priority 2: Pure Tab Navigation (Only if no entity is linked)
   else if (tab) {
-    ensureTab(tab);
+    if (tab === 'values') {
+      ensureTab('items');
+      if (typeof window.openValuesManager === 'function') {
+        window.openValuesManager(false);
+      }
+    } else {
+      ensureTab(tab);
+    }
   }
 }
 
@@ -1210,17 +1460,41 @@ function updateURL(entityId = null, entityType = null, pushState = true) {
   // 3. If no entity is selected, we rely on the tab parameter
   else if (state.currentTab !== 'quests') {
     // Only set tab if it's not the default "quests" tab
-    url.searchParams.set('tab', state.currentTab);
+    const valuesOpen = state.currentTab === 'items'
+      && typeof window.isValuesManagerOpen === 'function'
+      && window.isValuesManagerOpen();
+    url.searchParams.set('tab', valuesOpen ? 'values' : state.currentTab);
   }
   
   // 4. Create state object for history
   const historyState = {
-    tab: state.currentTab,
+    tab: (state.currentTab === 'items'
+      && typeof window.isValuesManagerOpen === 'function'
+      && window.isValuesManagerOpen())
+      ? 'values'
+      : state.currentTab,
     questId: entityType === 'quest' ? entityId : null,
     itemId: entityType === 'item' ? entityId : null,
     autolootSlot: entityType === 'autoloot' ? entityId : null
   };
   
+  // Persist items-tab search state in URL
+  if (state.currentTab === 'items' || entityType === 'item') {
+    if (state.selectedItemList >= 0) url.searchParams.set('il', state.selectedItemList);
+    else url.searchParams.delete('il');
+    if (state.showAllItems)      url.searchParams.set('ia', '1');
+    else                         url.searchParams.delete('ia');
+    if (state.showNewItemsOnly)  url.searchParams.set('in', '1');
+    else                         url.searchParams.delete('in');
+    if (state.showValuesOnly)    url.searchParams.set('iv', '1');
+    else                         url.searchParams.delete('iv');
+    if (state.searchDescriptions) url.searchParams.set('id', '1');
+    else                          url.searchParams.delete('id');
+  } else {
+    // Clean up items params when not on items tab
+    ['il','ia','in','iv','id'].forEach(k => url.searchParams.delete(k));
+  }
+
   if (pushState) {
     window.history.pushState(historyState, '', url);
   } else {
@@ -1379,6 +1653,8 @@ window.showToast = showToast;
 
 document.addEventListener("DOMContentLoaded", () => {
 
+  window.applySvgIcons?.();
+
   const logo = document.getElementById("osro-quests-logo");
   if (logo) {
         logo.title = `OSRO Quests v${VERSION} (${FLAVOR})`;
@@ -1409,8 +1685,16 @@ document.addEventListener("DOMContentLoaded", () => {
     if (event.state) {
       const { tab, questId, itemId, autolootSlot } = event.state;
       
-      if (tab && tab !== state.currentTab) {
-        switchTab(tab, false);
+      if (tab === 'values') {
+        if (state.currentTab !== 'items') switchTab('items', false);
+        if (typeof window.openValuesManager === 'function') window.openValuesManager(false);
+      } else {
+        if (tab && tab !== state.currentTab) {
+          switchTab(tab, false);
+        }
+        if (tab === 'items' && typeof window.closeValuesManager === 'function') {
+          window.closeValuesManager(false);
+        }
       }
       
       if (questId) {
@@ -1437,7 +1721,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // ===== SHARED VIEWER HEADER =====
 
-function renderViewerHeader(itemId, item, { meta = '', loc = '', showExtLinks = false, bound = false } = {}) {
+function renderViewerHeader(itemId, item, { meta = '', loc = '', showExtLinks = false, bound = false, listBadges = '' } = {}) {
   const icon48  = itemId ? renderItemIcon(itemId, 48) : '';
   const idBadge = itemId ? `<span class="qvh-id">#${itemId}</span>` : '';
   const slot    = item && Number(item.slot) > 0
@@ -1460,14 +1744,15 @@ function renderViewerHeader(itemId, item, { meta = '', loc = '', showExtLinks = 
       <a class="qvh-ext-link" href="https://pre.pservero.com/item/${itemId}" target="_blank" rel="noopener">rAthenaDB</a>
     </span>` : '';
 
-  // Location breadcrumb + external links share the same row
+  // Location breadcrumb + external links + list badges share the same row
   let bottomRow = '';
-  if (loc || extLinks) {
+  if (loc || extLinks || listBadges) {
     const [locGroup, locSub] = loc ? loc.split(' / ') : ['', ''];
     const breadcrumb = loc
       ? `<span>${locGroup}</span><span class="qvh-loc-sep">›</span><span>${locSub}</span>`
       : '';
-    bottomRow = `<div class="qvh-loc">${breadcrumb}${extLinks}</div>`;
+    const listBadgesHtml = listBadges ? `<span class="qvh-list-badges">${listBadges}</span>` : '';
+    bottomRow = `<div class="qvh-loc">${breadcrumb}${extLinks}${listBadgesHtml}</div>`;
   }
 
   return `
@@ -1483,6 +1768,35 @@ function renderViewerHeader(itemId, item, { meta = '', loc = '', showExtLinks = 
 }
 
 window.renderViewerHeader = renderViewerHeader;
+
+
+// ===== ITEM LISTS HELPERS =====
+
+function getListsForItem(itemId) {
+  if (!DATA.itemLists) return [];
+  return DATA.itemLists
+    .map((list, idx) => ({ idx, name: list.name, items: list.items }))
+    .filter(l => l.items.includes(Number(itemId)));
+}
+
+function renderItemListBadges(itemId) {
+  const lists = getListsForItem(itemId);
+  if (!lists.length) return '';
+  return lists.map(l =>
+    `<a class="item-list-badge" href="?tab=items&il=${l.idx}" onclick="event.preventDefault(); navigateToItemList(${l.idx})" title="View list: ${escapeHtml(l.name)}">${escapeHtml(l.name)}</a>`
+  ).join('');
+}
+
+function navigateToItemList(idx) {
+  state.selectedItemList = idx;
+  switchTab('items');
+  if (typeof renderItems === 'function') renderItems();
+  updateURL(null, null, true);
+}
+
+window.getListsForItem     = getListsForItem;
+window.renderItemListBadges = renderItemListBadges;
+window.navigateToItemList  = navigateToItemList;
 
 // ===== SHARED USAGE LOOKUP & RENDERING =====
 
@@ -1630,16 +1944,177 @@ window.questUrl = questUrl;
 window.shopUrl  = shopUrl;
 window.itemUrl  = itemUrl;
 
+// ===== NOTIFICATIONS (optional) =====
+
+function osroCanNotify() {
+  return typeof window !== 'undefined' && 'Notification' in window;
+}
+
+async function osroEnsureNotifyPermission() {
+  if (!osroCanNotify()) return false;
+  if (Notification.permission === 'granted') return true;
+  if (Notification.permission === 'denied') return false;
+  try {
+    const res = await Notification.requestPermission();
+    return res === 'granted';
+  } catch {
+    return false;
+  }
+}
+
+function osroFireNotification({ title, body = '', tag = '', url = '' }) {
+  // Prefer browser notifications; fall back to in-app toast.
+  if (osroCanNotify() && Notification.permission === 'granted') {
+    try {
+      const n = new Notification(title, { body, tag, renotify: false });
+      if (url) {
+        n.onclick = () => { window.focus(); window.location.href = url; };
+      }
+      return true;
+    } catch { /* fall through */ }
+  }
+  if (typeof showToast === 'function') {
+    showToast(body ? `${title} — ${body}` : title, 'info', 3500);
+  }
+  return false;
+}
+
+function osroNotifyReady({ section, body, tag, url = '' }) {
+  osroFireNotification({ title: `OSRO Quests — ${section}`, body, tag, url });
+}
+
+// --- NEW CONSTANTS FOR WEB PUSH ---
+// We will generate this key in the next step. It's safe to be public.
+const VAPID_PUBLIC_KEY = "BAet8Vv5lUgSYaJPGzB25Ehhnze2yF7R541mIyyfEoiMmMbZne8t7ckmfiDnOFYUawtMcmmmznobySm8sh-r4zg"; 
+const CLOUDFLARE_WORKER_URL = "https://osro-push-worker.osro-push-worker.workers.dev";
+
+// --- SERVICE WORKER REGISTRATION ---
+if ('serviceWorker' in navigator && 'PushManager' in window) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('/osro-quests-mr/sw.js').then(function(registration) {
+      console.log('ServiceWorker registration successful with scope: ', registration.scope);
+    }, function(err) {
+      console.log('ServiceWorker registration failed: ', err);
+    });
+  });
+}
+
+// Helper to convert VAPID string for the PushManager
+function urlB64ToUint8Array(base64String) {
+  const padding = '='.repeat((4 - base64String.length % 4) % 4);
+  const base64 = (base64String + padding).replace(/\-/g, '+').replace(/_/g, '/');
+  const rawData = window.atob(base64);
+  const outputArray = new Uint8Array(rawData.length);
+  for (let i = 0; i < rawData.length; ++i) {
+    outputArray[i] = rawData.charCodeAt(i);
+  }
+  return outputArray;
+}
+
+// --- UPDATED FOR DEBUGGING ---
+async function osroEnsureNotifyPermission() {
+  console.log("Checking permissions...");
+  if (!('Notification' in window) || !('serviceWorker' in navigator)) {
+    console.error("Browser does not support notifications or SW.");
+    return false;
+  }
+
+  let permission = Notification.permission;
+  console.log("Current permission:", permission);
+  
+  if (permission !== 'granted') {
+    permission = await Notification.requestPermission();
+    console.log("Permission requested, result:", permission);
+  }
+
+  if (permission === 'granted') {
+    const registration = await navigator.serviceWorker.ready;
+    let subscription = await registration.pushManager.getSubscription();
+    
+    if (!subscription) {
+      console.log("No subscription found, subscribing...");
+      const applicationServerKey = urlB64ToUint8Array(VAPID_PUBLIC_KEY);
+      try {
+        subscription = await registration.pushManager.subscribe({
+          userVisibleOnly: true,
+          applicationServerKey: applicationServerKey
+        });
+        localStorage.setItem('osro_push_sub', JSON.stringify(subscription));
+        console.log("Subscribed successfully!");
+      } catch (e) {
+        console.error("Subscription failed:", e);
+      }
+    }
+    return true;
+  }
+  return false;
+}
+
+async function osroScheduleCloudPush(timerId, delayInSeconds, payload) {
+  // Always fetch the live subscription from the SW — localStorage can go stale
+  // (expired subscription, SW re-registered, storage cleared during debugging, etc.)
+  let subscription;
+  try {
+    const registration = await navigator.serviceWorker.ready;
+    subscription = await registration.pushManager.getSubscription();
+  } catch (e) {
+    console.error("Could not get push subscription from SW:", e);
+    return null;
+  }
+
+  if (!subscription) {
+    console.error("No active push subscription — call osroEnsureNotifyPermission first.");
+    return null;
+  }
+
+  console.log("Attempting to fetch:", `${CLOUDFLARE_WORKER_URL}/schedule`);
+  
+  try {
+    const response = await fetch(`${CLOUDFLARE_WORKER_URL}/schedule`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        subscription: subscription.toJSON(),
+        delay: delayInSeconds,
+        payload: payload
+      })
+    });
+    
+    console.log("Worker response status:", response.status);
+    const data = await response.json();
+    console.log("Worker returned:", data);
+    return data.messageId;
+  } catch (err) {
+    console.error("Fetch request FAILED (Check CORS or Worker URL):", err);
+    return null;
+  }
+}
+
+async function osroCancelCloudPush(messageId) {
+  if (!messageId) return;
+  try {
+    await fetch(`${CLOUDFLARE_WORKER_URL}/cancel`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ messageId })
+    });
+  } catch (err) {
+    console.error("Failed to cancel push:", err);
+  }
+}
+
 // ===== PUBLIC API EXPOSURE =====
 
 // Explicitly expose functions that may be called from HTML or other scripts
 // This ensures compatibility even if loaded as a module
 window.toggleSidebar = toggleSidebar;
+window.isMobileSidebarMode = isMobileSidebarMode;
 window.toggleEditorMode = toggleEditorMode;
 window.switchTab = switchTab;
 window.clearItemSearch = clearItemSearch;
 window.clearQuestSearch = clearQuestSearch;
 window.importItemValues = importItemValues;
+window.resetItemValuesToDefaults = resetItemValuesToDefaults;
 window.toggleValuesFilter = toggleValuesFilter;
 window.exportQuests = exportQuests;
 window.exportShops = exportShops;
@@ -1649,3 +2124,8 @@ window.saveData = saveData;
 window.render = render;
 window.toggleDescSearch = toggleDescSearch;
 window.toggleTheme = toggleTheme;
+window.osroCanNotify = osroCanNotify;
+window.osroEnsureNotifyPermission = osroEnsureNotifyPermission;
+window.osroFireNotification = osroFireNotification;
+window.osroNotifyReady = osroNotifyReady;
+window.osroNotifyTitle = section => `OSRO Quests (MR) - ${section}`;

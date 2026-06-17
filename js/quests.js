@@ -187,7 +187,7 @@ function createQuestElement(group, subgroup, quest, groupIdx, subIdx, questIdx) 
 
   questDiv.querySelector(".quest-name").onclick = () => {
     selectQuest(group, subgroup, quest);
-    if (window.innerWidth <= 768) toggleSidebar();
+    if (window.isMobileSidebarMode && window.isMobileSidebarMode()) toggleSidebar();
   };
 
   return questDiv;
@@ -304,7 +304,7 @@ function renderQuestContentCore() {
         ${state.sections.desc ? `<div class="item-description-box">${descriptionHtml}</div>` : ''}
       ` : ""}
 
-      ${quest.notes ? `
+       ${quest.notes ? `
         <span class="item-label sec-label" onclick="toggleSection('notes')">
           <span class="sec-chevron${state.sections.notes ? '' : ' sec-chevron--closed'}">▾</span>Notes:</span>
         ${state.sections.notes ? `<div class="item-description-box item-notes-box">${parseDescription(quest.notes)}</div>` : ''}
@@ -321,6 +321,7 @@ function renderQuestContentCore() {
           </div>
         ` : ''}
       </div>
+
       ${state.sections.reqs ? `<div class="material-tree">${renderMaterialTree(questIndex)}</div>` : ''}
 
       ${(() => {
@@ -353,9 +354,10 @@ function renderQuestViewerHeader(quest, item) {
     : `<span class="qvh-rate qvh-rate--full">100% Success</span>`;
   const boundBadge = quest.accountBound ? `<span class="qvh-bound">Account Bound</span>` : '';
   return renderViewerHeader(quest.producesId, item, {
-    meta:  rate + boundBadge,
-    loc:   findQuestLocation(quest),
-    bound: !!quest.accountBound
+    meta:       rate + boundBadge,
+    loc:        findQuestLocation(quest),
+    bound:      !!quest.accountBound,
+    listBadges: (typeof renderItemListBadges === 'function' ? renderItemListBadges(quest.producesId) : '')
   });
 }
 
@@ -438,22 +440,6 @@ function renderTotalsHeader(questIndex) {
 
 // ===== REQUIREMENT RENDERING =====
 
-const REQ_TYPE_OPTIONS = [
-  { value: 'item', label: 'Item' },
-  { value: 'zeny', label: 'Zeny' },
-  { value: 'gold', label: 'Gold' },
-  { value: 'credit', label: 'Credit' },
-  { value: 'vote_points', label: 'Vote Points' },
-  { value: 'hourly_points', label: 'Hourly Points' },
-  { value: 'activity_points', label: 'Activity Points' },
-  { value: 'instance_points', label: 'Instance Points' },
-  { value: 'monster_arena_points', label: 'MA Points' },
-  { value: 'otherworld_points', label: 'Otherworld Points' },
-  { value: 'hall_of_heritage_points', label: 'HoH Points' },
-  { value: 'token_points', label: 'Token Points' },
-  { value: 'cardo_points', label: 'Cardo Points'}
-];
-
 function renderRequirement(req, idx) {
   const isItem = req.type === "item";
   const item = isItem ? getItem(req.id) : null;
@@ -511,21 +497,6 @@ function renderItemRequirement(req, idx, item) {
 
 // ===== MATERIAL TREE =====
 
-const CURRENCY_NAMES = {
-  zeny: 'Zeny',
-  credit: 'Credit',
-  gold: 'Gold',
-  vote_points: 'Vote Points',
-  activity_points: 'Activity Points',
-  instance_points: 'Instance Points',
-  hourly_points: 'Hourly Points',
-  monster_arena_points: 'Monster Arena Points',
-  otherworld_points: 'Otherworld Points',
-  hall_of_heritage_points: 'Hall of Heritage Points',
-  cardo_points: 'Cardo Points',
-  token_points: 'Token Points',
-  event_points: 'Event Points'
-};
 
 function renderMaterialTree(questIndex) {
 
@@ -628,7 +599,7 @@ function _matRow({ xbtn, badge, icon, name, slot, amt, aside, asideType, immune 
 function _matSourceItem(req, questIndex, eff, immuneHtml, itemKey, expanded, depth, questPath, walkQuest, questMeta, shopMeta) {
   const item = getItem(req.id);
   const icon = renderItemIcon(req.id);
-  const rawName = item ? (item.name || 'Unknown') : 'Unknown';
+  const rawName = item ? (getItemDisplayName(item) || 'Unknown') : 'Unknown';
   const slot = item && Number(item.slot) > 0 ? `[${item.slot}]` : '';
   const sources = questIndex.get(req.id);
   const questSources = sources.filter(s => s.type === 'quest').map(s => s.source);
@@ -712,7 +683,7 @@ function _matLeaf(req, eff, immuneHtml) {
     const item = getItem(req.id);
     icon = renderItemIcon(req.id);
     if (item && Number(item.slot) > 0) slot = `[${item.slot}]`;
-    name = `<a class="item-link" href="${itemUrl(req.id)}" onclick="event.preventDefault(); navigateToItem(${req.id})">${item ? (item.name || 'Unknown') : 'Unknown'}</a>`;
+    name = `<a class="item-link" href="${itemUrl(req.id)}" onclick="event.preventDefault(); navigateToItem(${req.id})">${getItemDisplayName(item) || 'Unknown'}</a>`;
   }
 
   return `<div class="mat-node">${_matRow({ icon, name, slot, amt: eff, aside, asideType, immune: immuneHtml })}</div>`;
@@ -782,7 +753,7 @@ function findMultiQuestItems(questIndex) {
       if (req.type === "item" && questIndex.has(req.id)) {
         const sources = questIndex.get(req.id);
         if (sources.length > 1) {
-          multiQuestItems.set(req.id, { name: getItem(req.id).name, sources });
+          multiQuestItems.set(req.id, { name: getItemDisplayName(getItem(req.id)) || 'Unknown', sources });
         }
         // Recurse into quest sources to find nested multi-option items
         sources.filter(s => s.type === 'quest').forEach(s => scan(s.source, newPath));
@@ -831,7 +802,7 @@ function renderMultiOptionSummary(multiQuestItems, questIndex) {
         ${unique.map(({ totalZeny }, idx) => `
           <div class="summary-tab ${idx === 0 ? "active" : ""}" 
                onclick="switchSummaryTab(${idx})">
-            ${formatZenyCompact(totalZeny)}
+            ${formatValue(totalZeny)}
           </div>
         `).join("")}
       </div>
@@ -878,7 +849,9 @@ function shopZenyCostPerUnit(shop) {
   let zeny = 0;
   if (!Array.isArray(shop.requirements)) return 0;
   shop.requirements.forEach(req => {
-    zeny += calculateZenyValue(req, Number(req.amount) || 0);
+    const raw = calculateZenyValue(req, Number(req.amount) || 0);
+    // Zeny reqs here are shop purchase prices — apply discount
+    zeny += req.type === 'zeny' ? applyDiscount(raw) : raw;
   });
   return zeny;
 }
@@ -895,14 +868,20 @@ function calculateDirectRequirements(questIndex = null) {
       const sources = questIndex.get(req.id);
       const shopSrc = sources.find(s => s.type === 'shop');
       if (shopSrc) {
-        const shopZenyPerUnit = shopZenyCostPerUnit(shopSrc.source);
+        // Get per-unit cost from shop requirements (already applies discount for zeny type)
+        let shopZenyPerUnit = shopZenyCostPerUnit(shopSrc.source);
+        // Fallback: shop has no explicit requirements — treat item.value as shop price with discount
+        if (shopZenyPerUnit === 0) {
+          const itemVal = getItem(req.id)?.value || 0;
+          if (itemVal > 0) shopZenyPerUnit = applyDiscount(itemVal);
+        }
         if (shopZenyPerUnit > 0) {
           totalZeny += shopZenyPerUnit * effectiveAmount;
           const item = getItem(req.id);
           const key = `item_${req.id}`;
           if (!totals[key]) {
             totals[key] = {
-              name: item?.name || 'Unknown',
+              name: getItemDisplayName(item) || 'Unknown',
               amount: 0,
               type: 'item',
               itemId: req.id,
@@ -953,13 +932,40 @@ function calculateFullRequirements(questIndex, questChoices) {
         if (chosenSourceObj.type === 'quest') {
           accumulate(chosenSourceObj.source, effectiveAmount, questPath);
         } else if (chosenSourceObj.type === 'shop') {
-          // For shops, add the shop's requirements directly (don't recurse)
+          // Shops are terminal — treat like direct mode: show item with discounted shop cost.
+          // Only quest sources recurse; this keeps "Include Sub-Quests" about quests only.
           const shop = chosenSourceObj.source;
-          shop.requirements.forEach(shopReq => {
-            const shopEffectiveAmount = (Number(shopReq.amount) || 0) * effectiveAmount;
-            totalZeny += calculateZenyValue(shopReq, shopEffectiveAmount);
-            accumulateRequirement(totals, shopReq, shopEffectiveAmount);
-          });
+          let shopZenyPerUnit = 0;
+          if (Array.isArray(shop.requirements)) {
+            shop.requirements.forEach(shopReq => {
+              const raw = calculateZenyValue(shopReq, Number(shopReq.amount) || 0);
+              shopZenyPerUnit += shopReq.type === 'zeny' ? applyDiscount(raw) : raw;
+            });
+          }
+          if (shopZenyPerUnit === 0) {
+            const itemVal = getItem(req.id)?.value || 0;
+            if (itemVal > 0) shopZenyPerUnit = applyDiscount(itemVal);
+          }
+          if (shopZenyPerUnit > 0) {
+            totalZeny += shopZenyPerUnit * effectiveAmount;
+            const item = getItem(req.id);
+            const key = `item_${req.id}`;
+            if (!totals[key]) {
+              totals[key] = {
+                name: getItemDisplayName(item) || 'Unknown',
+                amount: 0,
+                type: 'item',
+                itemId: req.id,
+                slot: Number(item?.slot) || 0,
+                value: shopZenyPerUnit
+              };
+            }
+            totals[key].amount += effectiveAmount;
+          } else {
+            // No zeny cost — just accumulate the item at face value
+            totalZeny += calculateZenyValue(req, effectiveAmount);
+            accumulateRequirement(totals, req, effectiveAmount);
+          }
         }
       } else {
         totalZeny += calculateZenyValue(req, effectiveAmount);
@@ -979,22 +985,29 @@ function calculateZenyValue(req, amount) {
   if (req.type === "credit") return amount * getCreditValue();
   if (req.type === "gold") return amount * getGoldValue();
   if (req.type === "item") return amount * (getItem(req.id).value || 0);
+
+  const ticketId = window.getTicketIdForRequirementType?.(req.type);
+  if (ticketId) return amount * (getItem(ticketId)?.value || 0);
+
   return 0;
 }
 
 function accumulateRequirement(totals, req, effectiveAmount) {
+  const linkedTicketId = req.type !== 'item' ? window.getTicketIdForRequirementType?.(req.type) : null;
+  const isLinkedPoints = !!linkedTicketId;
+
   const key = req.type === "item" ? `item_${req.id}` : req.type;
   const item = req.type === "item" ? getItem(req.id) : null;
-  const name = CURRENCY_NAMES[req.type] || (req.type === "item" ? (item?.name || "Unknown") : req.type);
+  const name = CURRENCY_NAMES[req.type] || (req.type === "item" ? (getItemDisplayName(item) || "Unknown") : req.type);
 
   if (!totals[key]) {
     totals[key] = {
       name,
       amount: 0,
       type: req.type,
-      itemId: req.type === "item" ? req.id : null,
+      itemId: req.type === "item" ? req.id : (isLinkedPoints ? linkedTicketId : null),
       slot: req.type === "item" ? (Number(item?.slot) || 0) : 0,
-      value: req.type === "item" ? (item?.value || 0) : 0
+      value: req.type === "item" ? (item?.value || 0) : (isLinkedPoints ? (getItem(linkedTicketId)?.value || 0) : 0)
     };
   }
   totals[key].amount += effectiveAmount;
@@ -1019,7 +1032,7 @@ function renderSummaryItems(entries, totalZeny) {
   // Only show entries that have a known zeny value
   const zenyCurrencies = new Set(["zeny", "gold", "credit"]);
   const valued = entries.filter(e =>
-    zenyCurrencies.has(e.type) || (e.type === "item" && e.value > 0)
+    zenyCurrencies.has(e.type) || e.value > 0
   );
 
   if (valued.length === 0) {
@@ -1031,8 +1044,8 @@ function renderSummaryItems(entries, totalZeny) {
   if (totalZeny > 0) {
     html += `
       <div class="tot-row tot-row--total">
-        <span class="tot-label">Total Zeny Value</span>
-        <span class="tot-amt">${formatZenyCompact(totalZeny)}</span>
+        <span class="tot-label">Total Value</span>
+        <span class="tot-amt">${formatValue(totalZeny)}</span>
       </div>`;
   }
 
@@ -1071,7 +1084,7 @@ function renderSummaryItems(entries, totalZeny) {
     else                              zenyVal = entry.amount * entry.value;
 
     const subLine = (entry.type !== "zeny" && zenyVal > 0)
-      ? `<div class="mat-row-sub mat-row-sub--val">${formatZenyCompact(zenyVal)} zeny</div>`
+      ? `<div class="mat-row-sub mat-row-sub--val">${formatValue(zenyVal)}</div>`
       : "";
 
     return `
@@ -1207,9 +1220,22 @@ function buildQuestIndex() {
 
 function hasNestedQuests(questIndex) {
   if (!state.selectedQuest) return false;
-  return state.selectedQuest.requirements.some(
-    req => req.type === "item" && questIndex.has(req.id)
-  );
+
+  function checkSource(quest, visited = new Set()) {
+    if (visited.has(quest)) return false;
+    visited.add(quest);
+    return quest.requirements.some(req => {
+      if (req.type !== "item" || !questIndex.has(req.id)) return false;
+      const sources = questIndex.get(req.id);
+      // Only quest sources (not shops) make the toggle meaningful
+      const questSources = sources.filter(s => s.type === 'quest');
+      if (questSources.length > 0) return true;
+      // Recurse into any shop sources' sub-items? No — shops are terminal.
+      return false;
+    });
+  }
+
+  return checkSource(state.selectedQuest);
 }
 
 function toggleTotals() {

@@ -8,6 +8,7 @@ let SEARCH_INDEX_DESC = {};
 let saveValueTimeout = null;
 
 function debouncedSaveItemValues() {
+  if (state?.valueSource !== 'custom') return;
   clearTimeout(saveValueTimeout);
   saveValueTimeout = setTimeout(() => {
     saveItemValuesToStorage();
@@ -15,6 +16,23 @@ function debouncedSaveItemValues() {
 }
 
 function renderItemsCore() {
+  // Populate list select (idempotent)
+  const listSel = document.getElementById('itemListSelect');
+  if (listSel && DATA.itemLists) {
+    const currentVal = listSel.value;
+    // Only rebuild if options are stale
+    if (listSel.options.length !== DATA.itemLists.length + 1) {
+      listSel.innerHTML = '<option value="-1">All Items</option>';
+      DATA.itemLists.forEach((list, idx) => {
+        const opt = document.createElement('option');
+        opt.value = idx;
+        opt.textContent = list.name;
+        listSel.appendChild(opt);
+      });
+    }
+    listSel.value = state.selectedItemList >= 0 ? String(state.selectedItemList) : '-1';
+  }
+
   const container = document.getElementById("itemsList");
   
   if (!container) {
@@ -109,12 +127,27 @@ function renderItemsCore() {
     });
   }
 
+  // 1e. Add items from saved lists
+  if (Array.isArray(DATA.itemLists)) {
+    DATA.itemLists.forEach(list => {
+      if (Array.isArray(list.items)) {
+        list.items.forEach(id => usedItemIds.add(Number(id)));
+      }
+    });
+  }
+
   // 2. Filter items
-  // If showAllItems is true, show everything.
-  // Otherwise, only show items that are in the usedItemIds whitelist.
-  let items = state.showAllItems 
-    ? getAllItems() 
-    : getAllItems().filter((item) => usedItemIds.has(item.id));
+  // If a list is selected, show exactly those items regardless of showAllItems.
+  // Otherwise: showAllItems = everything, default = usedItemIds whitelist.
+  let items;
+  if (state.selectedItemList >= 0 && DATA.itemLists?.[state.selectedItemList]) {
+    const listIds = new Set(DATA.itemLists[state.selectedItemList].items.map(Number));
+    items = getAllItems().filter(item => listIds.has(item.id));
+  } else {
+    items = state.showAllItems
+      ? getAllItems()
+      : getAllItems().filter((item) => usedItemIds.has(item.id));
+  }
 
   // Apply value filter
   if (state.showValuesOnly) {
@@ -326,7 +359,7 @@ function renderItemsCore() {
 
   // 4. Render
   const totalFound = items.length;
-  const limit = 2000;
+  const limit = 4000;
   const displayedItems = items.slice(0, limit);
 
   let html = "";
@@ -367,6 +400,7 @@ function renderItemsCore() {
 }
 
 function selectItem(id, pushToHistory = true) {
+  if (valuesManagerState?.open) closeValuesManager(false);
   state.selectedItemId = id;
   
   // Update URL with item ID for sharing and browser history
@@ -376,7 +410,7 @@ function selectItem(id, pushToHistory = true) {
   
   renderItems();
   renderItemContent();
-  if (window.innerWidth <= 768) toggleSidebar();
+  if (window.isMobileSidebarMode && window.isMobileSidebarMode()) toggleSidebar();
 }
 
 // Select an item by ID (for URL navigation)
@@ -428,7 +462,8 @@ function highlightSearchTerm(text, searchQuery) {
   });
 }
 
-function renderItemViewerHeader(id, item) {
+function renderItemViewerHeader(id, item, { showExtLinks = true, listBadges = null } = {}) {
+  const resolvedListBadges = listBadges ?? (typeof renderItemListBadges === "function" ? renderItemListBadges(id) : "");
   // Items tab: name may have search highlights — override display inline
   const displayName = state.itemSearchFilter
     ? highlightSearchTerm(getItemDisplayName(item), state.itemSearchFilter)
@@ -444,7 +479,8 @@ function renderItemViewerHeader(id, item) {
 
   return renderViewerHeader(id, itemProxy, {
     meta: newBadge + valBadge,
-    showExtLinks: true
+    showExtLinks: true,
+    listBadges: resolvedListBadges
   });
 }
 
@@ -496,19 +532,6 @@ function renderItemContentCore() {
           }</div>` : ""}
       </div>
 
-      <div class="panel-section">
-        <div class="form-group">
-          <span class="item-label">Zeny Value:</span>
-          <div class="form-row-1">
-            <input type="number"
-                   placeholder="0"
-                   value="${item.value || 0}"
-                   onchange="updateItemValue(${id}, this.value)"
-                   class="zeny-input-large">
-          </div>
-        </div>
-      </div>
-
       ${renderUsageSection(id)}
 
     </div>
@@ -516,6 +539,10 @@ function renderItemContentCore() {
 }
 
 function updateItemValue(id, value) {
+  if (state?.valueSource !== 'custom') {
+    if (typeof showToast === 'function') showToast('Values are read-only (Default). Enable Custom values in Settings to edit.', 'info', 3500);
+    return;
+  }
   if (DATA.items[id]) {
     if (window.initState) {
       window.initState.userHasEditedValues = true;
@@ -579,5 +606,713 @@ window.updateItemValue = updateItemValue;
 window.navigateToItem = navigateToItem;
 window.toggleNewItemsFilter = toggleNewItemsFilter;
 
+function selectItemList(idx) {
+  state.selectedItemList = parseInt(idx);
+  renderItems();
+  updateURL(null, null, true);
+}
+window.selectItemList = selectItemList;
+
 window.SEARCH_INDEX_NAME = SEARCH_INDEX_NAME;
 window.SEARCH_INDEX_DESC = SEARCH_INDEX_DESC;
+
+// ===== VALUES MANAGER PANE =====
+
+const valuesManagerState = {
+  open: false,
+  mode: 'zeny', // 'zeny' | 'credit'
+  source: 'default', // 'default' | 'custom'
+  sortKey: 'name', // 'name' | 'id' | 'value'
+  sortDir: 'asc',  // 'asc' | 'desc'
+  initDone: false,
+  tracked: new Set(), // keeps rows visible even when value == 0
+  searchDebounce: null,
+  nameFilter: '',
+};
+
+function loadValuesManagerConfig() {
+  let cfg = {};
+  if (typeof loadConfig === 'function') {
+    cfg = loadConfig() || {};
+  } else {
+    try { cfg = JSON.parse(localStorage.getItem(LOCAL_STORAGE.config)) || {}; } catch { cfg = {}; }
+  }
+
+  const vm = cfg.valuesManager || {};
+  const mode = vm.mode === 'credit' ? 'credit' : 'zeny';
+  const trackedIds = Array.isArray(vm.trackedIds)
+    ? vm.trackedIds
+    : (Array.isArray(vm.pinnedIds) ? vm.pinnedIds : []); // legacy support
+
+  const sortKey = (vm.sortKey === 'id' || vm.sortKey === 'value') ? vm.sortKey : 'name';
+  const sortDir = vm.sortDir === 'desc' ? 'desc' : 'asc';
+
+  valuesManagerState.source = (vm.source === 'custom') ? 'custom' : 'default';
+  valuesManagerState.mode = mode;
+  valuesManagerState.sortKey = sortKey;
+  valuesManagerState.sortDir = sortDir;
+  valuesManagerState.tracked = new Set(
+    trackedIds.map(n => Number(n)).filter(n => Number.isFinite(n))
+  );
+}
+
+function saveValuesManagerConfig(patch) {
+  let cfg = {};
+  if (typeof loadConfig === 'function') {
+    cfg = loadConfig() || {};
+  } else {
+    try { cfg = JSON.parse(localStorage.getItem(LOCAL_STORAGE.config)) || {}; } catch { cfg = {}; }
+  }
+
+  const current = cfg.valuesManager || {};
+  const next = { ...current, ...patch };
+  // Always persist current source
+  if (!('source' in patch)) next.source = valuesManagerState.source;
+
+  if (typeof saveConfig === 'function') {
+    saveConfig({ valuesManager: next });
+  } else {
+    try {
+      localStorage.setItem(LOCAL_STORAGE.config, JSON.stringify({ ...cfg, valuesManager: next }));
+    } catch {
+      // ignore storage failures
+    }
+  }
+}
+
+function ensureValuesManagerInit() {
+  if (valuesManagerState.initDone) return;
+  valuesManagerState.initDone = true;
+
+  const input = document.getElementById('valuesManagerAddInput');
+  const results = document.getElementById('valuesManagerAddResults');
+  if (!input || !results) return;
+
+  const hideResults = () => {
+    results.classList.add('hidden');
+    results.innerHTML = '';
+  };
+
+  input.addEventListener('input', () => {
+    clearTimeout(valuesManagerState.searchDebounce);
+    valuesManagerState.searchDebounce = setTimeout(() => {
+      renderValuesManagerAddResults(input.value);
+    }, 80);
+  });
+
+  input.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      input.value = '';
+      hideResults();
+    }
+  });
+
+  // Click-away to close the add results dropdown
+  document.addEventListener('click', (e) => {
+    const pane = document.getElementById('valuesManagerPane');
+    if (!pane) return;
+    if (!pane.contains(e.target)) hideResults();
+  });
+}
+
+function openValuesManager(pushToHistory = true) {
+  // Mobile: this is a button action, so always close sidebar even if already open
+  if (window.isMobileSidebarMode && window.isMobileSidebarMode() && typeof toggleSidebar === 'function') {
+    const sb = document.getElementById('sidebar');
+    if (sb && sb.classList.contains('open')) toggleSidebar();
+  }
+
+  if (valuesManagerState.open) return;
+  valuesManagerState.open = true;
+
+  loadValuesManagerConfig();
+  ensureValuesManagerInit();
+  const pane = document.getElementById('valuesManagerPane');
+  if (pane) {
+    pane.classList.remove('hidden');
+    pane.setAttribute('aria-hidden', 'false');
+  }
+
+  setValuesManagerMode(valuesManagerState.mode || 'zeny');
+  syncValuesManagerSortUI();
+  syncValuesManagerSource();
+  syncValuesManagerNotice();
+  renderValuesManager();
+
+  if (typeof updateURL === 'function') {
+    updateURL(null, null, pushToHistory);
+  }
+}
+
+function closeValuesManager(pushToHistory = true) {
+  const wasOpen = valuesManagerState.open;
+  if (!wasOpen) return;
+
+  valuesManagerState.open = false;
+  const pane = document.getElementById('valuesManagerPane');
+  if (pane) {
+    pane.classList.add('hidden');
+    pane.setAttribute('aria-hidden', 'true');
+  }
+
+  const results = document.getElementById('valuesManagerAddResults');
+  if (results) {
+    results.classList.add('hidden');
+    results.innerHTML = '';
+  }
+
+  if (typeof updateURL === 'function' && pushToHistory) {
+    updateURL(null, null, true);
+  }
+}
+
+function setValuesManagerMode(mode) {
+  valuesManagerState.mode = mode === 'credit' ? 'credit' : 'zeny';
+  saveValuesManagerConfig({
+    mode: valuesManagerState.mode,
+    trackedIds: Array.from(valuesManagerState.tracked),
+    sortKey: valuesManagerState.sortKey,
+    sortDir: valuesManagerState.sortDir,
+  });
+
+  const btnZ = document.getElementById('vmgrModeZeny');
+  const btnC = document.getElementById('vmgrModeCredit');
+  if (btnZ && btnC) {
+    btnZ.classList.toggle('sec-btn--off', valuesManagerState.mode !== 'zeny');
+    btnC.classList.toggle('sec-btn--off', valuesManagerState.mode !== 'credit');
+  }
+
+  syncValuesManagerNotice();
+  if (valuesManagerState.open) renderValuesManager();
+}
+
+function setValuesManagerSource(src) {
+  const isCustom = src === 'custom';
+  valuesManagerState.source = isCustom ? 'custom' : 'default';
+
+  // Persist
+  saveValuesManagerConfig({ source: valuesManagerState.source });
+
+  // Also update global state & config so loadItemValuesFromStorage re-runs correctly
+  if (typeof saveConfig === 'function') saveConfig({ valueSource: valuesManagerState.source });
+  if (typeof state !== 'undefined') state.valueSource = valuesManagerState.source;
+
+  // Reload values for the new mode
+  if (isCustom) {
+    // Switch to custom: load from localStorage (or remote if none)
+    const stored = localStorage.getItem(LOCAL_STORAGE.item_values);
+    if (stored) {
+      try {
+        const values = JSON.parse(stored);
+        if (typeof applyItemValues === 'function') applyItemValues(values);
+      } catch {}
+    }
+  } else {
+    // Switch to default: reload from remote without saving to localStorage
+    if (typeof loadDefaultValuesIntoView === 'function') loadDefaultValuesIntoView();
+    else if (typeof fetchJSON === 'function') {
+      fetchJSON(AUTO_IMPORT_URLS.values).then(v => {
+        if (v && typeof applyItemValues === 'function') applyItemValues(v);
+        renderValuesManager();
+      });
+    }
+  }
+
+  syncValuesManagerSource();
+  syncValuesManagerControlsVisibility();
+  renderValuesManager();
+}
+
+function syncValuesManagerSource() {
+  const isCustom = valuesManagerState.source === 'custom';
+  const dBtn = document.getElementById('vmgrSrcDefault');
+  const cBtn = document.getElementById('vmgrSrcCustom');
+  if (dBtn) dBtn.classList.toggle('sec-btn--off', isCustom);
+  if (cBtn) cBtn.classList.toggle('sec-btn--off', !isCustom);
+}
+
+function syncValuesManagerControlsVisibility() {
+  const isCustom = valuesManagerState.source === 'custom';
+  // Controls that only appear in custom mode
+  const customOnly = document.querySelectorAll('.vmgr-custom-only');
+  customOnly.forEach(el => el.classList.toggle('hidden', !isCustom));
+  // Controls that only appear in default mode
+  const defaultOnly = document.querySelectorAll('.vmgr-default-only');
+  defaultOnly.forEach(el => el.classList.toggle('hidden', isCustom));
+  // Add-item input row
+  const addRow = document.getElementById('valuesManagerAddRow');
+  if (addRow) addRow.classList.toggle('hidden', !isCustom);
+}
+
+function setValuesManagerNameFilter(val) {
+  valuesManagerState.nameFilter = val;
+  renderValuesManager();
+}
+
+function clearValuesManagerNameFilter() {
+  valuesManagerState.nameFilter = '';
+  const input = document.getElementById('vmgrNameFilter');
+  if (input) input.value = '';
+  renderValuesManager();
+}
+
+window.setValuesManagerNameFilter  = setValuesManagerNameFilter;
+window.clearValuesManagerNameFilter = clearValuesManagerNameFilter;
+
+function renderValuesManager() {
+  const list = document.getElementById('valuesManagerList');
+  if (!list) return;
+
+  syncValuesManagerControlsVisibility();
+  const activeSet = valuesManagerState.tracked;
+  const mode = valuesManagerState.mode;
+
+  // Always show items that already have a value, plus anything the user added.
+  const ids = new Set(activeSet);
+  Object.entries(DATA.items || {}).forEach(([id, item]) => {
+    const n = Number(id);
+    if (!item) return;
+    if ((item.value || 0) > 0) ids.add(n);
+  });
+
+  const idArr = Array.from(ids).filter((id) => DATA.items && DATA.items[id]);
+
+  if (idArr.length === 0) {
+    list.innerHTML = `<div class="values-manager-empty">No values yet. Add an item above to start.</div>`;
+    return;
+  }
+
+  // Stable sort: user-selected primary, then name asc, then id asc
+  idArr.sort((a, b) => {
+    const av = Number(DATA.items[a]?.value || 0);
+    const bv = Number(DATA.items[b]?.value || 0);
+    const an = (getItemDisplayName(DATA.items[a]) || '').toLowerCase();
+    const bn = (getItemDisplayName(DATA.items[b]) || '').toLowerCase();
+
+    const dir = valuesManagerState.sortDir === 'desc' ? -1 : 1;
+    const key = valuesManagerState.sortKey || 'name';
+
+    if (key === 'value') {
+      if (av !== bv) return (av - bv) * dir;
+    } else if (key === 'id') {
+      if (a !== b) return (a - b) * dir;
+    } else {
+      if (an < bn) return -1 * dir;
+      if (an > bn) return 1 * dir;
+    }
+
+    if (an < bn) return -1;
+    if (an > bn) return 1;
+    return a - b;
+  });
+
+  // Filter by name
+  const nf = valuesManagerState.nameFilter.trim().toLowerCase();
+  const filtered = nf
+    ? idArr.filter(id => (getItemDisplayName(DATA.items[id]) || '').toLowerCase().includes(nf))
+    : idArr;
+
+  if (filtered.length === 0 && nf) {
+    list.innerHTML = `<div class="values-manager-empty">No items match "<em>${escapeHtml(nf)}</em>".</div>`;
+    return;
+  }
+
+  list.innerHTML = filtered.map((id) => renderValuesManagerRow(id, DATA.items[id], mode)).join('');
+}
+
+function renderValuesManagerRow(id, item, mode) {
+  const name = getItemDisplayName(item) || '<unnamed>';
+  const isCreditItem = typeof SPECIAL_ITEMS !== 'undefined' && id === SPECIAL_ITEMS.CREDIT;
+  const creditZeny = (typeof getCreditValue === 'function') ? getCreditValue() : 0;
+
+  let label = 'Zeny';
+  let shown = Number(item.value || 0);
+  let inputStep = '1';
+
+  if (mode === 'credit' && !isCreditItem) {
+    label = 'Credit';
+    inputStep = '0.01';
+    shown = creditZeny > 0 ? (Number(item.value || 0) / creditZeny) : 0;
+  } else if (mode === 'credit' && isCreditItem) {
+    label = 'Zeny&nbsp;&nbsp;';
+    shown = Number(item.value || 0);
+  }
+
+  const safeShown = Number.isFinite(shown) ? shown : 0;
+  const valueText = Number(item.value || 0) > 0 ? `${formatZenyCompact(Number(item.value || 0))} zeny` : '0 zeny';
+  const disableCreditEdit = (mode === 'credit' && isCreditItem);
+  const inputDisabledAttr = disableCreditEdit ? 'disabled' : '';
+  const inputTitle = disableCreditEdit ? 'Disabled in Credits mode' : '';
+
+  const isDefault = valuesManagerState.source === 'default';
+  const nameCell = isDefault
+    ? `<button class="values-manager-name-link" onclick="valuesManagerOpenItem(${id})" title="Open item page">${escapeHtml(name)}</button>`
+    : `<div class="values-manager-row-name">${escapeHtml(name)}</div>`;
+
+  const formatCreditsForDisplay = (num) => {
+    const n = Number(num);
+    if (!Number.isFinite(n)) return '0';
+    // Keep up to 4 decimals, but hide trailing zeros (e.g. 3.0000 -> 3, 0.0124 -> 0.0124)
+    return n.toFixed(4).replace(/\.?0+$/, '');
+  };
+
+  const valueCell = isDefault
+    ? `<span class="values-manager-value-readonly">${mode === 'credit' && !isCreditItem ? formatCreditsForDisplay(safeShown) : Math.round(safeShown).toLocaleString()} <span class="values-manager-value-unit">${label.toLowerCase()}</span></span>`
+    : `<input
+        class="values-manager-value-input"
+        type="number"
+        step="${inputStep}"
+        inputmode="decimal"
+        value="${mode === 'credit' && !isCreditItem ? safeShown : Math.round(safeShown)}"
+        onchange="updateValuesManagerValue(${id}, this.value)"
+        placeholder="0"
+        ${inputDisabledAttr}
+        title="${inputTitle}"
+        aria-label="${label} value for ${escapeHtml(name)}"
+      />`;
+
+  const actionsCell = isDefault
+    ? ``
+    : `<div class="values-manager-row-actions">
+         <button class="btn btn-sm btn-icon" onclick="valuesManagerOpenItem(${id})" title="Open item page" aria-label="Open item page">
+          ${window.SVG_ICONS?.openItem || ''}
+         </button>
+         <button class="btn btn-sm btn-danger btn-icon" onclick="deleteValuesManagerItem(${id})" title="Delete value" aria-label="Delete value">
+          ${window.SVG_ICONS?.trash14 || ''}
+         </button>
+       </div>`;
+
+  return `
+    <div class="values-manager-row${isDefault ? ' values-manager-row--readonly' : ''}">
+      ${renderItemIcon(id, 24)}
+      <div class="values-manager-row-main">
+        ${nameCell}
+        <div class="values-manager-row-sub" title="${escapeHtml(valueText)}">#${id}</div>
+      </div>
+      ${valueCell}
+      ${actionsCell}
+    </div>
+  `;
+}
+
+function valuesManagerOpenItem(id) {
+  closeValuesManager(false);
+  navigateToItem(id);
+}
+
+function addToValuesManager(id) {
+  valuesManagerState.tracked.add(Number(id));
+  saveValuesManagerConfig({
+    mode: valuesManagerState.mode,
+    trackedIds: Array.from(valuesManagerState.tracked),
+    sortKey: valuesManagerState.sortKey,
+    sortDir: valuesManagerState.sortDir,
+  });
+  renderValuesManager();
+}
+
+function updateValuesManagerValue(id, raw) {
+  const itemId = Number(id);
+  const v = Number(raw);
+  if (!Number.isFinite(v) || v < 0) return;
+
+  const isCreditItem = typeof SPECIAL_ITEMS !== 'undefined' && itemId === SPECIAL_ITEMS.CREDIT;
+  if (valuesManagerState.mode === 'credit' && isCreditItem) return;
+
+  let zenyValue = v;
+  if (valuesManagerState.mode === 'credit' && !isCreditItem) {
+    const creditZeny = (typeof getCreditValue === 'function') ? getCreditValue() : 0;
+    zenyValue = creditZeny > 0 ? Math.round(v * creditZeny) : 0;
+  } else {
+    zenyValue = Math.round(v);
+  }
+
+  addToValuesManager(itemId);
+  updateItemValue(itemId, zenyValue);
+  renderValuesManager();
+
+  // Keep item view in sync if open
+  if (state.currentTab === 'items' && state.selectedItemId === itemId && typeof renderItemContent === 'function') {
+    renderItemContent();
+  }
+}
+
+function deleteValuesManagerItem(id) {
+  const itemId = Number(id);
+  const item = DATA.items?.[itemId];
+  const name = item ? (getItemDisplayName(item) || `#${itemId}`) : `#${itemId}`;
+
+  const ok = window.confirm(`Delete value for ${name}? This sets it to 0.`);
+  if (!ok) return;
+
+  valuesManagerState.tracked.delete(itemId);
+  saveValuesManagerConfig({
+    mode: valuesManagerState.mode,
+    trackedIds: Array.from(valuesManagerState.tracked),
+    sortKey: valuesManagerState.sortKey,
+    sortDir: valuesManagerState.sortDir,
+  });
+
+  updateItemValue(itemId, 0);
+  renderValuesManager();
+
+  if (state.currentTab === 'items' && state.selectedItemId === itemId && typeof renderItemContent === 'function') {
+    renderItemContent();
+  }
+}
+
+function renderValuesManagerAddResults(query) {
+  const results = document.getElementById('valuesManagerAddResults');
+  if (!results) return;
+
+  const q = (query || '').trim();
+  if (!q) {
+    results.classList.add('hidden');
+    results.innerHTML = '';
+    return;
+  }
+
+  const stripColorCodes = (text) => {
+    if (!text) return '';
+    return text.replace(/\^[0-9A-Fa-f]{6}/g, '');
+  };
+
+  const all = getAllItems();
+  let matches = [];
+
+  const queryNum = parseInt(q, 10);
+  const isExactNumeric = !isNaN(queryNum) && q === queryNum.toString();
+
+  if (isExactNumeric) {
+    // Exact ID match pinned first (mirrors setupAutocomplete behaviour)
+    const exactMatch = all.find(it => it.id === queryNum);
+    const rest = all.filter(it =>
+      it.id !== queryNum &&
+      (it.id.toString().includes(q) || (getItemDisplayName(it) || '').toLowerCase().includes(q))
+    ).slice(0, exactMatch ? 19 : 20);
+    matches = exactMatch ? [exactMatch, ...rest] : rest;
+
+  } else if (/^\d+$/.test(q)) {
+    // Partial numeric — match by ID substring, exact ID first if present
+    const exactMatch = all.find(it => it.id === queryNum);
+    const rest = all.filter(it => it.id !== (exactMatch?.id ?? -1) && it.id.toString().includes(q)).slice(0, exactMatch ? 19 : 20);
+    matches = exactMatch ? [exactMatch, ...rest] : rest;
+
+  } else {
+    // Text query — use SEARCH_INDEX_NAME for word/phrase/exclude logic
+    const lower = q.toLowerCase();
+    const includePhrases = [];
+    const includeWords = [];
+    const excludePhrases = [];
+    const excludeWords = [];
+
+    let remaining = lower.replace(/-?"([^"]+)"/g, (match, phrase) => {
+      if (match.startsWith('-')) {
+        excludePhrases.push(phrase);
+      } else {
+        includePhrases.push(phrase);
+      }
+      return '';
+    });
+
+    remaining.split(/\s+/).forEach(word => {
+      if (word.length > 0) {
+        if (word.startsWith('-') && word.length > 1) {
+          excludeWords.push(word.substring(1));
+        } else if (!word.startsWith('-')) {
+          includeWords.push(word);
+        }
+      }
+    });
+
+    // Include words via index
+    const includeMatchSets = includeWords.map(word => {
+      const matchingIds = new Set();
+      const cleanWord = word.replace(/[^\w]/g, '');
+      Object.keys(SEARCH_INDEX_NAME).forEach(indexTerm => {
+        if (indexTerm.includes(cleanWord)) {
+          SEARCH_INDEX_NAME[indexTerm].forEach(id => matchingIds.add(id));
+        }
+      });
+      return matchingIds;
+    });
+
+    // Include phrases via index + exact verify
+    const includePhraseMatchSets = includePhrases.map(phrase => {
+      const matchingIds = new Set();
+      const phraseWords = phrase.split(/\s+/);
+      const wordSets = phraseWords.map(word => {
+        const wordIds = new Set();
+        const cleanWord = word.replace(/[^\w]/g, '');
+        Object.keys(SEARCH_INDEX_NAME).forEach(indexTerm => {
+          if (indexTerm.includes(cleanWord)) {
+            SEARCH_INDEX_NAME[indexTerm].forEach(id => wordIds.add(id));
+          }
+        });
+        return wordIds;
+      });
+      const candidates = Array.from(wordSets[0] || []).filter(id =>
+        wordSets.every(set => set.has(id))
+      );
+      candidates.forEach(id => {
+        const item = DATA.items[id];
+        if (!item) return;
+        if (stripColorCodes(item.name || '').toLowerCase().includes(phrase)) matchingIds.add(id);
+      });
+      return matchingIds;
+    });
+
+    const allIncludeMatchSets = [...includeMatchSets, ...includePhraseMatchSets];
+
+    // Exclude words via index
+    const excludeIds = new Set();
+    excludeWords.forEach(word => {
+      const cleanWord = word.replace(/[^\w]/g, '');
+      Object.keys(SEARCH_INDEX_NAME).forEach(indexTerm => {
+        if (indexTerm.includes(cleanWord)) {
+          SEARCH_INDEX_NAME[indexTerm].forEach(id => excludeIds.add(id));
+        }
+      });
+    });
+
+    // Exclude phrases via exact verify
+    excludePhrases.forEach(phrase => {
+      const phraseWords = phrase.split(/\s+/);
+      const wordSets = phraseWords.map(word => {
+        const wordIds = new Set();
+        const cleanWord = word.replace(/[^\w]/g, '');
+        Object.keys(SEARCH_INDEX_NAME).forEach(indexTerm => {
+          if (indexTerm.includes(cleanWord)) {
+            SEARCH_INDEX_NAME[indexTerm].forEach(id => wordIds.add(id));
+          }
+        });
+        return wordIds;
+      });
+      const candidates = Array.from(wordSets[0] || []).filter(id =>
+        wordSets.every(set => set.has(id))
+      );
+      candidates.forEach(id => {
+        const item = DATA.items[id];
+        if (!item) return;
+        if (stripColorCodes(item.name || '').toLowerCase().includes(phrase)) excludeIds.add(id);
+      });
+    });
+
+    matches = all.filter(it => {
+      const matchesAllIncludes = allIncludeMatchSets.length === 0 ||
+        allIncludeMatchSets.every(matchSet => matchSet.has(it.id));
+      return matchesAllIncludes && !excludeIds.has(it.id);
+    });
+
+    // Relevance sort: exact name > starts-with > rest (by id) — mirrors setupAutocomplete
+    matches.sort((a, b) => {
+      const an = (getItemDisplayName(a) || '').toLowerCase();
+      const bn = (getItemDisplayName(b) || '').toLowerCase();
+      if (an === lower && bn !== lower) return -1;
+      if (bn === lower && an !== lower) return 1;
+      if (an.startsWith(lower) && !bn.startsWith(lower)) return -1;
+      if (bn.startsWith(lower) && !an.startsWith(lower)) return 1;
+      return a.id - b.id;
+    });
+
+    matches = matches.slice(0, 20);
+  }
+
+  if (matches.length === 0) {
+    results.classList.remove('hidden');
+    results.innerHTML = `<div class="values-manager-result"><span>No matches</span><span></span></div>`;
+    return;
+  }
+
+  results.classList.remove('hidden');
+  results.innerHTML = matches.map(it => `
+    <div class="values-manager-result" onclick="valuesManagerAddPick(${it.id})">
+      <span style="display:flex;align-items:center;gap:8px;min-width:0;">
+        ${renderItemIcon(it.id, 24)}
+        <span style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${escapeHtml(getItemDisplayName(it) || '<unnamed>')}</span>
+      </span>
+      <span style="color:var(--text-muted);font-size:12px;">#${it.id}</span>
+    </div>
+  `).join('');
+}
+
+function valuesManagerAddPick(id) {
+  addToValuesManager(Number(id));
+  const input = document.getElementById('valuesManagerAddInput');
+  const results = document.getElementById('valuesManagerAddResults');
+  if (input) input.value = '';
+  if (results) {
+    results.classList.add('hidden');
+    results.innerHTML = '';
+  }
+  renderValuesManager();
+}
+
+function setValuesManagerSort(key) {
+  valuesManagerState.sortKey = (key === 'id' || key === 'value') ? key : 'name';
+  saveValuesManagerConfig({
+    mode: valuesManagerState.mode,
+    trackedIds: Array.from(valuesManagerState.tracked),
+    sortKey: valuesManagerState.sortKey,
+    sortDir: valuesManagerState.sortDir,
+  });
+  syncValuesManagerSortUI();
+  renderValuesManager();
+}
+
+function toggleValuesManagerSortDir() {
+  valuesManagerState.sortDir = valuesManagerState.sortDir === 'desc' ? 'asc' : 'desc';
+  saveValuesManagerConfig({
+    mode: valuesManagerState.mode,
+    trackedIds: Array.from(valuesManagerState.tracked),
+    sortKey: valuesManagerState.sortKey,
+    sortDir: valuesManagerState.sortDir,
+  });
+  syncValuesManagerSortUI();
+  renderValuesManager();
+}
+
+function syncValuesManagerSortUI() {
+  const sel = document.getElementById('valuesManagerSortKey');
+  if (sel) sel.value = valuesManagerState.sortKey || 'name';
+
+  const btn = document.getElementById('valuesManagerSortDir');
+  if (!btn) return;
+
+  const key = valuesManagerState.sortKey || 'name';
+  const dir = valuesManagerState.sortDir === 'desc' ? 'desc' : 'asc';
+
+  let label = dir === 'desc' ? 'Z→A' : 'A→Z';
+  if (key === 'id') label = dir === 'desc' ? 'ID↓' : 'ID↑';
+  if (key === 'value') label = dir === 'desc' ? 'V↓' : 'V↑';
+  btn.textContent = label;
+}
+
+function syncValuesManagerNotice() {
+  const notice = document.getElementById('valuesManagerNotice');
+  if (!notice) return;
+
+  const isCreditMode = valuesManagerState.mode === 'credit';
+  if (!isCreditMode) {
+    notice.classList.add('hidden');
+    notice.textContent = '';
+    return;
+  }
+}
+
+// Expose pane controls for inline handlers
+window.setValuesManagerSource = setValuesManagerSource;
+window.openValuesManager = openValuesManager;
+window.closeValuesManager = closeValuesManager;
+window.setValuesManagerMode = setValuesManagerMode;
+window.updateValuesManagerValue = updateValuesManagerValue;
+window.addToValuesManager = addToValuesManager;
+window.valuesManagerAddPick = valuesManagerAddPick;
+window.valuesManagerOpenItem = valuesManagerOpenItem;
+window.deleteValuesManagerItem = deleteValuesManagerItem;
+window.setValuesManagerSort = setValuesManagerSort;
+window.toggleValuesManagerSortDir = toggleValuesManagerSortDir;
+window.isValuesManagerOpen = () => valuesManagerState.open;
+window.renderValuesManagerPane = () => {
+  if (valuesManagerState.open) renderValuesManager();
+};

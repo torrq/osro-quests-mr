@@ -1,75 +1,103 @@
 /* =========================================
-   OSRO Quests - MR Dark Theme
-   Red = state/selection
-   Amber = interaction/text highlights
+   OSRO Quests - Dark Theme
+   Balanced dark mode with subtle blue tint
    ========================================= */
 
 :root {
-  /* Base */
+  /* Base backgrounds - subtle blue-gray tones */
   --bg: #030101;
   --bg-dark: #020000;
   --bg-secondary: #0a0505;
   --bg-tertiary: #120808;
-
+  
   /* Header background image */
   --header-bg-image: url("../image/osromr_dark.jpg");
 
+  /* Panel colors */
   --panel: #080303;
   --panel-hover: #140707;
-
+  
+  /* Borders */
   --border: #2a1414;
   --border-light: #3a1c1c;
   --group-border: #140707;
-
+  
+  /* Text colors */
   --text: #e6edf3;
   --text-muted: #9a7f7f;
-
-  /* 🔴 Red — structure / state */
+  
+  /* Accent colors - bright blue for dark backgrounds */
   --accent: #e23b3b;
   --accent-hover: #ff5a5a;
   --accent-bg: rgba(226, 59, 59, 0.12);
-  --active-quest-bg: rgba(226, 59, 59, 0.22);
-
-  /* 🟡 Amber — interaction */
-  --amber: #ffcc33;
-  --amber-hover: #ffd966;
-  --amber-soft: rgba(255, 204, 51, 0.18);
-
-  /* Use amber for links/items */
-  --link: var(--amber);
-  --link-hover: var(--amber-hover);
-
-  /* UI elements */
+  
+  /* Expand icon */
   --expand-icon: rgb(255, 210, 120);
-  --version-tag: var(--amber);
+  
+  /* Success hover (copy link button) */
+  --success-hover-bright: #4ade80;
 
-  /* Status */
+  /* Status colors */
   --danger: #ff4d4d;
   --danger-hover: #ff6a6a;
-
   --success: #3fb950;
   --success-hover: #4ade80;
-
+  --success-shadow: rgba(63, 185, 80, 0.4);
   --warning: #d29922;
   --warning-bg: rgba(210, 153, 34, 0.15);
 
-  /* Misc */
+  /* Account Bound name styling */
   --bound-text: #ffd900;
   --bound-shadow: #bd9102;
-
+  
+  /* Shadows and overlays */
+  --shadow: rgba(0, 0, 0, 0.5);
+  --shadow-strong: rgba(0, 0, 0, 0.9);
+  --subtle-overlay: rgba(255, 255, 255, 0.1);
+  
+  /* Button text colors */
+  --btn-text: #000;
+  --tab-active-text: #000;
+  
+  /* Toggle colors */
+  
+  /* Special elements */
+  --version-tag: var(--amber);
+  --active-quest-bg: rgba(226, 59, 59, 0.22);
+  
+  /* Code blocks */
+  --code-bg: #0d1117;
+  --code-block-bg: rgba(0, 0, 0, 0.3);
   --code-text: #ffb86c;
-
+  --autocomplete-bg: #1a272b;
+  
+  /* Item placeholders */
+  --placeholder-bg: #3a3a3a;
+  --placeholder-text: #888;
+  --placeholder-border: #555;
+  --placeholder-icon: #999;
+  
+  --zeny-bg: #062b09;
+  --zeny-border: #2a7537;
+  --zeny-icon: #00ff22;
+  
   --points-bg: #2a0000;
   --points-border: #ff4d9a;
   --points-icon: #ffd0ff;
-
+  
+  /* Search highlight */
+  --highlight-bg: #ffeb3b;
+  --highlight-text: #000;
+  
+  /* Badge */
   --badge-gradient: linear-gradient(135deg, #ffcc33 0%, #e23b3b 100%);
   --badge-shadow: rgba(255, 140, 0, 0.35);
 
-  /* Material tree */
-  --mat-connector: #2a1414;
+ /* Material Tree - dark theme connectors */
+  --mat-connector: #2a1414;   /* subtle dark blue-gray spine */
   --mat-connector-opts: #2a1414;
 
+  /* ⚠ options badge — amber on dark */
   --mat-opts-bg: rgba(210, 153, 34, 0.12);
   --mat-opts-text: #d29922;
   --mat-opts-border: rgba(210, 153, 34, 0.4);
@@ -88,4 +116,105 @@
 .qvh-item-name:hover,
 .item-link:hover {
   color: var(--link-hover) !important;
+}
+
+/* Complete HR colors for Lab Timers */
+.ca-main, .gem-main, .gc-main {
+/* Base backgrounds - subtle blue-gray tones */
+  --bg: #020403;
+  --bg-dark: #0a140c;
+  --bg-secondary: #09120d;
+  --bg-tertiary: #112112;
+  
+  /* Header background image */
+  --header-bg-image: url("../image/osrohr_dark.jpg");
+
+  /* Panel colors */
+  --panel: #080e0e;
+  --panel-hover: #1f3735;
+  
+  /* Borders */
+  --border: #303d33;
+  --border-light: #3d4d42;
+  --group-border: #1f372b;
+  
+  /* Text colors */
+  --text: #e6edf3;
+  --text-muted: #8b9e96;
+  
+  /* Accent colors - bright blue for dark backgrounds */
+  --accent: #00ffb8;
+  --accent-hover: #81ff79;
+  --accent-bg: rgba(88, 166, 255, 0.1);
+  
+  /* Expand icon */
+  --expand-icon: rgb(190, 255, 228);
+  
+  /* Success hover (copy link button) */
+  --success-hover-bright: #4ade80;
+
+  /* Status colors */
+  --danger: #f85149;
+  --danger-hover: #ff6a6a;
+  --success: #3fb950;
+  --success-hover: #4ade80;
+  --success-shadow: rgba(63, 185, 80, 0.4);
+  --warning: #d29922;
+  --warning-bg: rgba(210, 153, 34, 0.15);
+
+  /* Account Bound name styling */
+  --bound-text: #ffd900;
+  --bound-shadow: #bd9102;
+  
+  /* Shadows and overlays */
+  --shadow: rgba(0, 0, 0, 0.5);
+  --shadow-strong: rgba(0, 0, 0, 0.9);
+  --subtle-overlay: rgba(255, 255, 255, 0.1);
+  
+  /* Button text colors */
+  --btn-text: #000;
+  --tab-active-text: #000;
+  
+  /* Toggle colors */
+  
+  /* Special elements */
+  --version-tag: #97ff00;
+  --active-quest-bg: rgba(88, 166, 255, 0.15);
+  
+  /* Code blocks */
+  --code-bg: #0d1117;
+  --code-block-bg: rgba(0, 0, 0, 0.3);
+  --code-text: #79c0ff;
+  --autocomplete-bg: #1a272b;
+  
+  /* Item placeholders */
+  --placeholder-bg: #3a3a3a;
+  --placeholder-text: #888;
+  --placeholder-border: #555;
+  --placeholder-icon: #999;
+  
+  --zeny-bg: #062b09;
+  --zeny-border: #2a7537;
+  --zeny-icon: #00ff22;
+  
+  --points-bg: #a30000;
+  --points-border: #f31a7f;
+  --points-icon: #ffd0ff;
+  
+  /* Search highlight */
+  --highlight-bg: #ffeb3b;
+  --highlight-text: #000;
+  
+  /* Badge */
+  --badge-gradient: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+  --badge-shadow: rgba(238, 90, 111, 0.3);
+
+ /* Material Tree - dark theme connectors */
+  --mat-connector:      #2f4b30;   /* subtle dark blue-gray spine */
+  --mat-connector-opts: #1c241c;
+
+  /* ⚠ options badge — amber on dark */
+  --mat-opts-bg:     rgba(210, 153, 34, 0.12);
+  --mat-opts-text:   #d29922;
+  --mat-opts-border: rgba(210, 153, 34, 0.4);
 }

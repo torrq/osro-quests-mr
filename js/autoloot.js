@@ -6,7 +6,7 @@ const AUTOLOOT_CONFIG = {
   MAX_ITEMS_PER_LINE: 25, // Just an upper bound, specific limits handled in generateCommands
   MAX_CHARS_PER_LINE: 255, 
   MAX_SLOTS: 10,
-  MAX_ITEMS_PER_SLOT: 100,
+  MAX_ITEMS_PER_SLOT: 60,
   COMMANDS_WITH_SLOTS: ["save", "reset", "load", "clear", "add", "remove"]
 };
 
@@ -63,7 +63,7 @@ function selectAutolootSlot(slotNum, pushToHistory = true) {
   
   renderAutolootSidebar();
   renderAutolootMain();
-  if (window.innerWidth <= 768) toggleSidebar();
+  if (window.isMobileSidebarMode && window.isMobileSidebarMode()) toggleSidebar();
 }
 
 // ===== MAIN CONTENT RENDERING =====

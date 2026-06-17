@@ -29,6 +29,9 @@
             <div class="tab" onclick="switchTab('items')">Items</div>
             <div class="tab" onclick="switchTab('groups')">Groups</div>
             <div class="tab" onclick="switchTab('autoloot')">Autoloot</div>
+            <div class="tab tab--icon" data-tab="lab" onclick="switchTab('lab')" title="Lab">
+              <span class="tab-icon" data-svg-icon="tabLab" aria-hidden="true"></span>
+            </div>
           </div>
           <div id="settingsPanel">
             <div class="settings-row">
@@ -51,6 +54,42 @@
                 <button id="secBtn_producedby" class="sec-btn" onclick="toggleSection('producedby')">Produced</button>
                 <button id="secBtn_requiredby" class="sec-btn" onclick="toggleSection('requiredby')">Required</button>
               </div>
+            </div>
+            <div class="settings-row">
+              <div class="settings-label">Zeny Discount</div>
+              <div class="sec-btn-group">
+                <button id="discBtn_off" class="sec-btn" onclick="settingSetDiscount(0)">Off</button>
+                <button id="discBtn_24"  class="sec-btn sec-btn--off" onclick="settingSetDiscount(0.24)">24%</button>
+                <button id="discBtn_25"  class="sec-btn sec-btn--off" onclick="settingSetDiscount(0.25)">25%</button>
+              </div>
+            </div>
+            <div class="settings-row">
+              <div class="settings-label">Value Display</div>
+              <div class="sec-btn-group">
+                <button id="vmBtn_mixed"  class="sec-btn" onclick="settingSetValueMode('mixed')">Mixed</button>
+                <button id="vmBtn_zeny"   class="sec-btn sec-btn--off" onclick="settingSetValueMode('zeny')">Zeny</button>
+                <button id="vmBtn_credit" class="sec-btn sec-btn--off" onclick="settingSetValueMode('credit')">Credit</button>
+              </div>
+            </div>
+            <div class="settings-row">
+              <div>
+                <div class="settings-label">Value Source</div>
+                <div class="settings-sublabel">Default (read-only) or Custom (local)</div>
+              </div>
+              <div class="sec-btn-group">
+                <button id="vsBtn_default" class="sec-btn" onclick="settingSetValueSource('default')">Default</button>
+                <button id="vsBtn_custom"  class="sec-btn sec-btn--off" onclick="settingSetValueSource('custom')">Custom</button>
+              </div>
+            </div>
+            <div class="settings-row">
+              <div>
+                <div class="settings-label">Force Mobile View</div>
+                <div class="settings-sublabel">Use the mobile sidebar layout at any width</div>
+              </div>
+              <label class="setting-toggle">
+                <input type="checkbox" id="settingForceMobileView" onchange="settingSetForceMobileView(this.checked)">
+                <span class="setting-toggle-slider"></span>
+              </label>
             </div>
             <div class="settings-row">
               <a href="https://github.com/torrq/osro-quests-mr" class="settings-link" target="_blank" rel="noopener">
@@ -104,14 +143,16 @@
                 <input type="checkbox" id="showNewItemsOnly" onchange="toggleNewItemsFilter(this.checked)" autocomplete="off">
                 <span>New</span>
               </label>
-            </div>
-            <div class="market-row">
               <label class="checkbox-label">
                 <input type="checkbox" id="showValuesOnly" onchange="toggleValuesFilter(this.checked)" autocomplete="off">
-                <span>Zeny Values</span>
+                <span>Has Value</span>
               </label>
-              <button class="btn btn-sm" onclick="importItemValues()" title="Import Zeny Values">Import</button>
-              <button class="btn btn-sm" onclick="exportValues()" title="Export Zeny Values">Export</button>
+            </div>
+            <div class="market-row">
+              <select id="itemListSelect" class="item-list-select" onchange="selectItemList(this.value)">
+                <option value="-1">All Items</option>
+              </select>
+              <button class="btn btn-sm" onclick="openValuesManager()" title="Manage item values">Values</button>
             </div>
           </div>
           <div class="toolbar">
@@ -138,20 +179,85 @@
         <div class="items-list hidden" id="itemsList"></div>
         <div class="groups-list hidden" id="groupsList"></div>
         <div class="autoloot-list hidden" id="autolootList"></div>
+        <div class="lab-list hidden" id="labList"></div>
       </div>
-      <div class="main-content" id="mainContent">
-        <div class="empty-state">
-          <h2>No Quest Selected</h2>
-          <p>Select a quest from the sidebar</p>
+      <div class="right-pane" id="rightPane">
+        <div class="main-content" id="mainContent">
+          <div class="empty-state">
+            <h2>No Quest Selected</h2>
+            <p>Select a quest from the sidebar</p>
+          </div>
+        </div>
+
+        <div id="valuesManagerPane" class="values-manager-pane hidden" aria-hidden="true">
+        <div class="values-manager-header">
+          <div class="values-manager-header-top">
+            <div class="values-manager-title">Values</div>
+            <div class="values-manager-header-actions">
+              <div class="values-manager-mode">
+                <button id="vmgrModeZeny" class="btn btn-sm sec-btn" onclick="setValuesManagerMode('zeny')" title="Display in zeny">Zeny</button>
+                <button id="vmgrModeCredit" class="btn btn-sm sec-btn sec-btn--off" onclick="setValuesManagerMode('credit')" title="Display in credits">Credits</button>
+              </div>
+            </div>
+          </div>
+          <div class="values-manager-source-row">
+            <span class="values-manager-source-label">Source</span>
+            <div class="sec-btn-group">
+              <button id="vmgrSrcDefault" class="sec-btn" onclick="setValuesManagerSource('default')" title="Use official values from the server">Default</button>
+              <button id="vmgrSrcCustom" class="sec-btn sec-btn--off" onclick="setValuesManagerSource('custom')" title="Use your own custom values">Custom</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="values-manager-body">
+          <div id="valuesManagerAddRow" class="values-manager-add vmgr-custom-only hidden">
+            <input id="valuesManagerAddInput" class="search-input" type="text" placeholder="Add item by name or ID..." autocomplete="off" />
+            <div id="valuesManagerAddResults" class="values-manager-results hidden"></div>
+          </div>
+
+          <div class="values-manager-filter-row">
+            <input id="vmgrNameFilter" class="search-input vmgr-filter-input" type="text"
+                   placeholder="Filter by name…"
+                   oninput="setValuesManagerNameFilter(this.value)"
+                   autocomplete="off" />
+            <button class="btn btn-sm" onclick="clearValuesManagerNameFilter()" title="Clear filter">×</button>
+          </div>
+          <div class="values-manager-controls">
+            <div class="values-manager-controls-left">
+              <label class="values-manager-control">
+                <span class="values-manager-control-label">Sort</span>
+                <select id="valuesManagerSortKey" class="values-manager-select" onchange="setValuesManagerSort(this.value)">
+                  <option value="name">Name</option>
+                  <option value="id">Item ID</option>
+                  <option value="value">Value</option>
+                </select>
+              </label>
+              <button id="valuesManagerSortDir" class="btn btn-sm" onclick="toggleValuesManagerSortDir()" title="Toggle sort direction">A→Z</button>
+            </div>
+            <div class="values-manager-controls-right vmgr-custom-only hidden">
+              <button class="btn btn-sm" onclick="loadDefaultValuesIntoCustom().then(() => renderValuesManagerPane())" title="Merge server default values into custom (keeps your extra items)">Load Defaults</button>
+              <button class="btn btn-sm" onclick="importItemValues()" title="Import values JSON">Import</button>
+              <button class="btn btn-sm" onclick="exportValues()" title="Export values JSON">Export</button>
+            </div>
+          </div>
+
+          <div id="valuesManagerNotice" class="values-manager-notice hidden"></div>
+          <div id="valuesManagerList" class="values-manager-list"></div>
+        </div>
         </div>
       </div>
     </div>
     <script src="js/config.js"></script>
+    <script src="js/svg.js"></script>
     <script src="js/main.js"></script>
     <script src="js/items.js"></script>
     <script src="js/quests.js"></script>
     <script src="js/shops.js"></script>
     <script src="js/groups.js"></script>
     <script src="js/autoloot.js"></script>
+    <script src="js/lab.js"></script>
+    <script src="js/lab-gc.js"></script>
+    <script src="js/lab-credit.js"></script>
+    <script src="js/lab-gem.js"></script>
   </body>
 </html>

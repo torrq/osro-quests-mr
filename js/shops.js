@@ -230,7 +230,7 @@ function createShopElement(group, subgroup, shop, groupIdx, subIdx, shopIdx) {
 
   shopDiv.querySelector(".shop-name").onclick = () => {
     selectShop(group, subgroup, shop);
-    if (window.innerWidth <= 768) toggleSidebar();
+    if (window.isMobileSidebarMode && window.isMobileSidebarMode()) toggleSidebar();
   };
 
   return shopDiv;
@@ -384,9 +384,10 @@ function renderShopContentCore() {
 function renderShopViewerHeader(shop, item) {
   const boundBadge = shop.accountBound ? `<span class="qvh-bound">Account Bound</span>` : '';
   return renderViewerHeader(shop.producesId, item, {
-    meta:  boundBadge,
-    loc:   findShopLocation(shop),
-    bound: !!shop.accountBound
+    meta:       boundBadge,
+    loc:        findShopLocation(shop),
+    bound:      !!shop.accountBound,
+    listBadges: (typeof renderItemListBadges === 'function' ? renderItemListBadges(shop.producesId) : '')
   });
 }
 
@@ -405,6 +406,14 @@ function renderShopRequirementsFlat(shop) {
 
     if (req.type === 'zeny') {
       icon = renderItemIcon(1);
+      const discounted = applyDiscount(eff);
+      if (state.discount && discounted !== eff) {
+        const origFmt = eff >= 1e6 ? formatZenyCompact(eff) : eff >= 1000 ? eff.toLocaleString() : String(eff);
+        const discFmt = discounted >= 1e6 ? formatZenyCompact(discounted) : discounted >= 1000 ? discounted.toLocaleString() : String(discounted);
+        name = `Zeny <span class="disc-badge">${Math.round(state.discount * 100)}%</span>`;
+        // Override fmtAmt inline by patching the row specially
+        return _matRow({ icon, name, amt: `<span class="disc-original">${origFmt}</span> <span class="disc-price">${discFmt}</span>`, aside: '', asideType: 'loc', immune: immuneHtml });
+      }
       name = 'Zeny';
     } else if (req.type === 'credit') {
       icon = renderItemIcon(SPECIAL_ITEMS.CREDIT);
@@ -412,24 +421,27 @@ function renderShopRequirementsFlat(shop) {
     } else if (req.type === 'gold') {
       icon = renderItemIcon(SPECIAL_ITEMS.GOLD);
       name = `<a class="item-link" href="${itemUrl(SPECIAL_ITEMS.GOLD)}" onclick="event.preventDefault(); navigateToItem(${SPECIAL_ITEMS.GOLD})">Gold</a>`;
-    } else if (SHOP_CURRENCY_NAMES[req.type]) {
+    } else if (CURRENCY_NAMES[req.type]) {
       icon = renderItemIcon(2);
-      name = SHOP_CURRENCY_NAMES[req.type];
+      name = CURRENCY_NAMES[req.type];
     } else if (req.type === 'item') {
       const itm = getItem(req.id);
       icon = renderItemIcon(req.id);
       if (itm && Number(itm.slot) > 0) slot = `[${itm.slot}]`;
-      name = `<a class="item-link" href="${itemUrl(req.id)}" onclick="event.preventDefault(); navigateToItem(${req.id})">${itm ? (itm.name || 'Unknown') : 'Unknown'}</a>`;
+      name = `<a class="item-link" href="${itemUrl(req.id)}" onclick="event.preventDefault(); navigateToItem(${req.id})">${getItemDisplayName(itm) || 'Unknown'}</a>`;
     }
 
     // Zeny sub-value line
     let zenyVal = 0;
-    if (req.type === 'zeny')        zenyVal = eff;
+    if (req.type === 'zeny')        zenyVal = applyDiscount(eff);
     else if (req.type === 'gold')   zenyVal = eff * getGoldValue();
     else if (req.type === 'credit') zenyVal = eff * getCreditValue();
     else if (req.type === 'item') {
       const itm = getItem(req.id);
       zenyVal = eff * (itm?.value || 0);
+    } else {
+      const ticketId = window.getTicketIdForRequirementType?.(req.type);
+      if (ticketId) zenyVal = eff * (getItem(ticketId)?.value || 0);
     }
 
     return `
@@ -514,22 +526,6 @@ function shopRenderTotalsHeader() {
 
 // ===== REQUIREMENT RENDERING =====
 
-const SHOP_SHOP_REQ_TYPE_OPTIONS = [
-  { value: 'item', label: 'Item' },
-  { value: 'zeny', label: 'Zeny' },
-  { value: 'gold', label: 'Gold' },
-  { value: 'credit', label: 'Credit' },
-  { value: 'vote_points', label: 'Vote Points' },
-  { value: 'hourly_points', label: 'Hourly Points' },
-  { value: 'activity_points', label: 'Activity Points' },
-  { value: 'instance_points', label: 'Instance Points' },
-  { value: 'monster_arena_points', label: 'MA Points' },
-  { value: 'otherworld_points', label: 'Otherworld Points' },
-  { value: 'hall_of_heritage_points', label: 'HoH Points' },
-  { value: 'token_points', label: 'Token Points' },
-  { value: 'cardo_points', label: 'Cardo Points' }
-];
-
 function shopRenderRequirement(req, idx) {
   const isItem = req.type === "item";
   const item = isItem ? getItem(req.id) : null;
@@ -540,7 +536,7 @@ function shopRenderRequirement(req, idx) {
       
       <div class="req-top-row">
         <select onchange="shopUpdateReqType(${idx}, this.value)">
-          ${SHOP_SHOP_REQ_TYPE_OPTIONS.map(opt => 
+          ${REQ_TYPE_OPTIONS.map(opt => 
             `<option value="${opt.value}" ${req.type === opt.value ? "selected" : ""}>${opt.label}</option>`
           ).join('')}
         </select>
@@ -587,21 +583,6 @@ function shopRenderItemRequirement(req, idx, item) {
 
 // ===== MATERIAL TREE =====
 
-const SHOP_CURRENCY_NAMES = {
-  zeny: 'Zeny',
-  credit: 'Credit',
-  gold: 'Gold',
-  vote_points: 'Vote Points',
-  activity_points: 'Activity Points',
-  instance_points: 'Instance Points',
-  hourly_points: 'Hourly Points',
-  monster_arena_points: 'Monster Arena Points',
-  otherworld_points: 'Otherworld Points',
-  hall_of_heritage_points: 'Hall of Heritage Points',
-  token_points: 'Token Points',
-  cardo_points: 'Cardo Points',
-  event_points: 'Event Points'
-};
 
 // ===== SUMMARY RENDERING =====
 
@@ -627,7 +608,7 @@ function shopFindMultiShopItems(shopIndex) {
       if (req.type === "item" && shopIndex.has(req.id)) {
         const shops = shopIndex.get(req.id);
         if (shops.length > 1) {
-          multiShopItems.set(req.id, { name: getItem(req.id).name, shops });
+          multiShopItems.set(req.id, { name: getItemDisplayName(getItem(req.id)) || 'Unknown', shops });
         }
         scan(shops[0], newPath);
       }
@@ -743,26 +724,32 @@ function shopCalculateFullRequirements(shopIndex, shopChoices) {
 }
 
 function shopCalculateZenyValue(req, amount) {
-  if (req.type === "zeny") return amount;
+  if (req.type === "zeny") return applyDiscount(amount);
   if (req.type === "credit") return amount * getCreditValue();
   if (req.type === "gold") return amount * getGoldValue();
   if (req.type === "item") return amount * (getItem(req.id).value || 0);
+
+  const ticketId = window.getTicketIdForRequirementType?.(req.type);
+  if (ticketId) return amount * (getItem(ticketId)?.value || 0);
+
   return 0;
 }
 
 function shopAccumulateRequirement(totals, req, effectiveAmount) {
+  const linkedTicketId = req.type !== 'item' ? window.getTicketIdForRequirementType?.(req.type) : null;
+  const isLinkedPoints = !!linkedTicketId;
   const key = req.type === "item" ? `item_${req.id}` : req.type;
   const item = req.type === "item" ? getItem(req.id) : null;
-  const name = SHOP_CURRENCY_NAMES[req.type] || (req.type === "item" ? (item?.name || "Unknown") : req.type);
+  const name = CURRENCY_NAMES[req.type] || (req.type === "item" ? (getItemDisplayName(item) || "Unknown") : req.type);
 
   if (!totals[key]) {
     totals[key] = {
       name,
       amount: 0,
       type: req.type,
-      itemId: req.type === "item" ? req.id : null,  // ADD THIS
+      itemId: req.type === "item" ? req.id : (isLinkedPoints ? linkedTicketId : null),
       slot: req.type === "item" ? (Number(item?.slot) || 0) : 0,  // ADD THIS
-      value: req.type === "item" ? (item?.value || 0) : 0
+      value: req.type === "item" ? (item?.value || 0) : (isLinkedPoints ? (getItem(linkedTicketId)?.value || 0) : 0)
     };
   }
   totals[key].amount += effectiveAmount;
@@ -787,7 +774,7 @@ function renderShopSummaryItems(entries, totalZeny) {
   // Only show entries that have a known zeny value
   const zenyCurrencies = new Set(["zeny", "gold", "credit"]);
   const valued = entries.filter(e =>
-    zenyCurrencies.has(e.type) || (e.type === "item" && e.value > 0)
+    zenyCurrencies.has(e.type) || e.value > 0
   );
 
   if (valued.length === 0) {
@@ -797,7 +784,7 @@ function renderShopSummaryItems(entries, totalZeny) {
   // If the only cost is zeny and totalZeny equals that zeny requirement,
   // the value section would just repeat the requirement — suppress it.
   const onlyZeny = valued.length === 1 && valued[0].type === "zeny";
-  if (onlyZeny && valued[0].amount === totalZeny) {
+  if (onlyZeny && applyDiscount(valued[0].amount) === totalZeny) {
     return '<div class="tot-empty">No zeny-valued materials</div>';
   }
 
@@ -806,15 +793,16 @@ function renderShopSummaryItems(entries, totalZeny) {
   if (totalZeny > 0) {
     html += `
       <div class="tot-row tot-row--total">
-        <span class="tot-label">Total Zeny Value</span>
-        <span class="tot-amt">${formatZenyCompact(totalZeny)}</span>
+        <span class="tot-label">Total Value</span>
+        <span class="tot-amt">${formatValue(totalZeny)}</span>
       </div>`;
   }
 
   html += valued.map(entry => {
-    const fmtAmt = entry.amount >= 1e6 ? formatZenyCompact(entry.amount)
-                 : entry.amount >= 1000 ? entry.amount.toLocaleString()
-                 : entry.amount;
+    const displayAmt = entry.type === "zeny" ? applyDiscount(entry.amount) : entry.amount;
+    const fmtAmt = displayAmt >= 1e6 ? formatZenyCompact(displayAmt)
+                 : displayAmt >= 1000 ? displayAmt.toLocaleString()
+                 : displayAmt;
 
     const slot = entry.type === "item" && entry.slot > 0
       ? `<span class="mat-slot">[${entry.slot}]</span>` : "";
@@ -835,13 +823,13 @@ function renderShopSummaryItems(entries, totalZeny) {
     }
 
     let zenyVal = 0;
-    if (entry.type === "zeny")        zenyVal = entry.amount;
+    if (entry.type === "zeny")        zenyVal = applyDiscount(entry.amount);
     else if (entry.type === "gold")   zenyVal = entry.amount * getGoldValue();
     else if (entry.type === "credit") zenyVal = entry.amount * getCreditValue();
     else                              zenyVal = entry.amount * entry.value;
 
     const subLine = (entry.type !== "zeny" && zenyVal > 0)
-      ? `<div class="mat-row-sub mat-row-sub--val">${formatZenyCompact(zenyVal)} zeny</div>`
+      ? `<div class="mat-row-sub mat-row-sub--val">${formatValue(zenyVal)}</div>`
       : "";
 
     return `
