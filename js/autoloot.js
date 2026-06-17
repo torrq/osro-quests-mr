@@ -6,7 +6,7 @@ const AUTOLOOT_CONFIG = {
   MAX_ITEMS_PER_LINE: 25, // Just an upper bound, specific limits handled in generateCommands
   MAX_CHARS_PER_LINE: 255, 
   MAX_SLOTS: 10,
-  MAX_ITEMS_PER_SLOT: 60,
+  MAX_ITEMS_PER_SLOT: 100,
   COMMANDS_WITH_SLOTS: ["save", "reset", "load", "clear", "add", "remove"]
 };
 
