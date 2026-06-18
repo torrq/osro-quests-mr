@@ -127,7 +127,7 @@ function gcRenderMain() {
             ${window.SVG_ICONS?.gc14 || ''}
             Guild Contribution
           </div>
-          <div class="lab-section-meta">Refreshes every 6 hours from NPC access · 6 items per rotation</div>
+          <div class="lab-section-meta">Refreshes every 5 minutes from NPC access · 6 items per rotation</div>
         </div>
 
         <div class="gc-timer-row">
