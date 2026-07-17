@@ -397,6 +397,29 @@ function renderItemsCore() {
   }
 
   container.innerHTML = html;
+
+  // Sync HTML inputs/checkboxes with state (handles page load and back/forward navigation)
+  const chkDesc = document.getElementById('searchDescriptions');
+  if (chkDesc) chkDesc.checked = !!state.searchDescriptions;
+
+  const chkAll = document.getElementById('showAllItems');
+  if (chkAll) chkAll.checked = !!state.showAllItems;
+
+  const chkNew = document.getElementById('showNewItemsOnly');
+  if (chkNew) chkNew.checked = !!state.showNewItemsOnly;
+
+  const chkVal = document.getElementById('showValuesOnly');
+  if (chkVal) chkVal.checked = !!state.showValuesOnly;
+
+  const txtSearch = document.getElementById('itemSearchInput');
+  if (txtSearch && document.activeElement !== txtSearch) {
+    txtSearch.value = state.itemSearchFilter || '';
+  }
+
+  // Update URL search parameters to reflect search state without pushing a new history item
+  if (typeof updateURL === 'function' && (state.currentTab === 'items' || state.selectedItemId)) {
+    updateURL(state.selectedItemId, 'item', false);
+  }
 }
 
 function selectItem(id, pushToHistory = true) {

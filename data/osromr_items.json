@@ -10662,7 +10662,7 @@
   },
   "4238": {
     "name": "Owl Baron Card",
-    "desc": "Add the chance of auto casting ^008800Level 1 Lex Aeterna^000000 on an enemy when doing Physical Attack.\n------------------------\n[ ^008000Unlock Effect^000000 ]\nINT +1\n------------------------\nClass:^6666CC Card^000000\nCompound on:^B40088 Accessory^000000\nWeight:^009900 1^000000"
+    "desc": "Add the chance of auto casting ^008800Level 1 Lex Aeterna^000000 on an enemy when doing Physical Attack.\n------------------------\n[ ^008000Unlock Effect^000000 ]\nINT +1\n------------------------\n[ ^008000Deposit Effect^000000 ]\nMATK +2\n------------------------\nClass:^6666CC Card^000000\nCompound on:^B40088 Accessory^000000\nWeight:^009900 1^000000"
   },
   "4239": {
     "name": "Iron Fist Card",
@@ -10846,7 +10846,7 @@
   },
   "4284": {
     "name": "Chepet Card",
-    "desc": "Add a chance of auto casting ^008800Level 5 Heal^000000 on target when doing Physical Attack.\n------------------------\n[ ^008000Unlock Effect^000000 ]\nHeal Effectiveness +5%\n------------------------\nClass:^6666CC Card^000000\nCompound on:^FF0000 Weapon^000000\nWeight:^009900 1^000000"
+    "desc": "Add a chance of auto casting ^008800Level 5 Heal^000000 on target when doing Physical Attack.\n------------------------\n[ ^008000Unlock Effect^000000 ]\nHeal Effectiveness +5%\n------------------------\n[ ^008000Deposit Effect^000000 ]\nHeal Effectiveness +1%\n------------------------\nClass:^6666CC Card^000000\nCompound on:^FF0000 Weapon^000000\nWeight:^009900 1^000000"
   },
   "4285": {
     "name": "Choco Card",
@@ -10922,7 +10922,7 @@
   },
   "4303": {
     "name": "Giant Whisper Card",
-    "desc": "Flee +10\nAtk +20 if the user has 80 or more STR points.\nMaxHP +3% if the user has 80 or more VIT points.\nCritical +3 if the user has 80 or more LUK points.\n------------------------\n[ ^008000Unlock Effect^000000 ]\nFlee +2\n------------------------\nClass:^6666CC Card^000000\nCompound on:^008C99 Garment^000000\nWeight:^009900 1^000000"
+    "desc": "Flee +10\nAtk +20 if the user has 80 or more STR points.\nMaxHP +3% if the user has 80 or more VIT points.\nCritical +3 if the user has 80 or more LUK points.\n------------------------\n[ ^008000Unlock Effect^000000 ]\nFlee +2\n------------------------\n[ ^008000Deposit Effect^000000 ]\nFlee +2\n------------------------\nClass:^6666CC Card^000000\nCompound on:^008C99 Garment^000000\nWeight:^009900 1^000000"
   },
   "4304": {
     "name": "Tamruan Card",
@@ -10990,7 +10990,7 @@
   },
   "4320": {
     "name": "Bloody Knight Card",
-    "desc": "Add the chance of casting ^008800Level 1 Meteor Storm^000000 on an enemy when doing Physical Attack.\n------------------------\n[ ^008000Unlock Effect^000000 ]\nMeteor Storm damage +2%\n------------------------\nClass:^6666CC Card^000000\nCompound on:^FF0000 Weapon^000000\nWeight:^009900 1^000000"
+    "desc": "Add the chance of casting ^008800Level 1 Meteor Storm^000000 on an enemy when doing Physical Attack.\n------------------------\n[ ^008000Unlock Effect^000000 ]\nMeteor Storm damage +2%\n------------------------\n[ ^008000Deposit Effect^000000 ]\nMeteor Storm Damage +1%\n------------------------\nClass:^6666CC Card^000000\nCompound on:^FF0000 Weapon^000000\nWeight:^009900 1^000000"
   },
   "4321": {
     "name": "Hylozoist Card",
@@ -11002,7 +11002,7 @@
   },
   "4323": {
     "name": "Hatii Bebe Card",
-    "desc": "Add the chance of auto casting ^008800Level 3 Frost Diver^000000 on an enemy when doing Physical Attack.\nIf the user is equipped with an item compounded to the ^008800Hatii Card^000000, the chance is greatly increased.\n------------------------\n[ ^008000Unlock Effect^000000 ]\nINT +3\n------------------------\nClass:^6666CC Card^000000\nCompound on:^FF0000 Weapon^000000\nWeight:^009900 1^000000"
+    "desc": "Add the chance of auto casting ^008800Level 3 Frost Diver^000000 on an enemy when doing Physical Attack.\nIf the user is equipped with an item compounded to the ^008800Hatii Card^000000, the chance is greatly increased.\n------------------------\n[ ^008000Unlock Effect^000000 ]\nINT +3\n------------------------\n[ ^008000Deposit Effect^000000 ]\nMATK +2\n------------------------\nClass:^6666CC Card^000000\nCompound on:^FF0000 Weapon^000000\nWeight:^009900 1^000000"
   },
   "4324": {
     "name": "Hatii Card",
@@ -11290,19 +11290,19 @@
   },
   "4395": {
     "name": "Maero of Thanatos Card",
-    "desc": "Atk +5\nAdds a chance of autocasting ^008800Level 3 Decrease AGI^000000 with each physical attack.\n------------------------\n[ ^008000Unlock Effect^000000 ]\nATK +3\n------------------------\nClass:^6666CC Card^000000\nCompound on:^FF0000 Weapon^000000\nWeight:^009900 1^000000"
+    "desc": "Atk +5\nAdds a chance of autocasting ^008800Level 3 Decrease AGI^000000 with each physical attack.\n------------------------\n[ ^008000Unlock Effect^000000 ]\nATK +3\n------------------------\n[ ^008000Deposit Effect^000000 ]\nGhost Resist +1%\n------------------------\nClass:^6666CC Card^000000\nCompound on:^FF0000 Weapon^000000\nWeight:^009900 1^000000"
   },
   "4396": {
     "name": "Odium of Thanatos Card",
-    "desc": "AGI -5\nAdds an amount of AGI equal to the compounded Shoes's upgrade level.\n------------------------\n[ ^008000Unlock Effect^000000 ]\nAGI +1\n------------------------\nClass:^6666CC Card^000000\nCompound on:^999900 Footgear^000000\nWeight:^009900 1^000000"
+    "desc": "AGI -5\nAdds an amount of AGI equal to the compounded Shoes's upgrade level.\n------------------------\n[ ^008000Unlock Effect^000000 ]\nAGI +1\n------------------------\n[ ^008000Deposit Effect^000000 ]\nDark Resist +1%\n------------------------\nClass:^6666CC Card^000000\nCompound on:^999900 Footgear^000000\nWeight:^009900 1^000000"
   },
   "4397": {
     "name": "Despero of Thanatos Card",
-    "desc": "INT -6\nAdds an amount of INT equal to the compounded Shield's upgrade level.\n------------------------\n[ ^008000Unlock Effect^000000 ]\nINT +1\n------------------------\nClass:^6666CC Card^000000\nCompound on:^6666CC Shield^000000\nWeight:^009900 1^000000"
+    "desc": "INT -6\nAdds an amount of INT equal to the compounded Shield's upgrade level.\n------------------------\n[ ^008000Unlock Effect^000000 ]\nINT +1\n------------------------\n[ ^008000Deposit Effect^000000 ]\nFire Resist +1%\n------------------------\nClass:^6666CC Card^000000\nCompound on:^6666CC Shield^000000\nWeight:^009900 1^000000"
   },
   "4398": {
     "name": "Dolor of Thanatos Card",
-    "desc": "Increases Magic\nDamage against Angel\ntype monsters by 10%.\n------------------------\n[ ^008000Unlock Effect^000000 ]\nAngel monster damage +1%\n------------------------\nClass:^6666CC Card^000000\nCompound on:^FF0000 Weapon^000000\nWeight:^009900 1^000000"
+    "desc": "Increases Magic\nDamage against Angel\ntype monsters by 10%.\n------------------------\n[ ^008000Unlock Effect^000000 ]\nAngel monster damage +1%\n------------------------\n[ ^008000Deposit Effect^000000 ]\nHoly Resist +1%\n------------------------\nClass:^6666CC Card^000000\nCompound on:^FF0000 Weapon^000000\nWeight:^009900 1^000000"
   },
   "4399": {
     "name": "Memory of Thanatos Card",
@@ -11950,31 +11950,31 @@
   },
   "4560": {
     "name": "Clown Card",
-    "desc": "Flee +10\nIncrease ^0000FFArrow Vulcan^000000 damage by 10%.\n[^880088If base ^006600DEX^000000 at least 150^000000]\nIncrease INT and DEX + 1, per ^885500(Refine Rate)^000000\n[^880088If base ^006600VIT^000000 at least 160^000000]\nIncrease Max HP by 1%, per ^885500(Refine Rate)^000000\n------------------------\n^FF0000Two (2) Clown Cards will not work together.^000000\nMisc.:^6666CC Card^000000\nCompound on:^00CC33 Headgear^000000\nWeight:^006600 1^000000"
+    "desc": "Flee +10\nIncrease ^0000FFArrow Vulcan^000000 damage by 10%.\n[^880088If base ^006600DEX^000000 at least 150^000000]\nIncrease INT and DEX + 1, per ^885500(Refine Rate)^000000\n[^880088If base ^006600VIT^000000 at least 160^000000]\nIncrease Max HP by 1%, per ^885500(Refine Rate)^000000\n------------------------\n^FF0000Two (2) Clown Cards will not work together.^000000\n------------------------\n[ ^008000Deposit Effect^000000 ]\nVIT +2, HP +1%\n------------------------\nMisc.:^6666CC Card^000000\nCompound on:^00CC33 Headgear^000000\nWeight:^006600 1^000000"
   },
   "4561": {
     "name": "Professor Card",
-    "desc": "MATK +3%\nHas a chance of auto-casting ^0000FFSpider Web^000000 when attacking & receiving physical damage.\nEnable to use Level 1 ^0000FFDeluge, Violent Gale, Volcano & Land Protector^000000.\n------------------------\n^FF0000Two (2) Professor Cards will not work together.^000000\nMisc.:^6666CC Card^000000\nCompound on:^00CC33 Accessory^000000\nWeight:^006600 1^000000"
+    "desc": "MATK +3%\nHas a chance of auto-casting ^0000FFSpider Web^000000 when attacking & receiving physical damage.\nEnable to use Level 1 ^0000FFDeluge, Violent Gale, Volcano & Land Protector^000000.\n------------------------\n^FF0000Two (2) Professor Cards will not work together.^000000\n------------------------\n[ ^008000Deposit Effect^000000 ]\nINT +2, MATK +3\n------------------------\nMisc.:^6666CC Card^000000\nCompound on:^00CC33 Accessory^000000\nWeight:^006600 1^000000"
   },
   "4562": {
     "name": "Champion Card",
-    "desc": "Enable to use Level 1 ^0000FFBody Relocation^000000 skill.\nHas a 0.50% chance of auto casting Level 1 ^885500Critical Explosion^000000.\n[^880088When used by Monk Class^000000]\nIncrease damage of ^885500Tiger Knuckle Fist, Triple Attack, Palm Push Strike, Combo Finish & Chain Crush Combo^000000.\n------------------------\nMisc.:^6666CC Card^000000\nCompound on:^00CC33 Footwear^000000\nWeight:^006600 1^000000"
+    "desc": "Enable to use Level 1 ^0000FFBody Relocation^000000 skill.\nHas a 0.50% chance of auto casting Level 1 ^885500Critical Explosion^000000.\n[^880088When used by Monk Class^000000]\nIncrease damage of ^885500Tiger Knuckle Fist, Triple Attack, Palm Push Strike, Combo Finish & Chain Crush Combo^000000.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nSTR +1, ATK +6\n------------------------\nMisc.:^6666CC Card^000000\nCompound on:^00CC33 Footwear^000000\nWeight:^006600 1^000000"
   },
   "4563": {
     "name": "Creator Card",
-    "desc": "CRIT +20\nEnable to use ^0000FFCall Homunculus, Rest & Resurrect Homunculus^000000.\nIncrease ^885500Acid Demonstration^000000 damage by 10%.\nAcid Bomb has a 5% chance to trigger a 2x2 AoE damage effect.\n------------------------\nMisc.:^6666CC Card^000000\nCompound on:^00CC33 Garment^000000\nWeight:^006600 1^000000"
+    "desc": "CRIT +20\nEnable to use ^0000FFCall Homunculus, Rest & Resurrect Homunculus^000000.\nIncrease ^885500Acid Demonstration^000000 damage by 10%.\nAcid Bomb has a 5% chance to trigger a 2x2 AoE damage effect.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nAcid Demo damage +1%\n------------------------\nMisc.:^6666CC Card^000000\nCompound on:^00CC33 Garment^000000\nWeight:^006600 1^000000"
   },
   "4564": {
     "name": "Stalker Card",
-    "desc": "Flee +20\nPerfect Dodge +1\nEnable to use Level 5 ^0000FFChase Walk^000000.\n[ ^2EDE28Rogue Class^000000 ]\nInflict 12% more damage with ^885500Double Strafe^000000.\n------------------------\nMisc.:^6666CC Card^000000\nCompound on:^00CC33 Garment^000000\nWeight:^006600 1^000000"
+    "desc": "Flee +20\nPerfect Dodge +1\nEnable to use Level 5 ^0000FFChase Walk^000000.\n[ ^2EDE28Rogue Class^000000 ]\nInflict 12% more damage with ^885500Double Strafe^000000.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nDEX +2, LUK +1\n------------------------\nMisc.:^6666CC Card^000000\nCompound on:^00CC33 Garment^000000\nWeight:^006600 1^000000"
   },
   "4565": {
     "name": "Paladin Card",
-    "desc": "VIT +3\nEnable to use Level 5 ^0000FFAuto Guard^000000 skill.\nIncreases ^885500Sacrifice^000000 and ^885500Shield Chain^000000 skill damage by 50%.\nMisc.:^6666CC Card^000000\nCompound on:^00CC33 Accessory^000000\nWeight:^006600 1^000000"
+    "desc": "VIT +3\nEnable to use Level 5 ^0000FFAuto Guard^000000 skill.\nIncreases ^885500Sacrifice^000000 and ^885500Shield Chain^000000 skill damage by 50%.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nHP +2%\n------------------------\nMisc.:^6666CC Card^000000\nCompound on:^00CC33 Accessory^000000\nWeight:^006600 1^000000"
   },
   "4566": {
     "name": "Gypsy Card",
-    "desc": "Dex +2, Flee +10\nIncrease ^0000FFThrow Arrow^000000 damage by 10%.\n[^880088If base ^006600AGI^000000 at least 150^000000]\nIncrease Flee + 2, per ^885500(Refine Rate)^000000\n[^880088If base ^006600LUK^000000 at least 160^000000]\nIncrease Perfect Dodge + 1, per ^885500(Refine Rate)^000000\n------------------------\n^FF0000Two (2) Gypsy Cards will not work together.^000000\nMisc.:^6666CC Card^000000\nCompound on:^00CC33 Headgear^000000\nWeight:^006600 1^000000"
+    "desc": "Dex +2, Flee +10\nIncrease ^0000FFThrow Arrow^000000 damage by 10%.\n[^880088If base ^006600AGI^000000 at least 150^000000]\nIncrease Flee + 2, per ^885500(Refine Rate)^000000\n[^880088If base ^006600LUK^000000 at least 160^000000]\nIncrease Perfect Dodge + 1, per ^885500(Refine Rate)^000000\n------------------------\n^FF0000Two (2) Gypsy Cards will not work together.^000000\n------------------------\n[ ^008000Deposit Effect^000000 ]\nFLEE +3, Perfect Dodge +1\n------------------------\nMisc.:^6666CC Card^000000\nCompound on:^00CC33 Headgear^000000\nWeight:^006600 1^000000"
   },
   "4567": {
     "name": "Alphoccio Card",
@@ -17606,7 +17606,7 @@
   },
   "5970": {
     "name": "Rune Helm",
-    "desc": "A mysterious helm that can amplify the magic power of its wearer.\nClass:^6666CC Headgear^000000\nLocation:^6666CC Upper^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000",
+    "desc": "A mysterious helm that can amplify the magic power of its wearer.\nSource:^777777 Lotti Girl^000000\nClass:^6666CC Headgear^000000\nLocation:^6666CC Upper^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000",
     "slot": 1
   },
   "5971": {
@@ -45369,7 +45369,7 @@
   },
   "19311": {
     "name": "Greater Dracul Horn",
-    "desc": "An unusual helmet that has vicious aura bearing the Great Demon name.\nAs its name implies, it has an ability to absorb the life force of its enemy.\nClass:^6666CC Headgear^000000\nLocation:^6666CC Upper^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000",
+    "desc": "An unusual helmet that has vicious aura bearing the Great Demon name.\nAs its name implies, it has an ability to absorb the life force of its enemy.\nMax Weight + 500\nGives +1 random stat when equipped.\nIncreases experience gained from defeating monsters by 10%.\nSource:^777777 Monthsary Giveaway^000000\nClass:^6666CC Headgear^000000\nLocation:^6666CC Upper^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000",
     "slot": 1
   },
   "19312": {
@@ -50026,7 +50026,7 @@
   },
   "20762": {
     "name": "Great Devil Wings",
-    "desc": "Costume replica of famous winged demon of underworld.\nClass:^6666CC Garment^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000"
+    "desc": "Costume replica of famous winged demon of underworld.\nMax Weight + 500\nGives +1 random stat when equipped.\nIncreases experience gained from defeating monsters by 10%.\nSource:^777777 Monthsary Giveaway^000000\nClass:^6666CC Garment^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000"
   },
   "20763": {
     "name": "Amistr Bag",
@@ -62572,8 +62572,8 @@
     "desc": "One of the currencies ingame. Exchange for zeny at the '^CC5500Credit Agent^000000'.\nValue is ^33CC0010,000,000^000000 Zeny\n^FFFFFF_^000000\nWeight:^009900 0^000000"
   },
   "40002": {
-    "name": "Black Credit",
-    "desc": "One of the currencies ingame. Exchange for zeny at the '^CC5500Credit Agent^000000'.\nValue is ^33CC001,000,000,000^000000 Zeny\n^FFFFFF_^000000\nWeight:^009900 0^000000"
+    "name": "Rare Credit",
+    "desc": "One of the currencies ingame. Exchange for zeny at the '^CC5500Credit Agent^000000'.\nValue is ^33CC00100,000,000^000000 Zeny\n^FFFFFF_^000000\nWeight:^009900 0^000000"
   },
   "40003": {
     "name": "Donation Ticket",
@@ -67962,7 +67962,7 @@
   },
   "46079": {
     "name": "Firewolf Aura",
-    "desc": "It feels warm. You are protected by this powerful wolf spirit.\n-------------------------\nMax Weight + 500\nReceive 10% less damage from ^6666CCBoss^000000 monsters.\nSource:^777777 Lotti Girl^000000\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 5^000000\nJobs:^6666CC All^000000"
+    "desc": "It feels warm. You are protected by this powerful wolf spirit.\n-------------------------\nMax Weight + 500\nReceive 10% less damage from ^6666CCBoss^000000 monsters.\n--------------------------\n[ ^008000Deposit Effect^000000 ]\nResistance to fire property +1%.\n--------------------------\nSource:^777777 Lotti Girl^000000\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 5^000000\nJobs:^6666CC All^000000"
   },
   "46080": {
     "name": "Flame Aura",
@@ -68766,11 +68766,11 @@
   },
   "46599": {
     "name": "Gold Rune of Power",
-    "desc": "Crafted with lost magic, these runes can conjure godly powers.\n-------------------------\nMax Weight + 500\nDrop Rate of any items and cards increased by 5%.\n------------------------\nSource:^777777 Lotti Girl^000000\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 5^000000\nJobs:^6666CC All^000000"
+    "desc": "Crafted with lost magic, these runes can conjure godly powers.\n-------------------------\nMax Weight + 500\nDrop Rate of any items and cards increased by 5%.\n--------------------------\n[ ^008000Deposit Effect^000000 ]\nResistance to water property +1%.\n--------------------------\nSource:^777777 Lotti Girl^000000\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 5^000000\nJobs:^6666CC All^000000"
   },
   "46600": {
     "name": "Green Rune of Power",
-    "desc": "Crafted with lost magic, these runes can conjure godly powers.\n-------------------------\nMax Weight + 500\nDrop Rate of any items and cards increased by 5%.\nSource:^777777 Lotti Girl^000000\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 5^000000\nJobs:^6666CC All^000000"
+    "desc": "Crafted with lost magic, these runes can conjure godly powers.\n-------------------------\nMax Weight + 500\nDrop Rate of any items and cards increased by 5%.\n--------------------------\n[ ^008000Deposit Effect^000000 ]\nResistance to wind property +1%.\n--------------------------\nSource:^777777 Lotti Girl^000000\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 5^000000\nJobs:^6666CC All^000000"
   },
   "46601": {
     "name": "Pink Rune of Power",
@@ -72905,15 +72905,15 @@
   },
   "48542": {
     "name": "Okarun Aura",
-    "desc": "Level up your look with OldschoolRO's exclusive headgear!\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 10^000000\nRequired Level :^777777 1^000000\nJobs:^6666CC All^000000"
+    "desc": "Level up your look with OldschoolRO's exclusive headgear!\n-------------------------\nMax Weight + 500\nIncreases damage inflicted on Demon monsters by 6%.\nDrop Rate of any items and cards increased by 5%.\n--------------------------\n[ ^008000Deposit Effect^000000 ]\nDemon monster damage 1%.\n--------------------------\nSource:^777777 Lotti Girl^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 10^000000\nRequired Level :^777777 1^000000\nJobs:^6666CC All^000000"
   },
   "48543": {
     "name": "Okarun Cape",
-    "desc": "Level up your look with OldschoolRO's exclusive headgear!\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Mid^000000\nWeight:^009900 10^000000\nRequired Level :^777777 1^000000\nJobs:^6666CC All^000000"
+    "desc": "Level up your look with OldschoolRO's exclusive headgear!\n-------------------------\nMax Weight + 500\nIncreases damage inflicted on Demon monsters by 6%.\nDrop Rate of any items and cards increased by 5%.\n--------------------------\n[ ^008000Deposit Effect^000000 ]\nReduce damage from range attacks by 1%.\n--------------------------\nSource:^777777 Lotti Girl^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Mid^000000\nWeight:^009900 10^000000\nRequired Level :^777777 1^000000\nJobs:^6666CC All^000000"
   },
   "48544": {
     "name": "Okarun Wig",
-    "desc": "Level up your look with OldschoolRO's exclusive headgear!\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Upper^000000\nWeight:^009900 10^000000\nRequired Level :^777777 1^000000\nJobs:^6666CC All^000000"
+    "desc": "Level up your look with OldschoolRO's exclusive headgear!\n-------------------------\nMax Weight + 500\nIncreases damage inflicted on Demon monsters by 6%.\nDrop Rate of any items and cards increased by 5%.\n--------------------------\n[ ^008000Deposit Effect^000000 ]\nReduce damage from near attacks by 1%.\n--------------------------\nSource:^777777 Lotti Girl^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Upper^000000\nWeight:^009900 10^000000\nRequired Level :^777777 1^000000\nJobs:^6666CC All^000000"
   },
   "48545": {
     "name": "Outlaw Gang Aura",
@@ -72921,11 +72921,11 @@
   },
   "48546": {
     "name": "Outlaw Gang Cap",
-    "desc": "Level up your look with OldschoolRO's exclusive headgear!\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Upper^000000\nWeight:^009900 10^000000\nRequired Level :^777777 1^000000\nJobs:^6666CC All^000000"
+    "desc": "Level up your look with OldschoolRO's exclusive headgear!\nMax Weight + 500\nGives +1 random stat when equipped.\nIncreases experience gained from defeating monsters by 10%.\nSource:^777777 Monthsary Giveaway^000000\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Upper^000000\nWeight:^009900 10^000000\nRequired Level :^777777 1^000000\nJobs:^6666CC All^000000"
   },
   "48547": {
     "name": "Outlaw Gang Scarf",
-    "desc": "Level up your look with OldschoolRO's exclusive headgear!\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Mid^000000\nWeight:^009900 10^000000\nRequired Level :^777777 1^000000\nJobs:^6666CC All^000000"
+    "desc": "Level up your look with OldschoolRO's exclusive headgear!\nMax Weight + 500\nGives +1 random stat when equipped.\nIncreases experience gained from defeating monsters by 10%.\nSource:^777777 Monthsary Giveaway^000000\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Mid^000000\nWeight:^009900 10^000000\nRequired Level :^777777 1^000000\nJobs:^6666CC All^000000"
   },
   "48548": {
     "name": "Pet Ghost",
@@ -73013,15 +73013,15 @@
   },
   "48569": {
     "name": "Valentine King Aura",
-    "desc": "Level up your look with OldschoolRO's exclusive headgear!\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 10^000000\nRequired Level :^777777 1^000000\nJobs:^6666CC All^000000"
+    "desc": "Level up your look with OldschoolRO's exclusive headgear!\n-------------------------\nMax Weight + 500\nIncreases damage inflicted on Shadow monsters by 6%.\nDrop Rate of any items and cards increased by 5%.\n--------------------------\n[ ^008000Deposit Effect^000000 ]\nShadow monster damage +1%\n--------------------------\nSource:^777777 Lotti Girl^000000\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 10^000000\nRequired Level :^777777 1^000000\nJobs:^6666CC All^000000"
   },
   "48570": {
     "name": "Valentine King Cap",
-    "desc": "Level up your look with OldschoolRO's exclusive headgear!\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Upper^000000\nWeight:^009900 10^000000\nRequired Level :^777777 1^000000\nJobs:^6666CC All^000000"
+    "desc": "Level up your look with OldschoolRO's exclusive headgear!\n-------------------------\nMax Weight + 500\nIncreases damage inflicted on Shadow monsters by 6%.\nDrop Rate of any items and cards increased by 5%.\n--------------------------\n[ ^008000Deposit Effect^000000 ]\nSmall monster damage +1%\n--------------------------\nSource:^777777 Lotti Girl^000000\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Upper^000000\nWeight:^009900 10^000000\nRequired Level :^777777 1^000000\nJobs:^6666CC All^000000"
   },
   "48571": {
     "name": "Valentine Love Visor",
-    "desc": "Level up your look with OldschoolRO's exclusive headgear!\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Mid^000000\nWeight:^009900 10^000000\nRequired Level :^777777 1^000000\nJobs:^6666CC All^000000"
+    "desc": "Level up your look with OldschoolRO's exclusive headgear!\n-------------------------\nMax Weight + 500\nIncreases damage inflicted on Shadow monsters by 6%.\nDrop Rate of any items and cards increased by 5%.\n--------------------------\n[ ^008000Deposit Effect^000000 ]\nLarge monster damage +1%\n--------------------------\nSource:^777777 Lotti Girl^000000\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Mid^000000\nWeight:^009900 10^000000\nRequired Level :^777777 1^000000\nJobs:^6666CC All^000000"
   },
   "48572": {
     "name": "Valentine Queen Aura",
@@ -73387,6 +73387,22 @@
     "name": "Royals Crown",
     "desc": "^008800[ GOTM Season 15 ]^000000\n--------------------------\nMax Weight + 500\nAn exclusive customized headgear made for Royals guild.\n--------------------------\nSource:^777777 Donation Exclusive^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Top^000000\nWeight:^009900 10^000000\nRequired Level :^777777 1^000000\nJobs:^6666CC All^000000"
   },
+  "48663": {
+    "name": "Sultan Aura",
+    "desc": "^008800[ GOTM Season 14 ]^000000\n--------------------------\nMax Weight + 500\nAn exclusive customized headgear made for Sultan guild.\n--------------------------\nSource:^777777 Donation Exclusive^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Low^000000\nWeight:^009900 10^000000\nRequired Level :^777777 1^000000\nJobs:^6666CC All^000000"
+  },
+  "48664": {
+    "name": "Caelestis Scarf",
+    "desc": "-------------------------\nMaximum HP +2%\nReduce damage from Demihuman by 1%.\nGives +2 random stat when equipped.\n------------------------\n[^663399 Caelestis Set ^000000]\nAll Stats +1\nReduce range and near attacks by 2%.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nDecreases Chance of being hit by critical by 1%\n------------------------\nSource:^777777 Donation Exclusive^000000\nClass:^6666CC Costume Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 10^000000\nRequired Level :^777777 1^000000\nJobs:^6666CC All^000000"
+  },
+  "48665": {
+    "name": "Caelestis Halo",
+    "desc": "-------------------------\nMaximum HP +2%\nReduce damage from Demihuman by 1%.\nGives +2 random stat when equipped.\n------------------------\n[^663399 Caelestis Set ^000000]\nAll Stats +1\nReduce range and near attacks by 2%.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nMaximum HP +1%\nReduce range attacks by 1%\n------------------------\nSource:^777777 Donation Exclusive^000000\nClass:^6666CC Costume Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Upper^000000\nWeight:^009900 10^000000\nRequired Level :^777777 1^000000\nJobs:^6666CC All^000000"
+  },
+  "48666": {
+    "name": "Caelestis Eye",
+    "desc": "-------------------------\nMaximum HP +2%\nReduce damage from Demihuman by 1%.\nGives +2 random stat when equipped.\n------------------------\n[^663399 Caelestis Set ^000000]\nAll Stats +1\nReduce range and near attacks by 2%.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nMaximum HP +1%\nReduce near attacks by 1%\n------------------------\nSource:^777777 Donation Exclusive^000000\nClass:^6666CC Costume Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Mid^000000\nWeight:^009900 10^000000\nRequired Level :^777777 1^000000\nJobs:^6666CC All^000000"
+  },
   "49000": {
     "name": "Angelic Valkyrie Wings Dark",
     "desc": "-------------------------\nMax Weight + 500\nIncrease damage on Boss monsters by 5%.\nDrop Rate of any items and cards increased by 10%.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nMaxHP +1%\n------------------------\nSource:^777777 Donation Exclusive^000000\nClass:^6666CC Costume Garment^000000\nDefense :^777777 0^000000\nEquipped on :^777777 Garment^000000\nWeight :^777777 10^000000\nApplicable Job :^777777 All^000000"
@@ -73438,6 +73454,10 @@
   "49012": {
     "name": "Sun God Nika Hat",
     "desc": "-------------------------\nMax Weight + 700\nATK + 2%, MATK + 2%\nGives +1 random stat when equipped.\n------------------------\n[^663399 Sun God Nika Set ^000000]\nAll Stats +1\nIncreases physical and magic damage on ^6666CCDemihuman^000000 monsters by 2%.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nIncreases physical and magic damage on ^6666CCDemihuman^000000 monsters by 1%.\n------------------------\nSource:^777777 Donation Exclusive^000000\nClass:^6666CC Costume Garment^000000\nDefense :^777777 0^000000\nEquipped on :^777777 Garment^000000\nWeight :^777777 10^000000\nApplicable Job :^777777 All^000000"
+  },
+  "49013": {
+    "name": "Caelestis Staff",
+    "desc": "-------------------------\nResist to all elements +6%\nGives +2 random stat when equipped.\n------------------------\n[^663399 Caelestis Set ^000000]\nAll Stats +1\nReduce range and near attacks by 2%.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nReduces damage taken from ^6666CCDemihuman^000000 monsters by 1%.\n------------------------\nSource:^777777 Donation Exclusive^000000\nClass:^6666CC Costume Garment^000000\nDefense :^777777 0^000000\nEquipped on :^777777 Garment^000000\nWeight :^777777 10^000000\nApplicable Job :^777777 All^000000"
   },
   "400020": {
     "name": "Beach Ball",
