@@ -23,12 +23,12 @@
   --group-border: #140707;
   
   /* Text colors */
-  --text: #e6edf3;
-  --text-muted: #9a7f7f;
+  --text: #e6e6e6;
+  --text-muted: #c2c2c2;
   
   /* Accent colors - bright blue for dark backgrounds */
-  --accent: #e23b3b;
-  --accent-hover: #ff5a5a;
+  --accent: #ffd700;
+  --accent-hover: #ffe510;
   --accent-bg: rgba(226, 59, 59, 0.12);
   
   /* Expand icon */
@@ -63,7 +63,7 @@
   
   /* Special elements */
   --version-tag: var(--amber);
-  --active-quest-bg: rgba(226, 59, 59, 0.22);
+  --active-quest-bg: rgba(119, 3, 3, 0.22);
   
   /* Code blocks */
   --code-bg: #140707;
@@ -139,8 +139,8 @@
   --group-border: #1f372b;
   
   /* Text colors */
-  --text: #e6edf3;
-  --text-muted: #8b9e96;
+  --text: #e6e6e6;
+  --text-muted: #c2c2c2;
   
   /* Accent colors - bright blue for dark backgrounds */
   --accent: #00ffb8;

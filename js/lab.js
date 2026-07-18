@@ -11,7 +11,22 @@ const LAB_DEFAULT_EXPERIMENT = 'lab-gc';
 
 function getActiveLabExperiment() {
   const tabId = window.state?.currentTab;
-  return window.LAB_EXPERIMENTS[tabId] || window.LAB_EXPERIMENTS[LAB_DEFAULT_EXPERIMENT] || null;
+  if (!tabId) return window.LAB_EXPERIMENTS[LAB_DEFAULT_EXPERIMENT] || null;
+  
+  if (window.LAB_EXPERIMENTS[tabId]) {
+    return window.LAB_EXPERIMENTS[tabId];
+  }
+  
+  for (const exp of Object.values(window.LAB_EXPERIMENTS)) {
+    if (exp.children && Array.isArray(exp.children)) {
+      const child = exp.children.find(c => c.tabId === tabId);
+      if (child) {
+        return child;
+      }
+    }
+  }
+  
+  return window.LAB_EXPERIMENTS[LAB_DEFAULT_EXPERIMENT] || null;
 }
 
 function loadLabData() {
@@ -35,18 +50,32 @@ function renderLabSidebar() {
   }
 
   const currentTab = window.state?.currentTab || LAB_DEFAULT_EXPERIMENT;
-  // Render all registered experiments in registration order
   const entries = Object.values(window.LAB_EXPERIMENTS);
-  const rows = entries.map(exp => {
-    const isActive = currentTab === exp.tabId;
-    return `
-      <div class="lab-sidebar-section ${isActive ? 'active' : ''}" onclick="switchTab('${exp.tabId}')">
+  const rows = [];
+
+  entries.forEach(exp => {
+    const isChildActive = exp.children && exp.children.some(c => c.tabId === currentTab);
+    const isParentActive = currentTab === exp.tabId || isChildActive;
+
+    rows.push(`
+      <div class="lab-sidebar-section ${isParentActive ? 'active' : ''}" onclick="switchTab('${exp.tabId}')">
         <span class="lab-sidebar-icon">${exp.sidebarIcon || ''}</span>
         ${exp.sidebarLabel || exp.title || exp.tabId}
-      </div>`;
-  }).join('');
+      </div>`);
 
-  el.innerHTML = `<div class="lab-sidebar-content">${rows}</div>`;
+    if (exp.children && Array.isArray(exp.children)) {
+      exp.children.forEach(child => {
+        const isThisChildActive = currentTab === child.tabId;
+        const iconHtml = child.sidebarIcon ? `<span class="lab-sidebar-icon">${child.sidebarIcon}</span>` : '';
+        rows.push(`
+          <div class="lab-sidebar-child ${isThisChildActive ? 'active' : ''}" onclick="switchTab('${child.tabId}')">
+            ${iconHtml}${child.sidebarLabel || child.title || child.tabId}
+          </div>`);
+      });
+    }
+  });
+
+  el.innerHTML = `<div class="lab-sidebar-content">${rows.join('')}</div>`;
 }
 
 function renderLabMain() {

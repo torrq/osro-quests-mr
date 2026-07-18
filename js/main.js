@@ -1064,6 +1064,18 @@ const TAB_ELEMENTS = {
   'lab-gem': {
     sidebar: "labList",
     render: ["renderLabSidebar", "renderLabMain"]
+  },
+  'lab-tracker': {
+    sidebar: "labList",
+    render: ["renderLabSidebar", "renderLabMain"]
+  },
+  'lab-tracker-deposits': {
+    sidebar: "labList",
+    render: ["renderLabSidebar", "renderLabMain"]
+  },
+  'lab-tracker-unlocks': {
+    sidebar: "labList",
+    render: ["renderLabSidebar", "renderLabMain"]
   }
 };
 
