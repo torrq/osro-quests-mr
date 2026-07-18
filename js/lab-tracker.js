@@ -452,7 +452,9 @@
               </span>
               <span class="lab-section-meta">${counts.have} of ${counts.total} collected (${pct}%) — ${counts.want} wanted</span>
             </div>
-            <div style="display: flex; gap: 8px; align-self: flex-start; margin-top: 2px;">
+            <div style="display: flex; gap: 8px; align-self: flex-start; margin-top: 2px; align-items: center;">
+              <span style="font-size: 11px; cursor: pointer; color: #50e3c2; text-decoration: underline;" onclick="window.trackerSelectAll('${listName}')" title="Mark all items as Have">Select All</span>
+              <span style="font-size: 11px; cursor: pointer; color: #ff6b6b; text-decoration: underline;" onclick="window.trackerClearAll('${listName}')" title="Mark all items as Not Have">Clear All</span>
               <button class="dt-export-btn" onclick="window.importTrackerFromCsv('${listName}')">
                 Import CSV
               </button>
@@ -474,8 +476,6 @@
             ${classFilterHtml}
             
             <div class="dt-filter-bar">
-              <button class="dt-filter-btn" style="color: #50e3c2; border-color: rgba(0, 200, 100, 0.3);" onclick="window.trackerSelectAll('${listName}')" title="Mark all items as Have">Select All</button>
-              <div style="width: 1px; background: var(--border); margin: 0 4px;"></div>
               <button class="dt-filter-btn ${currentFilter === 'all' ? 'active' : ''}" onclick="window.setTrackerFilter('${listName}', 'all')">All</button>
               <button class="dt-filter-btn ${currentFilter === 'need' ? 'active' : ''}" onclick="window.setTrackerFilter('${listName}', 'need')">Need</button>
               <button class="dt-filter-btn ${currentFilter === 'want' ? 'active' : ''}" onclick="window.setTrackerFilter('${listName}', 'want')">Want</button>
@@ -594,14 +594,35 @@
 
   window.trackerSelectAll = function(listName) {
     if (!confirm(`Are you sure you want to mark ALL items in ${listName} as 'Have'?`)) return;
-    const listData = DATA.itemLists?.find(l => l.name === listName);
+    const stateKey = listName === "Deposit List" ? "deposits" : "unlocks";
+    const subState = trackerState[stateKey];
+    const listData = getListData(listName);
     if (!listData) return;
-    const subState = listName === "Deposit List" ? trackerState.deposits : trackerState.unlocks;
+    
     listData.items.forEach(id => {
-      const idStr = id.toString();
-      if (!subState[idStr]) subState[idStr] = {};
-      subState[idStr].have = true;
+      if (!subState[id]) subState[id] = { have: false, want: false };
+      subState[id].have = true;
     });
+    
+    saveTrackerState();
+    trackerRenderDashboard();
+  };
+
+  window.trackerClearAll = function(listName) {
+    if (!confirm(`Are you sure you want to clear all progress for ${listName}? This action cannot be undone.`)) {
+      return;
+    }
+    const stateKey = listName === "Deposit List" ? "deposits" : "unlocks";
+    const subState = trackerState[stateKey];
+    const listData = getListData(listName);
+    if (!listData) return;
+    
+    listData.items.forEach(id => {
+      if (subState[id]) {
+        subState[id].have = false;
+      }
+    });
+    
     saveTrackerState();
     trackerRenderDashboard();
   };
