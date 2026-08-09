@@ -36715,15 +36715,15 @@
     "desc": "..."
   },
   "14588": {
-    "name": "Party Blessing 10 Scroll",
+    "name": "PT Blessing Scroll",
     "desc": "A scroll in which\na single use of Level 10\nParty Blessing\nhas been recorded.\nWill cast on all party\nmembers within a\ncertain range.\nCaution-- This item\nwon't work while your\ncharacter is casting\na spell or skill.\nThis item can only be placed in Kafra storage or traded.\n^FFFFFF_^000000\nWeight:^009900 1^000000"
   },
   "14589": {
-    "name": "Party Increase Agi 10 Scroll",
+    "name": "PT Agility Scroll",
     "desc": "A scroll in which\na single use of Level 10\nParty Increase AGI\nhas been recorded.\nWill cast on all party\nmembers within a\ncertain range.\nCaution-- This item\nwon't work while your\ncharacter is casting\na spell or skill.\nThis item can only be placed in Kafra storage or traded.\n^FFFFFF_^000000\nWeight:^009900 1^000000"
   },
   "14590": {
-    "name": "Party Assumptio 5 Scroll",
+    "name": "PT Assump Scroll",
     "desc": "A scroll in which\na single use of Level 5\nParty Assumptio\nhas been recorded.\nWill cast on all party\nmembers within a\ncertain range.\nCaution-- This item\nwon't work while your\ncharacter is casting\na spell or skill.\nThis item can only be placed in Kafra storage or traded.\n^FFFFFF_^000000\nWeight:^009900 1^000000"
   },
   "14591": {
@@ -36776,7 +36776,7 @@
   },
   "14603": {
     "name": "Mistress Scroll",
-    "desc": "..."
+    "desc": "A Scroll that imbued with great force of Monster Mistress.\nEnables of casting certain spells without gemstones for 5 minutes.\nIncreases SP Consumption of skills by 25%.\n^ffffff_^000000\nWeight :^777777 1^000000"
   },
   "14604": {
     "name": "Orc Hero Scard",
@@ -44674,8 +44674,8 @@
     "desc": "..."
   },
   "19038": {
-    "name": "12th Anniversary Crown",
-    "desc": "...",
+    "name": "Jaburak Crown",
+    "desc": "Authenticated with Jaburak signature.\n--------------------------\nMax Weight + 500\nGives +1 random stat when equipped.\nIncrease damage on Boss monsters by 5%.\n--------------------------\nVisit ^008800www.osro.mr/donate ^000000\n--------------------------\nClass :^777777 Costume Headgear^000000\nClass:^6666CC Garment^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000",
     "slot": 1
   },
   "19039": {
@@ -68794,19 +68794,19 @@
   },
   "46606": {
     "name": "Rare Orc Hero Helmet",
-    "desc": "One of the unique costumes in Oldschool RO that gives great amount of stats.\n-------------------------\nMax Weight + 1000\nGives All Stats +1\nDrop Rate of any items and cards increased by 10%.\n-------------------------\nIncreases experience gained from defeating monsters by 10%.\n-------------------------\nSource:^777777 Auction Exclusive^000000\nClass:^6666CC Costume Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 5^000000\nJobs:^6666CC All^000000"
+    "desc": "One of the unique costumes in Oldschool RO that gives great amount of stats.\n-------------------------\nMax Weight + 1000\nGives All Stats +1\nIncrease damage on Boss monsters by 10%.\n-------------------------\nDrop Rate of any items and cards increased by 10%.\nIncreases experience gained from defeating monsters by 10%.\n-------------------------\nSource:^777777 Auction Exclusive^000000\nClass:^6666CC Costume Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 5^000000\nJobs:^6666CC All^000000"
   },
   "46607": {
     "name": "Rare Orc Hero Helmet BLG",
-    "desc": "One of the unique costumes in Oldschool RO that gives great amount of stats.\n-------------------------\nMax Weight + 1000\nGives All Stats +1\nDrop Rate of any items and cards increased by 10%.\n-------------------------\nIncreases experience gained from defeating monsters by 10%.\n-------------------------\nSource:^777777 Auction Exclusive^000000\nClass:^6666CC Costume Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 5^000000\nJobs:^6666CC All^000000"
+    "desc": "One of the unique costumes in Oldschool RO that gives great amount of stats.\n-------------------------\nMax Weight + 1000\nGives All Stats +1\nIncrease damage on Boss monsters by 10%.\n-------------------------\nDrop Rate of any items and cards increased by 10%.\nIncreases experience gained from defeating monsters by 10%.\n-------------------------\nSource:^777777 Auction Exclusive^000000\nClass:^6666CC Costume Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 5^000000\nJobs:^6666CC All^000000"
   },
   "46608": {
     "name": "Rare Orc Hero Helmet BLK",
-    "desc": "One of the unique costumes in Oldschool RO that gives great amount of stats.\n-------------------------\nMax Weight + 1000\nGives All Stats +1\nDrop Rate of any items and cards increased by 10%.\n-------------------------\nIncreases experience gained from defeating monsters by 10%.\n-------------------------\nSource:^777777 Auction Exclusive^000000\nClass:^6666CC Costume Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 5^000000\nJobs:^6666CC All^000000"
+    "desc": "One of the unique costumes in Oldschool RO that gives great amount of stats.\n-------------------------\nMax Weight + 1000\nGives All Stats +1\nIncrease damage on Boss monsters by 10%.\n-------------------------\nDrop Rate of any items and cards increased by 10%.\nIncreases experience gained from defeating monsters by 10%.\n-------------------------\nSource:^777777 Auction Exclusive^000000\nClass:^6666CC Costume Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 5^000000\nJobs:^6666CC All^000000"
   },
   "46609": {
     "name": "Rare Orc Hero Helmet WHT",
-    "desc": "One of the unique costumes in Oldschool RO that gives great amount of stats.\n-------------------------\nMax Weight + 1000\nGives All Stats +1\nDrop Rate of any items and cards increased by 10%.\n-------------------------\nIncreases experience gained from defeating monsters by 10%.\n-------------------------\nSource:^777777 Auction Exclusive^000000\nClass:^6666CC Costume Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 5^000000\nJobs:^6666CC All^000000"
+    "desc": "One of the unique costumes in Oldschool RO that gives great amount of stats.\n-------------------------\nMax Weight + 1000\nGives All Stats +1\nIncrease damage on Boss monsters by 10%.\n-------------------------\nDrop Rate of any items and cards increased by 10%.\nIncreases experience gained from defeating monsters by 10%.\n-------------------------\nSource:^777777 Auction Exclusive^000000\nClass:^6666CC Costume Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 5^000000\nJobs:^6666CC All^000000"
   },
   "46610": {
     "name": "Chosen Ones Golden Crown",
@@ -69759,20 +69759,20 @@
     "desc": "An exclusive customized headgear made for Ohara.\n--------------------------\nMax Weight + 500\nYou can only obtain this item thru exclusive donation order.\n--------------------------\nVisit ^008800www.osro.mr/discord^000000\n--------------------------\nSource:^777777 Donation Exclusive^000000\nClass :^777777 Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Upper^000000\nWeight:^009900 10^000000\nJobs:^6666CC All^000000"
   },
   "46847": {
-    "name": "OH Helm Void BGB",
-    "desc": "One of the unique costumes in Oldschool RO that gives great amount of stats.\n-------------------------\nMax Weight + 1000\nGives All Stats +1\nDrop Rate of any items and cards increased by 10%.\n-------------------------\nIncreases experience gained from defeating monsters by 10%.\n-------------------------\nSource:^777777 Auction Exclusive^000000\nClass:^6666CC Costume Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Upper^000000\nWeight:^009900 10^000000\nJobs:^6666CC All^000000"
+    "name": "Rare Orc Hero Helmet BGB",
+    "desc": "One of the unique costumes in Oldschool RO that gives great amount of stats.\n-------------------------\nMax Weight + 1000\nGives All Stats +1\nIncrease damage on Boss monsters by 10%.\n-------------------------\nDrop Rate of any items and cards increased by 10%.\nIncreases experience gained from defeating monsters by 10%.\n-------------------------\nSource:^777777 Auction Exclusive^000000\nClass:^6666CC Costume Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Upper^000000\nWeight:^009900 10^000000\nJobs:^6666CC All^000000"
   },
   "46848": {
-    "name": "OH Helm Void BRBB",
-    "desc": "One of the unique costumes in Oldschool RO that gives great amount of stats.\n-------------------------\nMax Weight + 1000\nGives All Stats +1\nDrop Rate of any items and cards increased by 10%.\n-------------------------\nIncreases experience gained from defeating monsters by 10%.\n-------------------------\nSource:^777777 Auction Exclusive^000000\nClass:^6666CC Costume Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Upper^000000\nWeight:^009900 10^000000\nJobs:^6666CC All^000000"
+    "name": "Rare Orc Hero Helmet BRBB",
+    "desc": "One of the unique costumes in Oldschool RO that gives great amount of stats.\n-------------------------\nMax Weight + 1000\nGives All Stats +1\nIncrease damage on Boss monsters by 10%.\n-------------------------\nDrop Rate of any items and cards increased by 10%.\nIncreases experience gained from defeating monsters by 10%.\n-------------------------\nSource:^777777 Auction Exclusive^000000\nClass:^6666CC Costume Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Upper^000000\nWeight:^009900 10^000000\nJobs:^6666CC All^000000"
   },
   "46849": {
-    "name": "OH Helm Void BRBG",
-    "desc": "One of the unique costumes in Oldschool RO that gives great amount of stats.\n-------------------------\nMax Weight + 1000\nGives All Stats +1\nDrop Rate of any items and cards increased by 10%.\n-------------------------\nIncreases experience gained from defeating monsters by 10%.\n-------------------------\nSource:^777777 Auction Exclusive^000000\nClass:^6666CC Costume Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Upper^000000\nWeight:^009900 10^000000\nJobs:^6666CC All^000000"
+    "name": "Rare Orc Hero Helmet BRBG",
+    "desc": "One of the unique costumes in Oldschool RO that gives great amount of stats.\n-------------------------\nMax Weight + 1000\nGives All Stats +1\nIncrease damage on Boss monsters by 10%.\n-------------------------\nDrop Rate of any items and cards increased by 10%.\nIncreases experience gained from defeating monsters by 10%.\n-------------------------\nSource:^777777 Auction Exclusive^000000\nClass:^6666CC Costume Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Upper^000000\nWeight:^009900 10^000000\nJobs:^6666CC All^000000"
   },
   "46850": {
-    "name": "OH Helm Void RBG",
-    "desc": "One of the unique costumes in Oldschool RO that gives great amount of stats.\n-------------------------\nMax Weight + 1000\nGives All Stats +1\nDrop Rate of any items and cards increased by 10%.\n-------------------------\nIncreases experience gained from defeating monsters by 10%.\n-------------------------\nSource:^777777 Auction Exclusive^000000\nClass:^6666CC Costume Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Upper^000000\nWeight:^009900 10^000000\nJobs:^6666CC All^000000"
+    "name": "Rare Orc Hero Helmet RBG",
+    "desc": "One of the unique costumes in Oldschool RO that gives great amount of stats.\n-------------------------\nMax Weight + 1000\nGives All Stats +1\nIncrease damage on Boss monsters by 10%.\n-------------------------\nDrop Rate of any items and cards increased by 10%.\nIncreases experience gained from defeating monsters by 10%.\n-------------------------\nSource:^777777 Auction Exclusive^000000\nClass:^6666CC Costume Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Upper^000000\nWeight:^009900 10^000000\nJobs:^6666CC All^000000"
   },
   "46851": {
     "name": "Chovely Wings",
@@ -70885,11 +70885,11 @@
   },
   "48035": {
     "name": "Rare Orc Hero Helmet BBLB",
-    "desc": "One of the unique costumes in Oldschool RO that gives great amount of stats.\n-------------------------\nMax Weight + 1000\nGives All Stats +1\nDrop Rate of any items and cards increased by 10%.\n-------------------------\nIncreases experience gained from defeating monsters by 10%.\n-------------------------\nSource:^777777 Auction Exclusive^000000\nClass:^6666CC Costume Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Upper^000000\nWeight:^009900 10^000000\nJobs:^6666CC All^000000"
+    "desc": "One of the unique costumes in Oldschool RO that gives great amount of stats.\n-------------------------\nMax Weight + 1000\nGives All Stats +1\nIncrease damage on Boss monsters by 10%.\n-------------------------\nDrop Rate of any items and cards increased by 10%.\nIncreases experience gained from defeating monsters by 10%.\n-------------------------\nSource:^777777 Auction Exclusive^000000\nClass:^6666CC Costume Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Upper^000000\nWeight:^009900 10^000000\nJobs:^6666CC All^000000"
   },
   "48036": {
     "name": "Rare Orc Hero Helmet BWB",
-    "desc": "One of the unique costumes in Oldschool RO that gives great amount of stats.\n-------------------------\nMax Weight + 1000\nGives All Stats +1\nDrop Rate of any items and cards increased by 10%.\n-------------------------\nIncreases experience gained from defeating monsters by 10%.\n-------------------------\nSource:^777777 Auction Exclusive^000000\nClass:^6666CC Costume Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Upper^000000\nWeight:^009900 10^000000\nJobs:^6666CC All^000000"
+    "desc": "One of the unique costumes in Oldschool RO that gives great amount of stats.\n-------------------------\nMax Weight + 1000\nGives All Stats +1\nIncrease damage on Boss monsters by 10%.\n-------------------------\nDrop Rate of any items and cards increased by 10%.\nIncreases experience gained from defeating monsters by 10%.\n-------------------------\nSource:^777777 Auction Exclusive^000000\nClass:^6666CC Costume Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Upper^000000\nWeight:^009900 10^000000\nJobs:^6666CC All^000000"
   },
   "48037": {
     "name": "Paeonia Gold",
@@ -74251,8 +74251,8 @@
     "desc": "A coat worn by adventurers to withstand the cold. An essential item in cold weather.\nClass:^6666CC Garment^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000"
   },
   "480107": {
-    "name": "Twin Swords of Glory and Doom",
-    "desc": "A costume double sword made after the sword of an ancient king.\nIt is known for the sword that praises the splendor of the ancient king and the sword that is said to have destroyed thousands of countries.\nClass:^6666CC Garment^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000"
+    "name": "Jaburak Twin Swords",
+    "desc": "Authenticated with Jaburak signature.\n--------------------------\nMax Weight + 500\nGives +1 random stat when equipped.\nIncrease damage on Boss monsters by 5%.\n--------------------------\nVisit ^008800www.osro.mr/donate ^000000\n--------------------------\nClass :^777777 Costume Headgear^000000\nClass:^6666CC Garment^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000"
   },
   "480108": {
     "name": "Poring Basket",
