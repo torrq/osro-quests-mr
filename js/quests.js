@@ -1356,8 +1356,7 @@ function setupProducesSearch(input) {
     return;
   }
 
-  const matches = Object.entries(DATA.items)
-    .map(([id, item]) => ({ ...item, id: parseInt(id) }))
+  const matches = getAllItems()
     .filter(i => (i.name && i.name.toLowerCase().includes(query)) || i.id.toString().includes(query))
     .slice(0, 10);
 

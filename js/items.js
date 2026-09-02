@@ -1,8 +1,87 @@
 // items.js - Item List and Detail Logic
 
-// Search indices
+// Search indices (legacy stubs)
 let SEARCH_INDEX_NAME = {};
 let SEARCH_INDEX_DESC = {};
+
+// Search & pagination state
+let currentSearchReqId = 0;
+let lastExecutedSearchQuery = null;
+let lastExecutedSearchDesc = null;
+let searchWorkerResults = null; // null when no search active, or Array of matching item IDs
+let searchWorkerPending = false;
+let itemsRenderLimit = 60;
+const ITEMS_PAGE_SIZE = 60;
+let cachedFilteredItems = [];
+
+function triggerItemSearch() {
+  const query = (state.itemSearchFilter || '').trim();
+  const searchDesc = !!state.searchDescriptions;
+
+  // Reset pagination limit on new search or filter change
+  itemsRenderLimit = ITEMS_PAGE_SIZE;
+
+  if (!query) {
+    lastExecutedSearchQuery = null;
+    lastExecutedSearchDesc = null;
+    searchWorkerResults = null;
+    searchWorkerPending = false;
+    renderItemsCore();
+    return;
+  }
+
+  if (query === lastExecutedSearchQuery && searchDesc === lastExecutedSearchDesc && searchWorkerResults !== null) {
+    renderItemsCore();
+    return;
+  }
+
+  lastExecutedSearchQuery = query;
+  lastExecutedSearchDesc = searchDesc;
+
+  if (window.searchWorker && window.searchWorkerReady) {
+    searchWorkerPending = true;
+    currentSearchReqId++;
+    window.searchWorker.postMessage({
+      type: 'SEARCH',
+      reqId: currentSearchReqId,
+      query,
+      searchDescriptions: searchDesc
+    });
+    renderItemsCore();
+  } else {
+    // Fallback synchronous search if worker unavailable
+    const qLower = query.toLowerCase();
+    const all = getAllItems();
+    if (/^\d+$/.test(query)) {
+      const num = parseInt(query, 10);
+      const exact = all.find(it => it.id === num);
+      const rest = all.filter(it => it.id !== num && it.id.toString().includes(query));
+      searchWorkerResults = (exact ? [exact, ...rest] : rest).map(i => i.id);
+    } else {
+      searchWorkerResults = all.filter(it => {
+        const nameMatch = (it.name || '').toLowerCase().includes(qLower);
+        const descMatch = searchDesc && (it.desc || '').toLowerCase().includes(qLower);
+        return nameMatch || descMatch;
+      }).map(i => i.id);
+    }
+    searchWorkerPending = false;
+    renderItemsCore();
+  }
+}
+window.triggerItemSearch = triggerItemSearch;
+
+function handleSearchWorkerMessage(data) {
+  if (!data) return;
+  if (data.type === 'SEARCH_RESULTS') {
+    if (data.reqId !== currentSearchReqId) {
+      return;
+    }
+    searchWorkerPending = false;
+    searchWorkerResults = data.matchingIds || [];
+    renderItemsCore();
+  }
+}
+window.handleSearchWorkerMessage = handleSearchWorkerMessage;
 
 // Debounced save for item values
 let saveValueTimeout = null;
@@ -137,266 +216,115 @@ function renderItemsCore() {
   }
 
   // 2. Filter items
-  // If a list is selected, show exactly those items regardless of showAllItems.
-  // Otherwise: showAllItems = everything, default = usedItemIds whitelist.
   let items;
-  if (state.selectedItemList >= 0 && DATA.itemLists?.[state.selectedItemList]) {
-    const listIds = new Set(DATA.itemLists[state.selectedItemList].items.map(Number));
-    items = getAllItems().filter(item => listIds.has(item.id));
-  } else {
-    items = state.showAllItems
-      ? getAllItems()
-      : getAllItems().filter((item) => usedItemIds.has(item.id));
-  }
+  const activeQuery = (state.itemSearchFilter || '').trim();
 
-  // Apply value filter
-  if (state.showValuesOnly) {
-    items = items.filter((item) => (item.value || 0) > 0);
-  }
-
-  // Apply "New Only" filter
-  // If checked, we restrict the list to ONLY new items.
-  if (state.showNewItemsOnly) {
-    items = items.filter((item) => DATA.newItemIds.has(item.id));
-  }
-
-  // 3. Apply Search
-  if (state.itemSearchFilter) {
-    const q = state.itemSearchFilter.trim();
-    
-    // Helper function to strip color codes (^RRGGBB format)
-    const stripColorCodes = (text) => {
-      if (!text) return '';
-      return text.replace(/\^[0-9A-Fa-f]{6}/g, '');
-    };
-    
-    if (/^\d+$/.test(q)) {
-      items = items.filter(item => 
-        item.id.toString().includes(q)
-      );
+  if (activeQuery) {
+    if (searchWorkerPending && searchWorkerResults === null) {
+      // Waiting for initial worker response for this query
+      items = [];
     } else {
-      const includePhrases = [];
-      const includeWords = [];
-      const excludePhrases = [];
-      const excludeWords = [];
-      
-      // Extract quoted phrases (both include and exclude)
-      let remaining = q.replace(/-?"([^"]+)"/g, (match, phrase) => {
-        if (match.startsWith('-')) {
-          excludePhrases.push(phrase.toLowerCase());
-        } else {
-          includePhrases.push(phrase.toLowerCase());
+      const ids = searchWorkerResults || [];
+      items = [];
+      for (let i = 0; i < ids.length; i++) {
+        const id = ids[i];
+        const it = DATA.items[id];
+        if (it) {
+          items.push({ ...it, id });
         }
-        return '';
-      });
-      
-      // Process remaining words
-      remaining.split(/\s+/).forEach(word => {
-        if (word.length > 0) {
-          if (word.startsWith('-') && word.length > 1) {
-            excludeWords.push(word.substring(1).toLowerCase());
-          } else if (!word.startsWith('-')) {
-            includeWords.push(word.toLowerCase());
-          }
-        }
-      });
-      
-      // For regular words, use index matching
-      const includeMatchSets = includeWords.map(word => {
-        const matchingIds = new Set();
-        // Strip punctuation from word for index lookup
-        const cleanWord = word.replace(/[^\w]/g, '');
-        
-        Object.keys(SEARCH_INDEX_NAME).forEach(indexTerm => {
-          if (indexTerm.includes(cleanWord)) {
-            SEARCH_INDEX_NAME[indexTerm].forEach(id => matchingIds.add(id));
-          }
-        });
-        
-        if (state.searchDescriptions) {
-          Object.keys(SEARCH_INDEX_DESC).forEach(indexTerm => {
-            if (indexTerm.includes(cleanWord)) {
-              SEARCH_INDEX_DESC[indexTerm].forEach(id => matchingIds.add(id));
-            }
-          });
-        }
-        
-        return matchingIds;
-      });
-      
-      // For phrases, get candidates using all words, then verify exact phrase
-      const includePhraseMatchSets = includePhrases.map(phrase => {
-        const matchingIds = new Set();
-        const phraseWords = phrase.split(/\s+/);
-        
-        // Get candidates that contain all words
-        const wordSets = phraseWords.map(word => {
-          const wordIds = new Set();
-          // Strip punctuation from word for index lookup
-          const cleanWord = word.replace(/[^\w]/g, '');
-          
-          Object.keys(SEARCH_INDEX_NAME).forEach(indexTerm => {
-            if (indexTerm.includes(cleanWord)) {
-              SEARCH_INDEX_NAME[indexTerm].forEach(id => wordIds.add(id));
-            }
-          });
-          
-          if (state.searchDescriptions) {
-            Object.keys(SEARCH_INDEX_DESC).forEach(indexTerm => {
-              if (indexTerm.includes(cleanWord)) {
-                SEARCH_INDEX_DESC[indexTerm].forEach(id => wordIds.add(id));
-              }
-            });
-          }
-          
-          return wordIds;
-        });
-        
-        // Get items that have all words (candidates)
-        const candidates = Array.from(wordSets[0] || []).filter(id =>
-          wordSets.every(set => set.has(id))
-        );
-        
-        // Verify exact phrase in name or description
-        candidates.forEach(id => {
-          const item = DATA.items[id];
-          if (!item) return;
-          
-          const itemName = stripColorCodes(item.name || '').toLowerCase();
-          const itemDesc = stripColorCodes(item.desc || '').toLowerCase();
-          const nameMatch = itemName.includes(phrase);
-          const descMatch = state.searchDescriptions && itemDesc.includes(phrase);
-          
-          if (nameMatch || descMatch) {
-            matchingIds.add(id);
-          }
-        });
-        
-        return matchingIds;
-      });
-      
-      const allIncludeMatchSets = [...includeMatchSets, ...includePhraseMatchSets];
-      
-      // For exclude terms, also handle phrases and words separately
-      const excludeIds = new Set();
-      
-      // Exclude words
-      excludeWords.forEach(word => {
-        // Strip punctuation from word for index lookup
-        const cleanWord = word.replace(/[^\w]/g, '');
-        
-        Object.keys(SEARCH_INDEX_NAME).forEach(indexTerm => {
-          if (indexTerm.includes(cleanWord)) {
-            SEARCH_INDEX_NAME[indexTerm].forEach(id => excludeIds.add(id));
-          }
-        });
-        
-        if (state.searchDescriptions) {
-          Object.keys(SEARCH_INDEX_DESC).forEach(indexTerm => {
-            if (indexTerm.includes(cleanWord)) {
-              SEARCH_INDEX_DESC[indexTerm].forEach(id => excludeIds.add(id));
-            }
-          });
-        }
-      });
-      
-      // Exclude phrases (exact match)
-      excludePhrases.forEach(phrase => {
-        const phraseWords = phrase.split(/\s+/);
-        
-        // Get candidates
-        const wordSets = phraseWords.map(word => {
-          const wordIds = new Set();
-          // Strip punctuation from word for index lookup
-          const cleanWord = word.replace(/[^\w]/g, '');
-          
-          Object.keys(SEARCH_INDEX_NAME).forEach(indexTerm => {
-            if (indexTerm.includes(cleanWord)) {
-              SEARCH_INDEX_NAME[indexTerm].forEach(id => wordIds.add(id));
-            }
-          });
-          
-          if (state.searchDescriptions) {
-            Object.keys(SEARCH_INDEX_DESC).forEach(indexTerm => {
-              if (indexTerm.includes(cleanWord)) {
-                SEARCH_INDEX_DESC[indexTerm].forEach(id => wordIds.add(id));
-              }
-            });
-          }
-          
-          return wordIds;
-        });
-        
-        const candidates = Array.from(wordSets[0] || []).filter(id =>
-          wordSets.every(set => set.has(id))
-        );
-        
-        // Verify exact phrase
-        candidates.forEach(id => {
-          const item = DATA.items[id];
-          if (!item) return;
-          
-          const itemName = stripColorCodes(item.name || '').toLowerCase();
-          const itemDesc = stripColorCodes(item.desc || '').toLowerCase();
-          const nameMatch = itemName.includes(phrase);
-          const descMatch = state.searchDescriptions && itemDesc.includes(phrase);
-          
-          if (nameMatch || descMatch) {
-            excludeIds.add(id);
-          }
-        });
-      });
-      
-      // Filter: must match all include terms AND match no exclude terms
-      items = items.filter(item => {
-        const matchesAllIncludes = allIncludeMatchSets.length === 0 || 
-          allIncludeMatchSets.every(matchSet => matchSet.has(item.id));
-        const matchesNoExcludes = !excludeIds.has(item.id);
-        return matchesAllIncludes && matchesNoExcludes;
-      });
+      }
+
+      // Apply whitelist / facet filters
+      if (state.selectedItemList >= 0 && DATA.itemLists?.[state.selectedItemList]) {
+        const listIds = new Set(DATA.itemLists[state.selectedItemList].items.map(Number));
+        items = items.filter(it => listIds.has(it.id));
+      } else if (!state.showAllItems) {
+        items = items.filter(it => usedItemIds.has(it.id));
+      }
+
+      if (state.showValuesOnly) {
+        items = items.filter(it => (it.value || 0) > 0);
+      }
+
+      if (state.showNewItemsOnly) {
+        items = items.filter(it => DATA.newItemIds && DATA.newItemIds.has(it.id));
+      }
+    }
+  } else {
+    // No text search query - start from cached getAllItems()
+    if (state.selectedItemList >= 0 && DATA.itemLists?.[state.selectedItemList]) {
+      const listIds = new Set(DATA.itemLists[state.selectedItemList].items.map(Number));
+      items = getAllItems().filter(it => listIds.has(it.id));
+    } else {
+      items = state.showAllItems
+        ? getAllItems()
+        : getAllItems().filter(it => usedItemIds.has(it.id));
+    }
+
+    if (state.showValuesOnly) {
+      items = items.filter(it => (it.value || 0) > 0);
+    }
+
+    if (state.showNewItemsOnly) {
+      items = items.filter(it => DATA.newItemIds && DATA.newItemIds.has(it.id));
     }
   }
 
-  // 4. Render
-  const totalFound = items.length;
-  const limit = 4000;
-  const displayedItems = items.slice(0, limit);
+  cachedFilteredItems = items;
 
+  // 3. Render
+  const totalFound = items.length;
+
+  // If a specific item is selected, ensure it's rendered by expanding itemsRenderLimit if needed
+  if (state.selectedItemId != null) {
+    const selIdx = items.findIndex(it => it.id === state.selectedItemId);
+    if (selIdx >= itemsRenderLimit) {
+      itemsRenderLimit = Math.min(totalFound, Math.ceil((selIdx + 1) / ITEMS_PAGE_SIZE) * ITEMS_PAGE_SIZE);
+    }
+  }
+
+  const displayedItems = items.slice(0, itemsRenderLimit);
   let html = "";
 
   if (totalFound > 0) {
     html += `<div class="items-search-banner">
-               ${displayedItems.length}${totalFound > limit ? `/${totalFound}` : ''} items
+               ${displayedItems.length}${totalFound > displayedItems.length ? ` / ${totalFound}` : ''} items
+               ${searchWorkerPending ? ' <span class="search-spinner">⏳</span>' : ''}
              </div>`;
   }
 
   if (items.length === 0) {
-    html = `<div class="empty-msg-centered">
-              No used items found ${state.itemSearchFilter ? "matching your search" : ""}
-            </div>`;
+    const msg = searchWorkerPending
+      ? "Searching items..."
+      : `No used items found ${state.itemSearchFilter ? "matching your search" : ""}`;
+    html = `<div class="empty-msg-centered">${msg}</div>`;
   } else {
     html += displayedItems
       .map(
         (item) => `
       <div class="item-row ${state.selectedItemId === item.id ? "active" : ""}"
+          data-item-id="${item.id}"
           onclick="selectItem(${item.id})">
         <div class="item-row-header">
           ${renderItemIcon(item.id)}
-          <span style="margin-left: 8px;">${getItemDisplayName(item) || "&lt;unnamed&gt;"}</span>
+          <span style="margin-left: 8px;">${highlightSearchTerm(getItemDisplayName(item) || "&lt;unnamed&gt;", state.itemSearchFilter)}</span>
           <span class="item-row-id">#${item.id}</span>
-          ${DATA.newItemIds.has(item.id) ? '<span class="new-item-badge">NEW</span>' : ''}
+          ${DATA.newItemIds && DATA.newItemIds.has(item.id) ? '<span class="new-item-badge">NEW</span>' : ''}
         </div>
       </div>
     `,
       )
       .join("");
-    
-    if (totalFound > limit) {
-      html += `<div class="items-limit-msg">Showing first ${limit} of ${totalFound} items. Use search to narrow results.</div>`;
+
+    if (totalFound > displayedItems.length) {
+      html += `<div id="itemsListSentinel" class="items-limit-msg" style="cursor: pointer;" onclick="loadMoreItems()">
+                 Showing ${displayedItems.length} of ${totalFound} items. Click or scroll down to load more.
+               </div>`;
     }
   }
 
   container.innerHTML = html;
+  setupItemsIntersectionObserver();
 
   // Sync HTML inputs/checkboxes with state (handles page load and back/forward navigation)
   const chkDesc = document.getElementById('searchDescriptions');
@@ -422,16 +350,57 @@ function renderItemsCore() {
   }
 }
 
+function setupItemsIntersectionObserver() {
+  const sentinel = document.getElementById('itemsListSentinel');
+  if (!sentinel) return;
+
+  if (window.itemsIntersectionObserver) {
+    window.itemsIntersectionObserver.disconnect();
+  }
+
+  const container = document.getElementById('itemsList');
+  if (!window.IntersectionObserver) return;
+
+  window.itemsIntersectionObserver = new IntersectionObserver((entries) => {
+    if (entries[0] && entries[0].isIntersecting) {
+      loadMoreItems();
+    }
+  }, {
+    root: container,
+    rootMargin: '150px'
+  });
+
+  window.itemsIntersectionObserver.observe(sentinel);
+}
+
+function loadMoreItems() {
+  if (itemsRenderLimit >= cachedFilteredItems.length) return;
+  itemsRenderLimit += ITEMS_PAGE_SIZE;
+  renderItemsCore();
+}
+window.loadMoreItems = loadMoreItems;
+
 function selectItem(id, pushToHistory = true) {
   if (valuesManagerState?.open) closeValuesManager(false);
+  const prevId = state.selectedItemId;
   state.selectedItemId = id;
-  
+
   // Update URL with item ID for sharing and browser history
   if (id && typeof updateURL === 'function') {
     updateURL(id.toString(), 'item', pushToHistory);
   }
-  
-  renderItems();
+
+  // Fast targeted row active class toggle if already rendered
+  const prevRow = prevId ? document.querySelector(`.item-row[data-item-id="${prevId}"]`) : null;
+  if (prevRow) prevRow.classList.remove('active');
+  const newRow = id ? document.querySelector(`.item-row[data-item-id="${id}"]`) : null;
+  if (newRow) {
+    newRow.classList.add('active');
+  } else {
+    // If not in DOM (e.g. beyond current page), re-render to expand pagination
+    renderItems();
+  }
+
   renderItemContent();
   if (window.isMobileSidebarMode && window.isMobileSidebarMode()) toggleSidebar();
 }
@@ -441,10 +410,10 @@ function selectItemById(itemId, pushToHistory = true) {
   const id = parseInt(itemId);
   if (DATA.items[id]) {
     selectItem(id, pushToHistory);
-    
+
     // Scroll to item in sidebar after a short delay
     setTimeout(() => {
-      const itemElement = document.querySelector('.item-row.active');
+      const itemElement = document.querySelector(`.item-row[data-item-id="${id}"]`);
       if (itemElement) {
         itemElement.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
       }
@@ -579,7 +548,11 @@ function updateItemValue(id, value) {
 
 function toggleNewItemsFilter(checked) {
   state.showNewItemsOnly = checked;
-  renderItems();
+  if (typeof triggerItemSearch === 'function') {
+    triggerItemSearch();
+  } else {
+    renderItems();
+  }
 }
 
 
@@ -631,7 +604,11 @@ window.toggleNewItemsFilter = toggleNewItemsFilter;
 
 function selectItemList(idx) {
   state.selectedItemList = parseInt(idx);
-  renderItems();
+  if (typeof triggerItemSearch === 'function') {
+    triggerItemSearch();
+  } else {
+    renderItems();
+  }
   updateURL(null, null, true);
 }
 window.selectItemList = selectItemList;
@@ -1122,109 +1099,10 @@ function renderValuesManagerAddResults(query) {
     matches = exactMatch ? [exactMatch, ...rest] : rest;
 
   } else {
-    // Text query — use SEARCH_INDEX_NAME for word/phrase/exclude logic
     const lower = q.toLowerCase();
-    const includePhrases = [];
-    const includeWords = [];
-    const excludePhrases = [];
-    const excludeWords = [];
-
-    let remaining = lower.replace(/-?"([^"]+)"/g, (match, phrase) => {
-      if (match.startsWith('-')) {
-        excludePhrases.push(phrase);
-      } else {
-        includePhrases.push(phrase);
-      }
-      return '';
-    });
-
-    remaining.split(/\s+/).forEach(word => {
-      if (word.length > 0) {
-        if (word.startsWith('-') && word.length > 1) {
-          excludeWords.push(word.substring(1));
-        } else if (!word.startsWith('-')) {
-          includeWords.push(word);
-        }
-      }
-    });
-
-    // Include words via index
-    const includeMatchSets = includeWords.map(word => {
-      const matchingIds = new Set();
-      const cleanWord = word.replace(/[^\w]/g, '');
-      Object.keys(SEARCH_INDEX_NAME).forEach(indexTerm => {
-        if (indexTerm.includes(cleanWord)) {
-          SEARCH_INDEX_NAME[indexTerm].forEach(id => matchingIds.add(id));
-        }
-      });
-      return matchingIds;
-    });
-
-    // Include phrases via index + exact verify
-    const includePhraseMatchSets = includePhrases.map(phrase => {
-      const matchingIds = new Set();
-      const phraseWords = phrase.split(/\s+/);
-      const wordSets = phraseWords.map(word => {
-        const wordIds = new Set();
-        const cleanWord = word.replace(/[^\w]/g, '');
-        Object.keys(SEARCH_INDEX_NAME).forEach(indexTerm => {
-          if (indexTerm.includes(cleanWord)) {
-            SEARCH_INDEX_NAME[indexTerm].forEach(id => wordIds.add(id));
-          }
-        });
-        return wordIds;
-      });
-      const candidates = Array.from(wordSets[0] || []).filter(id =>
-        wordSets.every(set => set.has(id))
-      );
-      candidates.forEach(id => {
-        const item = DATA.items[id];
-        if (!item) return;
-        if (stripColorCodes(item.name || '').toLowerCase().includes(phrase)) matchingIds.add(id);
-      });
-      return matchingIds;
-    });
-
-    const allIncludeMatchSets = [...includeMatchSets, ...includePhraseMatchSets];
-
-    // Exclude words via index
-    const excludeIds = new Set();
-    excludeWords.forEach(word => {
-      const cleanWord = word.replace(/[^\w]/g, '');
-      Object.keys(SEARCH_INDEX_NAME).forEach(indexTerm => {
-        if (indexTerm.includes(cleanWord)) {
-          SEARCH_INDEX_NAME[indexTerm].forEach(id => excludeIds.add(id));
-        }
-      });
-    });
-
-    // Exclude phrases via exact verify
-    excludePhrases.forEach(phrase => {
-      const phraseWords = phrase.split(/\s+/);
-      const wordSets = phraseWords.map(word => {
-        const wordIds = new Set();
-        const cleanWord = word.replace(/[^\w]/g, '');
-        Object.keys(SEARCH_INDEX_NAME).forEach(indexTerm => {
-          if (indexTerm.includes(cleanWord)) {
-            SEARCH_INDEX_NAME[indexTerm].forEach(id => wordIds.add(id));
-          }
-        });
-        return wordIds;
-      });
-      const candidates = Array.from(wordSets[0] || []).filter(id =>
-        wordSets.every(set => set.has(id))
-      );
-      candidates.forEach(id => {
-        const item = DATA.items[id];
-        if (!item) return;
-        if (stripColorCodes(item.name || '').toLowerCase().includes(phrase)) excludeIds.add(id);
-      });
-    });
-
     matches = all.filter(it => {
-      const matchesAllIncludes = allIncludeMatchSets.length === 0 ||
-        allIncludeMatchSets.every(matchSet => matchSet.has(it.id));
-      return matchesAllIncludes && !excludeIds.has(it.id);
+      const name = (getItemDisplayName(it) || '').toLowerCase();
+      return name.includes(lower) || it.id.toString().includes(lower);
     });
 
     // Relevance sort: exact name > starts-with > rest (by id) — mirrors setupAutocomplete

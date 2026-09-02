@@ -2,7 +2,7 @@
 // OSRO Quest Helper - Configuration
 // ============================================================================
 
-const VERSION = 115;
+const VERSION = 116;
 const FLAVOR = 'Midrate';
 
 // === DATA SOURCE CONFIGURATION ===
@@ -30,8 +30,6 @@ const FILES = {
   quests:          "osromr_quests.json",
   shops:           "osromr_shops.json",
   icons:           "osromr_item_icons.json",
-  searchIndexName: "osromr_search_index_name.json",
-  searchIndexDesc: "osromr_search_index_desc.json",
   spriteMap:       "osromr_sprite_map.json",
   itemLists:       "osromr_item_lists.json",
 };

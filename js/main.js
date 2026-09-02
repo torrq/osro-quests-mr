@@ -344,6 +344,40 @@ function applyTheme(theme) {
   head.appendChild(link);
 }
 
+// ===== SEARCH WORKER SUBSYSTEM =====
+
+window.searchWorker = null;
+window.searchWorkerReady = false;
+
+function initSearchWorker() {
+  try {
+    const worker = new Worker('js/search-worker.js');
+    worker.onmessage = function (e) {
+      const data = e.data || {};
+      if (data.type === 'READY') {
+        window.searchWorkerReady = true;
+        console.log(`[SearchWorker] Index ready (${data.count} items)`);
+        if (state.itemSearchFilter && typeof triggerItemSearch === 'function') {
+          triggerItemSearch();
+        }
+      } else if (typeof handleSearchWorkerMessage === 'function') {
+        handleSearchWorkerMessage(data);
+      }
+    };
+    worker.onerror = function (err) {
+      console.warn('[SearchWorker] Worker error, falling back to sync search:', err);
+      window.searchWorker = null;
+    };
+    return worker;
+  } catch (err) {
+    console.warn('[SearchWorker] Failed to create worker:', err);
+    return null;
+  }
+}
+
+// Early worker initialization
+window.searchWorker = initSearchWorker();
+
 // ===== INITIALIZATION =====
 
 // Track initialization state to prevent race conditions
@@ -364,19 +398,16 @@ function initializeData() {
     fetchJSON(AUTO_IMPORT_URLS.quests),
     fetchJSON(AUTO_IMPORT_URLS.shops),
     fetchJSON(AUTO_IMPORT_URLS.icons),
-    fetchJSON(AUTO_IMPORT_URLS.searchIndexName),
-    fetchJSON(AUTO_IMPORT_URLS.searchIndexDesc),
     fetchJSON(AUTO_IMPORT_URLS.newItems),
     fetchJSON(AUTO_IMPORT_URLS.spriteMap),
     fetchJSON(AUTO_IMPORT_URLS.itemLists).catch(() => []),
     fetchJSON(AUTO_IMPORT_URLS.pointLinks).catch(() => ({}))
   ])
-    .then(([items, quests, shops, icons, searchName, searchDesc, newItems, spriteMap, itemLists, pointLinks]) => {
+    .then(([items, quests, shops, icons, newItems, spriteMap, itemLists, pointLinks]) => {
       loadItems(items);
       loadQuests(quests);
       loadShops(shops);
       loadItemIcons(icons);
-      loadSearchIndices(searchName, searchDesc);
       loadNewItems(newItems);
       loadSpriteMap(spriteMap);
       DATA.itemLists = Array.isArray(itemLists) ? itemLists : [];
@@ -417,6 +448,12 @@ function loadItems(items) {
   }
 
   DATA.items = items;
+  if (typeof invalidateAllItemsCache === 'function') {
+    invalidateAllItemsCache();
+  }
+  if (window.searchWorker) {
+    window.searchWorker.postMessage({ type: 'INIT', items: DATA.items });
+  }
   console.log(`[Init] Loaded ${Object.keys(DATA.items).length} items from remote`);
 }
 
@@ -581,7 +618,11 @@ async function resetItemValuesToDefaults() {
 
 function toggleValuesFilter(checked) {
   state.showValuesOnly = checked;
-  renderItems();
+  if (typeof triggerItemSearch === 'function') {
+    triggerItemSearch();
+  } else {
+    renderItems();
+  }
 }
 
 function loadQuests(quests) {
@@ -830,21 +871,32 @@ function ensureItem(id, name) {
 
   if (!DATA.items[numId]) {
     DATA.items[numId] = { name: name || "", value: 0 };
+    invalidateAllItemsCache();
   } else if (name && !DATA.items[numId].name) {
     DATA.items[numId].name = name;
+    invalidateAllItemsCache();
   }
   return DATA.items[numId];
 }
 
+let cachedAllItems = null;
+
+function invalidateAllItemsCache() {
+  cachedAllItems = null;
+}
+window.invalidateAllItemsCache = invalidateAllItemsCache;
+
 function getAllItems() {
+  if (cachedAllItems) return cachedAllItems;
   if (!DATA.items || typeof DATA.items !== 'object') {
     console.warn('[getAllItems] DATA.items is not a valid object');
     return [];
   }
   
-  return Object.entries(DATA.items)
+  cachedAllItems = Object.entries(DATA.items)
     .map(([id, item]) => ({ ...item, id: +id }))
     .sort((a, b) => (a.name || "").localeCompare(b.name || ""));
+  return cachedAllItems;
 }
 
 function getItemIconUrl(id) {
@@ -1339,11 +1391,15 @@ const debouncedQuestFilter = debounce(value => {
 
 const debouncedItemFilter = debounce(value => {
   state.itemSearchFilter = value.toLowerCase();
-  if (typeof renderItems === 'function') renderItems();
+  if (typeof triggerItemSearch === 'function') {
+    triggerItemSearch();
+  } else if (typeof renderItems === 'function') {
+    renderItems();
+  }
   if (state.selectedItemId && typeof renderItemContent === 'function') {
     renderItemContent();
   }
-}, 250);
+}, 150);
 
 const debouncedShopFilter = debounce(value => {
   state.shopSearchFilter = value.toLowerCase();
@@ -1354,7 +1410,11 @@ function clearItemSearch() {
   const input = document.getElementById("itemSearchInput");
   if (input) input.value = "";
   state.itemSearchFilter = "";
-  if (typeof renderItems === 'function') renderItems();
+  if (typeof triggerItemSearch === 'function') {
+    triggerItemSearch();
+  } else if (typeof renderItems === 'function') {
+    renderItems();
+  }
   if (state.selectedItemId && typeof renderItemContent === 'function') {
     renderItemContent();
   }
@@ -1374,12 +1434,20 @@ function clearShopSearch() {
 
 function toggleDescSearch(checked) {
   state.searchDescriptions = checked;
-  renderItems();
+  if (typeof triggerItemSearch === 'function') {
+    triggerItemSearch();
+  } else if (typeof renderItems === 'function') {
+    renderItems();
+  }
 }
 
 function toggleShowAllItems(checked) {
   state.showAllItems = checked;
-  renderItems();
+  if (typeof triggerItemSearch === 'function') {
+    triggerItemSearch();
+  } else if (typeof renderItems === 'function') {
+    renderItems();
+  }
 }
 
 window.toggleShowAllItems = toggleShowAllItems;
