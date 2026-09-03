@@ -3566,6 +3566,55 @@ body.viewer-mode .editor-quest select {
   padding-left: 23px;
 }
 
+/* GC page header row with mobile toggle btn */
+.gc-section-header-row {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.gc-section-header-left {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.gc-mobile-btn {
+  flex-shrink: 0;
+  align-self: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  background: none;
+  border: 1.5px solid var(--border);
+  border-radius: 6px;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s, background 0.15s;
+}
+
+.gc-mobile-btn:hover {
+  color: var(--text);
+  border-color: var(--text-muted);
+  background: var(--panel);
+}
+
+.gc-mobile-btn--active {
+  color: var(--accent);
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+}
+
+.gc-mobile-btn--active:hover {
+  background: color-mix(in srgb, var(--accent) 20%, transparent);
+}
+
 /* Timer row */
 .gc-timer-row {
   display: flex;
@@ -4692,6 +4741,548 @@ body.viewer-mode .editor-quest select {
   --accent: #a855f7;
   --accent-hover: #9333ea;
 }
+/* ===== BOOKMARKS ===== */
+
+.bookmarks-list {
+  overflow-y: auto;
+  height: 100%;
+}
+
+/* Group header label e.g. "Quests", "Shops", "Items" */
+.bm-group {
+  padding-bottom: 4px;
+}
+
+.bm-group-label {
+  padding: 10px 12px 4px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  opacity: 0.7;
+}
+
+/* Each bookmark row */
+.bm-row {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0 6px 0 12px;
+  border-left: 3px solid transparent;
+  transition: background 0.12s, border-color 0.12s;
+}
+
+.bm-row:hover {
+  background: var(--panel-hover);
+  border-left-color: var(--border);
+}
+
+.bm-row-link {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 2px;
+  color: var(--text);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.bm-row-icon {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  line-height: 0;
+}
+
+.bm-row-name {
+  font-size: 13px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--text);
+}
+
+.bm-row-link:hover .bm-row-name {
+  color: var(--accent);
+}
+
+/* Empty state */
+.bm-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 40px 20px;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+.bm-empty-icon {
+  opacity: 0.25;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bm-empty-icon svg {
+  width: 32px;
+  height: 32px;
+}
+
+.bm-empty-label {
+  font-size: 13px;
+  font-weight: 600;
+  margin-top: 4px;
+}
+
+.bm-empty-sub {
+  font-size: 11px;
+  opacity: 0.7;
+  max-width: 180px;
+  line-height: 1.4;
+}
+
+/* ── Bookmark toggle button in the viewer header ────────────── */
+
+/* The slot in .qvh that holds the bookmark button */
+.qvh-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+  margin-left: 12px;
+  align-self: flex-start;
+  padding-top: 4px;
+}
+
+.qvh-bm {
+  flex-shrink: 0;
+}
+
+.bm-toggle-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  background: none;
+  border: 1.5px solid var(--border);
+  border-radius: 6px;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s, background 0.15s;
+}
+
+.bm-toggle-btn:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+}
+
+.bm-toggle-btn--on {
+  color: var(--accent);
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
+}
+
+.bm-toggle-btn--on:hover {
+  background: color-mix(in srgb, var(--accent) 22%, transparent);
+}
+
+/* Sidebar row link icon */
+.bm-row-link-icon {
+  margin-left: auto;
+  opacity: 0.3;
+  width: 14px;
+  height: 14px;
+  display: flex;
+  align-items: center;
+  transition: opacity 0.12s, color 0.12s;
+}
+
+.bm-row-link:hover .bm-row-link-icon {
+  opacity: 0.8;
+  color: var(--accent);
+}
+
+/* ── Bookmarks Main Content Pane ────────────── */
+
+.bookmarks-main {
+  /* Flows normally within #mainContent, matching Quests and Autoloot */
+}
+
+/* ── Controls Bar ────────────── */
+.bm-controls-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 8px 12px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.bm-controls-left, .bm-controls-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.bm-controls-left label {
+  font-size: 13px;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.bm-select {
+  background: var(--panel-hover);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 13px;
+  outline: none;
+  cursor: pointer;
+}
+
+.bm-icon-btn {
+  background: var(--panel-hover);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 13px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+
+.bm-icon-btn:hover {
+  background: var(--button-hover);
+}
+
+.bm-icon-btn.active {
+  background: color-mix(in srgb, var(--accent) 20%, transparent);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* ── List View Modifiers ────────────── */
+.bm-main-list.list-view {
+  grid-template-columns: 1fr;
+}
+
+.bm-main-list.list-view .bm-main-row {
+  flex-direction: row;
+  align-items: center;
+}
+
+.bm-main-list.list-view .bm-main-row-body {
+  flex: 1;
+  padding: 8px 12px;
+  min-width: 0;
+}
+
+.bm-main-list.list-view .bm-main-info {
+  align-items: center;
+}
+
+.bm-main-list.list-view .bm-main-title-row {
+  flex-direction: row;
+  align-items: center;
+  min-height: auto;
+}
+
+.bm-main-list.list-view .bm-main-desc-container {
+  display: none;
+}
+
+.bm-main-list.list-view .bm-main-footer {
+  border-top: none;
+  background: transparent;
+  padding: 8px 12px;
+  flex: 0 0 auto;
+}
+
+.bm-main-list.list-view .bm-main-icon img,
+.bm-main-list.list-view .bm-main-icon svg {
+  width: 32px;
+  height: 32px;
+}
+
+.bm-main-group {
+  margin-bottom: 32px;
+}
+
+.bm-main-group h3 {
+  font-size: 14px;
+  color: var(--accent);
+  margin-top: 0;
+  margin-bottom: 16px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.bm-main-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 12px;
+  align-items: start;
+}
+
+.bm-main-row {
+  display: flex;
+  flex-direction: column;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  transition: border-color 0.15s, box-shadow 0.15s, background 0.15s;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.bm-main-row-body {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 12px 16px;
+  flex: 1;
+}
+
+.bm-main-row:hover {
+  border-color: var(--accent);
+  box-shadow: 0 2px 8px var(--shadow);
+  background: var(--panel-hover);
+}
+
+.bm-main-info {
+  flex: 1;
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  min-width: 0;
+}
+
+.bm-main-icon {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+}
+a.bm-main-icon {
+  text-decoration: none;
+  transition: transform 0.15s;
+}
+a.bm-main-icon:hover {
+  transform: scale(1.05);
+}
+
+.bm-main-icon img,
+.bm-main-icon svg {
+  width: 48px;
+  height: 48px;
+  filter: drop-shadow(0 1px 3px var(--shadow));
+}
+
+.bm-main-content {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-top: 2px;
+}
+
+.bm-main-title-row {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  min-height: 48px;
+}
+
+.bm-main-name {
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--accent);
+  line-height: 1.2;
+}
+a.bm-main-name {
+  text-decoration: none;
+  transition: opacity 0.15s;
+}
+a.bm-main-name:hover {
+  text-decoration: underline;
+  opacity: 0.8;
+}
+
+.bm-main-id {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-muted);
+  background: var(--panel-hover);
+  padding: 2px 5px;
+  border-radius: 4px;
+  opacity: 0.8;
+}
+
+.bm-main-desc-container {
+  position: relative;
+  margin-top: 2px;
+}
+
+.bm-main-desc-container.is-clamped {
+  cursor: pointer;
+}
+
+.bm-main-desc {
+  font-size: 13px;
+  color: var(--text);
+  opacity: 0.9;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 7;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  padding-right: 8px;
+  min-height: calc(1.4em * 7);
+}
+
+.bm-main-desc-container.expanded .bm-main-desc {
+  -webkit-line-clamp: unset;
+}
+
+.bm-main-desc-overlay {
+  display: none;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 28px;
+  background: linear-gradient(to bottom, transparent, var(--panel));
+  pointer-events: none;
+  transition: background 0.15s;
+}
+
+.bm-main-desc-container.is-clamped:not(.expanded) .bm-main-desc-overlay {
+  display: block;
+}
+
+.bm-main-row:hover .bm-main-desc-overlay {
+  background: linear-gradient(to bottom, transparent, var(--panel-hover));
+}
+
+/* Parse description colors span inline */
+.bm-main-desc span {
+  display: inline;
+}
+
+/* ── Footer: Value and Usages ────────────── */
+.bm-main-footer {
+  border-top: 1px solid var(--border);
+  background: color-mix(in srgb, var(--panel-hover) 40%, transparent);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 10px 16px;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.bm-main-value {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.bm-main-usages {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.bm-main-usage-icon {
+  display: flex;
+  opacity: 0.7;
+  transition: opacity 0.15s, transform 0.15s;
+}
+
+.bm-main-usage-icon:hover {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+.bm-main-usage-icon img,
+.bm-main-usage-icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* ── Actions: Link and Remove ────────────── */
+.bm-main-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-left: auto;
+}
+
+.bm-main-remove-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: color-mix(in srgb, var(--panel-hover) 60%, transparent);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text-muted);
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.15s;
+}
+
+.bm-main-row:hover .bm-main-go-btn,
+.bm-main-row:hover .bm-main-remove-btn {
+  background: var(--panel-hover);
+}
+
+.bm-main-go-btn:hover {
+  color: var(--accent);
+  border-color: color-mix(in srgb, var(--accent) 50%, transparent);
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+}
+
+.bm-main-remove-btn:hover {
+  color: var(--danger, #e55);
+  border-color: color-mix(in srgb, var(--danger, #e55) 50%, transparent);
+  background: color-mix(in srgb, var(--danger, #e55) 12%, transparent);
+}
+
+@media (max-width: 600px) {
+  .bm-main-row-body {
+    padding: 10px 12px;
+    gap: 10px;
+    flex-direction: column;
+  }
+  .bm-main-info {
+    gap: 12px;
+  }
+  .bm-main-remove-btn {
+    width: 32px;
+    height: 32px;
+  }
+}
+
 /* ===== DEPOSIT & UNLOCK TRACKER ===== */
 .lab-sidebar-child {
   display: flex;

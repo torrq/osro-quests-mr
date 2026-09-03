@@ -387,7 +387,8 @@ function renderShopViewerHeader(shop, item) {
     meta:       boundBadge,
     loc:        findShopLocation(shop),
     bound:      !!shop.accountBound,
-    listBadges: (typeof renderItemListBadges === 'function' ? renderItemListBadges(shop.producesId) : '')
+    listBadges: (typeof renderItemListBadges === 'function' ? renderItemListBadges(shop.producesId) : ''),
+    bmType:     'shop',
   });
 }
 

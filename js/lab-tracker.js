@@ -8,7 +8,7 @@
   
   let currentSearchQuery = "";
   let currentFilter = "all"; // 'all' | 'need' | 'want' | 'done'
-  let currentClassFilter = "all"; // 'all' | 'card' | 'equipment' | 'costume'
+  let currentClassFilter = "all"; // 'all' | 'card' | 'equip/costume'
   
   let sortState = {
     key: "default", // 'default', 'have', 'want', 'name', 'effect', 'class'
@@ -48,22 +48,14 @@
   }
 
   function getItemCategory(itemId, itemClass, itemName) {
-    if (!itemClass) itemClass = "";
-    const lowerClass = itemClass.toLowerCase();
-    if (lowerClass.includes("card")) return "Card";
-    if (lowerClass.includes("costume")) return "Costume";
-    
     const lowerName = (itemName || "").toLowerCase();
-    if (lowerName.includes("costume") || lowerName.includes("chibi")) return "Costume";
+    const lowerClass = (itemClass || "").toLowerCase();
     
-    const idNum = parseInt(itemId);
-    if (idNum >= 20000 && idNum < 30000) {
-      if (!lowerClass.includes("card") && !lowerName.includes("card")) {
-        return "Costume";
-      }
+    if (lowerName.includes("card") || lowerClass.includes("card")) {
+      return "Card";
     }
     
-    return "Equipment";
+    return "Equip/Costume";
   }
 
   // Aggregate stats from checked items in both lists
@@ -435,8 +427,7 @@
         <div class="dt-class-filters">
           <button class="dt-class-btn ${currentClassFilter === 'all' ? 'active' : ''}" onclick="window.setTrackerClassFilter('Deposit List', 'all')">All</button>
           <button class="dt-class-btn ${currentClassFilter === 'card' ? 'active' : ''}" onclick="window.setTrackerClassFilter('Deposit List', 'card')">Cards</button>
-          <button class="dt-class-btn ${currentClassFilter === 'equipment' ? 'active' : ''}" onclick="window.setTrackerClassFilter('Deposit List', 'equipment')">Equip</button>
-          <button class="dt-class-btn ${currentClassFilter === 'costume' ? 'active' : ''}" onclick="window.setTrackerClassFilter('Deposit List', 'costume')">Costume</button>
+          <button class="dt-class-btn ${currentClassFilter === 'equip/costume' ? 'active' : ''}" onclick="window.setTrackerClassFilter('Deposit List', 'equip/costume')">Equip/Costume</button>
         </div>
       `;
     }

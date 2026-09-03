@@ -71,6 +71,17 @@ function gcSortItems(items, mode, manualOrder, selected = new Set(), selectedFir
 
 // ===== RENDER =====
 
+// ===== FORCE MOBILE VIEW TOGGLE =====
+
+function gcToggleForceMobileView() {
+  const current = !!(window.state && window.state.forceMobileView);
+  if (typeof window.settingSetForceMobileView === 'function') {
+    window.settingSetForceMobileView(!current);
+  }
+  // Re-render so the button reflects the new state
+  gcRenderMain();
+}
+
 function gcRenderMain() {
   const container = document.getElementById('mainContent');
   if (!container) return;
@@ -118,16 +129,27 @@ function gcRenderMain() {
       ${label}
     </label>`;
 
+  const isForceMobile = !!(window.state && window.state.forceMobileView);
+  const mobileBtnTitle = isForceMobile ? 'Force Mobile View: ON (click to disable)' : 'Force Mobile View: OFF (click to enable)';
+  const mobileBtnActive = isForceMobile ? 'gc-mobile-btn--active' : '';
+  // Phone SVG icon (14px, inline)
+  const phoneIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>`;
+
   container.innerHTML = `
     <div class="lab-main lab-main--gc lab-main--gc-size-${sizeMode}">
       <div class="lab-section">
 
-        <div class="lab-section-header">
-          <div class="lab-section-title">
-            ${window.SVG_ICONS?.gc14 || ''}
-            Guild Contribution
+        <div class="lab-section-header gc-section-header-row">
+          <div class="gc-section-header-left">
+            <div class="lab-section-title">
+              ${window.SVG_ICONS?.gc14 || ''}
+              Guild Contribution
+            </div>
+            <div class="lab-section-meta">Refreshes every 5 minutes from NPC access · 6 items per rotation</div>
           </div>
-          <div class="lab-section-meta">Refreshes every 5 minutes from NPC access · 6 items per rotation</div>
+          <button class="gc-mobile-btn ${mobileBtnActive}" onclick="gcToggleForceMobileView()" title="${mobileBtnTitle}" aria-label="${mobileBtnTitle}">
+            ${phoneIcon}
+          </button>
         </div>
 
         <div class="gc-timer-row">
@@ -560,5 +582,6 @@ window.gcSetSort = gcSetSort;
 window.gcSetSelectedFirst = gcSetSelectedFirst;
 window.gcSetSize = gcSetSize;
 window.gcSetNotifyOnDone = gcSetNotifyOnDone;
+window.gcToggleForceMobileView = gcToggleForceMobileView;
 
 window.addEventListener('keydown', gcHandleKeydown);

@@ -29,6 +29,9 @@
             <div class="tab" onclick="switchTab('items')">Items</div>
             <div class="tab" onclick="switchTab('groups')">Groups</div>
             <div class="tab" onclick="switchTab('autoloot')">Autoloot</div>
+            <div class="tab tab--icon" data-tab="bookmarks" onclick="switchTab('bookmarks')" title="Bookmarks">
+              <span class="tab-icon" data-svg-icon="tabBookmarks" aria-hidden="true"></span>
+            </div>
             <div class="tab tab--icon" data-tab="lab" onclick="switchTab('lab')" title="Lab">
               <span class="tab-icon" data-svg-icon="tabLab" aria-hidden="true"></span>
             </div>
@@ -180,6 +183,7 @@
         <div class="groups-list hidden" id="groupsList"></div>
         <div class="autoloot-list hidden" id="autolootList"></div>
         <div class="lab-list hidden" id="labList"></div>
+        <div class="bookmarks-list hidden" id="bookmarksList"></div>
       </div>
       <div class="right-pane" id="rightPane">
         <div class="main-content" id="mainContent">
@@ -261,5 +265,6 @@
     <script src="js/lab-gem.js"></script>
     <script src="js/lab-effect-parser.js"></script>
     <script src="js/lab-tracker.js"></script>
+    <script src="js/bookmarks.js"></script>
   </body>
 </html>

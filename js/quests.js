@@ -357,7 +357,8 @@ function renderQuestViewerHeader(quest, item) {
     meta:       rate + boundBadge,
     loc:        findQuestLocation(quest),
     bound:      !!quest.accountBound,
-    listBadges: (typeof renderItemListBadges === 'function' ? renderItemListBadges(quest.producesId) : '')
+    listBadges: (typeof renderItemListBadges === 'function' ? renderItemListBadges(quest.producesId) : ''),
+    bmType:     'quest',
   });
 }
 
