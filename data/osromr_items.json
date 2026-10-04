@@ -34331,8 +34331,8 @@
     "desc": "..."
   },
   "13989": {
-    "name": "Acid Bomb Box [10]",
-    "desc": "A box with 10 Fire Bottles and 10 Acid Bottles inside.\n^FFFFFF_^000000\nWeight:^009900 1^000000"
+    "name": "Acid Bomb Box [100]",
+    "desc": "A box with 100 Fire Bottles and 100 Acid Bottles inside.\n^FFFFFF_^000000\nWeight:^009900 1^000000"
   },
   "13990": {
     "name": "Job Battle Manual Box [10]",
@@ -36776,7 +36776,7 @@
   },
   "14603": {
     "name": "Mistress Scroll",
-    "desc": "A Scroll that imbued with great force of Monster Mistress.\nEnables of casting certain spells without gemstones for 5 minutes.\nIncreases SP Consumption of skills by 25%.\n^ffffff_^000000\nWeight :^777777 1^000000"
+    "desc": "A Scroll that imbued with great force of Monster Mistress.\nEnables of casting certain spells without gemstones for 3 minutes.\nIncreases SP Consumption of skills by 25%.\n^ffffff_^000000\nWeight :^777777 1^000000"
   },
   "14604": {
     "name": "Orc Hero Scard",
@@ -42513,7 +42513,7 @@
   },
   "18533": {
     "name": "Honey Bee Hat",
-    "desc": "A striped hat with honeybee antenna's on top.\nIt smells good, like sweet honey.\nClass:^6666CC Headgear^000000\nLocation:^6666CC Upper^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000",
+    "desc": "A striped hat with honeybee antenna's on top.\nIt smells good, like sweet honey.\nSource:^777777 KoE Point Shop^000000\nClass:^6666CC Headgear^000000\nLocation:^6666CC Upper^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000",
     "slot": 1
   },
   "18534": {
@@ -42531,7 +42531,7 @@
   },
   "18537": {
     "name": "Malangdo Hat",
-    "desc": "A souvenir hat from Malangdo.\nClass:^6666CC Headgear^000000\nLocation:^6666CC Upper^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000",
+    "desc": "A souvenir hat from Malangdo.\nSource:^777777 WoE Point Shop^000000\nClass:^6666CC Headgear^000000\nLocation:^6666CC Upper^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000",
     "slot": 1
   },
   "18538": {
@@ -42572,7 +42572,7 @@
   },
   "18548": {
     "name": "Taini Cap",
-    "desc": "A hat matching the one worn by the marionette Taini.\nClass:^6666CC Headgear^000000\nLocation:^6666CC Upper^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000"
+    "desc": "A hat matching the one worn by the marionette Taini.\nSource:^777777 KoE Point Shop^000000\nClass:^6666CC Headgear^000000\nLocation:^6666CC Upper^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000"
   },
   "18549": {
     "name": "Butterfly Hairpin",
@@ -42595,7 +42595,7 @@
   },
   "18554": {
     "name": "King Prawn Hat",
-    "desc": "A delicious seafood, the favorite of many people.\nClass:^6666CC Headgear^000000\nLocation:^6666CC Upper^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000"
+    "desc": "A delicious seafood, the favorite of many people.\nSource:^777777 WoE Point Shop^000000\nClass:^6666CC Headgear^000000\nLocation:^6666CC Upper^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000"
   },
   "18555": {
     "name": "Dragon General Helm",
@@ -42726,12 +42726,12 @@
   },
   "18585": {
     "name": "Orange Bunny Band",
-    "desc": "A hairband that attracts men. You can wear it when you want to look sexy. Your sexiness increases to 100%.\nClass:^6666CC Headgear^000000\nLocation:^6666CC Upper^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000",
+    "desc": "A hairband that attracts men. You can wear it when you want to look sexy. Your sexiness increases to 100%.\nSource:^777777 KoE Point Shop^000000\nClass:^6666CC Headgear^000000\nLocation:^6666CC Upper^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000",
     "slot": 1
   },
   "18586": {
     "name": "Violet Bunny Band",
-    "desc": "A hairband that attracts men. You can wear it when you want to look sexy. Your sexiness increases to 100%.\nClass:^6666CC Headgear^000000\nLocation:^6666CC Upper^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000",
+    "desc": "A hairband that attracts men. You can wear it when you want to look sexy. Your sexiness increases to 100%.\nSource:^777777 WoE Point Shop^000000\nClass:^6666CC Headgear^000000\nLocation:^6666CC Upper^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000",
     "slot": 1
   },
   "18587": {
@@ -42964,7 +42964,7 @@
   },
   "18636": {
     "name": "Ribbon of Bride",
-    "desc": "A ribbon expressing happiness for the new married bride. Makes you feel more sensitive.\nClass:^6666CC Headgear^000000\nLocation:^6666CC Upper^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000"
+    "desc": "A ribbon expressing happiness for the new married bride. Makes you feel more sensitive.\nSource:^777777 KoE Point Shop^000000\nClass:^6666CC Headgear^000000\nLocation:^6666CC Upper^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000"
   },
   "18637": {
     "name": "Ancient Admiral Helm",
@@ -43342,12 +43342,12 @@
   },
   "18727": {
     "name": "Sedora Hat",
-    "desc": "A cute hat made based of Sedora appearance.\nClass:^6666CC Headgear^000000\nLocation:^6666CC Upper^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000",
+    "desc": "A cute hat made based of Sedora appearance.\nSource:^777777 WoE Point Shop^000000\nClass:^6666CC Headgear^000000\nLocation:^6666CC Upper^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000",
     "slot": 1
   },
   "18728": {
     "name": "Aegir Helm",
-    "desc": "A Helmet from Aegir, god of Ocean. If the whole set of Egir are gathered, it will show the power of the Sea.\nClass:^6666CC Headgear^000000\nLocation:^6666CC Upper^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000",
+    "desc": "A Helmet from Aegir, god of Ocean. If the whole set of Egir are gathered, it will show the power of the Sea.\nSource:^777777 KoE Point Shop^000000\nClass:^6666CC Headgear^000000\nLocation:^6666CC Upper^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000",
     "slot": 1
   },
   "18729": {
@@ -43402,7 +43402,7 @@
   },
   "18741": {
     "name": "Will O Wisp",
-    "desc": "To feel the fear of those who see in the eerie paranormal.\nClass:^6666CC Headgear^000000\nLocation:^6666CC Upper^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000"
+    "desc": "To feel the fear of those who see in the eerie paranormal.\nSource:^777777 WoE Point Shop^000000\nClass:^6666CC Headgear^000000\nLocation:^6666CC Upper^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000"
   },
   "18742": {
     "name": "Moon and Stars",
@@ -43462,7 +43462,7 @@
   },
   "18756": {
     "name": "Black Shiba Inu Hat",
-    "desc": "A hat designed after a black Amatsu hound.\nClass:^6666CC Headgear^000000\nLocation:^6666CC Upper^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000",
+    "desc": "A hat designed after a black Amatsu hound.\nSource:^777777 KoE Point Shop^000000\nClass:^6666CC Headgear^000000\nLocation:^6666CC Upper^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000",
     "slot": 1
   },
   "18757": {
@@ -43597,7 +43597,7 @@
   },
   "18785": {
     "name": "King Poring Hat",
-    "desc": "A hat made in honor of the warrior King Poring.\nClass:^6666CC Headgear^000000\nLocation:^6666CC Upper^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000",
+    "desc": "A hat made in honor of the warrior King Poring.\nSource:^777777 WoE Point Shop^000000\nClass:^6666CC Headgear^000000\nLocation:^6666CC Upper^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000",
     "slot": 1
   },
   "18786": {
@@ -43673,7 +43673,7 @@
   },
   "18802": {
     "name": "Poring Fedora Hat",
-    "desc": "MaxHP +5%\nClass:^6666CC Headgear^000000\nLocation:^6666CC Upper^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000",
+    "desc": "MaxHP +5%\nSource:^777777 KoE Point Shop^000000\nClass:^6666CC Headgear^000000\nLocation:^6666CC Upper^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000",
     "slot": 1
   },
   "18803": {
@@ -44124,7 +44124,7 @@
   },
   "18903": {
     "name": "Rose of Frozen Land",
-    "desc": "A unique rose that only blooms on frezen land.\nClass:^6666CC Headgear^000000\nLocation:^6666CC Lower^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000"
+    "desc": "A unique rose that only blooms on frezen land.\nSource:^777777 KoE Point Shop^000000\nClass:^6666CC Headgear^000000\nLocation:^6666CC Lower^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000"
   },
   "18904": {
     "name": "Man's Medal",
@@ -44210,7 +44210,7 @@
   },
   "18926": {
     "name": "Green Foxtail",
-    "desc": "It's made to imitate fluffy green foxtail.\nClass:^6666CC Headgear^000000\nLocation:^6666CC Lower^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000"
+    "desc": "It's made to imitate fluffy green foxtail.\nSource:^777777 KoE Point Shop^000000\nClass:^6666CC Headgear^000000\nLocation:^6666CC Lower^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000"
   },
   "18929": {
     "name": "Elephant Model Hat",
@@ -44357,11 +44357,11 @@
   },
   "18967": {
     "name": "Jinn Poring Balloon",
-    "desc": "A 'Poring' jinn who makes wishes come true hovers around.\nClass:^6666CC Headgear^000000\nLocation:^6666CC Lower^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000"
+    "desc": "A 'Poring' jinn who makes wishes come true hovers around.\nSource:^777777 WoE Point Shop^000000\nClass:^6666CC Headgear^000000\nLocation:^6666CC Lower^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000"
   },
   "18968": {
     "name": "Jinn Marin Balloon",
-    "desc": "A 'Marine' jinn who makes wishes come true hovers around.\nClass:^6666CC Headgear^000000\nLocation:^6666CC Lower^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000"
+    "desc": "A 'Marine' jinn who makes wishes come true hovers around.\nSource:^777777 KoE Point Shop^000000\nClass:^6666CC Headgear^000000\nLocation:^6666CC Lower^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000"
   },
   "18969": {
     "name": "Boss Beret Hat",
@@ -44994,7 +44994,7 @@
   },
   "19139": {
     "name": "Orbs of Survival",
-    "desc": "Orbs that automatically assist their master in battle.\nClass:^6666CC Headgear^000000\nLocation:^6666CC Lower^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000"
+    "desc": "Orbs that automatically assist their master in battle.\nSource:^777777 WoE Point Shop^000000\nClass:^6666CC Headgear^000000\nLocation:^6666CC Lower^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000"
   },
   "19140": {
     "name": "Squirrel Ears Hoodie Cap",
@@ -45183,7 +45183,7 @@
   },
   "19184": {
     "name": "Time Prison",
-    "desc": "When worn, it feels closed during the time it flows down.\nClass:^6666CC Headgear^000000\nLocation:^6666CC Lower^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000"
+    "desc": "When worn, it feels closed during the time it flows down.\nSource:^777777 KoE Point Shop^000000\nClass:^6666CC Headgear^000000\nLocation:^6666CC Lower^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000"
   },
   "19185": {
     "name": "Dark Hand",
@@ -45477,7 +45477,7 @@
   },
   "19411": {
     "name": "Floating Gioia",
-    "desc": "I don't know who's making the doll of the four generals Gioia.\nThe fluffy appearance is adorable, but the floating principle and power are completely unknown.\nClass:^6666CC Headgear^000000\nLocation:^6666CC Lower^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000"
+    "desc": "I don't know who's making the doll of the four generals Gioia.\nThe fluffy appearance is adorable, but the floating principle and power are completely unknown.\nSource:^777777 WoE Point Shop^000000\nClass:^6666CC Headgear^000000\nLocation:^6666CC Lower^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000"
   },
   "19412": {
     "name": "Classic Vacation Hat Box",
@@ -46548,7 +46548,7 @@
   },
   "19751": {
     "name": "Light Darkness Crown",
-    "desc": "A white on the left, a black wing right wing was designed as a crown.\nClass:^6666CC Headgear^000000\nLocation:^6666CC Upper^000000\nWeight:^009900 0^000000\nLevel Requirement:^009900 1^000000\nJobs:^6666CC All^000000"
+    "desc": "A white on the left, a black wing right wing was designed as a crown.\nMax Weight + 500\nIncreases Shadow Resist by 5%.\nIncreases experience gained from defeating monsters by 10%.\nSource:^777777 Monthsary Giveaway^000000\nClass:^6666CC Headgear^000000\nLocation:^6666CC Upper^000000\nWeight:^009900 0^000000\nLevel Requirement:^009900 1^000000\nJobs:^6666CC All^000000"
   },
   "19752": {
     "name": "Shelter Wing Ears",
@@ -48153,7 +48153,7 @@
   },
   "20154": {
     "name": "Falling Maple Leafs",
-    "desc": "Class:^6666CC Headgear^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 0^000000\nLevel Requirement:^009900 1^000000\nJobs:^6666CC All^000000"
+    "desc": "Source:^777777 WoE Point Shop^000000\nClass:^6666CC Headgear^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 0^000000\nLevel Requirement:^009900 1^000000\nJobs:^6666CC All^000000"
   },
   "20155": {
     "name": "Lady Feather Hat",
@@ -48409,7 +48409,7 @@
   },
   "20218": {
     "name": "Spell Circuit",
-    "desc": "Class:^6666CC Headgear^000000\nLocation:^6666CC Upper^000000\nWeight:^009900 0^000000\nLevel Requirement:^009900 1^000000\nJobs:^6666CC All^000000"
+    "desc": "Source:^777777 Bonus Point Shop^000000\nClass:^6666CC Headgear^000000\nLocation:^6666CC Upper^000000\nWeight:^009900 0^000000\nLevel Requirement:^009900 1^000000\nJobs:^6666CC All^000000"
   },
   "20219": {
     "name": "Angel Marcher Hat",
@@ -49529,7 +49529,7 @@
   },
   "20511": {
     "name": "Blue Wings of Fairy",
-    "desc": "A blue wings of fairy that looks alike butterfly wings.\nClass:^6666CC Garment^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000"
+    "desc": "A blue wings of fairy that looks alike butterfly wings.\nSource:^777777 Bonus Point Shop^000000\nClass:^6666CC Garment^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000"
   },
   "20512": {
     "name": "Adventurer's Backpack",
@@ -49617,7 +49617,7 @@
   },
   "20570": {
     "name": "Heart Chocolate Bag",
-    "desc": "Bag tied to the Valentine's Day.\nThe poring is decorated on a chocolate heart with a ribbon.\nClass:^6666CC Garment^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000"
+    "desc": "Bag tied to the Valentine's Day.\nThe poring is decorated on a chocolate heart with a ribbon.\nSource:^777777 Bonus Point Shop^000000\nClass:^6666CC Garment^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000"
   },
   "20571": {
     "name": "Valkyries Wings",
@@ -49669,7 +49669,7 @@
   },
   "20590": {
     "name": "Evil Druid's Cross",
-    "desc": "A cross costume modeled after the cross carried by Evil Druids.\nYou can feel the feeling of becoming a dark priest.\nClass:^6666CC Garment^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000"
+    "desc": "A cross costume modeled after the cross carried by Evil Druids.\nYou can feel the feeling of becoming a dark priest.\nSource:^777777 Bonus Point Shop^000000\nClass:^6666CC Garment^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000"
   },
   "20592": {
     "name": "Santa's Bag",
@@ -49689,7 +49689,7 @@
   },
   "20597": {
     "name": "Evil Scythe",
-    "desc": "The side for costumes modeled after the weapon possessed by Evil.\nClass:^6666CC Garment^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000"
+    "desc": "The side for costumes modeled after the weapon possessed by Evil.\nSource:^777777 Bonus Point Shop^000000\nClass:^6666CC Garment^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000"
   },
   "20598": {
     "name": "Giant Cat Bag",
@@ -49705,7 +49705,7 @@
   },
   "20603": {
     "name": "Ulysses Butterfly Wings",
-    "desc": "Wearing a costume made after the appearance of a beautiful big purple swallow butterfly.\nBecause the color of the front and back of the wings is different, it gives a different feeling depending on the viewing angle.\nClass:^6666CC Garment^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000"
+    "desc": "Wearing a costume made after the appearance of a beautiful big purple swallow butterfly.\nBecause the color of the front and back of the wings is different, it gives a different feeling depending on the viewing angle.\nSource:^777777 Bonus Point Shop^000000\nClass:^6666CC Garment^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000"
   },
   "20604": {
     "name": "Veil of Blessing",
@@ -60429,7 +60429,7 @@
   },
   "31121": {
     "name": "Bat Stole",
-    "desc": "A costume with wings of bat attached on it. Perfect for halloween event.\nClass:^6666CC Headgear^000000\nLocation:^6666CC Lower^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000"
+    "desc": "A costume with wings of bat attached on it. Perfect for halloween event.\nMax Weight + 500\nIncreases Shadow Resist by 5%.\nIncreases experience gained from defeating monsters by 10%.\nSource:^777777 Monthsary Giveaway^000000\nClass:^6666CC Headgear^000000\nLocation:^6666CC Lower^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000"
   },
   "31122": {
     "name": "Bloody Stop Bandage",
@@ -62181,7 +62181,7 @@
   },
   "31816": {
     "name": "Moon Lion's Wings",
-    "desc": "Costume wing clothes that are highly valued by those who claim to be 'Lion of the Moon' that resemble rabbits.\nNo one really knows if it's a lion from the moon.\nClass:^6666CC Headgear^000000\nLocation:^6666CC Lower^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000"
+    "desc": "Costume wing clothes that are highly valued by those who claim to be 'Lion of the Moon' that resemble rabbits.\nNo one really knows if it's a lion from the moon.\nSource:^777777 Bonus Point Shop^000000\nClass:^6666CC Headgear^000000\nLocation:^6666CC Lower^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000"
   },
   "31817": {
     "name": "Rabbit Two Side Up",
@@ -62979,6 +62979,10 @@
     "name": "MVP Egg Scroll",
     "desc": "A scroll which gives you a random of MVP Egg.\n^FFFFFF_^000000\nWeight:^009900 10^000000"
   },
+  "40126": {
+    "name": "Tome of Glory Fragment",
+    "desc": "A valuable fragment that collectors might be interested in.\n^FFFFFF_^000000\nWeight:^009900 10^000000"
+  },
   "40151": {
     "name": "Seed Box [10]",
     "desc": "A box containing (10) Yggdrasil Seed.\n^FFFFFF_^000000\nWeight:^009900 1^000000"
@@ -63062,6 +63066,14 @@
   "40171": {
     "name": "Gold Treasure Box",
     "desc": "A box containing (5,000) Golds.\n^FFFFFF_^000000\nWeight:^009900 1^000000"
+  },
+  "40172": {
+    "name": "Pure Mithril Box",
+    "desc": "A box containing (1,000) Pure Mithrils.\n^FFFFFF_^000000\nWeight:^009900 1^000000"
+  },
+  "40173": {
+    "name": "Supply Box I",
+    "desc": "A box that contains minimal supply.\n^FFFFFF_^000000\nWeight:^009900 1^000000"
   },
   "40201": {
     "name": "Streamer Box",
@@ -64653,6 +64665,16 @@
     "desc": "Cursed Bone Wand...\n--------------------------\n^FF0000This item does NOT work in PVP and GVG maps.^000000\nDex +2, Int +2\nMagic Attack +15%\n+9 Upgrade : Increase magic and physical damage on ALL monsters by 35%.\n--------------------------\nSource:^777777 Quest^000000\nClass:^6666CC Rod^000000\nAttack:^CC0000 150^000000\nWeight:^009900 150^000000\nWeapon Level:^009900 3^000000\nLevel Requirement:^009900 40^000000\nJobs:^6666CC Mage Class, Priest^000000",
     "slot": 4
   },
+  "41143": {
+    "name": "Infused Purple Saber",
+    "desc": "A condensed multiple beam of light.\nIncreases damage against ^FF0000Boss^000000 enemies by 5%.\nAdditional damage against ^FF0000Boss^000000 enemies by 1% per every refine.\n[^C6A318 Infused Effect ^000000]\n^FF0000Infuse effect does NOT work in PVP and GVG maps.^000000\nAdds magic and physical damage on ^FF0000ALL^000000 monsters by 1% per every refine.\nAdds magic and physical damage on ^FF0000BOSS^000000 enemies by 1% per every refine.\n--------------------------\nSource:^777777 Equipment Infuser^000000\nClass:^6666CC Lightsaber^000000\nAttack:^CC0000 190^000000\nWeight:^009900 70^000000\nWeapon Level:^009900 4^000000\nJobs:^6666CC Padawan, Jedi, Sith Class^000000",
+    "slot": 4
+  },
+  "41144": {
+    "name": "Infused Dark Saber",
+    "desc": "Where there is light, there is darkness.\nVit +5, Str +5\nAdditional Str +1 per 2 Refine Rate.\n[^000088 +Torn Wings ^000000]\nCritical Rate +10\nCritical Damage +15%.\nPerfect Dodge -5.\n[^000088 +Geo Dragon Wings ^000000]\nCritical Damage +10%.\n^FF0000Nullified effect if Skewer or another Dark Saber is equipped.^000000\n[^C6A318 Infused Effect ^000000]\n^FF0000Infuse effect does NOT work in PVP and GVG maps.^000000\nAdds magic and physical damage on ^FF0000ALL^000000 monsters by 1% per every refine.\nAdds magic and physical damage on ^FF0000BOSS^000000 enemies by 1% per every refine.\n--------------------------\nSource:^777777 Equipment Infuser^000000\nClass:^6666CC Lightsaber^000000\nAttack:^CC0000 150^000000\nWeight:^009900 70^000000\nWeapon Level:^009900 4^000000\nJobs:^6666CC Padawan, Jedi, Sith Class^000000",
+    "slot": 4
+  },
   "42001": {
     "name": "Fire Head Protector",
     "desc": "A ninja headband the shows the wearer's village.\nStr +10\nDecreases damage taken from ^FF0000Fire^000000 elemental attacks by 50%.\nReceives more damage from ^0000FFWater^000000 elemental attacks by 50%.\nSource:^777777 Quest^000000\nClass:^6666CC Headgear^000000\nDefense:^0000FF 3^000000\nLocation:^6666CC Upper^000000\nWeight:^009900 5^000000\nJobs:^6666CC All classes^000000",
@@ -65018,6 +65040,16 @@
   "42651": {
     "name": "Shadow Boots",
     "desc": "Made from a scale of Nidhoggur's Shadow, it still possesses its strong power.\nMdef +10\nIncrease Maximum HP & SP by 20%.\nIncreasing Maximum HP by 1% per refine.\nIncrease Movespeed.\n^FF0000Indestructible^000000 in battle.\n[^000088 +Shadow Garb Set ^000000]\nAll Stats +1.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nVIT + 1\n------------------------\nSource:^777777 Quest, Donate^000000\nClass:^6666CC Footgear^000000\nDefense:^0000FF 3^000000\nWeight:^009900 50^000000\nLevel Requirement:^009900 90^000000\nJobs:^6666CC All^000000"
+  },
+  "42652": {
+    "name": "Shadow Armor",
+    "desc": "The armor that combine the skin of the creatures that lives behind every shadow.\nAll Stats + 1\nReflect 1% Melee & Long Range Damage per ^885500(Refine Rate)^000000.\n100% Resistance against '^000088Freeze^000000' Status.\nInvulnerable to '^880000Break^000000' in battle.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nVIT + 1\n------------------------\nSource:^777777 Quest, Donate^000000\nClass:^6666CC Armor^000000\nDefense:^0000FF 6^000000\nWeight:^009900 280^000000\nJobs:^6666CC All^000000",
+    "slot": 1
+  },
+  "42653": {
+    "name": "Shadow Buckler",
+    "desc": "The shield that combine the skin of the creatures that lives behind every shadow.\nAdds 20% resistance to Water, Fire, Undead and Shadow properties.\nMDEF +5\nReceive 1% less damage from Long Range Physical attack per ^885500(Refine Rate)^000000.\n100% Resistance against '^880000Stone Curse^000000' Status.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nVIT + 1\n------------------------\nSource:^777777 Quest, Donate^000000\nClass:^6666CC Shield^000000\nDefense:^0000FF 3^000000\nWeight:^009900 50^000000\nLevel Requirement:^009900 65^000000\nJobs:^6666CC All^000000",
+    "slot": 1
   },
   "42701": {
     "name": "STR Necklace",
@@ -65449,6 +65481,11 @@
   "42879": {
     "name": "Backslide Talent Ring",
     "desc": "Backslide Talent Skill\n------------------------\nQuickly move backwards to position yourself safely away from threats while maintaining combat readiness.\n------------------------\nClass :^777777 Left Costume Accessory^000000\nCool Down: ^7777775 Seconds^000000\nClass :^777777 Accessory^000000\nDefense :^777777 0^000000\nWeight :^777777 10^000000\nApplicable Job :^777777 All^000000"
+  },
+  "42880": {
+    "name": "Deviruchi Brooch II",
+    "desc": "--------------------------\nSTR + 8\nPerfect Hit (which never miss its target) + 8%\n--------------------------\n[ ^008000Deposit Effect^000000 ]\nPerfect Dodge + 1\n--------------------------\nSource:^777777 Quest^000000\nClass:^6666CC Accessory^000000\nDefense:^0000FF 0^000000\nWeight:^009900 10^000000\nLevel Requirement:^009900 100^000000\nJobs:^6666CC All^000000",
+    "slot": 1
   },
   "43001": {
     "name": "Buff Scroll",
@@ -68602,7 +68639,7 @@
   },
   "46558": {
     "name": "Green Overflowing Aura",
-    "desc": "This aura is too much for a mortal to handle.\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 5^000000\nJobs:^6666CC All^000000"
+    "desc": "This aura is too much for a mortal to handle.\nSource:^777777 Bonus Point Shop^000000\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 5^000000\nJobs:^6666CC All^000000"
   },
   "46559": {
     "name": "Orange Overflowing Aura",
@@ -68626,7 +68663,7 @@
   },
   "46564": {
     "name": "Yellow Overflowing Aura",
-    "desc": "This aura is too much for a mortal to handle.\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 5^000000\nJobs:^6666CC All^000000"
+    "desc": "This aura is too much for a mortal to handle.\nSource:^777777 Bonus Point Shop^000000\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 5^000000\nJobs:^6666CC All^000000"
   },
   "46565": {
     "name": "Purple Radiant Aura",
@@ -69542,7 +69579,7 @@
   },
   "46793": {
     "name": "LightFury",
-    "desc": "Level up your look with OldschoolRO's exclusive headgear!\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Upper^000000\nWeight:^009900 10^000000\nJobs:^6666CC All^000000"
+    "desc": "Level up your look with OldschoolRO's exclusive headgear!\n-------------------------\nMax Weight + 750\nIncrease damage on Boss monsters by 5%.\nDrop Rate of any items and cards increased by 7%.\n--------------------------\n[ ^008000Deposit Effect^000000 ]\nGives 1% Lifesteal\n--------------------------\nSource:^777777 Lotti Girl^000000\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Upper^000000\nWeight:^009900 10^000000\nJobs:^6666CC All^000000"
   },
   "46794": {
     "name": "Metapod",
@@ -69550,7 +69587,7 @@
   },
   "46795": {
     "name": "Mew Pirate",
-    "desc": "Level up your look with OldschoolRO's exclusive headgear!\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Upper^000000\nWeight:^009900 10^000000\nJobs:^6666CC All^000000"
+    "desc": "Level up your look with OldschoolRO's exclusive headgear!\nSource:^777777 Bonus Point Shop^000000\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Upper^000000\nWeight:^009900 10^000000\nJobs:^6666CC All^000000"
   },
   "46796": {
     "name": "Pikachu Cap",
@@ -69558,31 +69595,31 @@
   },
   "46797": {
     "name": "Pikachu Demon",
-    "desc": "Level up your look with OldschoolRO's exclusive headgear!\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Upper^000000\nWeight:^009900 10^000000\nJobs:^6666CC All^000000"
+    "desc": "Level up your look with OldschoolRO's exclusive headgear!\nSource:^777777 Bonus Point Shop^000000\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Upper^000000\nWeight:^009900 10^000000\nJobs:^6666CC All^000000"
   },
   "46798": {
     "name": "Slowpoke",
-    "desc": "Level up your look with OldschoolRO's exclusive headgear!\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Upper^000000\nWeight:^009900 10^000000\nJobs:^6666CC All^000000"
+    "desc": "Level up your look with OldschoolRO's exclusive headgear!\nSource:^777777 Bonus Point Shop^000000\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Upper^000000\nWeight:^009900 10^000000\nJobs:^6666CC All^000000"
   },
   "46799": {
     "name": "Togepi",
-    "desc": "Level up your look with OldschoolRO's exclusive headgear!\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Upper^000000\nWeight:^009900 10^000000\nJobs:^6666CC All^000000"
+    "desc": "Level up your look with OldschoolRO's exclusive headgear!\nSource:^777777 Bonus Point Shop^000000\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Upper^000000\nWeight:^009900 10^000000\nJobs:^6666CC All^000000"
   },
   "46800": {
     "name": "Toothless",
-    "desc": "Level up your look with OldschoolRO's exclusive headgear!\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Upper^000000\nWeight:^009900 10^000000\nJobs:^6666CC All^000000"
+    "desc": "Level up your look with OldschoolRO's exclusive headgear!\n-------------------------\nMax Weight + 750\nIncrease damage on Boss monsters by 5%.\nDrop Rate of any items and cards increased by 7%.\n--------------------------\n[ ^008000Deposit Effect^000000 ]\nGives 1% Lifesteal\n--------------------------\nSource:^777777 Lotti Girl^000000\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Upper^000000\nWeight:^009900 10^000000\nJobs:^6666CC All^000000"
   },
   "46801": {
     "name": "Loki",
-    "desc": "Level up your look with OldschoolRO's exclusive headgear!\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Upper^000000\nWeight:^009900 10^000000\nJobs:^6666CC All^000000"
+    "desc": "Level up your look with OldschoolRO's exclusive headgear!\nSource:^777777 Bonus Point Shop^000000\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Upper^000000\nWeight:^009900 10^000000\nJobs:^6666CC All^000000"
   },
   "46802": {
     "name": "Vaporeon",
-    "desc": "Level up your look with OldschoolRO's exclusive headgear!\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Upper^000000\nWeight:^009900 10^000000\nJobs:^6666CC All^000000"
+    "desc": "Level up your look with OldschoolRO's exclusive headgear!\nSource:^777777 Bonus Point Shop^000000\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Upper^000000\nWeight:^009900 10^000000\nJobs:^6666CC All^000000"
   },
   "46803": {
     "name": "Vulpix",
-    "desc": "Level up your look with OldschoolRO's exclusive headgear!\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Upper^000000\nWeight:^009900 10^000000\nJobs:^6666CC All^000000"
+    "desc": "Level up your look with OldschoolRO's exclusive headgear!\nSource:^777777 Bonus Point Shop^000000\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Upper^000000\nWeight:^009900 10^000000\nJobs:^6666CC All^000000"
   },
   "46804": {
     "name": "Ramadhan Moon 2024",
@@ -72353,7 +72390,7 @@
   },
   "48402": {
     "name": "Great Pyrenees",
-    "desc": "Level up your look with OldschoolRO's exclusive headgear!\nClass :^777777 Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 10^000000\nRequired Level :^777777 1^000000\nJobs:^6666CC All^000000"
+    "desc": "Level up your look with OldschoolRO's exclusive headgear!\nSource:^777777 Bonus Point Shop^000000\nClass :^777777 Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 10^000000\nRequired Level :^777777 1^000000\nJobs:^6666CC All^000000"
   },
   "48403": {
     "name": "Guide Of Dead Cap",
@@ -72729,11 +72766,11 @@
   },
   "48497": {
     "name": "Bat Aura Blue",
-    "desc": "Level up your look with OldschoolRO's exclusive headgear!\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 10^000000\nRequired Level :^777777 1^000000\nJobs:^6666CC All^000000"
+    "desc": "Level up your look with OldschoolRO's exclusive headgear!\nSource:^777777 Bonus Point Shop^000000\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 10^000000\nRequired Level :^777777 1^000000\nJobs:^6666CC All^000000"
   },
   "48498": {
     "name": "Bat Aura Green",
-    "desc": "Level up your look with OldschoolRO's exclusive headgear!\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 10^000000\nRequired Level :^777777 1^000000\nJobs:^6666CC All^000000"
+    "desc": "Level up your look with OldschoolRO's exclusive headgear!\nSource:^777777 Bonus Point Shop^000000\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 10^000000\nRequired Level :^777777 1^000000\nJobs:^6666CC All^000000"
   },
   "48499": {
     "name": "Bat Aura Orange",
@@ -72873,15 +72910,15 @@
   },
   "48533": {
     "name": "Majestic Cape",
-    "desc": "Level up your look with OldschoolRO's exclusive headgear!\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 10^000000\nRequired Level :^777777 1^000000\nJobs:^6666CC All^000000"
+    "desc": "Level up your look with OldschoolRO's exclusive headgear!\n-------------------------\nMax Weight + 600\nIncrease damage on Boss monsters by 5%.\nATK & MATK + 1%.\n--------------------------\n[ ^008000Deposit Effect^000000 ]\nATK + 3, MATK + 3\n--------------------------\nSource:^777777 Lotti Girl^000000\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 10^000000\nRequired Level :^777777 1^000000\nJobs:^6666CC All^000000"
   },
   "48534": {
     "name": "Majestic Rune",
-    "desc": "Level up your look with OldschoolRO's exclusive headgear!\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Mid^000000\nWeight:^009900 10^000000\nRequired Level :^777777 1^000000\nJobs:^6666CC All^000000"
+    "desc": "Level up your look with OldschoolRO's exclusive headgear!\n-------------------------\nMax Weight + 600\nIncrease damage on Boss monsters by 5%.\nATK & MATK + 1%.\n--------------------------\n[ ^008000Deposit Effect^000000 ]\nHIT + 3, CRIT + 3\n--------------------------\nSource:^777777 Lotti Girl^000000\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Mid^000000\nWeight:^009900 10^000000\nRequired Level :^777777 1^000000\nJobs:^6666CC All^000000"
   },
   "48535": {
     "name": "Majestic Valkyrie Helm",
-    "desc": "Level up your look with OldschoolRO's exclusive headgear!\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Upper^000000\nWeight:^009900 10^000000\nRequired Level :^777777 1^000000\nJobs:^6666CC All^000000"
+    "desc": "Level up your look with OldschoolRO's exclusive headgear!\n-------------------------\nMax Weight + 600\nIncrease damage on Boss monsters by 5%.\nATK & MATK + 1%.\n--------------------------\n[ ^008000Deposit Effect^000000 ]\nFlee + 2, Perfect Dodge + 2\n--------------------------\nSource:^777777 Lotti Girl^000000\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Upper^000000\nWeight:^009900 10^000000\nRequired Level :^777777 1^000000\nJobs:^6666CC All^000000"
   },
   "48536": {
     "name": "Nezuko Kamado Aura",
@@ -73403,6 +73440,42 @@
     "name": "Caelestis Eye",
     "desc": "-------------------------\nMaximum HP +2%\nReduce damage from Demihuman by 1%.\nGives +2 random stat when equipped.\n------------------------\n[^663399 Caelestis Set ^000000]\nAll Stats +1\nReduce range and near attacks by 2%.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nMaximum HP +1%\nReduce near attacks by 1%\n------------------------\nSource:^777777 Donation Exclusive^000000\nClass:^6666CC Costume Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Mid^000000\nWeight:^009900 10^000000\nRequired Level :^777777 1^000000\nJobs:^6666CC All^000000"
   },
+  "48667": {
+    "name": "Dynasty Monk Aura",
+    "desc": "-------------------------\nATK & MATK +1%\nIncrease damage to Demihuman by 1%.\nGives +1 random stat when equipped.\n------------------------\n[^663399 Dynasty Monk Set ^000000]\nAll Stats +1\nIncrease damage to Demihuman by 2%.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nLarge monster damage +1%\n------------------------\nSource:^777777 Donation Exclusive^000000\nClass:^6666CC Costume Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 10^000000\nRequired Level :^777777 1^000000\nJobs:^6666CC All^000000"
+  },
+  "48668": {
+    "name": "Dynasty Monk Helm",
+    "desc": "-------------------------\nATK & MATK +1%\nIncrease damage to Demihuman by 1%.\nGives +1 random stat when equipped.\n------------------------\n[^663399 Dynasty Monk Set ^000000]\nAll Stats +1\nIncrease damage to Demihuman by 2%.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nSmall monster damage +1%\n------------------------\nSource:^777777 Donation Exclusive^000000\nClass:^6666CC Costume Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Upper^000000\nWeight:^009900 10^000000\nRequired Level :^777777 1^000000\nJobs:^6666CC All^000000"
+  },
+  "48669": {
+    "name": "Dynasty Monk Necklace",
+    "desc": "-------------------------\nATK & MATK +1%\nIncrease damage to Demihuman by 1%.\nGives +1 random stat when equipped.\n------------------------\n[^663399 Dynasty Monk Set ^000000]\nAll Stats +1\nIncrease damage to Demihuman by 2%.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nMedium monster damage +1%\n------------------------\nSource:^777777 Donation Exclusive^000000\nClass:^6666CC Costume Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Mid^000000\nWeight:^009900 10^000000\nRequired Level :^777777 1^000000\nJobs:^6666CC All^000000"
+  },
+  "48670": {
+    "name": "Sacred Hero Aura",
+    "desc": "-------------------------\nIncrease damage to Demihuman by 1%.\nGives +1 random stat when equipped.\n------------------------\n[^663399 Sacred Hero Set ^000000]\nAll Stats +1\nMedium monster damage +1%.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nDEX + 1, HIT + 2\n------------------------\nSource:^777777 Donation Exclusive^000000\nClass:^6666CC Costume Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Mid^000000\nWeight:^009900 10^000000\nRequired Level :^777777 1^000000\nJobs:^6666CC All^000000"
+  },
+  "48671": {
+    "name": "Sacred Hero Helm",
+    "desc": "-------------------------\nIncrease damage to Demihuman by 1%.\nGives +1 random stat when equipped.\n------------------------\n[^663399 Sacred Hero Set ^000000]\nAll Stats +1\nMedium monster damage +1%.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nSTR + 1, ATK + 2\n------------------------\nSource:^777777 Donation Exclusive^000000\nClass:^6666CC Costume Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Upper^000000\nWeight:^009900 10^000000\nRequired Level :^777777 1^000000\nJobs:^6666CC All^000000"
+  },
+  "48672": {
+    "name": "Sacred Hero Spell",
+    "desc": "-------------------------\nIncrease damage to Demihuman by 1%.\nGives +1 random stat when equipped.\n------------------------\n[^663399 Sacred Hero Set ^000000]\nAll Stats +1\nMedium monster damage +1%.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nINT + 1, MATK + 2\n------------------------\nSource:^777777 Donation Exclusive^000000\nClass:^6666CC Costume Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 10^000000\nRequired Level :^777777 1^000000\nJobs:^6666CC All^000000"
+  },
+  "48673": {
+    "name": "Demon Hunter Aura",
+    "desc": "-------------------------\nATK & MATK +1%\nGives +1 random stat when equipped.\n------------------------\n[^663399 Demon Hunter Set ^000000]\nMaximum HP +1%\nMovespeed Rate +5%\n------------------------\n[ ^008000Deposit Effect^000000 ]\nLUK + 1, Perfect Dodge + 1\n------------------------\nSource:^777777 Donation Exclusive^000000\nClass:^6666CC Costume Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Mid^000000\nWeight:^009900 10^000000\nRequired Level :^777777 1^000000\nJobs:^6666CC All^000000"
+  },
+  "48674": {
+    "name": "Demon Hunter Sakkat",
+    "desc": "-------------------------\nATK & MATK +1%\nGives +1 random stat when equipped.\n------------------------\n[^663399 Demon Hunter Set ^000000]\nMaximum HP +1%\nMovespeed Rate +5%\n------------------------\n[ ^008000Deposit Effect^000000 ]\nAGI + 1, FLEE + 2\n------------------------\nSource:^777777 Donation Exclusive^000000\nClass:^6666CC Costume Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Upper^000000\nWeight:^009900 10^000000\nRequired Level :^777777 1^000000\nJobs:^6666CC All^000000"
+  },
+  "48675": {
+    "name": "Demon Hunter Void",
+    "desc": "-------------------------\nATK & MATK +1%\nGives +1 random stat when equipped.\n------------------------\n[^663399 Demon Hunter Set ^000000]\nMaximum HP +1%\nMovespeed Rate +5%\n------------------------\n[ ^008000Deposit Effect^000000 ]\nVIT + 1, HP + 100\n------------------------\nSource:^777777 Donation Exclusive^000000\nClass:^6666CC Costume Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 10^000000\nRequired Level :^777777 1^000000\nJobs:^6666CC All^000000"
+  },
   "49000": {
     "name": "Angelic Valkyrie Wings Dark",
     "desc": "-------------------------\nMax Weight + 500\nIncrease damage on Boss monsters by 5%.\nDrop Rate of any items and cards increased by 10%.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nMaxHP +1%\n------------------------\nSource:^777777 Donation Exclusive^000000\nClass:^6666CC Costume Garment^000000\nDefense :^777777 0^000000\nEquipped on :^777777 Garment^000000\nWeight :^777777 10^000000\nApplicable Job :^777777 All^000000"
@@ -73458,6 +73531,18 @@
   "49013": {
     "name": "Caelestis Staff",
     "desc": "-------------------------\nResist to all elements +6%\nGives +2 random stat when equipped.\n------------------------\n[^663399 Caelestis Set ^000000]\nAll Stats +1\nReduce range and near attacks by 2%.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nReduces damage taken from ^6666CCDemihuman^000000 monsters by 1%.\n------------------------\nSource:^777777 Donation Exclusive^000000\nClass:^6666CC Costume Garment^000000\nDefense :^777777 0^000000\nEquipped on :^777777 Garment^000000\nWeight :^777777 10^000000\nApplicable Job :^777777 All^000000"
+  },
+  "49014": {
+    "name": "Dynasty Monk Edge",
+    "desc": "-------------------------\nMax Weight + 700\nATK & MATK +1%\nGives +2 random stat when equipped.\n------------------------\n[^663399 Dynasty Monk Set ^000000]\nAll Stats +1\nIncrease damage to Demihuman by 2%.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nATK + 5, MATK + 5\n------------------------\nSource:^777777 Donation Exclusive^000000\nClass:^6666CC Costume Garment^000000\nDefense :^777777 0^000000\nEquipped on :^777777 Garment^000000\nWeight :^777777 10^000000\nApplicable Job :^777777 All^000000"
+  },
+  "49015": {
+    "name": "Sacred Hero Wings",
+    "desc": "-------------------------\nMax Weight + 600\nGives +1 random stat when equipped.\nDrop Rate of any items and cards increased by 10%.\n------------------------\n[^663399 Sacred Hero Set ^000000]\nAll Stats +1\nMedium monster damage +1%.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nIncrease damage to Demihuman by 1%.\n------------------------\nSource:^777777 Donation Exclusive^000000\nClass:^6666CC Costume Garment^000000\nDefense :^777777 0^000000\nEquipped on :^777777 Garment^000000\nWeight :^777777 10^000000\nApplicable Job :^777777 All^000000"
+  },
+  "49016": {
+    "name": "Demon Hunter Sword",
+    "desc": "-------------------------\nMax Weight + 600\nGives +1 random stat when equipped.\nDrop Rate of any items and cards increased by 10%.\n------------------------\n[^663399 Demon Hunter Set ^000000]\nMaximum HP +1%\nMovespeed Rate +5%\n------------------------\n[ ^008000Deposit Effect^000000 ]\nMaximum HP +1%\n------------------------\nSource:^777777 Donation Exclusive^000000\nClass:^6666CC Costume Garment^000000\nDefense :^777777 0^000000\nEquipped on :^777777 Garment^000000\nWeight :^777777 10^000000\nApplicable Job :^777777 All^000000"
   },
   "400020": {
     "name": "Beach Ball",
@@ -73788,11 +73873,11 @@
   },
   "410131": {
     "name": "White Tiger",
-    "desc": "A wonderful costume tiger doll that is so well made that you can mistake it for a real tiger.\nWhen you go together, you feel like you are the oil king.\nClass:^6666CC Headgear^000000\nLocation:^6666CC Middle^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000"
+    "desc": "A wonderful costume tiger doll that is so well made that you can mistake it for a real tiger.\nWhen you go together, you feel like you are the oil king.\nSource:^777777 KoE Point Shop^000000\nClass:^6666CC Headgear^000000\nLocation:^6666CC Middle^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000"
   },
   "410132": {
     "name": "Black Tiger",
-    "desc": "A wonderful costume tiger doll that is so well made that you can mistake it for a real tiger.\nWhen you go together, you feel like you are the oil king.\nClass:^6666CC Headgear^000000\nLocation:^6666CC Middle^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000"
+    "desc": "A wonderful costume tiger doll that is so well made that you can mistake it for a real tiger.\nWhen you go together, you feel like you are the oil king.\nSource:^777777 WoE Point Shop^000000\nClass:^6666CC Headgear^000000\nLocation:^6666CC Middle^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000"
   },
   "410133": {
     "name": "Puppy Divers",
@@ -73844,39 +73929,39 @@
   },
   "410188": {
     "name": "King Minimi",
-    "desc": "Automatic doll series product of the Fantasy Series Editorial Department.\nVR Book: Young-ae, the golden spoon, wants to live quietly.\nKing\n\\\"You, go with me.\\\"\n\nThis is an exchange-only product.\nClass:^6666CC Headgear^000000\nLocation:^6666CC Middle^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000"
+    "desc": "Automatic doll series product of the Fantasy Series Editorial Department.\nVR Book: Young-ae, the golden spoon, wants to live quietly.\nKing\n\\\"You, go with me.\\\"\n\nThis is an exchange-only product.\nSource:^777777 KoE Point Shop^000000\nClass:^6666CC Headgear^000000\nLocation:^6666CC Middle^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000"
   },
   "410189": {
     "name": "Angeling Minimi",
-    "desc": "Automatic doll series product of the Fantasy Series Editorial Department.\nVR Book: Growing Angellings~Dreaming Poring~\nGularing who became an Angeling\n\\\"I will walk the path of the strongest...!\\\"\n\nThis is an exchange-only product.\nClass:^6666CC Headgear^000000\nLocation:^6666CC Middle^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000"
+    "desc": "Automatic doll series product of the Fantasy Series Editorial Department.\nVR Book: Growing Angellings~Dreaming Poring~\nGularing who became an Angeling\n\\\"I will walk the path of the strongest...!\\\"\n\nThis is an exchange-only product.\nSource:^777777 KoE Point Shop^000000\nClass:^6666CC Headgear^000000\nLocation:^6666CC Middle^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000"
   },
   "410190": {
     "name": "Seyren Minimi",
-    "desc": "Automatic doll series product of the Fantasy Series Editorial Department.\nVR Book: Raw Rice~Seyren Windsor's Hugel Recreational Cookbook\nSeyren Windsor\n\\\"A memorable warm meal...\\\"\n\nThis is an exchange-only product.\nClass:^6666CC Headgear^000000\nLocation:^6666CC Middle^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000"
+    "desc": "Automatic doll series product of the Fantasy Series Editorial Department.\nVR Book: Raw Rice~Seyren Windsor's Hugel Recreational Cookbook\nSeyren Windsor\n\\\"A memorable warm meal...\\\"\n\nThis is an exchange-only product.\nSource:^777777 KoE Point Shop^000000\nClass:^6666CC Headgear^000000\nLocation:^6666CC Middle^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000"
   },
   "410191": {
     "name": "Spica Nerius Minimi",
-    "desc": "Automatic doll series product of the Fantasy Series Editorial Department.\nVR Book: The Lady of Gold Spoon wants to live quietly\n\\\"I had to use a pseudonym for the author...\\\"\n\nThis is an exchange-only product.\nClass:^6666CC Headgear^000000\nLocation:^6666CC Middle^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000"
+    "desc": "Automatic doll series product of the Fantasy Series Editorial Department.\nVR Book: The Lady of Gold Spoon wants to live quietly\n\\\"I had to use a pseudonym for the author...\\\"\n\nThis is an exchange-only product.\nSource:^777777 KoE Point Shop^000000\nClass:^6666CC Headgear^000000\nLocation:^6666CC Middle^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000"
   },
   "410192": {
     "name": "Evil Minimi",
-    "desc": "Automatic doll series product of the Fantasy Series Editorial Department.\nVR Book: I'm the only pure-blooded in the Academy\n\\\"It's safe now. It's time to...eat.\\\"\n\nThis is an exchange-only product.\nClass:^6666CC Headgear^000000\nLocation:^6666CC Middle^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000"
+    "desc": "Automatic doll series product of the Fantasy Series Editorial Department.\nVR Book: I'm the only pure-blooded in the Academy\n\\\"It's safe now. It's time to...eat.\\\"\n\nThis is an exchange-only product.\nSource:^777777 WoE Point Shop^000000\nClass:^6666CC Headgear^000000\nLocation:^6666CC Middle^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000"
   },
   "410193": {
     "name": "Gullaring Minimi",
-    "desc": "Automatic doll series product of the Fantasy Series Editorial Department.\nVR Book: Growing Angellings~Dreaming Poring~\nGularing\n\\\"Ahem. You'll be a great adult!\\\"\n\nThis is an exchange-only product.\nClass:^6666CC Headgear^000000\nLocation:^6666CC Middle^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000"
+    "desc": "Automatic doll series product of the Fantasy Series Editorial Department.\nVR Book: Growing Angellings~Dreaming Poring~\nGularing\n\\\"Ahem. You'll be a great adult!\\\"\n\nThis is an exchange-only product.\nSource:^777777 WoE Point Shop^000000\nClass:^6666CC Headgear^000000\nLocation:^6666CC Middle^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000"
   },
   "410205": {
     "name": "Marlbron Minimi",
-    "desc": "Automatic doll series product of the Fantasy Series Editorial Department.\nVR Book: Criatura Business Manual\n\\\"I really only do it until this year and I'm leaving...\\\"\n\nThis is an exchange-only product.\nClass:^6666CC Headgear^000000\nLocation:^6666CC Middle^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000"
+    "desc": "Automatic doll series product of the Fantasy Series Editorial Department.\nVR Book: Criatura Business Manual\n\\\"I really only do it until this year and I'm leaving...\\\"\n\nThis is an exchange-only product.\nSource:^777777 WoE Point Shop^000000\nClass:^6666CC Headgear^000000\nLocation:^6666CC Middle^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000"
   },
   "410206": {
     "name": "Lehar Minimi",
-    "desc": "Automatic doll series product of the Fantasy Series Editorial Department.\nVR Book: Me and Me\nLehar\n\\\"I will collect them all and burn them!!\\\"\n\nThis is an exchange-only product.\nClass:^6666CC Headgear^000000\nLocation:^6666CC Middle^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000"
+    "desc": "Automatic doll series product of the Fantasy Series Editorial Department.\nVR Book: Me and Me\nLehar\n\\\"I will collect them all and burn them!!\\\"\n\nThis is an exchange-only product.\nSource:^777777 WoE Point Shop^000000\nClass:^6666CC Headgear^000000\nLocation:^6666CC Middle^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000"
   },
   "410214": {
     "name": "Larva Yellow Minimi",
-    "desc": "Lava Collaboration Mini Me\n \n\\\"!!\\\"\n\\\"~~~!\\\"\nClass:^6666CC Headgear^000000\nLocation:^6666CC Middle^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000"
+    "desc": "Lava Collaboration Mini Me\n \n\\\"!!\\\"\n\\\"~~~!\\\"\nSource:^777777 WoE Point Shop^000000\nClass:^6666CC Headgear^000000\nLocation:^6666CC Middle^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000"
   },
   "410217": {
     "name": "Magic Cards",
@@ -74288,7 +74373,7 @@
   },
   "480129": {
     "name": "Triple Ice Cream",
-    "desc": "An costume ice cream that looks colorful and delicious.\nIn the hot summer, you want to eat it without realizing it.\nClass:^6666CC Garment^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000"
+    "desc": "An costume ice cream that looks colorful and delicious.\nIn the hot summer, you want to eat it without realizing it.\nSource:^777777 Bonus Point Shop^000000\nClass:^6666CC Garment^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000"
   },
   "480130": {
     "name": "Beer Server",
@@ -74345,7 +74430,7 @@
   },
   "480223": {
     "name": "Oriental Sword",
-    "desc": "A Doram costume sword made by imitating the sword of the East.\nSince it is actually a toy, it is safe for small children to wear.\nClass:^6666CC Garment^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000"
+    "desc": "A Doram costume sword made by imitating the sword of the East.\nSince it is actually a toy, it is safe for small children to wear.\nMax Weight + 500\nGives +1 random stat when equipped.\nIncreases experience gained from defeating monsters by 10%.\nSource:^777777 Monthsary Giveaway^000000\nClass:^6666CC Garment^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000"
   },
   "480236": {
     "name": "Big Magic Book",
