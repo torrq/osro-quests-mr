@@ -6972,7 +6972,7 @@
   },
   "2423": {
     "name": "Variant Shoes",
-    "desc": "Although it seems that whoever made these shoes tried to fix his mistakes, he didn't make these as well as he hoped.\nIncrease Maximum HP & SP by 20%.\nIncreasing Maximum HP by 1% per refine.\n^FF0000Indestructible^000000 in battle.\n[^000088 + Asprika Set ^000000]\nAll Stats +3.\nSource:^777777 ?^000000\nClass:^6666CC Footgear^000000\nDefense:^0000FF 5^000000\nWeight:^009900 50^000000\nLevel Requirement:^009900 85^000000\nJobs:^6666CC All except Novice^000000"
+    "desc": "Although it seems that whoever made these shoes tried to fix his mistakes, he didn't make these as well as he hoped.\nIncrease Maximum HP & SP by 20%.\nIncreasing Maximum HP by 1% per refine.\n^FF0000Indestructible^000000 in battle.\n[^000088 + Asprika Set ^000000]\nAll Stats +3.\nSource:^777777 Donate^000000\nClass:^6666CC Footgear^000000\nDefense:^0000FF 5^000000\nWeight:^009900 50^000000\nLevel Requirement:^009900 85^000000\nJobs:^6666CC All except Novice^000000"
   },
   "2424": {
     "name": "Tidal Shoes",
@@ -10462,7 +10462,7 @@
   },
   "4188": {
     "name": "Leib Olmai Card",
-    "desc": "Add the chance of gaining ^008800Red Blood^000000 item each time a Brute monster is killed.\nAdd 10% more tolerance against ^FF0000Fire^000000 elemental attack.\n------------------------\n[ ^008000Unlock Effect^000000 ]\nFire Property damage +1%\n------------------------\nClass:^6666CC Card^000000\nCompound on:^6600FF Headgear^000000\nWeight:^009900 1^000000"
+    "desc": "Add the chance of gaining ^008800Red Blood^000000 item each time a Brute monster is killed.\nAdd 10% more tolerance against ^FF0000Fire^000000 elemental attack.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nFire Resistance +1%\n------------------------\n[ ^008000Unlock Effect^000000 ]\nFire Property damage +1%\n------------------------\nClass:^6666CC Card^000000\nCompound on:^6600FF Headgear^000000\nWeight:^009900 1^000000"
   },
   "4189": {
     "name": "Wraith Dead Card",
@@ -10498,7 +10498,7 @@
   },
   "4197": {
     "name": "Mastering Card",
-    "desc": "Luk +1\nAdd Flee +18 if the user is equipped with an item compounded to the Poring card.\n------------------------\n[ ^008000Unlock Effect^000000 ]\nLUK +2\n------------------------\nClass:^6666CC Card^000000\nCompound on:^008C99 Garment^000000\nWeight:^009900 1^000000"
+    "desc": "Luk +1\nAdd Flee +18 if the user is equipped with an item compounded to the Poring card.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nLUK +1\n------------------------\n[ ^008000Unlock Effect^000000 ]\nLUK +2\n------------------------\nClass:^6666CC Card^000000\nCompound on:^008C99 Garment^000000\nWeight:^009900 1^000000"
   },
   "4198": {
     "name": "Maya Purple Card",
@@ -10514,7 +10514,7 @@
   },
   "4201": {
     "name": "Majoruros Card",
-    "desc": "Add the chance of auto casting ^FF0000Stun^000000 on an enemy when the user receives Physical Attack.\n------------------------\n[ ^008000Unlock Effect^000000 ]\nFire Property damage +1%\n------------------------\nClass:^6666CC Card^000000\nCompound on:^00CC33 Armor^000000\nWeight:^009900 1^000000"
+    "desc": "Add the chance of auto casting ^FF0000Stun^000000 on an enemy when the user receives Physical Attack.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nStun Resistance +1%\n------------------------\n[ ^008000Unlock Effect^000000 ]\nFire Property damage +1%\n------------------------\nClass:^6666CC Card^000000\nCompound on:^00CC33 Armor^000000\nWeight:^009900 1^000000"
   },
   "4202": {
     "name": "Mao Guai Card",
@@ -10526,7 +10526,7 @@
   },
   "4204": {
     "name": "Mini Demon Card",
-    "desc": "Receive 10% more Experience Points from ^6666CCBrute^000000 monsters.\nReceive 20% more damage from ^6666CCBrute^000000 monsters.\n------------------------\n[ ^008000Unlock Effect^000000 ]\nBrute monster damage +1%\n------------------------\nClass:^6666CC Card^000000\nCompound on:^999900 Footgear^000000\nWeight:^009900 1^000000"
+    "desc": "Receive 10% more Experience Points from ^6666CCBrute^000000 monsters.\nReceive 20% more damage from ^6666CCBrute^000000 monsters.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nBrute Monster Resistance +1%\n------------------------\n[ ^008000Unlock Effect^000000 ]\nBrute monster damage +1%\n------------------------\nClass:^6666CC Card^000000\nCompound on:^999900 Footgear^000000\nWeight:^009900 1^000000"
   },
   "4205": {
     "name": "Mimic Card",
@@ -10806,7 +10806,7 @@
   },
   "4274": {
     "name": "Zombie Master Card",
-    "desc": "Gain 5 SP each time an Undead monster is killed by Physical Melee Attack.\nDrain 5 SP as the weapon is unequipped.\n------------------------\n[ ^008000Unlock Effect^000000 ]\nUndead Property damage +1%\n------------------------\nClass:^6666CC Card^000000\nCompound on:^FF0000 Weapon^000000\nWeight:^009900 1^000000"
+    "desc": "Gain 5 SP each time an Undead monster is killed by Physical Melee Attack.\nDrain 5 SP as the weapon is unequipped.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nShadow Resistance +1%\n------------------------\n[ ^008000Unlock Effect^000000 ]\nUndead Property damage +1%\n------------------------\nClass:^6666CC Card^000000\nCompound on:^FF0000 Weapon^000000\nWeight:^009900 1^000000"
   },
   "4275": {
     "name": "Zombie Prisoner Card",
@@ -11402,7 +11402,7 @@
   },
   "4423": {
     "name": "Galion Card",
-    "desc": "Hit +5\nIncreases damage to Water monsters by 5%.\n------------------------\n[ ^008000Unlock Effect^000000 ]\nHIT +2\n------------------------\nClass:^6666CC Card^000000\nCompound on:^B40088 Accessory^000000\nWeight:^009900 1^000000"
+    "desc": "Hit +5\nIncreases damage to Water monsters by 5%.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nHIT +2\n------------------------\n[ ^008000Unlock Effect^000000 ]\nHIT +2\n------------------------\nClass:^6666CC Card^000000\nCompound on:^B40088 Accessory^000000\nWeight:^009900 1^000000"
   },
   "4424": {
     "name": "Stapo Card",
@@ -44863,7 +44863,7 @@
   },
   "19105": {
     "name": "Explosion Gum",
-    "desc": "The sound and vibration from this gum is enough to wake up sleeping people.\nClass:^6666CC Headgear^000000\nLocation:^6666CC Lower^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000"
+    "desc": "The sound and vibration from this gum is enough to wake up sleeping people.\nSource:^777777 Lotti Girl^000000\nClass:^6666CC Headgear^000000\nLocation:^6666CC Lower^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000"
   },
   "19106": {
     "name": "Magicstone of Grace",
@@ -46456,7 +46456,7 @@
   },
   "19728": {
     "name": "Drooping Zonda",
-    "desc": "Class:^6666CC Headgear^000000\nLocation:^6666CC Upper^000000\nWeight:^009900 0^000000\nLevel Requirement:^009900 1^000000\nJobs:^6666CC All^000000"
+    "desc": "-------------------------\nIncreases experience gained from defeating monsters by 15%.\n--------------------------\n[ ^008000Deposit Effect^000000 ]\nMax Weight + 50\n--------------------------\nSource:^777777 Lotti Girl^000000\nClass:^6666CC Headgear^000000\nLocation:^6666CC Upper^000000\nWeight:^009900 0^000000\nLevel Requirement:^009900 1^000000\nJobs:^6666CC All^000000"
   },
   "19729": {
     "name": "Neko Mimi Kafra",
@@ -49237,7 +49237,7 @@
   },
   "20430": {
     "name": "Loyal Servant of Devil Morocc",
-    "desc": "A costume that imitating the protection aura of Devil Morocc.\nClass:^6666CC Headgear^000000\nLocation:^6666CC Middle^000000\nWeight:^009900 0^000000\nLevel Requirement:^009900 1^000000\nJobs:^6666CC All^000000"
+    "desc": "A costume that imitating the protection aura of Devil Morocc.\nMax Weight + 500\nIncreases damage inflicted on Shadow monsters by 3%.\nIncreases experience gained from defeating monsters by 10%.\nSource:^777777 Monthsary Giveaway^000000\nClass:^6666CC Headgear^000000\nLocation:^6666CC Middle^000000\nWeight:^009900 0^000000\nLevel Requirement:^009900 1^000000\nJobs:^6666CC All^000000"
   },
   "20431": {
     "name": "Magician Headdress",
@@ -49253,7 +49253,7 @@
   },
   "20434": {
     "name": "Drooping Gunslinger",
-    "desc": "This gunslinger doll perches on your head.\nClass:^6666CC Headgear^000000\nLocation:^6666CC Upper^000000\nWeight:^009900 0^000000\nLevel Requirement:^009900 1^000000\nJobs:^6666CC All^000000"
+    "desc": "This gunslinger doll perches on your head.\n-------------------------\nIncreases experience gained from defeating monsters by 15%.\n--------------------------\n[ ^008000Deposit Effect^000000 ]\nMax Weight + 50\n--------------------------\nSource:^777777 Lotti Girl^000000\nClass:^6666CC Headgear^000000\nLocation:^6666CC Upper^000000\nWeight:^009900 0^000000\nLevel Requirement:^009900 1^000000\nJobs:^6666CC All^000000"
   },
   "20435": {
     "name": "Camellia Hair Pin",
@@ -60705,7 +60705,7 @@
   },
   "31193": {
     "name": "Drooping Ahat",
-    "desc": "A doll that resemble the minister of El Dicastes.\nClass:^6666CC Headgear^000000\nLocation:^6666CC Upper^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000"
+    "desc": "A doll that resemble the minister of El Dicastes.\n-------------------------\nIncreases experience gained from defeating monsters by 15%.\n--------------------------\n[ ^008000Deposit Effect^000000 ]\nMax Weight + 50\n--------------------------\nSource:^777777 Lotti Girl^000000\nClass:^6666CC Headgear^000000\nLocation:^6666CC Upper^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000"
   },
   "31194": {
     "name": "Spinning Propeller",
@@ -61873,15 +61873,15 @@
   },
   "31631": {
     "name": "Drooping Schmidt",
-    "desc": "A doll modeled after Schmidt.\nClass:^6666CC Headgear^000000\nLocation:^6666CC Upper^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000"
+    "desc": "A doll modeled after Schmidt.\n-------------------------\nIncreases experience gained from defeating monsters by 15%.\n--------------------------\n[ ^008000Deposit Effect^000000 ]\nMax Weight + 50\n--------------------------\nSource:^777777 Lotti Girl^000000\nClass:^6666CC Headgear^000000\nLocation:^6666CC Upper^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000"
   },
   "31632": {
     "name": "Drooping Oscar",
-    "desc": "A doll modeled after Oscar.\nClass:^6666CC Headgear^000000\nLocation:^6666CC Upper^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000"
+    "desc": "A doll modeled after Oscar.\n-------------------------\nIncreases experience gained from defeating monsters by 15%.\n--------------------------\n[ ^008000Deposit Effect^000000 ]\nMax Weight + 50\n--------------------------\nSource:^777777 Lotti Girl^000000\nClass:^6666CC Headgear^000000\nLocation:^6666CC Upper^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000"
   },
   "31633": {
     "name": "Drooping Heinrich",
-    "desc": "A doll modeled after Heinrich.\nClass:^6666CC Headgear^000000\nLocation:^6666CC Upper^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000"
+    "desc": "A doll modeled after Heinrich.\n-------------------------\nIncreases experience gained from defeating monsters by 15%.\n--------------------------\n[ ^008000Deposit Effect^000000 ]\nMax Weight + 50\n--------------------------\nSource:^777777 Lotti Girl^000000\nClass:^6666CC Headgear^000000\nLocation:^6666CC Upper^000000\nWeight:^006600 0^000000\nLevel Requirement:^006600 1^000000\nJobs:^6666CC All^000000"
   },
   "31635": {
     "name": "Blonde Fairy Long",
@@ -65427,7 +65427,7 @@
   },
   "42868": {
     "name": "Asprika I",
-    "desc": "A wing made of all lights that exist in the world. It's name means 'Light of the gods'.\nIncreases resistance to all elemental properties by 20%.\nFLEE + 15, MDEF + 5.\nAdditional Flee + 2 per ^885500(Refine Rate)^000000.\nDecreases Chance of being hit by critical by 2%\nCan not be destroyed.\n^ffffff_^000000\n------------------------\n[ ^008000Deposit Effect^000000 ]\nDecreases Chance of being hit by critical by 1%\n------------------------\nSource:^777777 ?^000000\nClass:^6666CC Garment^000000\nDefense:^0000FF 5^000000\nWeight:^009900 40^000000\nLevel Requirement:^009900 94^000000\nJobs:^6666CC All^000000"
+    "desc": "A wing made of all lights that exist in the world. It's name means 'Light of the gods'.\nIncreases resistance to all elemental properties by 20%.\nFLEE + 15, MDEF + 5.\nAdditional Flee + 2 per ^885500(Refine Rate)^000000.\nDecreases Chance of being hit by critical by 2%\nCan not be destroyed.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nDecreases Chance of being hit by critical by 1%\n------------------------\nSource:^777777 ?^000000\nClass:^6666CC Garment^000000\nDefense:^0000FF 5^000000\nWeight:^009900 40^000000\nLevel Requirement:^009900 94^000000\nJobs:^6666CC All^000000"
   },
   "42869": {
     "name": "Blank Eyes I",
@@ -65916,7 +65916,7 @@
   },
   "43734": {
     "name": "Maya Purple Card [Void]",
-    "desc": "Flee +20\nPerfect Dodge +5\nEnable to see hidden enemies.\nClass: ^777777Card^000000\nCompound on: ^777777Headgear^000000\nWeight: ^7777771^000000"
+    "desc": "Flee +20\nPerfect Dodge +5\nMaximum HP & SP +1%\nEnable to see hidden enemies.\nClass: ^777777Card^000000\nCompound on: ^777777Headgear^000000\nWeight: ^7777771^000000"
   },
   "43735": {
     "name": "Gemini-S58 Card [Void]",
@@ -70410,335 +70410,335 @@
   },
   "47001": {
     "name": "Cat Paws",
-    "desc": "A black-colored cute mittens shaped like a cat's paws.\nSource:^777777 Bonus Point Shop^000000\nClass:^6666CC Costume^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Assassin^000000"
+    "desc": "A black-colored cute mittens shaped like a cat's paws.\nSource:^777777 Bonus Point Shop^000000\nClass:^6666CC Costume Headgear^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Assassin^000000"
   },
   "47002": {
     "name": "Dark Axe",
-    "desc": "A battle spear which has darkness surrounding it.\nSource:^777777 Bonus Point Shop^000000\nClass:^6666CC Costume^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Knight, Crusader^000000"
+    "desc": "A battle spear which has darkness surrounding it.\nSource:^777777 Bonus Point Shop^000000\nClass:^6666CC Costume Headgear^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Knight, Crusader^000000"
   },
   "47003": {
     "name": "Light Bow",
-    "desc": "A special bow that was blessed by the Goddess Freya.\nSource:^777777 Bonus Point Shop^000000\nClass:^6666CC Costume^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Hunter, Bard, Dancer and Rogue^000000"
+    "desc": "A special bow that was blessed by the Goddess Freya.\nSource:^777777 Bonus Point Shop^000000\nClass:^6666CC Costume Headgear^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Hunter, Bard, Dancer and Rogue^000000"
   },
   "47004": {
     "name": "Light Claw",
-    "desc": "A special claw that was blessed by the Goddess Freya.\nSource:^777777 Bonus Point Shop^000000\nClass:^6666CC Costume^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Monk^000000"
+    "desc": "A special claw that was blessed by the Goddess Freya.\nSource:^777777 Bonus Point Shop^000000\nClass:^6666CC Costume Headgear^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Monk^000000"
   },
   "47005": {
     "name": "Light Wand",
-    "desc": "A special wand that was blessed by the Goddess Freya.\nSource:^777777 Bonus Point Shop^000000\nClass:^6666CC Costume^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Wizard and Sage^000000"
+    "desc": "A special wand that was blessed by the Goddess Freya.\nSource:^777777 Bonus Point Shop^000000\nClass:^6666CC Costume Headgear^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Wizard and Sage^000000"
   },
   "47006": {
     "name": "Warrior Blade",
-    "desc": "A sword with chipped blades that has resulted from countless battles.\nSource:^777777 Bonus Point Shop^000000\nClass:^6666CC Costume^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Blacksmith, Assassin, Alchemist and Rogue^000000"
+    "desc": "A sword with chipped blades that has resulted from countless battles.\nSource:^777777 Bonus Point Shop^000000\nClass:^6666CC Costume Headgear^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Blacksmith, Assassin, Alchemist and Rogue^000000"
   },
   "47007": {
     "name": "Noctis Blade",
-    "desc": "One of the Crown Prince's ascended deadly weapons.\n^FF0000Note^000000: This item has an animation during normal attacks and when in battle stance.\nSource:^777777 Donation Shop^000000\nClass:^6666CC Costume^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Knight, Crusader^000000"
+    "desc": "One of the Crown Prince's ascended deadly weapons.\n^FF0000Note^000000: This item has an animation during normal attacks and when in battle stance.\nSource:^777777 Donation Shop^000000\nClass:^6666CC Costume Headgear^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Knight, Crusader^000000"
   },
   "47008": {
     "name": "Noctis Spear",
-    "desc": "One of the Crown Prince's ascended deadly weapons.\n^FF0000Note^000000: This item has an animation during normal attacks and when in battle stance.\nSource:^777777 Donation Shop^000000\nClass:^6666CC Costume^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Knight, Crusader^000000"
+    "desc": "One of the Crown Prince's ascended deadly weapons.\n^FF0000Note^000000: This item has an animation during normal attacks and when in battle stance.\nSource:^777777 Donation Shop^000000\nClass:^6666CC Costume Headgear^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Knight, Crusader^000000"
   },
   "47009": {
     "name": "Noctis Bow",
-    "desc": "One of the Crown Prince's ascended deadly weapons.\n^FF0000Note^000000: This item has an animation during normal attacks and when in battle stance.\nSource:^777777 Donation Shop^000000\nClass:^6666CC Costume^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Hunter^000000"
+    "desc": "One of the Crown Prince's ascended deadly weapons.\n^FF0000Note^000000: This item has an animation during normal attacks and when in battle stance.\nSource:^777777 Donation Shop^000000\nClass:^6666CC Costume Headgear^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Hunter^000000"
   },
   "47010": {
     "name": "Noctis Book",
-    "desc": "One of the Crown Prince's ascended deadly weapons.\n^FF0000Note^000000: This item has an animation during normal attacks and when in battle stance.\nSource:^777777 Donation Shop^000000\nClass:^6666CC Costume^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Priest^000000"
+    "desc": "One of the Crown Prince's ascended deadly weapons.\n^FF0000Note^000000: This item has an animation during normal attacks and when in battle stance.\nSource:^777777 Donation Shop^000000\nClass:^6666CC Costume Headgear^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Priest^000000"
   },
   "47011": {
     "name": "Noctis Knuckle",
-    "desc": "One of the Crown Prince's ascended deadly weapons.\n^FF0000Note^000000: This item has an animation during normal attacks and when in battle stance.\nSource:^777777 Donation Shop^000000\nClass:^6666CC Costume^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Monk^000000"
+    "desc": "One of the Crown Prince's ascended deadly weapons.\n^FF0000Note^000000: This item has an animation during normal attacks and when in battle stance.\nSource:^777777 Donation Shop^000000\nClass:^6666CC Costume Headgear^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Monk^000000"
   },
   "47012": {
     "name": "Noctis Katar",
-    "desc": "One of the Crown Prince's ascended deadly weapons.\n^FF0000Note^000000: This item has an animation during normal attacks and when in battle stance.\nSource:^777777 Donation Shop^000000\nClass:^6666CC Costume^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Assassin^000000"
+    "desc": "One of the Crown Prince's ascended deadly weapons.\n^FF0000Note^000000: This item has an animation during normal attacks and when in battle stance.\nSource:^777777 Donation Shop^000000\nClass:^6666CC Costume Headgear^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Assassin^000000"
   },
   "47013": {
     "name": "Noctis Axe",
-    "desc": "One of the Crown Prince's ascended deadly weapons.\n^FF0000Note^000000: This item has an animation during normal attacks and when in battle stance.\nSource:^777777 Donation Shop^000000\nClass:^6666CC Costume^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Blacksmith^000000"
+    "desc": "One of the Crown Prince's ascended deadly weapons.\n^FF0000Note^000000: This item has an animation during normal attacks and when in battle stance.\nSource:^777777 Donation Shop^000000\nClass:^6666CC Costume Headgear^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Blacksmith^000000"
   },
   "47014": {
     "name": "Noctis Wand",
-    "desc": "One of the Crown Prince's ascended deadly weapons.\n^FF0000Note^000000: This item has an animation during normal attacks and when in battle stance.\nSource:^777777 Donation Shop^000000\nClass:^6666CC Costume^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Wizard^000000"
+    "desc": "One of the Crown Prince's ascended deadly weapons.\n^FF0000Note^000000: This item has an animation during normal attacks and when in battle stance.\nSource:^777777 Donation Shop^000000\nClass:^6666CC Costume Headgear^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Wizard^000000"
   },
   "47015": {
     "name": "Noctis Staff",
-    "desc": "One of the Crown Prince's ascended deadly weapons.\n^FF0000Note^000000: This item has an animation during normal attacks and when in battle stance.\nSource:^777777 Donation Shop^000000\nClass:^6666CC Costume^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Sage^000000"
+    "desc": "One of the Crown Prince's ascended deadly weapons.\n^FF0000Note^000000: This item has an animation during normal attacks and when in battle stance.\nSource:^777777 Donation Shop^000000\nClass:^6666CC Costume Headgear^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Sage^000000"
   },
   "47016": {
     "name": "Noctis Dagger",
-    "desc": "One of the Crown Prince's ascended deadly weapons.\n^FF0000Note^000000: This item has an animation during normal attacks and when in battle stance.\nSource:^777777 Donation Shop^000000\nClass:^6666CC Costume^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Rogue^000000"
+    "desc": "One of the Crown Prince's ascended deadly weapons.\n^FF0000Note^000000: This item has an animation during normal attacks and when in battle stance.\nSource:^777777 Donation Shop^000000\nClass:^6666CC Costume Headgear^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Rogue^000000"
   },
   "47017": {
     "name": "Noctis Guitar",
-    "desc": "One of the Crown Prince's ascended deadly weapons.\n^FF0000Note^000000: This item has an animation during normal attacks and when in battle stance.\nSource:^777777 Donation Shop^000000\nClass:^6666CC Costume^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Bard^000000"
+    "desc": "One of the Crown Prince's ascended deadly weapons.\n^FF0000Note^000000: This item has an animation during normal attacks and when in battle stance.\nSource:^777777 Donation Shop^000000\nClass:^6666CC Costume Headgear^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Bard^000000"
   },
   "47018": {
     "name": "Noctis Fan",
-    "desc": "One of the Crown Prince's ascended deadly weapons.\n^FF0000Note^000000: This item has an animation during normal attacks and when in battle stance.\nSource:^777777 Donation Shop^000000\nClass:^6666CC Costume^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Dancer^000000"
+    "desc": "One of the Crown Prince's ascended deadly weapons.\n^FF0000Note^000000: This item has an animation during normal attacks and when in battle stance.\nSource:^777777 Donation Shop^000000\nClass:^6666CC Costume Headgear^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Dancer^000000"
   },
   "47019": {
     "name": "Ahsoka Lightsaber",
-    "desc": "Lightsaber deadly series, you won't even feel you've been sliced in half.\n^FF0000Note^000000: This item has an animation during normal attacks and when in battle stance.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nATK, MATK, HIT + 3\n------------------------\nSource:^777777 Gacha Machine^000000\nClass:^6666CC Costume^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC 2nd Job, Novice, Ninja^000000"
+    "desc": "Lightsaber deadly series, you won't even feel you've been sliced in half.\n^FF0000Note^000000: This item has an animation during normal attacks and when in battle stance.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nATK, MATK, HIT + 3\n------------------------\nSource:^777777 Gacha Machine^000000\nClass:^6666CC Costume Headgear^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC 2nd Job, Novice, Ninja^000000"
   },
   "47020": {
     "name": "Anakin Lightsaber",
-    "desc": "Lightsaber deadly series, you won't even feel you've been sliced in half.\n^FF0000Note^000000: This item has an animation during normal attacks and when in battle stance.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nATK, MATK, HIT + 3\n------------------------\nSource:^777777 Gacha Machine^000000\nClass:^6666CC Costume^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC 2nd Job, Novice, Ninja^000000"
+    "desc": "Lightsaber deadly series, you won't even feel you've been sliced in half.\n^FF0000Note^000000: This item has an animation during normal attacks and when in battle stance.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nATK, MATK, HIT + 3\n------------------------\nSource:^777777 Gacha Machine^000000\nClass:^6666CC Costume Headgear^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC 2nd Job, Novice, Ninja^000000"
   },
   "47021": {
     "name": "Cal Lightsaber",
-    "desc": "Lightsaber deadly series, you won't even feel you've been sliced in half.\n^FF0000Note^000000: This item has an animation during normal attacks and when in battle stance.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nATK, MATK, HIT + 3\n------------------------\nSource:^777777 Gacha Machine^000000\nClass:^6666CC Costume^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC 2nd Job, Novice, Ninja^000000"
+    "desc": "Lightsaber deadly series, you won't even feel you've been sliced in half.\n^FF0000Note^000000: This item has an animation during normal attacks and when in battle stance.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nATK, MATK, HIT + 3\n------------------------\nSource:^777777 Gacha Machine^000000\nClass:^6666CC Costume Headgear^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC 2nd Job, Novice, Ninja^000000"
   },
   "47022": {
     "name": "Dark Lightsaber",
-    "desc": "Lightsaber deadly series, you won't even feel you've been sliced in half.\n^FF0000Note^000000: This item has an animation during normal attacks and when in battle stance.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nATK, MATK, HIT + 3\n------------------------\nSource:^777777 Gacha Machine^000000\nClass:^6666CC Costume^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC 2nd Job, Novice, Ninja^000000"
+    "desc": "Lightsaber deadly series, you won't even feel you've been sliced in half.\n^FF0000Note^000000: This item has an animation during normal attacks and when in battle stance.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nATK, MATK, HIT + 3\n------------------------\nSource:^777777 Gacha Machine^000000\nClass:^6666CC Costume Headgear^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC 2nd Job, Novice, Ninja^000000"
   },
   "47023": {
     "name": "KyloRen Lightsaber",
-    "desc": "Lightsaber deadly series, you won't even feel you've been sliced in half.\n^FF0000Note^000000: This item has an animation during normal attacks and when in battle stance.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nATK, MATK, HIT + 3\n------------------------\nSource:^777777 Gacha Machine^000000\nClass:^6666CC Costume^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC 2nd Job, Novice, Ninja^000000"
+    "desc": "Lightsaber deadly series, you won't even feel you've been sliced in half.\n^FF0000Note^000000: This item has an animation during normal attacks and when in battle stance.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nATK, MATK, HIT + 3\n------------------------\nSource:^777777 Gacha Machine^000000\nClass:^6666CC Costume Headgear^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC 2nd Job, Novice, Ninja^000000"
   },
   "47024": {
     "name": "Luke Lightsaber",
-    "desc": "Lightsaber deadly series, you won't even feel you've been sliced in half.\n^FF0000Note^000000: This item has an animation during normal attacks and when in battle stance.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nATK, MATK, HIT + 3\n------------------------\nSource:^777777 Gacha Machine^000000\nClass:^6666CC Costume^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC 2nd Job, Novice, Ninja^000000"
+    "desc": "Lightsaber deadly series, you won't even feel you've been sliced in half.\n^FF0000Note^000000: This item has an animation during normal attacks and when in battle stance.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nATK, MATK, HIT + 3\n------------------------\nSource:^777777 Gacha Machine^000000\nClass:^6666CC Costume Headgear^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC 2nd Job, Novice, Ninja^000000"
   },
   "47025": {
     "name": "Rey Lightsaber",
-    "desc": "Lightsaber deadly series, you won't even feel you've been sliced in half.\n^FF0000Note^000000: This item has an animation during normal attacks and when in battle stance.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nATK, MATK, HIT + 3\n------------------------\nSource:^777777 Gacha Machine^000000\nClass:^6666CC Costume^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC 2nd Job, Novice, Ninja^000000"
+    "desc": "Lightsaber deadly series, you won't even feel you've been sliced in half.\n^FF0000Note^000000: This item has an animation during normal attacks and when in battle stance.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nATK, MATK, HIT + 3\n------------------------\nSource:^777777 Gacha Machine^000000\nClass:^6666CC Costume Headgear^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC 2nd Job, Novice, Ninja^000000"
   },
   "47026": {
     "name": "Vader Lightsaber",
-    "desc": "Lightsaber deadly series, you won't even feel you've been sliced in half.\n^FF0000Note^000000: This item has an animation during normal attacks and when in battle stance.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nATK, MATK, HIT + 3\n------------------------\nSource:^777777 Gacha Machine^000000\nClass:^6666CC Costume^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC 2nd Job, Novice, Ninja^000000"
+    "desc": "Lightsaber deadly series, you won't even feel you've been sliced in half.\n^FF0000Note^000000: This item has an animation during normal attacks and when in battle stance.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nATK, MATK, HIT + 3\n------------------------\nSource:^777777 Gacha Machine^000000\nClass:^6666CC Costume Headgear^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC 2nd Job, Novice, Ninja^000000"
   },
   "47027": {
     "name": "Windu Lightsaber",
-    "desc": "Lightsaber deadly series, you won't even feel you've been sliced in half.\n^FF0000Note^000000: This item has an animation during normal attacks and when in battle stance.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nATK, MATK, HIT + 3\n------------------------\nSource:^777777 Gacha Machine^000000\nClass:^6666CC Costume^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC 2nd Job, Novice, Ninja^000000"
+    "desc": "Lightsaber deadly series, you won't even feel you've been sliced in half.\n^FF0000Note^000000: This item has an animation during normal attacks and when in battle stance.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nATK, MATK, HIT + 3\n------------------------\nSource:^777777 Gacha Machine^000000\nClass:^6666CC Costume Headgear^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC 2nd Job, Novice, Ninja^000000"
   },
   "47028": {
     "name": "Drake Axe",
-    "desc": "...\nSource:^777777 Donation Shop^000000\nClass:^6666CC Costume^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Blacksmith^000000"
+    "desc": "...\nSource:^777777 Donation Shop^000000\nClass:^6666CC Costume Headgear^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Blacksmith^000000"
   },
   "47029": {
     "name": "Drake Bow",
-    "desc": "...\nSource:^777777 Donation Shop^000000\nClass:^6666CC Costume^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Hunter, Rogue^000000"
+    "desc": "...\nSource:^777777 Donation Shop^000000\nClass:^6666CC Costume Headgear^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Hunter, Rogue^000000"
   },
   "47030": {
     "name": "Drake Claw",
-    "desc": "...\nSource:^777777 Donation Shop^000000\nClass:^6666CC Costume^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Monk^000000"
+    "desc": "...\nSource:^777777 Donation Shop^000000\nClass:^6666CC Costume Headgear^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Monk^000000"
   },
   "47031": {
     "name": "Drake Crucifix",
-    "desc": "...\nSource:^777777 Donation Shop^000000\nClass:^6666CC Costume^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Priest^000000"
+    "desc": "...\nSource:^777777 Donation Shop^000000\nClass:^6666CC Costume Headgear^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Priest^000000"
   },
   "47032": {
     "name": "Drake Dagger",
-    "desc": "...\nSource:^777777 Donation Shop^000000\nClass:^6666CC Costume^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Assassin^000000"
+    "desc": "...\nSource:^777777 Donation Shop^000000\nClass:^6666CC Costume Headgear^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Assassin^000000"
   },
   "47033": {
     "name": "Drake Destroyer",
-    "desc": "...\nSource:^777777 Donation Shop^000000\nClass:^6666CC Costume^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Gunslinger^000000"
+    "desc": "...\nSource:^777777 Donation Shop^000000\nClass:^6666CC Costume Headgear^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Gunslinger^000000"
   },
   "47034": {
     "name": "Drake Guitar",
-    "desc": "...\nSource:^777777 Donation Shop^000000\nClass:^6666CC Costume^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Bard^000000"
+    "desc": "...\nSource:^777777 Donation Shop^000000\nClass:^6666CC Costume Headgear^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Bard^000000"
   },
   "47035": {
     "name": "Drake Katar",
-    "desc": "...\nSource:^777777 Donation Shop^000000\nClass:^6666CC Costume^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Assassin^000000"
+    "desc": "...\nSource:^777777 Donation Shop^000000\nClass:^6666CC Costume Headgear^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Assassin^000000"
   },
   "47036": {
     "name": "Drake Killer",
-    "desc": "...\nSource:^777777 Donation Shop^000000\nClass:^6666CC Costume^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Gunslinger^000000"
+    "desc": "...\nSource:^777777 Donation Shop^000000\nClass:^6666CC Costume Headgear^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Gunslinger^000000"
   },
   "47037": {
     "name": "Drake Kunai",
-    "desc": "...\nSource:^777777 Donation Shop^000000\nClass:^6666CC Costume^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Ninja^000000"
+    "desc": "...\nSource:^777777 Donation Shop^000000\nClass:^6666CC Costume Headgear^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Ninja^000000"
   },
   "47038": {
     "name": "Drake Mace",
-    "desc": "...\nSource:^777777 Donation Shop^000000\nClass:^6666CC Costume^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Alchemist^000000"
+    "desc": "...\nSource:^777777 Donation Shop^000000\nClass:^6666CC Costume Headgear^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Alchemist^000000"
   },
   "47039": {
     "name": "Drake Pistol",
-    "desc": "...\nSource:^777777 Donation Shop^000000\nClass:^6666CC Costume^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Gunslinger^000000"
+    "desc": "...\nSource:^777777 Donation Shop^000000\nClass:^6666CC Costume Headgear^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Gunslinger^000000"
   },
   "47040": {
     "name": "Drake Scythe",
-    "desc": "...\nSource:^777777 Donation Shop^000000\nClass:^6666CC Costume^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Ninja^000000"
+    "desc": "...\nSource:^777777 Donation Shop^000000\nClass:^6666CC Costume Headgear^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Ninja^000000"
   },
   "47041": {
     "name": "Drake Shotgun",
-    "desc": "...\nSource:^777777 Donation Shop^000000\nClass:^6666CC Costume^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Gunslinger^000000"
+    "desc": "...\nSource:^777777 Donation Shop^000000\nClass:^6666CC Costume Headgear^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Gunslinger^000000"
   },
   "47042": {
     "name": "Drake Spear",
-    "desc": "...\nSource:^777777 Donation Shop^000000\nClass:^6666CC Costume^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Knight, Crusader^000000"
+    "desc": "...\nSource:^777777 Donation Shop^000000\nClass:^6666CC Costume Headgear^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Knight, Crusader^000000"
   },
   "47043": {
     "name": "Drake Staff",
-    "desc": "...\nSource:^777777 Donation Shop^000000\nClass:^6666CC Costume^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Wizard^000000"
+    "desc": "...\nSource:^777777 Donation Shop^000000\nClass:^6666CC Costume Headgear^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Wizard^000000"
   },
   "47044": {
     "name": "Drake Sword",
-    "desc": "...\nSource:^777777 Donation Shop^000000\nClass:^6666CC Costume^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Knight, Crusader^000000"
+    "desc": "...\nSource:^777777 Donation Shop^000000\nClass:^6666CC Costume Headgear^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Knight, Crusader^000000"
   },
   "47045": {
     "name": "Drake Trauncheon",
-    "desc": "...\nSource:^777777 Donation Shop^000000\nClass:^6666CC Costume^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Sage^000000"
+    "desc": "...\nSource:^777777 Donation Shop^000000\nClass:^6666CC Costume Headgear^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Sage^000000"
   },
   "47046": {
     "name": "Drake Umbrella",
-    "desc": "...\nSource:^777777 Lotti Girl^000000\nClass:^6666CC Costume^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Dancer^000000"
+    "desc": "...\nSource:^777777 Lotti Girl^000000\nClass:^6666CC Costume Headgear^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Dancer^000000"
   },
   "47047": {
     "name": "Blue Lightning Saber",
-    "desc": "Lightning Saber deadly series, you won't even feel you've been sliced in half.\nDramatically increase ^008800Saber Throw^000000 damage.\n^FF0000Note^000000: This item has an animation during normal attacks and when in battle stance.\nSource:^777777 Donation Shop^000000\nClass:^6666CC Costume^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Padawan, Jedi, Sith Class^000000"
+    "desc": "Lightning Saber deadly series, you won't even feel you've been sliced in half.\nDramatically increase ^008800Saber Throw^000000 damage.\n^FF0000Note^000000: This item has an animation during normal attacks and when in battle stance.\nSource:^777777 Donation Shop^000000\nClass:^6666CC Costume Headgear^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Padawan, Jedi, Sith Class^000000"
   },
   "47048": {
     "name": "Cyan Lightning Saber",
-    "desc": "Lightning Saber deadly series, you won't even feel you've been sliced in half.\nDramatically increase ^008800Saber Throw^000000 damage.\n^FF0000Note^000000: This item has an animation during normal attacks and when in battle stance.\nSource:^777777 Donation Shop^000000\nClass:^6666CC Costume^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Padawan, Jedi, Sith Class^000000"
+    "desc": "Lightning Saber deadly series, you won't even feel you've been sliced in half.\nDramatically increase ^008800Saber Throw^000000 damage.\n^FF0000Note^000000: This item has an animation during normal attacks and when in battle stance.\nSource:^777777 Donation Shop^000000\nClass:^6666CC Costume Headgear^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Padawan, Jedi, Sith Class^000000"
   },
   "47049": {
     "name": "Green Lightning Saber",
-    "desc": "Lightning Saber deadly series, you won't even feel you've been sliced in half.\nDramatically increase ^008800Saber Throw^000000 damage.\n^FF0000Note^000000: This item has an animation during normal attacks and when in battle stance.\nSource:^777777 Donation Shop^000000\nClass:^6666CC Costume^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Padawan, Jedi, Sith Class^000000"
+    "desc": "Lightning Saber deadly series, you won't even feel you've been sliced in half.\nDramatically increase ^008800Saber Throw^000000 damage.\n^FF0000Note^000000: This item has an animation during normal attacks and when in battle stance.\nSource:^777777 Donation Shop^000000\nClass:^6666CC Costume Headgear^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Padawan, Jedi, Sith Class^000000"
   },
   "47050": {
     "name": "Orange Lightning Saber",
-    "desc": "Lightning Saber deadly series, you won't even feel you've been sliced in half.\nDramatically increase ^008800Saber Throw^000000 damage.\n^FF0000Note^000000: This item has an animation during normal attacks and when in battle stance.\nSource:^777777 Donation Shop^000000\nClass:^6666CC Costume^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Padawan, Jedi, Sith Class^000000"
+    "desc": "Lightning Saber deadly series, you won't even feel you've been sliced in half.\nDramatically increase ^008800Saber Throw^000000 damage.\n^FF0000Note^000000: This item has an animation during normal attacks and when in battle stance.\nSource:^777777 Donation Shop^000000\nClass:^6666CC Costume Headgear^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Padawan, Jedi, Sith Class^000000"
   },
   "47051": {
     "name": "Red Lightning Saber",
-    "desc": "Lightning Saber deadly series, you won't even feel you've been sliced in half.\nDramatically increase ^008800Saber Throw^000000 damage.\n^FF0000Note^000000: This item has an animation during normal attacks and when in battle stance.\nSource:^777777 Donation Shop^000000\nClass:^6666CC Costume^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Padawan, Jedi, Sith Class^000000"
+    "desc": "Lightning Saber deadly series, you won't even feel you've been sliced in half.\nDramatically increase ^008800Saber Throw^000000 damage.\n^FF0000Note^000000: This item has an animation during normal attacks and when in battle stance.\nSource:^777777 Donation Shop^000000\nClass:^6666CC Costume Headgear^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Padawan, Jedi, Sith Class^000000"
   },
   "47052": {
     "name": "Norse Axe",
-    "desc": "A mighty axe forged in Norse tradition.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nATK + 4, MATK + 4\n------------------------\nSource:^777777 Quest Shop^000000\nClass:^6666CC Costume^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Blacksmith, Alchemist^000000"
+    "desc": "A mighty axe forged in Norse tradition.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nATK + 4, MATK + 4\n------------------------\nSource:^777777 Quest Shop^000000\nClass:^6666CC Costume Headgear^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Blacksmith, Alchemist^000000"
   },
   "47053": {
     "name": "Norse Bow",
-    "desc": "An elegant bow with Norse runes.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nATK + 4, MATK + 4\n------------------------\nSource:^777777 Quest Shop^000000\nClass:^6666CC Costume^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Hunter, Rogue^000000"
+    "desc": "An elegant bow with Norse runes.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nATK + 4, MATK + 4\n------------------------\nSource:^777777 Quest Shop^000000\nClass:^6666CC Costume Headgear^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Hunter, Rogue^000000"
   },
   "47054": {
     "name": "Norse Dagger",
-    "desc": "A swift dagger with Norse engravings.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nATK + 4, MATK + 4\n------------------------\nSource:^777777 Quest Shop^000000\nClass:^6666CC Costume^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Assassin^000000"
+    "desc": "A swift dagger with Norse engravings.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nATK + 4, MATK + 4\n------------------------\nSource:^777777 Quest Shop^000000\nClass:^6666CC Costume Headgear^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Assassin^000000"
   },
   "47055": {
     "name": "Norse Fan",
-    "desc": "A graceful fan with Norse patterns.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nATK + 4, MATK + 4\n------------------------\nSource:^777777 Quest Shop^000000\nClass:^6666CC Costume^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Dancer^000000"
+    "desc": "A graceful fan with Norse patterns.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nATK + 4, MATK + 4\n------------------------\nSource:^777777 Quest Shop^000000\nClass:^6666CC Costume Headgear^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Dancer^000000"
   },
   "47056": {
     "name": "Norse Gatling",
-    "desc": "A powerful gatling gun with Norse symbols.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nATK + 4, MATK + 4\n------------------------\nSource:^777777 Quest Shop^000000\nClass:^6666CC Costume^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Gunslinger^000000"
+    "desc": "A powerful gatling gun with Norse symbols.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nATK + 4, MATK + 4\n------------------------\nSource:^777777 Quest Shop^000000\nClass:^6666CC Costume Headgear^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Gunslinger^000000"
   },
   "47057": {
     "name": "Norse Guitar",
-    "desc": "A melodious guitar with Norse decorations.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nATK + 4, MATK + 4\n------------------------\nSource:^777777 Quest Shop^000000\nClass:^6666CC Costume^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Bard^000000"
+    "desc": "A melodious guitar with Norse decorations.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nATK + 4, MATK + 4\n------------------------\nSource:^777777 Quest Shop^000000\nClass:^6666CC Costume Headgear^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Bard^000000"
   },
   "47058": {
     "name": "Norse Katar",
-    "desc": "A deadly katar with Norse markings.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nATK + 4, MATK + 4\n------------------------\nSource:^777777 Quest Shop^000000\nClass:^6666CC Costume^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Assassin^000000"
+    "desc": "A deadly katar with Norse markings.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nATK + 4, MATK + 4\n------------------------\nSource:^777777 Quest Shop^000000\nClass:^6666CC Costume Headgear^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Assassin^000000"
   },
   "47059": {
     "name": "Norse Mace",
-    "desc": "A holy mace blessed with Norse power.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nATK + 4, MATK + 4\n------------------------\nSource:^777777 Quest Shop^000000\nClass:^6666CC Costume^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Priest, Monk^000000"
+    "desc": "A holy mace blessed with Norse power.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nATK + 4, MATK + 4\n------------------------\nSource:^777777 Quest Shop^000000\nClass:^6666CC Costume Headgear^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Priest, Monk^000000"
   },
   "47060": {
     "name": "Norse Revolver",
-    "desc": "A precise revolver with Norse craftsmanship.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nATK + 4, MATK + 4\n------------------------\nSource:^777777 Quest Shop^000000\nClass:^6666CC Costume^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Gunslinger^000000"
+    "desc": "A precise revolver with Norse craftsmanship.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nATK + 4, MATK + 4\n------------------------\nSource:^777777 Quest Shop^000000\nClass:^6666CC Costume Headgear^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Gunslinger^000000"
   },
   "47061": {
     "name": "Norse Rod",
-    "desc": "A magical rod infused with Norse wisdom.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nATK + 4, MATK + 4\n------------------------\nSource:^777777 Quest Shop^000000\nClass:^6666CC Costume^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Priest, Wizard^000000"
+    "desc": "A magical rod infused with Norse wisdom.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nATK + 4, MATK + 4\n------------------------\nSource:^777777 Quest Shop^000000\nClass:^6666CC Costume Headgear^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Priest, Wizard^000000"
   },
   "47062": {
     "name": "Norse Scythe",
-    "desc": "A mystical scythe with Norse enchantments.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nATK + 4, MATK + 4\n------------------------\nSource:^777777 Quest Shop^000000\nClass:^6666CC Costume^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Knight^000000"
+    "desc": "A mystical scythe with Norse enchantments.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nATK + 4, MATK + 4\n------------------------\nSource:^777777 Quest Shop^000000\nClass:^6666CC Costume Headgear^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Knight^000000"
   },
   "47063": {
     "name": "Norse Shield",
-    "desc": "A sturdy shield bearing Norse emblems.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nHP + 200\n------------------------\nSource:^777777 Quest Shop^000000\nClass:^6666CC Costume^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Crusader^000000"
+    "desc": "A sturdy shield bearing Norse emblems.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nHP + 200\n------------------------\nSource:^777777 Quest Shop^000000\nClass:^6666CC Costume Headgear^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Crusader^000000"
   },
   "47064": {
     "name": "Norse Shuriken",
-    "desc": "A deadly shuriken with Norse inscriptions.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nATK + 4, MATK + 4\n------------------------\nSource:^777777 Quest Shop^000000\nClass:^6666CC Costume^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Ninja^000000"
+    "desc": "A deadly shuriken with Norse inscriptions.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nATK + 4, MATK + 4\n------------------------\nSource:^777777 Quest Shop^000000\nClass:^6666CC Costume Headgear^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Ninja^000000"
   },
   "47065": {
     "name": "Norse Spirit",
-    "desc": "A spiritual weapon channeling Norse energy.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nHP + 200\n------------------------\nSource:^777777 Quest Shop^000000\nClass:^6666CC Costume^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Sage^000000"
+    "desc": "A spiritual weapon channeling Norse energy.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nHP + 200\n------------------------\nSource:^777777 Quest Shop^000000\nClass:^6666CC Costume Headgear^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Sage^000000"
   },
   "47066": {
     "name": "Norse Staff",
-    "desc": "A powerful staff with Norse runes.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nATK + 4, MATK + 4\n------------------------\nSource:^777777 Quest Shop^000000\nClass:^6666CC Costume^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Wizard^000000"
+    "desc": "A powerful staff with Norse runes.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nATK + 4, MATK + 4\n------------------------\nSource:^777777 Quest Shop^000000\nClass:^6666CC Costume Headgear^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Wizard^000000"
   },
   "47067": {
     "name": "Norse Sword",
-    "desc": "A legendary sword with Norse heritage.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nATK + 4, MATK + 4\n------------------------\nSource:^777777 Quest Shop^000000\nClass:^6666CC Costume^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Knight^000000"
+    "desc": "A legendary sword with Norse heritage.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nATK + 4, MATK + 4\n------------------------\nSource:^777777 Quest Shop^000000\nClass:^6666CC Costume Headgear^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Knight^000000"
   },
   "47068": {
     "name": "Hydra Dragon Axe",
-    "desc": "A fearsome axe with dragon scales.\nSource:^777777 Donation Shop^000000\nClass:^6666CC Costume^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Blacksmith^000000"
+    "desc": "A fearsome axe with dragon scales.\nSource:^777777 Donation Shop^000000\nClass:^6666CC Costume Headgear^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Blacksmith^000000"
   },
   "47069": {
     "name": "Hydra Dragon Bow",
-    "desc": "A majestic bow adorned with dragon motifs.\nSource:^777777 Donation Shop^000000\nClass:^6666CC Costume^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Hunter^000000"
+    "desc": "A majestic bow adorned with dragon motifs.\nSource:^777777 Donation Shop^000000\nClass:^6666CC Costume Headgear^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Hunter^000000"
   },
   "47070": {
     "name": "Hydra Dragon Chakram",
-    "desc": "A circular blade with dragon energy.\nSource:^777777 Donation Shop^000000\nClass:^6666CC Costume^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Soul Linker^000000"
+    "desc": "A circular blade with dragon energy.\nSource:^777777 Donation Shop^000000\nClass:^6666CC Costume Headgear^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Soul Linker^000000"
   },
   "47071": {
     "name": "Hydra Dragon Dagger",
-    "desc": "A swift dagger with dragon's fury.\nSource:^777777 Donation Shop^000000\nClass:^6666CC Costume^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Assassin, Rogue^000000"
+    "desc": "A swift dagger with dragon's fury.\nSource:^777777 Donation Shop^000000\nClass:^6666CC Costume Headgear^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Assassin, Rogue^000000"
   },
   "47072": {
     "name": "Hydra Dragon Grenade Launcher",
-    "desc": "A powerful launcher with dragon's breath.\nSource:^777777 Donation Shop^000000\nClass:^6666CC Costume^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Gunslinger^000000"
+    "desc": "A powerful launcher with dragon's breath.\nSource:^777777 Donation Shop^000000\nClass:^6666CC Costume Headgear^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Gunslinger^000000"
   },
   "47073": {
     "name": "Hydra Dragon Guitar",
-    "desc": "A resonant guitar with dragon's roar.\nSource:^777777 Donation Shop^000000\nClass:^6666CC Costume^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Bard^000000"
+    "desc": "A resonant guitar with dragon's roar.\nSource:^777777 Donation Shop^000000\nClass:^6666CC Costume Headgear^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Bard^000000"
   },
   "47074": {
     "name": "Hydra Dragon Katar",
-    "desc": "A deadly katar with dragon's claws.\nSource:^777777 Donation Shop^000000\nClass:^6666CC Costume^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Assassin^000000"
+    "desc": "A deadly katar with dragon's claws.\nSource:^777777 Donation Shop^000000\nClass:^6666CC Costume Headgear^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Assassin^000000"
   },
   "47075": {
     "name": "Hydra Dragon Knuckle",
-    "desc": "A powerful knuckle with dragon's might.\nSource:^777777 Donation Shop^000000\nClass:^6666CC Costume^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Monk^000000"
+    "desc": "A powerful knuckle with dragon's might.\nSource:^777777 Donation Shop^000000\nClass:^6666CC Costume Headgear^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Monk^000000"
   },
   "47076": {
     "name": "Hydra Dragon Long Bow",
-    "desc": "A precise bow with dragon's eye.\nSource:^777777 Donation Shop^000000\nClass:^6666CC Costume^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Rogue^000000"
+    "desc": "A precise bow with dragon's eye.\nSource:^777777 Donation Shop^000000\nClass:^6666CC Costume Headgear^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Rogue^000000"
   },
   "47077": {
     "name": "Hydra Dragon Mace",
-    "desc": "A holy mace with dragon's wisdom.\nSource:^777777 Donation Shop^000000\nClass:^6666CC Costume^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Priest, Monk^000000"
+    "desc": "A holy mace with dragon's wisdom.\nSource:^777777 Donation Shop^000000\nClass:^6666CC Costume Headgear^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Priest, Monk^000000"
   },
   "47078": {
     "name": "Hydra Dragon Revolver",
-    "desc": "A precise revolver with dragon's aim.\nSource:^777777 Donation Shop^000000\nClass:^6666CC Costume^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Gunslinger^000000"
+    "desc": "A precise revolver with dragon's aim.\nSource:^777777 Donation Shop^000000\nClass:^6666CC Costume Headgear^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Gunslinger^000000"
   },
   "47079": {
     "name": "Hydra Dragon Shuriken",
-    "desc": "A deadly shuriken with dragon's speed.\nSource:^777777 Donation Shop^000000\nClass:^6666CC Costume^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Ninja^000000"
+    "desc": "A deadly shuriken with dragon's speed.\nSource:^777777 Donation Shop^000000\nClass:^6666CC Costume Headgear^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Ninja^000000"
   },
   "47080": {
     "name": "Hydra Dragon Spear",
-    "desc": "A mighty spear with dragon's reach.\nSource:^777777 Donation Shop^000000\nClass:^6666CC Costume^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Knight, Crusader^000000"
+    "desc": "A mighty spear with dragon's reach.\nSource:^777777 Donation Shop^000000\nClass:^6666CC Costume Headgear^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Knight, Crusader^000000"
   },
   "47081": {
     "name": "Hydra Dragon Spear Shielder",
-    "desc": "A defensive spear with dragon's guard.\nSource:^777777 Donation Shop^000000\nClass:^6666CC Costume^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Knight, Crusader^000000"
+    "desc": "A defensive spear with dragon's guard.\nSource:^777777 Donation Shop^000000\nClass:^6666CC Costume Headgear^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Knight, Crusader^000000"
   },
   "47082": {
     "name": "Hydra Dragon Spell Rod",
-    "desc": "A magical rod with dragon's power.\nSource:^777777 Donation Shop^000000\nClass:^6666CC Costume^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Magician, Sage^000000"
+    "desc": "A magical rod with dragon's power.\nSource:^777777 Donation Shop^000000\nClass:^6666CC Costume Headgear^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Magician, Sage^000000"
   },
   "47083": {
     "name": "Hydra Dragon Sword",
-    "desc": "A legendary sword with dragon's soul.\nSource:^777777 Donation Shop^000000\nClass:^6666CC Costume^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Swordsman, Knight^000000"
+    "desc": "A legendary sword with dragon's soul.\nSource:^777777 Donation Shop^000000\nClass:^6666CC Costume Headgear^000000\nLocation:^6666CC Shadow Weapon^000000\nWeight:^009900 100^000000\nJobs:^6666CC Swordsman, Knight^000000"
   },
   "47084": {
     "name": "Dragonslayer Axe",
@@ -71346,7 +71346,7 @@
   },
   "48141": {
     "name": "Valkyrie Blessing GRN",
-    "desc": "Level up your look with OldschoolRO's exclusive headgear!\nClass :^777777 Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Upper^000000\nWeight:^009900 10^000000\nJobs:^6666CC All^000000"
+    "desc": "Level up your look with OldschoolRO's exclusive headgear!\nSource:^777777 Lotti Girl^000000\nClass :^777777 Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Upper^000000\nWeight:^009900 10^000000\nJobs:^6666CC All^000000"
   },
   "48142": {
     "name": "Valkyrie Blessing RED",
@@ -73026,15 +73026,15 @@
   },
   "48563": {
     "name": "Summer Aura",
-    "desc": "Level up your look with OldschoolRO's exclusive headgear!\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 10^000000\nRequired Level :^777777 1^000000\nJobs:^6666CC All^000000"
+    "desc": "Level up your look with OldschoolRO's exclusive headgear!\n-------------------------\nMax Weight + 600\nGives +1 random stat when equipped.\nReduce damage from Demihuman by 1%.\n--------------------------\n[ ^008000Deposit Effect^000000 ]\nReduce damage from Small monsters by 1%\n--------------------------\nSource:^777777 Lotti Girl^000000\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 10^000000\nRequired Level :^777777 1^000000\nJobs:^6666CC All^000000"
   },
   "48564": {
     "name": "Summer Crowned Wig",
-    "desc": "Level up your look with OldschoolRO's exclusive headgear!\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Upper^000000\nWeight:^009900 10^000000\nRequired Level :^777777 1^000000\nJobs:^6666CC All^000000"
+    "desc": "Level up your look with OldschoolRO's exclusive headgear!\n-------------------------\nMax Weight + 600\nGives +1 random stat when equipped.\nReduce damage from Demihuman by 1%.\n--------------------------\n[ ^008000Deposit Effect^000000 ]\nReduce damage from Medium monsters by 1%\n--------------------------\nSource:^777777 Lotti Girl^000000\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Upper^000000\nWeight:^009900 10^000000\nRequired Level :^777777 1^000000\nJobs:^6666CC All^000000"
   },
   "48565": {
     "name": "Summer Glasses",
-    "desc": "Level up your look with OldschoolRO's exclusive headgear!\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Mid^000000\nWeight:^009900 10^000000\nRequired Level :^777777 1^000000\nJobs:^6666CC All^000000"
+    "desc": "Level up your look with OldschoolRO's exclusive headgear!\n-------------------------\nMax Weight + 600\nGives +1 random stat when equipped.\nReduce damage from Demihuman by 1%.\n--------------------------\n[ ^008000Deposit Effect^000000 ]\nReduce damage from Large monsters by 1%\n--------------------------\nSource:^777777 Lotti Girl^000000\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Mid^000000\nWeight:^009900 10^000000\nRequired Level :^777777 1^000000\nJobs:^6666CC All^000000"
   },
   "48566": {
     "name": "Tanjiro Kamado Aura",
@@ -73134,91 +73134,91 @@
   },
   "48590": {
     "name": "Wicked Collar",
-    "desc": "Level up your look with OldschoolRO's exclusive headgear!\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Mid^000000\nWeight:^009900 10^000000\nRequired Level :^777777 1^000000\nJobs:^6666CC All^000000"
+    "desc": "[ ^FF0000Cannot be traded. ]^000000\nMax Weight + 600\nIncreases damage to Demon monsters by 1%.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nAttack Speed + 1%\n------------------------\nSource:^777777 Halloween Event^000000\nClass:^6666CC Costume Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Mid^000000\nWeight:^009900 10^000000\nRequired Level :^777777 1^000000\nJobs:^6666CC All^000000"
   },
   "48591": {
     "name": "Wicked Collar BLK",
-    "desc": "Level up your look with OldschoolRO's exclusive headgear!\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Mid^000000\nWeight:^009900 10^000000\nRequired Level :^777777 1^000000\nJobs:^6666CC All^000000"
+    "desc": "[ ^FF0000Cannot be traded. ]^000000\nMax Weight + 600\nIncreases damage to Demon monsters by 1%.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nAttack Speed + 1%\n------------------------\nSource:^777777 Halloween Event^000000\nClass:^6666CC Costume Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Mid^000000\nWeight:^009900 10^000000\nRequired Level :^777777 1^000000\nJobs:^6666CC All^000000"
   },
   "48592": {
     "name": "Wicked Collar BLU",
-    "desc": "Level up your look with OldschoolRO's exclusive headgear!\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Mid^000000\nWeight:^009900 10^000000\nRequired Level :^777777 1^000000\nJobs:^6666CC All^000000"
+    "desc": "[ ^FF0000Cannot be traded. ]^000000\nMax Weight + 600\nIncreases damage to Demon monsters by 1%.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nAttack Speed + 1%\n------------------------\nSource:^777777 Halloween Event^000000\nClass:^6666CC Costume Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Mid^000000\nWeight:^009900 10^000000\nRequired Level :^777777 1^000000\nJobs:^6666CC All^000000"
   },
   "48593": {
     "name": "Wicked Collar GRN",
-    "desc": "Level up your look with OldschoolRO's exclusive headgear!\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Mid^000000\nWeight:^009900 10^000000\nRequired Level :^777777 1^000000\nJobs:^6666CC All^000000"
+    "desc": "[ ^FF0000Cannot be traded. ]^000000\nMax Weight + 600\nIncreases damage to Demon monsters by 1%.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nAttack Speed + 1%\n------------------------\nSource:^777777 Halloween Event^000000\nClass:^6666CC Costume Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Mid^000000\nWeight:^009900 10^000000\nRequired Level :^777777 1^000000\nJobs:^6666CC All^000000"
   },
   "48594": {
     "name": "Wicked Collar GRY",
-    "desc": "Level up your look with OldschoolRO's exclusive headgear!\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Mid^000000\nWeight:^009900 10^000000\nRequired Level :^777777 1^000000\nJobs:^6666CC All^000000"
+    "desc": "[ ^FF0000Cannot be traded. ]^000000\nMax Weight + 600\nIncreases damage to Demon monsters by 1%.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nAttack Speed + 1%\n------------------------\nSource:^777777 Halloween Event^000000\nClass:^6666CC Costume Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Mid^000000\nWeight:^009900 10^000000\nRequired Level :^777777 1^000000\nJobs:^6666CC All^000000"
   },
   "48595": {
     "name": "Wicked Collar ORG",
-    "desc": "Level up your look with OldschoolRO's exclusive headgear!\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Mid^000000\nWeight:^009900 10^000000\nRequired Level :^777777 1^000000\nJobs:^6666CC All^000000"
+    "desc": "[ ^FF0000Cannot be traded. ]^000000\nMax Weight + 600\nIncreases damage to Demon monsters by 1%.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nAttack Speed + 1%\n------------------------\nSource:^777777 Halloween Event^000000\nClass:^6666CC Costume Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Mid^000000\nWeight:^009900 10^000000\nRequired Level :^777777 1^000000\nJobs:^6666CC All^000000"
   },
   "48596": {
     "name": "Wicked Collar PNK",
-    "desc": "Level up your look with OldschoolRO's exclusive headgear!\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Mid^000000\nWeight:^009900 10^000000\nRequired Level :^777777 1^000000\nJobs:^6666CC All^000000"
+    "desc": "[ ^FF0000Cannot be traded. ]^000000\nMax Weight + 600\nIncreases damage to Demon monsters by 1%.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nAttack Speed + 1%\n------------------------\nSource:^777777 Halloween Event^000000\nClass:^6666CC Costume Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Mid^000000\nWeight:^009900 10^000000\nRequired Level :^777777 1^000000\nJobs:^6666CC All^000000"
   },
   "48597": {
     "name": "Wicked Collar PRP",
-    "desc": "Level up your look with OldschoolRO's exclusive headgear!\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Mid^000000\nWeight:^009900 10^000000\nRequired Level :^777777 1^000000\nJobs:^6666CC All^000000"
+    "desc": "[ ^FF0000Cannot be traded. ]^000000\nMax Weight + 600\nIncreases damage to Demon monsters by 1%.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nAttack Speed + 1%\n------------------------\nSource:^777777 Halloween Event^000000\nClass:^6666CC Costume Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Mid^000000\nWeight:^009900 10^000000\nRequired Level :^777777 1^000000\nJobs:^6666CC All^000000"
   },
   "48598": {
     "name": "Wicked Collar RED",
-    "desc": "Level up your look with OldschoolRO's exclusive headgear!\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Mid^000000\nWeight:^009900 10^000000\nRequired Level :^777777 1^000000\nJobs:^6666CC All^000000"
+    "desc": "[ ^FF0000Cannot be traded. ]^000000\nMax Weight + 600\nIncreases damage to Demon monsters by 1%.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nAttack Speed + 1%\n------------------------\nSource:^777777 Halloween Event^000000\nClass:^6666CC Costume Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Mid^000000\nWeight:^009900 10^000000\nRequired Level :^777777 1^000000\nJobs:^6666CC All^000000"
   },
   "48599": {
     "name": "Wicked Collar WHT",
-    "desc": "Level up your look with OldschoolRO's exclusive headgear!\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Mid^000000\nWeight:^009900 10^000000\nRequired Level :^777777 1^000000\nJobs:^6666CC All^000000"
+    "desc": "[ ^FF0000Cannot be traded. ]^000000\nMax Weight + 600\nIncreases damage to Demon monsters by 1%.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nAttack Speed + 1%\n------------------------\nSource:^777777 Halloween Event^000000\nClass:^6666CC Costume Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Mid^000000\nWeight:^009900 10^000000\nRequired Level :^777777 1^000000\nJobs:^6666CC All^000000"
   },
   "48600": {
     "name": "Wicked Collar YLW",
-    "desc": "Level up your look with OldschoolRO's exclusive headgear!\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Mid^000000\nWeight:^009900 10^000000\nRequired Level :^777777 1^000000\nJobs:^6666CC All^000000"
+    "desc": "[ ^FF0000Cannot be traded. ]^000000\nMax Weight + 600\nIncreases damage to Demon monsters by 1%.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nAttack Speed + 1%\n------------------------\nSource:^777777 Halloween Event^000000\nClass:^6666CC Costume Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Mid^000000\nWeight:^009900 10^000000\nRequired Level :^777777 1^000000\nJobs:^6666CC All^000000"
   },
   "48601": {
     "name": "Wicked Hat",
-    "desc": "Level up your look with OldschoolRO's exclusive headgear!\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Upper^000000\nWeight:^009900 10^000000\nRequired Level :^777777 1^000000\nJobs:^6666CC All^000000"
+    "desc": "[ ^FF0000Cannot be traded. ]^000000\nMax Weight + 600\nIncreases damage to ALL monsters by 1%.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nHP + 125\n------------------------\nSource:^777777 Halloween Event^000000\nClass:^6666CC Costume Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Upper^000000\nWeight:^009900 10^000000\nRequired Level :^777777 1^000000\nJobs:^6666CC All^000000"
   },
   "48602": {
     "name": "Wicked Hat BLK",
-    "desc": "Level up your look with OldschoolRO's exclusive headgear!\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Upper^000000\nWeight:^009900 10^000000\nRequired Level :^777777 1^000000\nJobs:^6666CC All^000000"
+    "desc": "[ ^FF0000Cannot be traded. ]^000000\nMax Weight + 600\nIncreases damage to ALL monsters by 1%.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nHP + 125\n------------------------\nSource:^777777 Halloween Event^000000\nClass:^6666CC Costume Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Upper^000000\nWeight:^009900 10^000000\nRequired Level :^777777 1^000000\nJobs:^6666CC All^000000"
   },
   "48603": {
     "name": "Wicked Hat BLU",
-    "desc": "Level up your look with OldschoolRO's exclusive headgear!\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Upper^000000\nWeight:^009900 10^000000\nRequired Level :^777777 1^000000\nJobs:^6666CC All^000000"
+    "desc": "[ ^FF0000Cannot be traded. ]^000000\nMax Weight + 600\nIncreases damage to ALL monsters by 1%.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nHP + 125\n------------------------\nSource:^777777 Halloween Event^000000\nClass:^6666CC Costume Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Upper^000000\nWeight:^009900 10^000000\nRequired Level :^777777 1^000000\nJobs:^6666CC All^000000"
   },
   "48604": {
     "name": "Wicked Hat GRN",
-    "desc": "Level up your look with OldschoolRO's exclusive headgear!\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Upper^000000\nWeight:^009900 10^000000\nRequired Level :^777777 1^000000\nJobs:^6666CC All^000000"
+    "desc": "[ ^FF0000Cannot be traded. ]^000000\nMax Weight + 600\nIncreases damage to ALL monsters by 1%.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nHP + 125\n------------------------\nSource:^777777 Halloween Event^000000\nClass:^6666CC Costume Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Upper^000000\nWeight:^009900 10^000000\nRequired Level :^777777 1^000000\nJobs:^6666CC All^000000"
   },
   "48605": {
     "name": "Wicked Hat GRY",
-    "desc": "Level up your look with OldschoolRO's exclusive headgear!\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Upper^000000\nWeight:^009900 10^000000\nRequired Level :^777777 1^000000\nJobs:^6666CC All^000000"
+    "desc": "[ ^FF0000Cannot be traded. ]^000000\nMax Weight + 600\nIncreases damage to ALL monsters by 1%.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nHP + 125\n------------------------\nSource:^777777 Halloween Event^000000\nClass:^6666CC Costume Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Upper^000000\nWeight:^009900 10^000000\nRequired Level :^777777 1^000000\nJobs:^6666CC All^000000"
   },
   "48606": {
     "name": "Wicked Hat ORG",
-    "desc": "Level up your look with OldschoolRO's exclusive headgear!\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Upper^000000\nWeight:^009900 10^000000\nRequired Level :^777777 1^000000\nJobs:^6666CC All^000000"
+    "desc": "[ ^FF0000Cannot be traded. ]^000000\nMax Weight + 600\nIncreases damage to ALL monsters by 1%.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nHP + 125\n------------------------\nSource:^777777 Halloween Event^000000\nClass:^6666CC Costume Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Upper^000000\nWeight:^009900 10^000000\nRequired Level :^777777 1^000000\nJobs:^6666CC All^000000"
   },
   "48607": {
     "name": "Wicked Hat PNK",
-    "desc": "Level up your look with OldschoolRO's exclusive headgear!\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Upper^000000\nWeight:^009900 10^000000\nRequired Level :^777777 1^000000\nJobs:^6666CC All^000000"
+    "desc": "[ ^FF0000Cannot be traded. ]^000000\nMax Weight + 600\nIncreases damage to ALL monsters by 1%.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nHP + 125\n------------------------\nSource:^777777 Halloween Event^000000\nClass:^6666CC Costume Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Upper^000000\nWeight:^009900 10^000000\nRequired Level :^777777 1^000000\nJobs:^6666CC All^000000"
   },
   "48608": {
     "name": "Wicked Hat PRP",
-    "desc": "Level up your look with OldschoolRO's exclusive headgear!\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Upper^000000\nWeight:^009900 10^000000\nRequired Level :^777777 1^000000\nJobs:^6666CC All^000000"
+    "desc": "[ ^FF0000Cannot be traded. ]^000000\nMax Weight + 600\nIncreases damage to ALL monsters by 1%.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nHP + 125\n------------------------\nSource:^777777 Halloween Event^000000\nClass:^6666CC Costume Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Upper^000000\nWeight:^009900 10^000000\nRequired Level :^777777 1^000000\nJobs:^6666CC All^000000"
   },
   "48609": {
     "name": "Wicked Hat RED",
-    "desc": "Level up your look with OldschoolRO's exclusive headgear!\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Upper^000000\nWeight:^009900 10^000000\nRequired Level :^777777 1^000000\nJobs:^6666CC All^000000"
+    "desc": "[ ^FF0000Cannot be traded. ]^000000\nMax Weight + 600\nIncreases damage to ALL monsters by 1%.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nHP + 125\n------------------------\nSource:^777777 Halloween Event^000000\nClass:^6666CC Costume Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Upper^000000\nWeight:^009900 10^000000\nRequired Level :^777777 1^000000\nJobs:^6666CC All^000000"
   },
   "48610": {
     "name": "Wicked Hat WHT",
-    "desc": "Level up your look with OldschoolRO's exclusive headgear!\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Upper^000000\nWeight:^009900 10^000000\nRequired Level :^777777 1^000000\nJobs:^6666CC All^000000"
+    "desc": "[ ^FF0000Cannot be traded. ]^000000\nMax Weight + 600\nIncreases damage to ALL monsters by 1%.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nHP + 125\n------------------------\nSource:^777777 Halloween Event^000000\nClass:^6666CC Costume Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Upper^000000\nWeight:^009900 10^000000\nRequired Level :^777777 1^000000\nJobs:^6666CC All^000000"
   },
   "48611": {
     "name": "Wicked Hat YLW",
-    "desc": "Level up your look with OldschoolRO's exclusive headgear!\nClass:^6666CC Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Upper^000000\nWeight:^009900 10^000000\nRequired Level :^777777 1^000000\nJobs:^6666CC All^000000"
+    "desc": "[ ^FF0000Cannot be traded. ]^000000\nMax Weight + 600\nIncreases damage to ALL monsters by 1%.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nHP + 125\n------------------------\nSource:^777777 Halloween Event^000000\nClass:^6666CC Costume Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Upper^000000\nWeight:^009900 10^000000\nRequired Level :^777777 1^000000\nJobs:^6666CC All^000000"
   },
   "48612": {
     "name": "Yokai Aura",
@@ -73476,6 +73476,178 @@
     "name": "Demon Hunter Void",
     "desc": "-------------------------\nATK & MATK +1%\nGives +1 random stat when equipped.\n------------------------\n[^663399 Demon Hunter Set ^000000]\nMaximum HP +1%\nMovespeed Rate +5%\n------------------------\n[ ^008000Deposit Effect^000000 ]\nVIT + 1, HP + 100\n------------------------\nSource:^777777 Donation Exclusive^000000\nClass:^6666CC Costume Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 10^000000\nRequired Level :^777777 1^000000\nJobs:^6666CC All^000000"
   },
+  "48676": {
+    "name": "Aries Gold Armor",
+    "desc": "Level up your look with OldschoolRO's exclusive headgear!\nSource:^777777 Halloween Event^000000\nClass:^6666CC Costume Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Mid^000000\nWeight:^009900 10^000000\nJobs:^6666CC All^000000"
+  },
+  "48677": {
+    "name": "Aries Gold Helm",
+    "desc": "Level up your look with OldschoolRO's exclusive headgear!\nSource:^777777 Halloween Event^000000\nClass:^6666CC Costume Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Upper^000000\nWeight:^009900 10^000000\nJobs:^6666CC All^000000"
+  },
+  "48678": {
+    "name": "Aries Pet",
+    "desc": "Level up your look with OldschoolRO's exclusive headgear!\nSource:^777777 Halloween Event^000000\nClass:^6666CC Costume Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 10^000000\nJobs:^6666CC All^000000"
+  },
+  "48679": {
+    "name": "Flag Of Argentina",
+    "desc": "Level up your look with OldschoolRO's exclusive headgear!\nSource:^777777 Halloween Event^000000\nClass:^6666CC Costume Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 10^000000\nJobs:^6666CC All^000000"
+  },
+  "48680": {
+    "name": "Flag Of Brazil",
+    "desc": "Level up your look with OldschoolRO's exclusive headgear!\n-------------------------\nMax Weight + 750\nMovement Speed +5%\nAttack Speed +5%\n------------------------\n[ ^008000Deposit Effect^000000 ]\nSTR + 1\n------------------------\nSource:^777777 Halloween Event^000000\nClass:^6666CC Costume Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 10^000000\nJobs:^6666CC All^000000"
+  },
+  "48681": {
+    "name": "Flag Of Canada",
+    "desc": "Level up your look with OldschoolRO's exclusive headgear!\n-------------------------\nMax Weight + 750\nMovement Speed +5%\nAttack Speed +5%\n------------------------\n[ ^008000Deposit Effect^000000 ]\nINT + 1\n------------------------\nSource:^777777 Halloween Event^000000\nClass:^6666CC Costume Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 10^000000\nJobs:^6666CC All^000000"
+  },
+  "48682": {
+    "name": "Flag Of Chile",
+    "desc": "Level up your look with OldschoolRO's exclusive headgear!\n-------------------------\nMax Weight + 750\nMovement Speed +5%\nAttack Speed +5%\n------------------------\n[ ^008000Deposit Effect^000000 ]\nDEX + 1\n------------------------\nSource:^777777 Halloween Event^000000\nClass:^6666CC Costume Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 10^000000\nJobs:^6666CC All^000000"
+  },
+  "48683": {
+    "name": "Flag Of France",
+    "desc": "Level up your look with OldschoolRO's exclusive headgear!\n-------------------------\nMax Weight + 750\nMovement Speed +5%\nAttack Speed +5%\n------------------------\n[ ^008000Deposit Effect^000000 ]\nAGI + 1\n------------------------\nSource:^777777 Halloween Event^000000\nClass:^6666CC Costume Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 10^000000\nJobs:^6666CC All^000000"
+  },
+  "48684": {
+    "name": "Flag Of Germany",
+    "desc": "Level up your look with OldschoolRO's exclusive headgear!\n-------------------------\nMax Weight + 750\nMovement Speed +5%\nAttack Speed +5%\n------------------------\n[ ^008000Deposit Effect^000000 ]\nVIT + 1\n------------------------\nSource:^777777 Halloween Event^000000\nClass:^6666CC Costume Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 10^000000\nJobs:^6666CC All^000000"
+  },
+  "48685": {
+    "name": "Flag Of Mexico",
+    "desc": "Level up your look with OldschoolRO's exclusive headgear!\n-------------------------\nMax Weight + 750\nMovement Speed +5%\nAttack Speed +5%\n------------------------\n[ ^008000Deposit Effect^000000 ]\nLUK + 1\n------------------------\nSource:^777777 Halloween Event^000000\nClass:^6666CC Costume Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 10^000000\nJobs:^6666CC All^000000"
+  },
+  "48686": {
+    "name": "Flag Of Peru",
+    "desc": "Level up your look with OldschoolRO's exclusive headgear!\n-------------------------\nMax Weight + 750\nMovement Speed +5%\nAttack Speed +5%\n------------------------\n[ ^008000Deposit Effect^000000 ]\nResistance to Medium Monster +1%\n------------------------\nSource:^777777 Halloween Event^000000\nClass:^6666CC Costume Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 10^000000\nJobs:^6666CC All^000000"
+  },
+  "48687": {
+    "name": "Flag Of Spain",
+    "desc": "Level up your look with OldschoolRO's exclusive headgear!\n-------------------------\nMax Weight + 750\nMovement Speed +5%\nAttack Speed +5%\n------------------------\n[ ^008000Deposit Effect^000000 ]\nResistance to Neutral +1%\n------------------------\nSource:^777777 Halloween Event^000000\nClass:^6666CC Costume Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 10^000000\nJobs:^6666CC All^000000"
+  },
+  "48688": {
+    "name": "Flag Of United States",
+    "desc": "Level up your look with OldschoolRO's exclusive headgear!\n-------------------------\nMax Weight + 750\nMovement Speed +5%\nAttack Speed +5%\n------------------------\n[ ^008000Deposit Effect^000000 ]\nResistance to Demihuman +1%\n------------------------\nSource:^777777 Halloween Event^000000\nClass:^6666CC Costume Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 10^000000\nJobs:^6666CC All^000000"
+  },
+  "48689": {
+    "name": "Gaia Frozen Aura",
+    "desc": "Level up your look with OldschoolRO's exclusive headgear!\n-------------------------\nMax Weight + 600\nReduce Damage from Demihuman by 2%.\nGives +1 Random stat when equipped.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nNullify 1% magic spells\n------------------------\nSource:^777777 Halloween Event^000000\nClass:^6666CC Costume Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 10^000000\nJobs:^6666CC All^000000"
+  },
+  "48690": {
+    "name": "Gaia Frozen Floating Sword",
+    "desc": "Level up your look with OldschoolRO's exclusive headgear!\n-------------------------\nMax Weight + 600\nReduce Damage from Demihuman by 2%.\nGives +1 Random stat when equipped.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nReduce Damage from range attacks by 1%\n------------------------\nSource:^777777 Halloween Event^000000\nClass:^6666CC Costume Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Mid^000000\nWeight:^009900 10^000000\nJobs:^6666CC All^000000"
+  },
+  "48691": {
+    "name": "Gaia Frozen Tiara",
+    "desc": "Level up your look with OldschoolRO's exclusive headgear!\n-------------------------\nMax Weight + 600\nReduce Damage from Demihuman by 2%.\nGives +1 Random stat when equipped.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nReduce Damage from near attacks by 1%\n------------------------\nSource:^777777 Halloween Event^000000\nClass:^6666CC Costume Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Upper^000000\nWeight:^009900 10^000000\nJobs:^6666CC All^000000"
+  },
+  "48692": {
+    "name": "Hellboy Blood Horn",
+    "desc": "Level up your look with OldschoolRO's exclusive headgear!\n-------------------------\nMax Weight + 750\nIncrease damage on Boss monsters by 8%.\nDrop Rate of any items and cards increased by 8%.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nResist to all element except neutral +1%\n------------------------\nSource:^777777 Halloween Event^000000\nClass:^6666CC Costume Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Upper^000000\nWeight:^009900 10^000000\nJobs:^6666CC All^000000"
+  },
+  "48693": {
+    "name": "Hellboy Scarfblade",
+    "desc": "Level up your look with OldschoolRO's exclusive headgear!\n-------------------------\nMax Weight + 750\nIncrease damage on Boss monsters by 8%.\nDrop Rate of any items and cards increased by 8%.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nResist to all element except neutral +1%\n------------------------\nSource:^777777 Halloween Event^000000\nClass:^6666CC Costume Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 10^000000\nJobs:^6666CC All^000000"
+  },
+  "48694": {
+    "name": "Pegasus Armor",
+    "desc": "[ ^FF0000Cannot be traded. ]^000000\nMax Weight + 600\nGives +1 Random stat when equipped.\nIncrease Drop rate of any items and cards increased by 5%.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nIncrease damage to medium monster by 1%\n------------------------\nSource:^777777 Halloween Event^000000\nClass:^6666CC Costume Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Mid^000000\nWeight:^009900 10^000000\nJobs:^6666CC All^000000"
+  },
+  "48695": {
+    "name": "Pegasus Helm",
+    "desc": "[ ^FF0000Cannot be traded. ]^000000\nMax Weight + 600\nGives +1 Random stat when equipped.\nIncrease Drop rate of any items and cards increased by 5%.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nIncrease damage to small monster by 1%\n------------------------\nSource:^777777 Halloween Event^000000\nClass:^6666CC Costume Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Upper^000000\nWeight:^009900 10^000000\nJobs:^6666CC All^000000"
+  },
+  "48696": {
+    "name": "Pegasus Spirit",
+    "desc": "[ ^FF0000Cannot be traded. ]^000000\nMax Weight + 600\nGives +1 Random stat when equipped.\nIncrease Drop rate of any items and cards increased by 5%.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nIncrease damage to large monster by 1%\n------------------------\nSource:^777777 Halloween Event^000000\nClass:^6666CC Costume Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 10^000000\nJobs:^6666CC All^000000"
+  },
+  "48697": {
+    "name": "Pvp Cap",
+    "desc": "Level up your look with OldschoolRO's exclusive headgear!\nSource:^777777 Halloween Event^000000\nClass:^6666CC Costume Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Upper^000000\nWeight:^009900 10^000000\nJobs:^6666CC All^000000"
+  },
+  "48698": {
+    "name": "Pvp Gym Bag",
+    "desc": "Level up your look with OldschoolRO's exclusive headgear!\nSource:^777777 Halloween Event^000000\nClass:^6666CC Costume Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 10^000000\nJobs:^6666CC All^000000"
+  },
+  "48699": {
+    "name": "Pvp Jacket",
+    "desc": "Level up your look with OldschoolRO's exclusive headgear!\nSource:^777777 Halloween Event^000000\nClass:^6666CC Costume Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Mid^000000\nWeight:^009900 10^000000\nJobs:^6666CC All^000000"
+  },
+  "48700": {
+    "name": "Raya Celebration Aura",
+    "desc": "Level up your look with OldschoolRO's exclusive headgear!\nSource:^777777 Halloween Event^000000\nClass:^6666CC Costume Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 10^000000\nJobs:^6666CC All^000000"
+  },
+  "48701": {
+    "name": "Raya Celebration Emblem",
+    "desc": "Level up your look with OldschoolRO's exclusive headgear!\nSource:^777777 Halloween Event^000000\nClass:^6666CC Costume Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Mid^000000\nWeight:^009900 10^000000\nJobs:^6666CC All^000000"
+  },
+  "48702": {
+    "name": "Raya Celebration Shawl",
+    "desc": "Level up your look with OldschoolRO's exclusive headgear!\nSource:^777777 Halloween Event^000000\nClass:^6666CC Costume Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Upper^000000\nWeight:^009900 10^000000\nJobs:^6666CC All^000000"
+  },
+  "48703": {
+    "name": "Raya Celebration Songkok",
+    "desc": "Level up your look with OldschoolRO's exclusive headgear!\nSource:^777777 Halloween Event^000000\nClass:^6666CC Costume Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Upper^000000\nWeight:^009900 10^000000\nJobs:^6666CC All^000000"
+  },
+  "48704": {
+    "name": "Sun Wukong Burning Halo",
+    "desc": "Level up your look with OldschoolRO's exclusive headgear!\nSource:^777777 Halloween Event^000000\nClass:^6666CC Costume Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Mid^000000\nWeight:^009900 10^000000\nJobs:^6666CC All^000000"
+  },
+  "48705": {
+    "name": "Sun Wukong Circlet",
+    "desc": "Level up your look with OldschoolRO's exclusive headgear!\nSource:^777777 Halloween Event^000000\nClass:^6666CC Costume Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Upper^000000\nWeight:^009900 10^000000\nJobs:^6666CC All^000000"
+  },
+  "48706": {
+    "name": "Sun Wukong Golden Aura",
+    "desc": "Level up your look with OldschoolRO's exclusive headgear!\nSource:^777777 Halloween Event^000000\nClass:^6666CC Costume Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 10^000000\nJobs:^6666CC All^000000"
+  },
+  "48707": {
+    "name": "Titan Blade Captain Cape",
+    "desc": "[ ^FF0000Cannot be traded. ]^000000\nMax Weight + 600\nGives +1 Random stat when equipped.\nIncrease damage to Boss Monster by 6%\n------------------------\n[ ^008000Deposit Effect^000000 ]\nAttack Speed + 1%\n------------------------\nSource:^777777 Halloween Event^000000\nClass:^6666CC Costume Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 10^000000\nJobs:^6666CC All^000000"
+  },
+  "48708": {
+    "name": "Titan Blade Pirate Eyes",
+    "desc": "[ ^FF0000Cannot be traded. ]^000000\nMax Weight + 600\nGives +1 Random stat when equipped.\nIncrease damage to Boss Monster by 6%\n------------------------\n[ ^008000Deposit Effect^000000 ]\nAttack Speed + 1%\n------------------------\nSource:^777777 Halloween Event^000000\nClass:^6666CC Costume Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Mid^000000\nWeight:^009900 10^000000\nJobs:^6666CC All^000000"
+  },
+  "48709": {
+    "name": "Titan Blade Pirate Hat",
+    "desc": "[ ^FF0000Cannot be traded. ]^000000\nMax Weight + 600\nGives +1 Random stat when equipped.\nIncrease damage to Boss Monster by 6%\n------------------------\n[ ^008000Deposit Effect^000000 ]\nAttack Speed + 1%\n------------------------\nSource:^777777 Halloween Event^000000\nClass:^6666CC Costume Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Upper^000000\nWeight:^009900 10^000000\nJobs:^6666CC All^000000"
+  },
+  "48710": {
+    "name": "Uchiha Madara Aura",
+    "desc": "Level up your look with OldschoolRO's exclusive headgear!\nSource:^777777 Halloween Event^000000\nClass:^6666CC Costume Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 10^000000\nJobs:^6666CC All^000000"
+  },
+  "48711": {
+    "name": "Uchiha Madara Headgear",
+    "desc": "Level up your look with OldschoolRO's exclusive headgear!\nSource:^777777 Halloween Event^000000\nClass:^6666CC Costume Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Upper^000000\nWeight:^009900 10^000000\nJobs:^6666CC All^000000"
+  },
+  "48712": {
+    "name": "Uchiha Madara Susanoo",
+    "desc": "Level up your look with OldschoolRO's exclusive headgear!\nSource:^777777 Halloween Event^000000\nClass:^6666CC Costume Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Mid^000000\nWeight:^009900 10^000000\nJobs:^6666CC All^000000"
+  },
+  "48713": {
+    "name": "Hiei Aura",
+    "desc": "-------------------------\nMax Weight +500\nAttack Speed Rate +5%\nIncrease Damage to Boss monster by 7%.\nGives +2 random stat when equipped.\n------------------------\n[^663399 Hiei Set ^000000]\nAll Stats +1\nIncrease damage to Demihuman by 2%.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nDEX + 1, LUK + 1\n------------------------\nSource:^777777 Donation Exclusive^000000\nClass:^6666CC Costume Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 10^000000\nJobs:^6666CC All^000000"
+  },
+  "48714": {
+    "name": "Hiei Cape",
+    "desc": "-------------------------\nMax Weight +500\nAttack Speed Rate +5%\nIncrease Damage to Boss monster by 7%.\nGives +2 random stat when equipped.\n------------------------\n[^663399 Hiei Set ^000000]\nAll Stats +1\nIncrease damage to Demihuman by 2%.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nINT + 1, AGI + 1\n------------------------\nSource:^777777 Donation Exclusive^000000\nClass:^6666CC Costume Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Mid^000000\nWeight:^009900 10^000000\nJobs:^6666CC All^000000"
+  },
+  "48715": {
+    "name": "Hiei Headgear",
+    "desc": "-------------------------\nMax Weight +500\nAttack Speed Rate +5%\nIncrease Damage to Boss monster by 7%.\nGives +2 random stat when equipped.\n------------------------\n[^663399 Hiei Set ^000000]\nAll Stats +1\nIncrease damage to Demihuman by 2%.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nSTR + 1, VIT + 1\n------------------------\nSource:^777777 Donation Exclusive^000000\nClass:^6666CC Costume Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Upper^000000\nWeight:^009900 10^000000\nJobs:^6666CC All^000000"
+  },
+  "48716": {
+    "name": "Kurama Headgear",
+    "desc": "-------------------------\nMax Weight +700\nIncrease Damage to Demihuman by 1%.\nGives +1 random stat when equipped.\n------------------------\n[^663399 Kurama Set ^000000]\nAll Stats +1\nReduce range and near attacks by 2%.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nReflect melee physical damage by 1%.\n------------------------\nSource:^777777 Donation Exclusive^000000\nClass:^6666CC Costume Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Upper^000000\nWeight:^009900 10^000000\nJobs:^6666CC All^000000"
+  },
+  "48717": {
+    "name": "Kurama Ojigi Plant",
+    "desc": "-------------------------\nMax Weight +700\nIncrease Damage to Demihuman by 1%.\nGives +1 random stat when equipped.\n------------------------\n[^663399 Kurama Set ^000000]\nAll Stats +1\nReduce range and near attacks by 2%.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nReflect range physical damage by 1%.\n------------------------\nSource:^777777 Donation Exclusive^000000\nClass:^6666CC Costume Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Mid^000000\nWeight:^009900 10^000000\nJobs:^6666CC All^000000"
+  },
+  "48718": {
+    "name": "Kurama Rose Aura",
+    "desc": "-------------------------\nMax Weight +700\nIncrease Damage to Demihuman by 1%.\nGives +1 random stat when equipped.\n------------------------\n[^663399 Kurama Set ^000000]\nAll Stats +1\nReduce range and near attacks by 2%.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nDecrease Chance of being hit by Critical by 1%.\n------------------------\nSource:^777777 Donation Exclusive^000000\nClass:^6666CC Costume Headgear^000000\nDefense:^0000FF 0^000000\nLocation:^6666CC Lower^000000\nWeight:^009900 10^000000\nJobs:^6666CC All^000000"
+  },
   "49000": {
     "name": "Angelic Valkyrie Wings Dark",
     "desc": "-------------------------\nMax Weight + 500\nIncrease damage on Boss monsters by 5%.\nDrop Rate of any items and cards increased by 10%.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nMaxHP +1%\n------------------------\nSource:^777777 Donation Exclusive^000000\nClass:^6666CC Costume Garment^000000\nDefense :^777777 0^000000\nEquipped on :^777777 Garment^000000\nWeight :^777777 10^000000\nApplicable Job :^777777 All^000000"
@@ -73543,6 +73715,34 @@
   "49016": {
     "name": "Demon Hunter Sword",
     "desc": "-------------------------\nMax Weight + 600\nGives +1 random stat when equipped.\nDrop Rate of any items and cards increased by 10%.\n------------------------\n[^663399 Demon Hunter Set ^000000]\nMaximum HP +1%\nMovespeed Rate +5%\n------------------------\n[ ^008000Deposit Effect^000000 ]\nMaximum HP +1%\n------------------------\nSource:^777777 Donation Exclusive^000000\nClass:^6666CC Costume Garment^000000\nDefense :^777777 0^000000\nEquipped on :^777777 Garment^000000\nWeight :^777777 10^000000\nApplicable Job :^777777 All^000000"
+  },
+  "49017": {
+    "name": "Aries Gold Wing",
+    "desc": "-------------------------\nMax Weight + 600\nGives +1 random stat when equipped.\nDrop Rate of any items and cards increased by 10%.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nMaximum HP +1%\n------------------------\nSource:^777777 Donation Exclusive^000000\nClass:^6666CC Costume Garment^000000\nDefense :^777777 0^000000\nEquipped on :^777777 Garment^000000\nWeight :^777777 10^000000\nApplicable Job :^777777 All^000000"
+  },
+  "49018": {
+    "name": "Gaia Frozen Wing",
+    "desc": "-------------------------\nMax Weight + 600\nGives +1 random stat when equipped.\nDrop Rate of any items and cards increased by 10%.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nMaximum HP +1%\n------------------------\nSource:^777777 Donation Exclusive^000000\nClass:^6666CC Costume Garment^000000\nDefense :^777777 0^000000\nEquipped on :^777777 Garment^000000\nWeight :^777777 10^000000\nApplicable Job :^777777 All^000000"
+  },
+  "49019": {
+    "name": "Hiei Sword",
+    "desc": "-------------------------\nMax Weight + 500\nATK + 2%, MATK + 2%\nGives +2 random stat when equipped.\n------------------------\n[^663399 Hiei Set ^000000]\nAll Stats +1\nIncrease damage to Demihuman by 2%.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nIgnore DEF & MDEF of enemies by 2%.\n------------------------\nSource:^777777 Donation Exclusive^000000\nClass:^6666CC Costume Garment^000000\nDefense :^777777 0^000000\nEquipped on :^777777 Garment^000000\nWeight :^777777 10^000000\nApplicable Job :^777777 All^000000"
+  },
+  "49020": {
+    "name": "Kurama Fox Tail",
+    "desc": "-------------------------\nMax Weight + 600\nGives +1 random stat when equipped.\nDrop Rate of any items and cards increased by 10%.\n------------------------\n[^663399 Kurama Set ^000000]\nAll Stats +1\nReduce range and near attacks by 2%.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nGives 1% Lifesteal\n------------------------\nSource:^777777 Donation Exclusive^000000\nClass:^6666CC Costume Garment^000000\nDefense :^777777 0^000000\nEquipped on :^777777 Garment^000000\nWeight :^777777 10^000000\nApplicable Job :^777777 All^000000"
+  },
+  "49021": {
+    "name": "Pegasus Wing",
+    "desc": "[ ^FF0000Cannot be traded. ]^000000\n-------------------------\nMax Weight + 600\nGives +1 random stat when equipped.\nDrop Rate of any items and cards increased by 10%.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nMaximum HP +1%\n------------------------\nSource:^777777 Donation Exclusive^000000\nClass:^6666CC Costume Garment^000000\nDefense :^777777 0^000000\nEquipped on :^777777 Garment^000000\nWeight :^777777 10^000000\nApplicable Job :^777777 All^000000"
+  },
+  "49022": {
+    "name": "Sun Wukong Golden Staff",
+    "desc": "-------------------------\nMax Weight + 600\nGives +1 random stat when equipped.\nDrop Rate of any items and cards increased by 10%.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nMaximum HP +1%\n------------------------\nSource:^777777 Donation Exclusive^000000\nClass:^6666CC Costume Garment^000000\nDefense :^777777 0^000000\nEquipped on :^777777 Garment^000000\nWeight :^777777 10^000000\nApplicable Job :^777777 All^000000"
+  },
+  "49023": {
+    "name": "Uchiha Madara Gunbai",
+    "desc": "-------------------------\nMax Weight + 600\nGives +1 random stat when equipped.\nDrop Rate of any items and cards increased by 10%.\n------------------------\n[ ^008000Deposit Effect^000000 ]\nMaximum HP +1%\n------------------------\nSource:^777777 Donation Exclusive^000000\nClass:^6666CC Costume Garment^000000\nDefense :^777777 0^000000\nEquipped on :^777777 Garment^000000\nWeight :^777777 10^000000\nApplicable Job :^777777 All^000000"
   },
   "400020": {
     "name": "Beach Ball",
