@@ -3,7 +3,7 @@
 // ===== CONSTANTS =====
 
 const GEM_TIMER_MS    = 24 * 60 * 60 * 1000;
-const GEM_STORAGE_KEY = 'osrohr_lab_gem_v1';
+const GEM_STORAGE_KEY = (typeof LOCAL_STORAGE !== 'undefined' && LOCAL_STORAGE.lab_gem) || 'osromr_lab_gem_v1';
 
 const GEM_ITEMS = [
   {
@@ -61,12 +61,23 @@ const GEM_ITEMS = [
 // ===== STORAGE =====
 
 function gemLoad() {
-  try { return JSON.parse(localStorage.getItem(GEM_STORAGE_KEY)) || { timers: [] }; }
-  catch { return { timers: [] }; }
+  try {
+    return (window.osroStore ? osroStore.getJson(GEM_STORAGE_KEY, { timers: [] }) : JSON.parse(localStorage.getItem(GEM_STORAGE_KEY))) || { timers: [] };
+  } catch { return { timers: [] }; }
 }
 
 function gemSave(data) {
-  localStorage.setItem(GEM_STORAGE_KEY, JSON.stringify(data));
+  if (data && Array.isArray(data.timers)) {
+    const now = Date.now();
+    data.timers.forEach(t => {
+      if (!t.updatedAt) t.updatedAt = now;
+    });
+  }
+  if (window.osroStore) {
+    osroStore.setItem(GEM_STORAGE_KEY, data);
+  } else {
+    localStorage.setItem(GEM_STORAGE_KEY, JSON.stringify(data));
+  }
 }
 
 const gemIntervals = {};
@@ -281,6 +292,7 @@ function gemAddTimer() {
     notifyOnDone: false,
     notifiedForFinishedAt: null,
     cloudMessageId: null,
+    updatedAt: Date.now(),
   });
   gemSave(data);
   gemRenderMain();
@@ -290,6 +302,12 @@ function gemDeleteTimer(id) {
   clearInterval(gemIntervals[id]);
   delete gemIntervals[id];
   const data = gemLoad();
+  const t = data.timers.find(timer => timer.id === id);
+  if (t?.cloudMessageId) {
+    osroCancelCloudPush(t.cloudMessageId);
+  }
+  if (!data.deletedTimers) data.deletedTimers = {};
+  data.deletedTimers[id] = Date.now();
   data.timers = data.timers.filter(t => t.id !== id);
   gemSave(data);
   const card = document.querySelector(`.ca-timer[data-id="${id}"]`);
@@ -312,6 +330,7 @@ async function gemStartTimer(id) {
   t.startedAt = Date.now();
   t.finishedAt = null;
   t.notifiedForFinishedAt = null;
+  t.updatedAt = Date.now();
 
   // Schedule cloud push if notify is enabled
   if (t.notifyOnDone) {
@@ -320,7 +339,7 @@ async function gemStartTimer(id) {
       const msgId = await osroScheduleCloudPush(id, GEM_TIMER_MS / 1000, {
         title: osroNotifyTitle('Gem Quest'),
         body:  `${t.name || 'Account'} is ready.`,
-        url: 'https://torrq.github.io/osro-quests-hr/?tab=lab-gem',
+        url: 'https://torrq.github.io/osro-quests-mr/?tab=lab-gem',
       });
       if (msgId) t.cloudMessageId = msgId;
     }
@@ -353,6 +372,7 @@ function gemStopTimer(id) {
 
   t.startedAt = null;
   t.finishedAt = null;
+  t.updatedAt = Date.now();
   gemSave(data);
   const card = document.querySelector(`.ca-timer[data-id="${id}"]`);
   if (card) {
@@ -368,6 +388,7 @@ function gemStopTimer(id) {
 
 function gemStopAll() {
   const data = gemLoad();
+  const now = Date.now();
   data.timers.forEach(t => {
     if (t.cloudMessageId) {
       osroCancelCloudPush(t.cloudMessageId);
@@ -375,6 +396,7 @@ function gemStopAll() {
     }
     t.startedAt = null;
     t.finishedAt = null;
+    t.updatedAt = now;
   });
   gemSave(data);
   Object.keys(gemIntervals).forEach(id => { clearInterval(gemIntervals[id]); delete gemIntervals[id]; });
@@ -384,7 +406,7 @@ function gemStopAll() {
 function gemRenameTimer(id, name) {
   const data = gemLoad();
   const t = data.timers.find(t => t.id === id);
-  if (t) { t.name = name; gemSave(data); }
+  if (t) { t.name = name; t.updatedAt = Date.now(); gemSave(data); }
 }
 
 function gemStartTick(id) {
@@ -400,6 +422,7 @@ function gemStartTick(id) {
       const finishedAt = t.startedAt + GEM_TIMER_MS;
       t.startedAt = null;
       t.finishedAt = finishedAt;
+      t.updatedAt = Date.now();
       gemMaybeNotifyDone(t, finishedAt);
       gemSave(data);
 
@@ -456,6 +479,7 @@ function gemSliderCommit(id, val) {
   } else {
     t.startedAt = Date.now() - (GEM_TIMER_MS - remaining);
     t.finishedAt = null;
+    t.updatedAt = Date.now();
 
     // Reschedule cloud push with the new remaining time
     if (t.notifyOnDone) {
@@ -464,12 +488,12 @@ function gemSliderCommit(id, val) {
           osroScheduleCloudPush(id, Math.ceil(remaining / 1000), {
             title: osroNotifyTitle('Gem Quest'),
             body:  `${t.name || 'Account'} is ready.`,
-            url: 'https://torrq.github.io/osro-quests-hr/?tab=lab-gem',
+            url: 'https://torrq.github.io/osro-quests-mr/?tab=lab-gem',
           }).then(msgId => {
             if (msgId) {
               const d = gemLoad();
               const timer = d.timers.find(x => x.id === id);
-              if (timer) { timer.cloudMessageId = msgId; gemSave(d); }
+              if (timer) { timer.cloudMessageId = msgId; timer.updatedAt = Date.now(); gemSave(d); }
             }
           });
         }
@@ -481,6 +505,7 @@ function gemSliderCommit(id, val) {
       `<button class="btn btn-sm" onclick="gemStopTimer('${id}')">Stop</button>`;
     if (card) card.classList.remove('ca-timer--done');
   }
+  t.updatedAt = Date.now();
   gemSave(data);
 }
 
@@ -502,6 +527,7 @@ async function gemStartTimerFromDisplay(id) {
   t.startedAt = Date.now() - (GEM_TIMER_MS - remaining);
   t.finishedAt = null;
   t.notifiedForFinishedAt = null;
+  t.updatedAt = Date.now();
 
   // Schedule cloud push if notify is enabled
   if (t.notifyOnDone) {
@@ -511,7 +537,7 @@ async function gemStartTimerFromDisplay(id) {
       const msgId = await osroScheduleCloudPush(id, delayInSeconds, {
         title: osroNotifyTitle('Gem Quest'),
         body:  `${t.name || 'Account'} is ready.`,
-        url: 'https://torrq.github.io/osro-quests-hr/?tab=lab-gem',
+        url: 'https://torrq.github.io/osro-quests-mr/?tab=lab-gem',
       });
       if (msgId) t.cloudMessageId = msgId;
     }
@@ -539,7 +565,7 @@ function gemMaybeNotifyDone(t, finishedAt) {
     window.osroNotifyReady({
       section: 'Gem Quest',
       body:    `${t.name || 'Account'} is ready.`,
-      tag:     `osrohr_gem_${t.id}`,
+      tag:     `osromr_gem_${t.id}`,
       url:     '?tab=lab-gem',
     });
   }
@@ -569,7 +595,7 @@ async function gemSetNotifyOnDone(id, enabled, el) {
         const msgId = await osroScheduleCloudPush(id, Math.ceil(remaining / 1000), {
           title: osroNotifyTitle('Gem Quest'),
           body:  `${t.name || 'Account'} is ready.`,
-          url: 'https://torrq.github.io/osro-quests-hr/?tab=lab-gem',
+          url: 'https://torrq.github.io/osro-quests-mr/?tab=lab-gem',
         });
         if (msgId) t.cloudMessageId = msgId;
       }
@@ -583,6 +609,7 @@ async function gemSetNotifyOnDone(id, enabled, el) {
   }
 
   t.notifyOnDone = next;
+  t.updatedAt = Date.now();
   gemSave(data);
 }
 
@@ -623,6 +650,7 @@ function gemResetTimer(id) {
 
   t.startedAt = null;
   t.finishedAt = null;
+  t.updatedAt = Date.now();
   gemSave(data);
 
   const card = document.querySelector(`.ca-timer[data-id="${id}"]`);

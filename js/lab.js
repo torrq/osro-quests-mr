@@ -30,13 +30,19 @@ function getActiveLabExperiment() {
 }
 
 function loadLabData() {
-  try { return JSON.parse(localStorage.getItem(LOCAL_STORAGE.lab_data)) || {}; }
-  catch { return {}; }
+  try {
+    return (window.osroStore ? osroStore.getJson(LOCAL_STORAGE.lab_data, {}) : JSON.parse(localStorage.getItem(LOCAL_STORAGE.lab_data))) || {};
+  } catch { return {}; }
 }
 
 function saveLabData(patch) {
   const cur = loadLabData();
-  localStorage.setItem(LOCAL_STORAGE.lab_data, JSON.stringify({ ...cur, ...patch }));
+  const next = { ...cur, ...patch };
+  if (window.osroStore) {
+    osroStore.setItem(LOCAL_STORAGE.lab_data, next);
+  } else {
+    localStorage.setItem(LOCAL_STORAGE.lab_data, JSON.stringify(next));
+  }
 }
 
 function renderLabSidebar() {

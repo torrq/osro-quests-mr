@@ -189,7 +189,24 @@ function renderItemsCore() {
   }
 
   // 1c. Add autoloot items
-  if (state.autolootData) {
+  if (state.autolootV2) {
+    if (state.autolootV2.slots) {
+      Object.values(state.autolootV2.slots).forEach((slot) => {
+        (slot.sets || []).forEach((set) => {
+          (set.items || []).forEach((itemId) => {
+            usedItemIds.add(Number(itemId));
+          });
+        });
+      });
+    }
+    if (state.autolootV2.archive && Array.isArray(state.autolootV2.archive.sets)) {
+      state.autolootV2.archive.sets.forEach((set) => {
+        (set.items || []).forEach((itemId) => {
+          usedItemIds.add(Number(itemId));
+        });
+      });
+    }
+  } else if (state.autolootData) {
     Object.values(state.autolootData).forEach((autolootList) => {
       if (Array.isArray(autolootList)) {
         autolootList.forEach((itemId) => {
@@ -345,7 +362,7 @@ function renderItemsCore() {
   }
 
   // Update URL search parameters to reflect search state without pushing a new history item
-  if (typeof updateURL === 'function' && (state.currentTab === 'items' || state.selectedItemId)) {
+  if (!state.suppressUrlUpdate && typeof updateURL === 'function' && (state.currentTab === 'items' || state.selectedItemId)) {
     updateURL(state.selectedItemId, 'item', false);
   }
 }
@@ -635,6 +652,8 @@ function loadValuesManagerConfig() {
   let cfg = {};
   if (typeof loadConfig === 'function') {
     cfg = loadConfig() || {};
+  } else if (window.osroStore) {
+    cfg = osroStore.getJson(LOCAL_STORAGE.config, {});
   } else {
     try { cfg = JSON.parse(localStorage.getItem(LOCAL_STORAGE.config)) || {}; } catch { cfg = {}; }
   }
@@ -661,6 +680,8 @@ function saveValuesManagerConfig(patch) {
   let cfg = {};
   if (typeof loadConfig === 'function') {
     cfg = loadConfig() || {};
+  } else if (window.osroStore) {
+    cfg = osroStore.getJson(LOCAL_STORAGE.config, {});
   } else {
     try { cfg = JSON.parse(localStorage.getItem(LOCAL_STORAGE.config)) || {}; } catch { cfg = {}; }
   }
@@ -672,6 +693,8 @@ function saveValuesManagerConfig(patch) {
 
   if (typeof saveConfig === 'function') {
     saveConfig({ valuesManager: next });
+  } else if (window.osroStore) {
+    osroStore.setItem(LOCAL_STORAGE.config, { ...cfg, valuesManager: next });
   } else {
     try {
       localStorage.setItem(LOCAL_STORAGE.config, JSON.stringify({ ...cfg, valuesManager: next }));
@@ -801,7 +824,7 @@ function setValuesManagerSource(src) {
   // Reload values for the new mode
   if (isCustom) {
     // Switch to custom: load from localStorage (or remote if none)
-    const stored = localStorage.getItem(LOCAL_STORAGE.item_values);
+    const stored = window.osroStore ? osroStore.getItem(LOCAL_STORAGE.item_values) : localStorage.getItem(LOCAL_STORAGE.item_values);
     if (stored) {
       try {
         const values = JSON.parse(stored);

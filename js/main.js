@@ -37,9 +37,12 @@ window.state = {
   },
   expandedTreeItems: new Set(),
   showFullTotals: false,
-  autolootData: JSON.parse(localStorage.getItem(LOCAL_STORAGE.autoloot_data)) || {},
-  autolootNames: JSON.parse(localStorage.getItem(LOCAL_STORAGE.autoloot_names)) || {},
+  autolootData: (window.osroStore ? osroStore.getJson(LOCAL_STORAGE.autoloot_data, {}) : JSON.parse(localStorage.getItem(LOCAL_STORAGE.autoloot_data))) || {},
+  autolootNames: (window.osroStore ? osroStore.getJson(LOCAL_STORAGE.autoloot_names, {}) : JSON.parse(localStorage.getItem(LOCAL_STORAGE.autoloot_names))) || {},
   selectedAutolootSlot: 1,
+  autolootV2: null,
+  selectedAutolootSetId: null,
+  autolootCollapsedGroups: {},
   selectedItemId: null,
   showValuesOnly: false,
   searchDescriptions: false,
@@ -60,6 +63,11 @@ window.state = {
   bmSort: 'id',
   bmSortDir: 'asc',
   activeLabExperiment: null,   // last active lab sub-tab (e.g. 'lab-credit')
+  customTheme: {
+    enabled: false,
+    dark:  { accent: '#ffd700', bg: '#030101', panel: '#080303', text: '#e6e6e6' },
+    light: { accent: '#d1242f', bg: '#f6f8fa', panel: '#ffffff', text: '#24292f' }
+  },
 };
 
 // Ensure all 10 autoloot slots exist
@@ -169,13 +177,17 @@ window.formatValue   = formatValue;
 
 function loadConfig() {
   try {
-    return JSON.parse(localStorage.getItem(LOCAL_STORAGE.config)) || {};
+    return (window.osroStore ? osroStore.getJson(LOCAL_STORAGE.config, {}) : JSON.parse(localStorage.getItem(LOCAL_STORAGE.config))) || {};
   } catch { return {}; }
 }
 
 function saveConfig(patch) {
   const current = loadConfig();
-  localStorage.setItem(LOCAL_STORAGE.config, JSON.stringify({ ...current, ...patch }));
+  if (window.osroStore) {
+    osroStore.setItem(LOCAL_STORAGE.config, { ...current, ...patch });
+  } else {
+    localStorage.setItem(LOCAL_STORAGE.config, JSON.stringify({ ...current, ...patch }));
+  }
 }
 
 const SECTION_KEYS = ['desc', 'notes', 'reqs', 'value', 'requiredby', 'producedby'];
@@ -201,6 +213,7 @@ function initSettings() {
   if (sl) sl.checked = state.showLocation;
   const fmv = document.getElementById('settingForceMobileView');
   if (fmv) fmv.checked = state.forceMobileView;
+  initCustomThemeFromConfig(cfg);
   applyMobileLayoutPreference();
   syncSectionButtons();
   syncValueButtons();
@@ -347,8 +360,429 @@ function applyTheme(theme) {
   link.id = 'theme-stylesheet';
   link.rel = 'stylesheet';
   link.href = `css/style_${theme}.css`;
+  applyCustomTheme(theme);
+  syncCustomThemeUI(theme);
   head.appendChild(link);
 }
+
+const CUSTOM_THEME_DEFAULTS = {
+  dark:  { accent: '#ffd700', bg: '#030101', panel: '#080303', text: '#e6e6e6' },
+  light: { accent: '#d1242f', bg: '#f6f8fa', panel: '#ffffff', text: '#24292f' }
+};
+
+const CUSTOM_THEME_PRESETS = {
+  dark: [
+    { id: 'default',  name: 'Default',  accent: '#ffd700', bg: '#030101', panel: '#080303', text: '#e6e6e6' },
+    { id: 'emerald',  name: 'Emerald',  accent: '#00ffb8', bg: '#020403', panel: '#080e0e', text: '#e6edf3' },
+    { id: 'midnight', name: 'Midnight', accent: '#38bdf8', bg: '#060b14', panel: '#0d1626', text: '#e2e8f0' },
+    { id: 'amethyst', name: 'Amethyst', accent: '#c084fc', bg: '#090514', panel: '#130c24', text: '#f3e8ff' },
+    { id: 'crimson',  name: 'Crimson',  accent: '#ff4d6d', bg: '#0d0406', panel: '#19090d', text: '#fce7eb' },
+    { id: 'sakura',   name: 'Sakura',   accent: '#f472b6', bg: '#0e060b', panel: '#1a0e15', text: '#fce7f3' }
+  ],
+  light: [
+    { id: 'default',   name: 'Default',   accent: '#d1242f', bg: '#f6f8fa', panel: '#ffffff', text: '#24292f' },
+    { id: 'emerald',   name: 'Emerald',   accent: '#4f9800', bg: '#f5f8f4', panel: '#ffffff', text: '#24292f' },
+    { id: 'ocean',     name: 'Ocean',     accent: '#0284c7', bg: '#f0f7ff', panel: '#ffffff', text: '#0f172a' },
+    { id: 'lavender',  name: 'Lavender',  accent: '#7c3aed', bg: '#f6f3ff', panel: '#ffffff', text: '#1e1b4b' },
+    { id: 'parchment', name: 'Parchment', accent: '#b45309', bg: '#faf5e8', panel: '#fffdf7', text: '#292524' },
+    { id: 'teal',      name: 'Teal',      accent: '#0d9488', bg: '#f0fdfa', panel: '#ffffff', text: '#132a28' }
+  ]
+};
+
+function ctNormalizeHex(hex, fallback = '#000000') {
+  if (typeof hex !== 'string') return fallback;
+  const clean = hex.trim().toLowerCase();
+  if (/^#[0-9a-f]{6}$/.test(clean)) return clean;
+  if (/^[0-9a-f]{6}$/.test(clean)) return '#' + clean;
+  return fallback;
+}
+
+function ctHexToRgb(hex) {
+  const h = ctNormalizeHex(hex).slice(1);
+  return {
+    r: parseInt(h.slice(0, 2), 16),
+    g: parseInt(h.slice(2, 4), 16),
+    b: parseInt(h.slice(4, 6), 16)
+  };
+}
+
+function ctRgbToHex(r, g, b) {
+  const clamp = v => Math.max(0, Math.min(255, Math.round(v)));
+  const toHex = v => clamp(v).toString(16).padStart(2, '0');
+  return `#${toHex(r)}${toHex(g)}${toHex(b)}`;
+}
+
+function ctHexToHsl(hex) {
+  const { r: r255, g: g255, b: b255 } = ctHexToRgb(hex);
+  const r = r255 / 255, g = g255 / 255, b = b255 / 255;
+  const max = Math.max(r, g, b), min = Math.min(r, g, b);
+  let h = 0, s = 0;
+  const l = (max + min) / 2;
+  if (max !== min) {
+    const d = max - min;
+    s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+    switch (max) {
+      case r: h = ((g - b) / d + (g < b ? 6 : 0)) / 6; break;
+      case g: h = ((b - r) / d + 2) / 6; break;
+      case b: h = ((r - g) / d + 4) / 6; break;
+    }
+  }
+  return { h, s, l };
+}
+
+function ctHslToHex(h, s, l) {
+  const hh = ((h % 1) + 1) % 1;
+  const ss = Math.max(0, Math.min(1, s));
+  const ll = Math.max(0, Math.min(1, l));
+  if (ss === 0) {
+    const v = ll * 255;
+    return ctRgbToHex(v, v, v);
+  }
+  const hue2rgb = (p, q, t) => {
+    if (t < 0) t += 1;
+    if (t > 1) t -= 1;
+    if (t < 1 / 6) return p + (q - p) * 6 * t;
+    if (t < 1 / 2) return q;
+    if (t < 2 / 3) return p + (q - p) * (2 / 3 - t) * 6;
+    return p;
+  };
+  const q = ll < 0.5 ? ll * (1 + ss) : ll + ss - ll * ss;
+  const p = 2 * ll - q;
+  return ctRgbToHex(
+    hue2rgb(p, q, hh + 1 / 3) * 255,
+    hue2rgb(p, q, hh) * 255,
+    hue2rgb(p, q, hh - 1 / 3) * 255
+  );
+}
+
+function ctMix(hex1, hex2, weight2 = 0.5) {
+  const c1 = ctHexToRgb(hex1);
+  const c2 = ctHexToRgb(hex2);
+  const w = Math.max(0, Math.min(1, weight2));
+  return ctRgbToHex(
+    c1.r + (c2.r - c1.r) * w,
+    c1.g + (c2.g - c1.g) * w,
+    c1.b + (c2.b - c1.b) * w
+  );
+}
+
+function ctRgba(hex, alpha) {
+  const { r, g, b } = ctHexToRgb(hex);
+  return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+}
+
+function ctShiftLightness(hex, deltaL, deltaS = 0) {
+  const { h, s, l } = ctHexToHsl(hex);
+  return ctHslToHex(h, s + deltaS, l + deltaL);
+}
+
+function ctRelativeLuminance(hex) {
+  const { r, g, b } = ctHexToRgb(hex);
+  const chan = c => {
+    const s = c / 255;
+    return s <= 0.03928 ? s / 12.92 : Math.pow((s + 0.055) / 1.055, 2.4);
+  };
+  return 0.2126 * chan(r) + 0.7152 * chan(g) + 0.0722 * chan(b);
+}
+
+function isDefaultCustomPalette(palette, mode) {
+  const def = CUSTOM_THEME_DEFAULTS[mode] || CUSTOM_THEME_DEFAULTS.dark;
+  if (!palette) return true;
+  return ctNormalizeHex(palette.accent) === def.accent
+      && ctNormalizeHex(palette.bg)     === def.bg
+      && ctNormalizeHex(palette.panel)  === def.panel
+      && ctNormalizeHex(palette.text)   === def.text;
+}
+
+function buildCustomThemeCss(palette, mode) {
+  const def = CUSTOM_THEME_DEFAULTS[mode] || CUSTOM_THEME_DEFAULTS.dark;
+  const accent = ctNormalizeHex(palette?.accent, def.accent);
+  const bg     = ctNormalizeHex(palette?.bg,     def.bg);
+  const panel  = ctNormalizeHex(palette?.panel,  def.panel);
+  const text   = ctNormalizeHex(palette?.text,   def.text);
+
+  const isDarkSurface = ctRelativeLuminance(panel) < 0.35;
+  const acHsl = ctHexToHsl(accent);
+
+  const bgDark = isDarkSurface
+    ? ctMix(ctShiftLightness(bg, 0.03), accent, 0.06)
+    : ctMix(ctShiftLightness(bg, -0.04), accent, 0.04);
+  const bgSecondary = isDarkSurface
+    ? ctMix(ctMix(bg, panel, 0.72), accent, 0.04)
+    : ctMix(panel, bg, 0.35);
+  const bgTertiary = isDarkSurface
+    ? ctMix(ctMix(panel, text, 0.07), accent, 0.07)
+    : ctMix(ctMix(bg, text, 0.04), accent, 0.05);
+
+  const panelHover = isDarkSurface
+    ? ctMix(ctShiftLightness(panel, 0.09), accent, 0.16)
+    : ctMix(ctShiftLightness(panel, -0.05), accent, 0.12);
+  const buttonHover = isDarkSurface
+    ? ctMix(ctShiftLightness(panel, 0.13), accent, 0.20)
+    : ctMix(ctShiftLightness(panel, -0.08), accent, 0.15);
+
+  const border = isDarkSurface
+    ? ctMix(ctMix(panel, text, 0.18), accent, 0.12)
+    : ctMix(ctMix(panel, text, 0.16), accent, 0.10);
+  const borderLight = isDarkSurface
+    ? ctMix(ctMix(panel, text, 0.26), accent, 0.16)
+    : ctMix(ctMix(panel, text, 0.10), accent, 0.08);
+  const groupBorder = isDarkSurface
+    ? ctMix(ctMix(panel, accent, 0.18), text, 0.08)
+    : border;
+
+  const textMuted = ctMix(ctMix(text, panel, 0.42), accent, 0.06);
+
+  const accentHover = isDarkSurface
+    ? (acHsl.l > 0.80 ? ctShiftLightness(accent, -0.10, 0.05) : ctShiftLightness(accent, 0.10, 0.05))
+    : (acHsl.l < 0.22 ? ctShiftLightness(accent, 0.10, 0.05) : ctShiftLightness(accent, -0.08, 0.05));
+  const accentBg = ctRgba(accent, isDarkSurface ? 0.13 : 0.12);
+  const activeQuestBg = ctRgba(accent, isDarkSurface ? 0.16 : 0.12);
+  const expandIcon = isDarkSurface ? ctMix(accent, '#ffffff', 0.42) : accent;
+  const btnText = ctRelativeLuminance(accent) > 0.40 ? '#050807' : '#ffffff';
+  const versionTag = isDarkSurface ? ctShiftLightness(accent, 0.04) : ctShiftLightness(accent, -0.06);
+
+  const codeBg = isDarkSurface
+    ? ctMix(ctMix(bg, panel, 0.45), accent, 0.05)
+    : ctMix(bg, panel, 0.35);
+  const codeBlockBg = isDarkSurface
+    ? 'rgba(0, 0, 0, 0.32)'
+    : ctRgba(ctMix(text, accent, 0.25), 0.12);
+  const codeText = isDarkSurface
+    ? ctHslToHex(acHsl.h, Math.max(acHsl.s, 0.55), Math.max(acHsl.l, 0.68))
+    : ctHslToHex(acHsl.h, Math.max(acHsl.s, 0.55), Math.min(acHsl.l, 0.36));
+  const autocompleteBg = isDarkSurface
+    ? ctMix(ctShiftLightness(panel, 0.05), accent, 0.10)
+    : panel;
+
+  const placeholderBg = ctMix(panel, text, 0.10);
+  const matConnector = ctMix(border, accent, 0.24);
+  const subtleOverlay = ctRgba(text, 0.08);
+  const imgFile = mode === 'light' ? 'image/osromr_light.jpg' : 'image/osromr_dark.jpg';
+  const headerOverlayEnd = ctMix(panel, accent, isDarkSurface ? 0.24 : 0.18);
+  const headerBgImage = `linear-gradient(135deg, ${ctRgba(bg, 0.84)} 0%, ${ctRgba(headerOverlayEnd, 0.76)} 100%), url("${imgFile}")`;
+
+  return `html:root {
+  --bg: ${bg};
+  --bg-dark: ${bgDark};
+  --bg-secondary: ${bgSecondary};
+  --bg-tertiary: ${bgTertiary};
+  --header-bg-image: ${headerBgImage};
+  --panel: ${panel};
+  --panel-hover: ${panelHover};
+  --button-hover: ${buttonHover};
+  --bg-hover: ${buttonHover};
+  --border: ${border};
+  --border-light: ${borderLight};
+  --group-border: ${groupBorder};
+  --text: ${text};
+  --text-muted: ${textMuted};
+  --accent: ${accent};
+  --accent-hover: ${accentHover};
+  --link: ${accent};
+  --link-hover: ${accentHover};
+  --accent-bg: ${accentBg};
+  --expand-icon: ${expandIcon};
+  --btn-text: ${btnText};
+  --tab-active-text: ${btnText};
+  --version-tag: ${versionTag};
+  --active-quest-bg: ${activeQuestBg};
+  --code-bg: ${codeBg};
+  --code-block-bg: ${codeBlockBg};
+  --code-text: ${codeText};
+  --autocomplete-bg: ${autocompleteBg};
+  --placeholder-bg: ${placeholderBg};
+  --placeholder-text: ${textMuted};
+  --placeholder-border: ${borderLight};
+  --placeholder-icon: ${textMuted};
+  --mat-connector: ${matConnector};
+  --mat-connector-opts: ${border};
+  --subtle-overlay: ${subtleOverlay};
+}`;
+}
+
+function getCurrentThemeMode() {
+  return localStorage.getItem(LOCAL_STORAGE.theme) === 'light' ? 'light' : 'dark';
+}
+
+function applyCustomTheme(modeOverride) {
+  const mode = modeOverride || getCurrentThemeMode();
+  const existing = document.getElementById('custom-theme-stylesheet');
+  const ct = state.customTheme;
+  if (!ct || !ct.enabled) {
+    if (existing) existing.remove();
+    return;
+  }
+  const palette = ct[mode] || CUSTOM_THEME_DEFAULTS[mode];
+  if (isDefaultCustomPalette(palette, mode)) {
+    if (existing) existing.remove();
+    return;
+  }
+  let styleEl = existing;
+  if (!styleEl) {
+    styleEl = document.createElement('style');
+    styleEl.id = 'custom-theme-stylesheet';
+    document.head.appendChild(styleEl);
+  }
+  styleEl.textContent = buildCustomThemeCss(palette, mode);
+}
+
+function initCustomThemeFromConfig(cfg) {
+  const ct = cfg?.customTheme || {};
+  state.customTheme = {
+    enabled: !!ct.enabled,
+    dark: {
+      accent: ctNormalizeHex(ct.dark?.accent, CUSTOM_THEME_DEFAULTS.dark.accent),
+      bg:     ctNormalizeHex(ct.dark?.bg,     CUSTOM_THEME_DEFAULTS.dark.bg),
+      panel:  ctNormalizeHex(ct.dark?.panel,  CUSTOM_THEME_DEFAULTS.dark.panel),
+      text:   ctNormalizeHex(ct.dark?.text,   CUSTOM_THEME_DEFAULTS.dark.text),
+    },
+    light: {
+      accent: ctNormalizeHex(ct.light?.accent, CUSTOM_THEME_DEFAULTS.light.accent),
+      bg:     ctNormalizeHex(ct.light?.bg,     CUSTOM_THEME_DEFAULTS.light.bg),
+      panel:  ctNormalizeHex(ct.light?.panel,  CUSTOM_THEME_DEFAULTS.light.panel),
+      text:   ctNormalizeHex(ct.light?.text,   CUSTOM_THEME_DEFAULTS.light.text),
+    }
+  };
+  syncCustomThemeUI();
+  applyCustomTheme();
+}
+
+function syncCustomThemeUI(modeOverride) {
+  const ct = state.customTheme;
+  if (!ct) return;
+  const mode = modeOverride || getCurrentThemeMode();
+
+  const toggle = document.getElementById('settingCustomTheme');
+  if (toggle) toggle.checked = !!ct.enabled;
+
+  const controls = document.getElementById('customThemeControls');
+  if (controls) controls.classList.toggle('hidden', !ct.enabled);
+
+  const darkBtn  = document.getElementById('ctModeBtn_dark');
+  const lightBtn = document.getElementById('ctModeBtn_light');
+  if (darkBtn)  darkBtn.classList.toggle('active', mode === 'dark');
+  if (lightBtn) lightBtn.classList.toggle('active', mode === 'light');
+
+  const palette = ct[mode] || CUSTOM_THEME_DEFAULTS[mode];
+  ['accent', 'bg', 'panel', 'text'].forEach(key => {
+    const val = ctNormalizeHex(palette[key], CUSTOM_THEME_DEFAULTS[mode][key]);
+    const input = document.getElementById(`ctInput_${key}`);
+    const preview = document.getElementById(`ctPreview_${key}`);
+    if (input && input.value.toLowerCase() !== val) input.value = val;
+    if (preview) preview.style.backgroundColor = val;
+  });
+
+  const presetsRow = document.getElementById('ctPresetsRow');
+  if (presetsRow) {
+    const presets = CUSTOM_THEME_PRESETS[mode] || [];
+    presetsRow.innerHTML = presets.map(p => {
+      const isMatch = ctNormalizeHex(palette.accent) === p.accent
+                   && ctNormalizeHex(palette.bg)     === p.bg
+                   && ctNormalizeHex(palette.panel)  === p.panel
+                   && ctNormalizeHex(palette.text)   === p.text;
+      return `<button type="button" class="ct-preset-chip${isMatch ? ' active' : ''}" onclick="customThemeApplyPreset('${p.id}')" title="${p.name} theme preset">
+        <span class="ct-preset-dot" style="background: linear-gradient(135deg, ${p.accent} 50%, ${p.bg} 50%);"></span>
+        <span>${p.name}</span>
+      </button>`;
+    }).join('');
+  }
+}
+
+let ctSaveTimer = null;
+function scheduleSaveCustomTheme(immediate = false) {
+  if (ctSaveTimer) clearTimeout(ctSaveTimer);
+  if (immediate) {
+    saveConfig({ customTheme: state.customTheme });
+  } else {
+    ctSaveTimer = setTimeout(() => {
+      saveConfig({ customTheme: state.customTheme });
+    }, 250);
+  }
+}
+
+function settingSetCustomThemeEnabled(enabled) {
+  state.customTheme.enabled = !!enabled;
+  scheduleSaveCustomTheme(true);
+  syncCustomThemeUI();
+  applyCustomTheme();
+}
+
+function customThemeSelectMode(mode) {
+  const target = mode === 'light' ? 'light' : 'dark';
+  localStorage.setItem(LOCAL_STORAGE.theme, target);
+  applyTheme(target);
+  updateThemeIcon(target);
+}
+
+function customThemeSetColor(key, value, commit = false) {
+  if (!['accent', 'bg', 'panel', 'text'].includes(key)) return;
+  const mode = getCurrentThemeMode();
+  const hex = ctNormalizeHex(value, state.customTheme[mode][key]);
+  state.customTheme[mode][key] = hex;
+
+  const preview = document.getElementById(`ctPreview_${key}`);
+  if (preview) preview.style.backgroundColor = hex;
+
+  applyCustomTheme(mode);
+  syncCustomThemeUI(mode);
+  scheduleSaveCustomTheme(commit);
+}
+
+function customThemeApplyPreset(presetId) {
+  const mode = getCurrentThemeMode();
+  const presets = CUSTOM_THEME_PRESETS[mode] || [];
+  const found = presets.find(p => p.id === presetId);
+  if (!found) return;
+  state.customTheme[mode] = {
+    accent: found.accent,
+    bg:     found.bg,
+    panel:  found.panel,
+    text:   found.text,
+  };
+  applyCustomTheme(mode);
+  syncCustomThemeUI(mode);
+  scheduleSaveCustomTheme(true);
+}
+
+function customThemeAutoTint() {
+  const mode = getCurrentThemeMode();
+  const accent = ctNormalizeHex(state.customTheme[mode]?.accent, CUSTOM_THEME_DEFAULTS[mode].accent);
+  const { h, s } = ctHexToHsl(accent);
+  if (mode === 'dark') {
+    state.customTheme.dark = {
+      accent,
+      bg:    ctHslToHex(h, Math.min(s * 0.48, 0.38), 0.035),
+      panel: ctHslToHex(h, Math.min(s * 0.45, 0.40), 0.075),
+      text:  ctHslToHex(h, Math.min(s * 0.25, 0.25), 0.93),
+    };
+  } else {
+    state.customTheme.light = {
+      accent,
+      bg:    ctHslToHex(h, Math.min(s * 0.40, 0.35), 0.955),
+      panel: ctHslToHex(h, Math.min(s * 0.20, 0.18), 0.995),
+      text:  ctHslToHex(h, Math.min(s * 0.35, 0.30), 0.15),
+    };
+  }
+  applyCustomTheme(mode);
+  syncCustomThemeUI(mode);
+  scheduleSaveCustomTheme(true);
+}
+
+function customThemeResetMode() {
+  const mode = getCurrentThemeMode();
+  state.customTheme[mode] = { ...CUSTOM_THEME_DEFAULTS[mode] };
+  applyCustomTheme(mode);
+  syncCustomThemeUI(mode);
+  scheduleSaveCustomTheme(true);
+}
+
+window.settingSetCustomThemeEnabled = settingSetCustomThemeEnabled;
+window.customThemeSelectMode        = customThemeSelectMode;
+window.customThemeSetColor          = customThemeSetColor;
+window.customThemeApplyPreset       = customThemeApplyPreset;
+window.customThemeAutoTint          = customThemeAutoTint;
+window.customThemeResetMode         = customThemeResetMode;
 
 // ===== SEARCH WORKER SUBSYSTEM =====
 
@@ -433,8 +867,11 @@ function initializeData() {
       if (!window.history.state) {
         const urlParams = new URLSearchParams(window.location.search);
         const questId = urlParams.get('quest');
+        const shopId = urlParams.get('shop');
+        const itemId = urlParams.get('item');
+        const autolootSlot = urlParams.get('autoloot');
         window.history.replaceState(
-          { questId: questId || null, tab: state.currentTab },
+          { questId: questId || null, shopId: shopId || null, itemId: itemId || null, autolootSlot: autolootSlot || null, tab: state.currentTab },
           '',
           window.location.href
         );
@@ -473,7 +910,7 @@ function loadItemValuesFromStorage() {
   // Custom mode: load canonical remote defaults, then overlay localStorage (if any)
   return loadItemValuesFromRemote(false)
     .then(() => {
-      const stored = localStorage.getItem(LOCAL_STORAGE.item_values);
+      const stored = window.osroStore ? osroStore.getItem(LOCAL_STORAGE.item_values) : localStorage.getItem(LOCAL_STORAGE.item_values);
       if (!stored) return;
       try {
         const values = JSON.parse(stored);
@@ -482,7 +919,8 @@ function loadItemValuesFromStorage() {
         console.log(`[Init] Overlayed ${Object.keys(values).length} custom item values from localStorage`);
       } catch (err) {
         console.error("[Init] Failed to parse stored item values:", err);
-        localStorage.removeItem(LOCAL_STORAGE.item_values);
+        if (window.osroStore) osroStore.removeItem(LOCAL_STORAGE.item_values);
+        else localStorage.removeItem(LOCAL_STORAGE.item_values);
       }
     });
 }
@@ -523,12 +961,11 @@ function loadDefaultValuesIntoCustom() {
   return fetchJSON(AUTO_IMPORT_URLS.values).then(remote => {
     if (!remote) { showToast('Could not reach default values', 'error'); return; }
     // Merge: remote values overwrite matching ids, custom-only items are preserved
-    const stored = localStorage.getItem(LOCAL_STORAGE.item_values);
-    let existing = {};
-    try { existing = stored ? JSON.parse(stored) : {}; } catch { existing = {}; }
+    const existing = window.osroStore ? osroStore.getJson(LOCAL_STORAGE.item_values, {}) : (JSON.parse(localStorage.getItem(LOCAL_STORAGE.item_values) || '{}'));
     const merged = { ...existing, ...remote };
     applyItemValues(merged);
-    localStorage.setItem(LOCAL_STORAGE.item_values, JSON.stringify(merged));
+    if (window.osroStore) osroStore.setItem(LOCAL_STORAGE.item_values, merged);
+    else localStorage.setItem(LOCAL_STORAGE.item_values, JSON.stringify(merged));
     showToast(`Loaded ${Object.keys(remote).length} default values`, 'success');
   }).catch(() => showToast('Failed to load default values', 'error'));
 }
@@ -539,13 +976,19 @@ function saveItemValuesToStorage() {
   Object.entries(DATA.items).forEach(([id, item]) => {
     if (item.value > 0) values[id] = item.value;
   });
-  localStorage.setItem(LOCAL_STORAGE.item_values, JSON.stringify(values));
+  if (window.osroStore) osroStore.setItem(LOCAL_STORAGE.item_values, values);
+  else localStorage.setItem(LOCAL_STORAGE.item_values, JSON.stringify(values));
 }
 
 function saveAutolootData() {
   try {
-    localStorage.setItem(LOCAL_STORAGE.autoloot_data, JSON.stringify(state.autolootData));
-    localStorage.setItem(LOCAL_STORAGE.autoloot_names, JSON.stringify(state.autolootNames));
+    if (window.osroStore) {
+      osroStore.setItem(LOCAL_STORAGE.autoloot_data, state.autolootData);
+      osroStore.setItem(LOCAL_STORAGE.autoloot_names, state.autolootNames);
+    } else {
+      localStorage.setItem(LOCAL_STORAGE.autoloot_data, JSON.stringify(state.autolootData));
+      localStorage.setItem(LOCAL_STORAGE.autoloot_names, JSON.stringify(state.autolootNames));
+    }
     console.log("[Autoloot] Saved autoloot data to localStorage");
   } catch (error) {
     console.error("[Autoloot] Failed to save autoloot data:", error);
@@ -1142,44 +1585,54 @@ const TAB_ELEMENTS = {
 };
 
 function switchTab(tabName, pushState = true) {
-  // 'lab' is a namespace — redirect to the active experiment tab
-  if (tabName === 'lab') {
-      tabName = state.activeLabExperiment || (window.LAB_DEFAULT_EXPERIMENT) || 'lab-gc';
+  const prevSuppress = state.suppressUrlUpdate;
+  if (!pushState && window.state) {
+    state.suppressUrlUpdate = true;
   }
-  if (tabName.startsWith('lab-')) {
-      state.activeLabExperiment = tabName;
-  }
-  const previousTab = state.currentTab;
-  state.currentTab = tabName;
-  updateTabButtons(tabName);
-  hideAllElements();
-  showTabElements(tabName);
-
-  // Close the Values Manager when leaving Items tab
-  if (tabName !== 'items' && typeof window.closeValuesManager === 'function') {
-    window.closeValuesManager(false);
-  }
-  
-  // Update URL when switching tabs (avoid racing user clicks)
-  if (pushState && previousTab !== tabName && typeof updateURL === 'function') {
-    let entityType = null;
-    let entityId = null;
-
-    if (tabName === 'quests' && state.selectedQuest?.producesId) {
-      entityType = 'quest';
-      entityId = state.selectedQuest.producesId.toString();
-    } else if (tabName === 'shops' && state.selectedShop?.producesId) {
-      entityType = 'shop';
-      entityId = state.selectedShop.producesId.toString();
-    } else if (tabName === 'items' && state.selectedItemId) {
-      entityType = 'item';
-      entityId = state.selectedItemId.toString();
-    } else if (tabName === 'autoloot' && state.selectedAutolootSlot) {
-      entityType = 'autoloot';
-      entityId = state.selectedAutolootSlot.toString();
+  try {
+    // 'lab' is a namespace — redirect to the active experiment tab
+    if (tabName === 'lab') {
+        tabName = state.activeLabExperiment || (window.LAB_DEFAULT_EXPERIMENT) || 'lab-gc';
     }
+    if (tabName.startsWith('lab-')) {
+        state.activeLabExperiment = tabName;
+    }
+    const previousTab = state.currentTab;
+    state.currentTab = tabName;
+    updateTabButtons(tabName);
+    hideAllElements();
+    showTabElements(tabName);
 
-    updateURL(entityId, entityType, true);
+    // Close the Values Manager when leaving Items tab
+    if (tabName !== 'items' && typeof window.closeValuesManager === 'function') {
+      window.closeValuesManager(false);
+    }
+    
+    // Update URL when switching tabs (avoid racing user clicks)
+    if (pushState && previousTab !== tabName && typeof updateURL === 'function') {
+      let entityType = null;
+      let entityId = null;
+
+      if (tabName === 'quests' && state.selectedQuest?.producesId) {
+        entityType = 'quest';
+        entityId = state.selectedQuest.producesId.toString();
+      } else if (tabName === 'shops' && state.selectedShop?.producesId) {
+        entityType = 'shop';
+        entityId = state.selectedShop.producesId.toString();
+      } else if (tabName === 'items' && state.selectedItemId) {
+        entityType = 'item';
+        entityId = state.selectedItemId.toString();
+      } else if (tabName === 'autoloot' && (state.selectedAutolootSetId || state.selectedAutolootSlot)) {
+        entityType = 'autoloot';
+        entityId = (state.selectedAutolootSetId || state.selectedAutolootSlot).toString();
+      }
+
+      updateURL(entityId, entityType, true);
+    }
+  } finally {
+    if (window.state) {
+      state.suppressUrlUpdate = prevSuppress;
+    }
   }
 }
 
@@ -1260,6 +1713,41 @@ function render() {
   switchTab(state.currentTab);
 }
 
+// Called by sync.js after a cloud pull changed local storage. Refreshes the
+// in-memory copies that were read at startup so a later save doesn't write
+// stale data back over the synced values.
+function osroOnSyncedDataChanged(changedKeys = []) {
+  const has = k => changedKeys.includes(k);
+
+  if (has(LOCAL_STORAGE.autoloot_v2)) {
+    if (typeof window.loadAutolootV2FromSync === 'function') {
+      window.loadAutolootV2FromSync();
+    }
+  }
+  if (has(LOCAL_STORAGE.autoloot_data)) {
+    state.autolootData = osroStore.getJson(LOCAL_STORAGE.autoloot_data, {}) || {};
+    for (let i = 1; i <= 10; i++) {
+      if (!state.autolootData[i]) state.autolootData[i] = [];
+    }
+  }
+  if (has(LOCAL_STORAGE.autoloot_names)) {
+    state.autolootNames = osroStore.getJson(LOCAL_STORAGE.autoloot_names, {}) || {};
+  }
+  if (has(LOCAL_STORAGE.config)) {
+    initSettings();
+  }
+
+  // Before startup finishes, initializeData() reads values and renders with the fresh data.
+  if (!window.initState?.complete) return;
+
+  if (has(LOCAL_STORAGE.config) || has(LOCAL_STORAGE.item_values)) {
+    loadItemValuesFromStorage().then(() => render());
+  } else {
+    render();
+  }
+}
+window.osroOnSyncedDataChanged = osroOnSyncedDataChanged;
+
 function toggleSidebar() {
   document.getElementById("sidebar").classList.toggle("open");
 }
@@ -1338,7 +1826,7 @@ function exportQuests() {
     }))
   }));
 
-  downloadJSON({ groups: cleanedGroups }, "osrohr_quests.json");
+  downloadJSON({ groups: cleanedGroups }, FILES.quests || "osromr_quests.json");
 }
 
 function exportShops() {
@@ -1357,7 +1845,7 @@ function exportShops() {
     }))
   }));
 
-  downloadJSON({ groups: cleanedGroups }, "osrohr_shops.json");
+  downloadJSON({ groups: cleanedGroups }, FILES.shops || "osromr_shops.json");
 }
 
 function exportValues() {
@@ -1365,7 +1853,7 @@ function exportValues() {
   Object.entries(DATA.items).forEach(([id, item]) => {
     if (item.value > 0) values[id] = item.value;
   });
-  downloadJSON(values, "osrohr_item_values.json");
+  downloadJSON(values, FILES.values || "osromr_item_values.json");
 }
 
 function exportAll() {
@@ -1513,8 +2001,10 @@ function handleURLNavigation() {
   } 
   else if (autolootSlot) {
     ensureTab('autoloot');
-    if (window.selectAutolootSlot) {
-      window.selectAutolootSlot(parseInt(autolootSlot), false);
+    if (window.selectAutolootByParam) {
+      window.selectAutolootByParam(autolootSlot, false);
+    } else if (window.selectAutolootSlot) {
+      window.selectAutolootSlot(autolootSlot, false);
     }
   }
   // Priority 2: Pure Tab Navigation (Only if no entity is linked)
@@ -1532,6 +2022,7 @@ function handleURLNavigation() {
 
 // Update URL with current state without reloading page
 function updateURL(entityId = null, entityType = null, pushState = true) {
+  if (state.suppressUrlUpdate) return;
   const url = new URL(window.location);
   
   // 1. Clear all tracking parameters first to ensure a clean state
@@ -1564,6 +2055,7 @@ function updateURL(entityId = null, entityType = null, pushState = true) {
       ? 'values'
       : state.currentTab,
     questId: entityType === 'quest' ? entityId : null,
+    shopId: entityType === 'shop' ? entityId : null,
     itemId: entityType === 'item' ? entityId : null,
     autolootSlot: entityType === 'autoloot' ? entityId : null
   };
@@ -1702,8 +2194,10 @@ function selectAutolootSlotFromHistory(slotNum) {
     return;
   }
   
-  if (window.selectAutolootSlot) {
-    window.selectAutolootSlot(parseInt(slotNum), false);
+  if (window.selectAutolootByParam) {
+    window.selectAutolootByParam(slotNum, false);
+  } else if (window.selectAutolootSlot) {
+    window.selectAutolootSlot(slotNum, false);
   }
 }
 
@@ -1777,48 +2271,58 @@ document.addEventListener("DOMContentLoaded", () => {
   // Handle browser back/forward buttons
   window.addEventListener('popstate', function(event) {
     if (event.state) {
-      const { tab, questId, itemId, autolootSlot } = event.state;
-      
-      // Sync items filters from URL parameters on history change
-      const urlParams = new URLSearchParams(window.location.search);
-      const ilParam = urlParams.get('il');
-      if (ilParam !== null) {
-        const idx = parseInt(ilParam);
-        state.selectedItemList = Number.isFinite(idx) ? idx : -1;
-      } else {
-        state.selectedItemList = -1;
-      }
-      state.showAllItems = urlParams.get('ia') === '1';
-      state.showNewItemsOnly = urlParams.get('in') === '1';
-      state.showValuesOnly = urlParams.get('iv') === '1';
-      state.searchDescriptions = urlParams.get('id') === '1';
-      
-      const isParam = urlParams.get('is');
-      state.itemSearchFilter = isParam ? isParam.toLowerCase() : "";
+      state.suppressUrlUpdate = true;
+      try {
+        const { tab, questId, shopId, itemId, autolootSlot } = event.state;
+        
+        // Sync items filters from URL parameters on history change
+        const urlParams = new URLSearchParams(window.location.search);
+        const ilParam = urlParams.get('il');
+        if (ilParam !== null) {
+          const idx = parseInt(ilParam);
+          state.selectedItemList = Number.isFinite(idx) ? idx : -1;
+        } else {
+          state.selectedItemList = -1;
+        }
+        state.showAllItems = urlParams.get('ia') === '1';
+        state.showNewItemsOnly = urlParams.get('in') === '1';
+        state.showValuesOnly = urlParams.get('iv') === '1';
+        state.searchDescriptions = urlParams.get('id') === '1';
+        
+        const isParam = urlParams.get('is');
+        state.itemSearchFilter = isParam ? isParam.toLowerCase() : "";
 
-      if (tab === 'values') {
-        if (state.currentTab !== 'items') switchTab('items', false);
-        if (typeof window.openValuesManager === 'function') window.openValuesManager(false);
-      } else {
-        if (tab && tab !== state.currentTab) {
-          switchTab(tab, false);
+        if (tab === 'values') {
+          if (state.currentTab !== 'items') switchTab('items', false);
+          if (typeof window.openValuesManager === 'function') window.openValuesManager(false);
+        } else {
+          if (tab && tab !== state.currentTab) {
+            switchTab(tab, false);
+          }
+          if (tab === 'items' && typeof window.closeValuesManager === 'function') {
+            window.closeValuesManager(false);
+          }
         }
-        if (tab === 'items' && typeof window.closeValuesManager === 'function') {
-          window.closeValuesManager(false);
+        
+        if (questId) {
+          selectQuestFromHistory(questId);
+        } else if (shopId) {
+          if (window.selectShopById) window.selectShopById(shopId, false);
+        } else if (itemId) {
+          selectItemFromHistory(itemId);
+        } else if (autolootSlot) {
+          selectAutolootSlotFromHistory(autolootSlot);
+        } else {
+          state.selectedQuest = null;
+          state.selectedShop = null;
+          state.selectedItemId = null;
+          render();
         }
+      } finally {
+        state.suppressUrlUpdate = false;
       }
-      
-      if (questId) {
-        selectQuestFromHistory(questId);
-      } else if (itemId) {
-        selectItemFromHistory(itemId);
-      } else if (autolootSlot) {
-        selectAutolootSlotFromHistory(autolootSlot);
-      } else {
-        state.selectedQuest = null;
-        state.selectedItemId = null;
-        render();
-      }
+    } else {
+      handleURLNavigation();
     }
   });
 
@@ -1888,6 +2392,7 @@ function renderViewerHeader(itemId, item, { meta = '', loc = '', showExtLinks = 
     </div>
   `;
 }
+
 
 window.renderViewerHeader = renderViewerHeader;
 
@@ -1994,6 +2499,7 @@ function renderUsageSection(itemId, { excludeQuest = null, excludeShop = null } 
     const iconHtml = producesId ? renderItemIcon(producesId, 24) : '<span class="mat-xbtn-ph"></span>';
     const amtHtml = amountStr
       ? `<span class="mat-amt"><span class="mat-x">\u00d7</span>${amountStr}</span>` : '';
+
     if (u.type === 'quest') {
       return `
         <div class="mat-node">
@@ -2108,12 +2614,14 @@ function osroNotifyReady({ section, body, tag, url = '' }) {
 // --- NEW CONSTANTS FOR WEB PUSH ---
 // We will generate this key in the next step. It's safe to be public.
 const VAPID_PUBLIC_KEY = "BAet8Vv5lUgSYaJPGzB25Ehhnze2yF7R541mIyyfEoiMmMbZne8t7ckmfiDnOFYUawtMcmmmznobySm8sh-r4zg"; 
-const CLOUDFLARE_WORKER_URL = "https://osro-push-worker.osro-push-worker.workers.dev";
+// CLOUDFLARE_WORKER_URL is defined in config.js
 
 // --- SERVICE WORKER REGISTRATION ---
 if ('serviceWorker' in navigator && 'PushManager' in window) {
   window.addEventListener('load', function() {
-    navigator.serviceWorker.register('/osro-quests-mr/sw.js').then(function(registration) {
+    const isGhPages = window.location.pathname.startsWith('/osro-quests-mr');
+    const swUrl = isGhPages ? '/osro-quests-mr/sw.js' : '/sw.js';
+    navigator.serviceWorker.register(swUrl).then(function(registration) {
       console.log('ServiceWorker registration successful with scope: ', registration.scope);
     }, function(err) {
       console.log('ServiceWorker registration failed: ', err);
@@ -2192,11 +2700,18 @@ async function osroScheduleCloudPush(timerId, delayInSeconds, payload) {
   console.log("Attempting to fetch:", `${CLOUDFLARE_WORKER_URL}/schedule`);
   
   try {
+    const headers = { 'Content-Type': 'application/json' };
+    const sessionToken = window.osroSyncGetSessionToken ? window.osroSyncGetSessionToken() : null;
+    if (sessionToken) {
+      headers['Authorization'] = `Bearer ${sessionToken}`;
+    }
+
     const response = await fetch(`${CLOUDFLARE_WORKER_URL}/schedule`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers,
       body: JSON.stringify({
         subscription: subscription.toJSON(),
+        deviceId: window.osroSyncGetDeviceId ? window.osroSyncGetDeviceId() : null,
         delay: delayInSeconds,
         payload: payload
       })

@@ -3,7 +3,7 @@
 // ===== CONSTANTS =====
 
 const CA_TIMER_MS    = 24 * 60 * 60 * 1000;  // 24 hours
-const CA_STORAGE_KEY = 'osrohr_lab_credit_v1';
+const CA_STORAGE_KEY = (typeof LOCAL_STORAGE !== 'undefined' && LOCAL_STORAGE.lab_credit) || 'osromr_lab_credit_v1';
 
 // Passport info displayed in the info panel
 const CA_PASSPORT_INFO = {
@@ -33,12 +33,23 @@ const CA_PASSPORT_INFO = {
 // ===== STORAGE =====
 
 function caLoad() {
-  try { return JSON.parse(localStorage.getItem(CA_STORAGE_KEY)) || { timers: [] }; }
-  catch { return { timers: [] }; }
+  try {
+    return (window.osroStore ? osroStore.getJson(CA_STORAGE_KEY, { timers: [] }) : JSON.parse(localStorage.getItem(CA_STORAGE_KEY))) || { timers: [] };
+  } catch { return { timers: [] }; }
 }
 
 function caSave(data) {
-  localStorage.setItem(CA_STORAGE_KEY, JSON.stringify(data));
+  if (data && Array.isArray(data.timers)) {
+    const now = Date.now();
+    data.timers.forEach(t => {
+      if (!t.updatedAt) t.updatedAt = now;
+    });
+  }
+  if (window.osroStore) {
+    osroStore.setItem(CA_STORAGE_KEY, data);
+  } else {
+    localStorage.setItem(CA_STORAGE_KEY, JSON.stringify(data));
+  }
 }
 
 // Active tick intervals keyed by timer id
@@ -183,6 +194,8 @@ function caAddTimer(type) {
     finishedAt: null,
     notifyOnDone: false,
     notifiedForFinishedAt: null,
+    cloudMessageId: null,
+    updatedAt: Date.now(),
   });
   caSave(data);
   caRenderMain();
@@ -192,6 +205,12 @@ function caDeleteTimer(id) {
   clearInterval(caIntervals[id]);
   delete caIntervals[id];
   const data = caLoad();
+  const t = data.timers.find(timer => timer.id === id);
+  if (t?.cloudMessageId) {
+    osroCancelCloudPush(t.cloudMessageId);
+  }
+  if (!data.deletedTimers) data.deletedTimers = {};
+  data.deletedTimers[id] = Date.now();
   data.timers = data.timers.filter(t => t.id !== id);
   caSave(data);
   // Remove card from DOM without full re-render so other timers keep ticking
@@ -217,6 +236,7 @@ async function caStartTimer(id) {
   t.startedAt = Date.now();
   t.finishedAt = null;
   t.notifiedForFinishedAt = null;
+  t.updatedAt = Date.now();
   
   // 2. Update UI
   const card = document.querySelector(`.ca-timer[data-id="${id}"]`);
@@ -237,7 +257,7 @@ async function caStartTimer(id) {
           const msgId = await osroScheduleCloudPush(id, delayInSeconds, {
               title: osroNotifyTitle('Credit Agent'),
               body: "Your 24-hour credit timer is done!",
-              url: 'https://torrq.github.io/osro-quests-hr/?tab=lab-credit',
+              url: 'https://torrq.github.io/osro-quests-mr/?tab=lab-credit',
           });
           
           if (msgId) t.cloudMessageId = msgId;
@@ -263,6 +283,7 @@ function caStopTimer(id) {
 
   t.startedAt = null;
   t.finishedAt = null;
+  t.updatedAt = Date.now();
   caSave(data);
   const card = document.querySelector(`.ca-timer[data-id="${id}"]`);
   if (card) {
@@ -278,7 +299,16 @@ function caStopTimer(id) {
 
 function caStopAll() {
   const data = caLoad();
-  data.timers.forEach(t => { t.startedAt = null; t.finishedAt = null; });
+  const now = Date.now();
+  data.timers.forEach(t => {
+    if (t.cloudMessageId) {
+      osroCancelCloudPush(t.cloudMessageId);
+      t.cloudMessageId = null;
+    }
+    t.startedAt = null;
+    t.finishedAt = null;
+    t.updatedAt = now;
+  });
   caSave(data);
   Object.keys(caIntervals).forEach(id => { clearInterval(caIntervals[id]); delete caIntervals[id]; });
   caRenderMain();
@@ -287,7 +317,7 @@ function caStopAll() {
 function caRenameTimer(id, name) {
   const data = caLoad();
   const t = data.timers.find(t => t.id === id);
-  if (t) { t.name = name; caSave(data); }
+  if (t) { t.name = name; t.updatedAt = Date.now(); caSave(data); }
 }
 
 function caStartTick(id) {
@@ -305,6 +335,7 @@ function caStartTick(id) {
       const finishedAt = t.startedAt + CA_TIMER_MS;
       t.startedAt = null;
       t.finishedAt = finishedAt;
+      t.updatedAt = Date.now();
       caMaybeNotifyDone(t, finishedAt);
       caSave(data);
 
@@ -374,7 +405,7 @@ function caSliderCommit(id, val) {
           osroScheduleCloudPush(id, Math.ceil(remaining / 1000), {
             title: osroNotifyTitle('Credit Agent'),
             body: `${t.name || 'Account'} is ready.`,
-            url: 'https://torrq.github.io/osro-quests-hr/?tab=lab-credit',
+            url: 'https://torrq.github.io/osro-quests-mr/?tab=lab-credit',
           }).then(msgId => {
             if (msgId) {
               const d = caLoad();
@@ -392,6 +423,7 @@ function caSliderCommit(id, val) {
     const card = document.querySelector(`.ca-timer[data-id="${id}"]`);
     if (card) card.classList.remove('ca-timer--done');
   }
+  t.updatedAt = Date.now();
   caSave(data);
 }
 
@@ -413,6 +445,7 @@ async function caStartTimerFromDisplay(id) {
   t.startedAt = Date.now() - (CA_TIMER_MS - remaining);
   t.finishedAt = null;
   t.notifiedForFinishedAt = null;
+  t.updatedAt = Date.now();
 
   // Schedule cloud push if notify is enabled
   if (t.notifyOnDone) {
@@ -422,7 +455,7 @@ async function caStartTimerFromDisplay(id) {
       const msgId = await osroScheduleCloudPush(id, delayInSeconds, {
         title: osroNotifyTitle('Credit Agent'),
         body: `${t.name || 'Account'} is ready.`,
-        url: 'https://torrq.github.io/osro-quests-hr/?tab=lab-credit',
+        url: 'https://torrq.github.io/osro-quests-mr/?tab=lab-credit',
       });
       if (msgId) t.cloudMessageId = msgId;
     }
@@ -450,7 +483,7 @@ function caMaybeNotifyDone(t, finishedAt) {
     window.osroNotifyReady({
       section: 'Credit Agent',
       body:    `${t.name || 'Account'} is ready.`,
-      tag:     `osrohr_credit_${t.type || 'credit'}_${t.id}`,
+      tag:     `osromr_credit_${t.type || 'credit'}_${t.id}`,
       url:     '?tab=lab-credit',
     });
   }
@@ -474,6 +507,7 @@ async function caSetNotifyOnDone(id, enabled, el) {
   }
 
   t.notifyOnDone = next;
+  t.updatedAt = Date.now();
   caSave(data);
 }
 
@@ -513,6 +547,7 @@ function caResetTimer(id) {
   
   t.startedAt = null;
   t.finishedAt = null;
+  t.updatedAt = Date.now();
   caSave(data);
 
   const card = document.querySelector(`.ca-timer[data-id="${id}"]`);

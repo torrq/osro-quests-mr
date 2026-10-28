@@ -2,7 +2,7 @@
 // OSRO Quest Helper - Configuration
 // ============================================================================
 
-const VERSION = 116;
+const VERSION = 117;
 const FLAVOR = 'Midrate';
 
 // === DATA SOURCE CONFIGURATION ===
@@ -35,13 +35,40 @@ const FILES = {
 };
 
 const LOCAL_STORAGE = {
-  "config": "osromr_config_v1",
-  "theme": "osro-theme",
-  "autoloot_data": "osro_autoloot_v1",
+  "config":         "osromr_config_v1",
+  "theme":          "osro-theme",
+  "autoloot_data":  "osro_autoloot_v1",
   "autoloot_names": "osro_autoloot_names_v1",
-  "item_values":   "osro_item_values_v1",
-  "lab_data":      "osromr_lab_data"
+  "autoloot_v2":    "osromr_autoloot_v2",
+  "item_values":    "osro_item_values_v1",
+  "lab_data":       "osromr_lab_data",
+  "bookmarks":      "osromr_bookmarks",
+  "lab_gem":        "osromr_lab_gem_v1",
+  "lab_credit":     "osromr_lab_credit_v1",
+  "lab_tracker":    "osromr_lab_tracker_v1"
 };
+
+// Keys synchronized across devices when linked (theme stays per device)
+const SYNC_KEYS = [
+  LOCAL_STORAGE.config,
+  LOCAL_STORAGE.autoloot_v2,
+  LOCAL_STORAGE.item_values,
+  LOCAL_STORAGE.lab_data,
+  LOCAL_STORAGE.bookmarks,
+  LOCAL_STORAGE.lab_gem,
+  LOCAL_STORAGE.lab_credit,
+  LOCAL_STORAGE.lab_tracker
+];
+
+// Cloud worker & sync configuration
+const CLOUDFLARE_WORKER_URL = window.CLOUDFLARE_WORKER_URL || "https://osro-push-worker.osro-push-worker.workers.dev";
+const GOOGLE_CLIENT_ID = window.GOOGLE_CLIENT_ID || ""; // Google OAuth Web Client ID — leave empty to hide Google sign-in
+
+// Top-level const doesn't create window properties, so expose these explicitly
+window.CLOUDFLARE_WORKER_URL = CLOUDFLARE_WORKER_URL;
+window.GOOGLE_CLIENT_ID      = GOOGLE_CLIENT_ID;
+window.SYNC_KEYS             = SYNC_KEYS;
+window.LOCAL_STORAGE         = LOCAL_STORAGE;
 
 const USE_LOCAL_SERVER = isLocalLikeHost(window.location.hostname);
 const prefix = USE_LOCAL_SERVER ? LOCAL_PREFIX : REMOTE_PREFIX;

@@ -2,15 +2,20 @@
 
 // ===== STORAGE =====
 
-const BOOKMARKS_KEY = 'osromr_bookmarks';
+const BOOKMARKS_KEY = (typeof LOCAL_STORAGE !== 'undefined' && LOCAL_STORAGE.bookmarks) || 'osromr_bookmarks';
 
 function loadBookmarks() {
-  try { return JSON.parse(localStorage.getItem(BOOKMARKS_KEY)) || []; }
-  catch { return []; }
+  try {
+    return (window.osroStore ? osroStore.getJson(BOOKMARKS_KEY, []) : JSON.parse(localStorage.getItem(BOOKMARKS_KEY))) || [];
+  } catch { return []; }
 }
 
 function saveBookmarks(list) {
-  localStorage.setItem(BOOKMARKS_KEY, JSON.stringify(list));
+  if (window.osroStore) {
+    osroStore.setItem(BOOKMARKS_KEY, list);
+  } else {
+    localStorage.setItem(BOOKMARKS_KEY, JSON.stringify(list));
+  }
 }
 
 // Each bookmark: { type: 'quest'|'shop'|'item', id: number, name: string, addedAt: number }

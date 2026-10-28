@@ -619,6 +619,18 @@ window.parseEffect = // Parse effect text into structured stats and unparsed det
         pendingStats = [];
         continue;
       }
+
+      // Chance of decreasing enemy's SP amount
+      m = part.match(/(?:Add(?:s)?(?:\s+the)?\s+)?(\d+)%\s+chance\s+of\s+decreasing\s+enemy(?:'s)?\s+SP(?:\s+amount)?\s+by\s+(\d+)%\s+when\s+attacking/i);
+      if (m) {
+        const chance = parseInt(m[1]);
+        const spAmount = parseInt(m[2]);
+        stats[`Chance to decrease enemy's SP amount by ${spAmount}% when attacking %`] =
+          (stats[`Chance to decrease enemy's SP amount by ${spAmount}% when attacking %`] || 0) + chance;
+        pendingStats.forEach(s => unparsed.push(s));
+        pendingStats = [];
+        continue;
+      }
       
       // Single stat
       m = part.match(/^(HP|SP|ATK|MATK|FLEE|Flee|HIT|STR|AGI|VIT|INT|DEX|LUK|DEF|MDEF|Perfect Dodge|Crit|Critical|(?:Max\s*)?Weight|Max\s*HP|Max\s*SP|Maximum HP|Maximum SP)\s*\+\s*(\d+)(%?)$/i);

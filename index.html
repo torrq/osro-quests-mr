@@ -18,7 +18,9 @@
               <!-- Remove the old editor toggle div, keep only the github link -->
               <div class="header-controls-row">
                 <button class="header-icon-btn" id="themeToggleBtn" title="Toggle theme" onclick="toggleTheme()">☀</button>
-                <button class="header-icon-btn" id="settingsGearBtn" title="Settings" onclick="toggleSettingsPanel()">⚙</button>
+                <button class="header-icon-btn" id="settingsGearBtn" title="Settings" onclick="toggleSettingsPanel()">
+                  ⚙<span class="sync-status-indicator status--unlinked" id="syncStatusIndicator"></span>
+                </button>
               </div>
               <div id="header-version-tag"></div>
             </div>
@@ -29,7 +31,7 @@
             <div class="tab" onclick="switchTab('items')">Items</div>
             <div class="tab" onclick="switchTab('groups')">Groups</div>
             <div class="tab" onclick="switchTab('autoloot')">Autoloot</div>
-            <div class="tab tab--icon" data-tab="bookmarks" onclick="switchTab('bookmarks')" title="Bookmarks">
+          <div class="tab tab--icon" data-tab="bookmarks" onclick="switchTab('bookmarks')" title="Bookmarks">
               <span class="tab-icon" data-svg-icon="tabBookmarks" aria-hidden="true"></span>
             </div>
             <div class="tab tab--icon" data-tab="lab" onclick="switchTab('lab')" title="Lab">
@@ -37,6 +39,57 @@
             </div>
           </div>
           <div id="settingsPanel">
+            <div class="settings-row settings-row--custom-theme">
+              <div class="custom-theme-header-row">
+                <div>
+                  <div class="settings-label">Custom Theme</div>
+                  <div class="settings-sublabel">Personalize dark &amp; light palettes</div>
+                </div>
+                <label class="setting-toggle">
+                  <input type="checkbox" id="settingCustomTheme" onchange="settingSetCustomThemeEnabled(this.checked)">
+                  <span class="setting-toggle-slider"></span>
+                </label>
+              </div>
+              <div id="customThemeControls" class="custom-theme-controls hidden">
+                <div class="ct-top-bar">
+                  <div class="ct-mode-tabs" role="tablist" aria-label="Theme mode">
+                    <button type="button" id="ctModeBtn_dark" class="ct-mode-btn" onclick="customThemeSelectMode('dark')">🌙 Dark</button>
+                    <button type="button" id="ctModeBtn_light" class="ct-mode-btn" onclick="customThemeSelectMode('light')">☀ Light</button>
+                  </div>
+                  <div class="ct-actions">
+                    <button type="button" class="ct-action-btn" onclick="customThemeAutoTint()" title="Auto-tint background, panel &amp; text from your Accent color">✨ Tint</button>
+                    <button type="button" class="ct-action-btn" onclick="customThemeResetMode()" title="Reset current mode to default">↺ Reset</button>
+                  </div>
+                </div>
+                <div class="ct-swatches-grid">
+                  <label class="ct-swatch-card" title="Primary accent color (buttons, links, active states)">
+                    <span class="ct-swatch-preview" id="ctPreview_accent">
+                      <input type="color" id="ctInput_accent" class="ct-color-input" oninput="customThemeSetColor('accent', this.value, false)" onchange="customThemeSetColor('accent', this.value, true)">
+                    </span>
+                    <span class="ct-swatch-label">Accent</span>
+                  </label>
+                  <label class="ct-swatch-card" title="Main backdrop color">
+                    <span class="ct-swatch-preview" id="ctPreview_bg">
+                      <input type="color" id="ctInput_bg" class="ct-color-input" oninput="customThemeSetColor('bg', this.value, false)" onchange="customThemeSetColor('bg', this.value, true)">
+                    </span>
+                    <span class="ct-swatch-label">Bg</span>
+                  </label>
+                  <label class="ct-swatch-card" title="Sidebar and card surface color">
+                    <span class="ct-swatch-preview" id="ctPreview_panel">
+                      <input type="color" id="ctInput_panel" class="ct-color-input" oninput="customThemeSetColor('panel', this.value, false)" onchange="customThemeSetColor('panel', this.value, true)">
+                    </span>
+                    <span class="ct-swatch-label">Panel</span>
+                  </label>
+                  <label class="ct-swatch-card" title="Primary text color">
+                    <span class="ct-swatch-preview" id="ctPreview_text">
+                      <input type="color" id="ctInput_text" class="ct-color-input" oninput="customThemeSetColor('text', this.value, false)" onchange="customThemeSetColor('text', this.value, true)">
+                    </span>
+                    <span class="ct-swatch-label">Text</span>
+                  </label>
+                </div>
+                <div class="ct-presets-row" id="ctPresetsRow"></div>
+              </div>
+            </div>
             <div class="settings-row">
               <div>
                 <div class="settings-label">Show Location</div>
@@ -93,6 +146,9 @@
                 <input type="checkbox" id="settingForceMobileView" onchange="settingSetForceMobileView(this.checked)">
                 <span class="setting-toggle-slider"></span>
               </label>
+            </div>
+            <div class="settings-row settings-row--block">
+              <div id="cloudSyncSection"></div>
             </div>
             <div class="settings-row">
               <a href="https://github.com/torrq/osro-quests-mr" class="settings-link" target="_blank" rel="noopener">
@@ -252,6 +308,9 @@
       </div>
     </div>
     <script src="js/config.js"></script>
+    <script src="js/store.js"></script>
+    <script src="js/lib/qrcode.min.js"></script>
+    <script src="js/sync.js"></script>
     <script src="js/svg.js"></script>
     <script src="js/main.js"></script>
     <script src="js/items.js"></script>

@@ -1,5 +1,5 @@
 (function() {
-  const TRACKER_STORAGE_KEY = 'osromr_lab_tracker_v1';
+  const TRACKER_STORAGE_KEY = (typeof LOCAL_STORAGE !== 'undefined' && LOCAL_STORAGE.lab_tracker) || 'osromr_lab_tracker_v1';
   
   let trackerState = {
     deposits: {},
@@ -28,9 +28,9 @@
   
   function loadTrackerState() {
     try {
-      const stored = localStorage.getItem(TRACKER_STORAGE_KEY);
+      const stored = window.osroStore ? osroStore.getJson(TRACKER_STORAGE_KEY) : JSON.parse(localStorage.getItem(TRACKER_STORAGE_KEY));
       if (stored) {
-        trackerState = JSON.parse(stored);
+        trackerState = stored;
       }
     } catch (e) {
       console.error("Failed to load tracker state", e);
@@ -41,7 +41,11 @@
   
   function saveTrackerState() {
     try {
-      localStorage.setItem(TRACKER_STORAGE_KEY, JSON.stringify(trackerState));
+      if (window.osroStore) {
+        osroStore.setItem(TRACKER_STORAGE_KEY, trackerState);
+      } else {
+        localStorage.setItem(TRACKER_STORAGE_KEY, JSON.stringify(trackerState));
+      }
     } catch (e) {
       console.error("Failed to save tracker state", e);
     }
@@ -141,8 +145,8 @@
       statsHtml += `<div class="dt-stats-grid">`;
       const sortedKeys = Object.keys(parsed).sort();
       sortedKeys.forEach(stat => {
-        const isPercent = stat.includes('%');
-        const displayName = isPercent ? stat.replace('%', '').trim() : stat;
+        const isPercent = stat.endsWith('%');
+        const displayName = isPercent ? stat.replace(/%$/, '').trim() : stat;
         const suffix = isPercent ? '%' : '';
         const data = parsed[stat];
         const sign = data.value >= 0 ? '+' : '';
@@ -175,7 +179,7 @@
                   </div>
                   <div class="dt-unparsed-source" style="font-size: 11px; margin-top: 3px;">
                     <span class="dt-unparsed-icon">${renderItemIcon(src.itemId)}</span>
-                    <a href="#" onclick="window.navigateToTrackerItem(${src.itemId}); return false;" class="item-link" style="font-size: 11px;">${src.itemName}</a>
+                    <a href="${typeof itemUrl === 'function' ? itemUrl(src.itemId) : '?item=' + src.itemId}" onclick="event.preventDefault(); window.navigateToTrackerItem(${src.itemId});" class="item-link" style="font-size: 11px;">${src.itemName}</a>
                   </div>
                 </div>
               `).join('')}
@@ -207,7 +211,7 @@
                   </div>
                   <div class="dt-unparsed-source">
                     <span class="dt-unparsed-icon">${renderItemIcon(item.itemId)}</span>
-                    <a href="#" onclick="window.navigateToTrackerItem(${item.itemId}); return false;" class="item-link">${item.itemName}</a>
+                    <a href="${typeof itemUrl === 'function' ? itemUrl(item.itemId) : '?item=' + item.itemId}" onclick="event.preventDefault(); window.navigateToTrackerItem(${item.itemId});" class="item-link">${item.itemName}</a>
                     <span class="item-row-id" style="margin-left: 4px;">#${item.itemId}</span>
                   </div>
                 </div>
@@ -408,7 +412,7 @@
             ${renderItemIcon(item.id)}
           </td>
           <td class="dt-col-item">
-            <a href="#" onclick="window.navigateToTrackerItem(${item.id}); return false;" class="item-link">${item.name}</a>
+            <a href="${typeof itemUrl === 'function' ? itemUrl(item.id) : '?item=' + item.id}" onclick="event.preventDefault(); window.navigateToTrackerItem(${item.id});" class="item-link">${item.name}</a>
           </td>
           <td class="dt-col-effect">
             ${item.effect}
@@ -522,6 +526,7 @@
     const subState = listName === "Deposit List" ? trackerState.deposits : trackerState.unlocks;
     if (!subState[itemId]) subState[itemId] = {};
     subState[itemId].have = checked;
+    subState[itemId].updatedAt = Date.now();
     saveTrackerState();
     
     const row = document.getElementById(`dt-row-${itemId}`);
@@ -538,6 +543,7 @@
     
     const isWant = !subState[itemId].want;
     subState[itemId].want = isWant;
+    subState[itemId].updatedAt = Date.now();
     saveTrackerState();
     
     const row = document.getElementById(`dt-row-${itemId}`);
@@ -590,9 +596,11 @@
     const listData = getListData(listName);
     if (!listData) return;
     
+    const now = Date.now();
     listData.items.forEach(id => {
       if (!subState[id]) subState[id] = { have: false, want: false };
       subState[id].have = true;
+      subState[id].updatedAt = now;
     });
     
     saveTrackerState();
@@ -608,9 +616,11 @@
     const listData = getListData(listName);
     if (!listData) return;
     
+    const now = Date.now();
     listData.items.forEach(id => {
       if (subState[id]) {
         subState[id].have = false;
+        subState[id].updatedAt = now;
       }
     });
     
@@ -799,7 +809,7 @@
           const want = row[3] === "Yes";
           
           if (have || want) {
-            subState[id] = { have, want };
+            subState[id] = { have, want, updatedAt: Date.now() };
           }
         }
         
