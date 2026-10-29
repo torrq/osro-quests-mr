@@ -6325,6 +6325,14 @@ a.bm-main-name:hover {
   padding: 0 10px;
 }
 
+.dt-search-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1 1 240px;
+  max-width: 370px;
+}
+
 .dt-search-wrapper {
   display: flex;
   align-items: center;
@@ -6334,6 +6342,19 @@ a.bm-main-name:hover {
   padding: 0 10px;
   flex: 1 1 200px;
   max-width: 300px;
+}
+
+.dt-desc-toggle {
+  user-select: none;
+  white-space: nowrap;
+  font-size: 12px;
+  flex-shrink: 0;
+}
+
+.dt-desc-toggle .dt-checkbox {
+  width: 15px;
+  height: 15px;
+  margin: 0;
 }
 
 .dt-search-icon {

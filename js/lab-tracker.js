@@ -7,6 +7,7 @@
   };
   
   let currentSearchQuery = "";
+  let currentSearchDesc = false;
   let currentFilter = "all"; // 'all' | 'need' | 'want' | 'done'
   let currentClassFilter = "all"; // 'all' | 'card' | 'equip/costume'
   
@@ -20,6 +21,7 @@
     if (lastTab !== currentTabName) {
       lastTab = currentTabName;
       currentSearchQuery = "";
+      currentSearchDesc = false;
       currentFilter = "all";
       currentClassFilter = "all";
       sortState = { key: "default", dir: "asc" };
@@ -279,6 +281,85 @@
     return sortState.dir === 'asc' ? ' <span class="dt-sort-arrow">▲</span>' : ' <span class="dt-sort-arrow">▼</span>';
   }
 
+  function parseTrackerSearchQuery(query) {
+    const q = (query || "").trim();
+    if (!q) return null;
+
+    const includePhrases = [];
+    const includeWords = [];
+    const excludePhrases = [];
+    const excludeWords = [];
+
+    const remaining = q.replace(/-?"([^"]+)"/g, (match, phrase) => {
+      if (match.startsWith('-')) {
+        excludePhrases.push(phrase.toLowerCase());
+      } else {
+        includePhrases.push(phrase.toLowerCase());
+      }
+      return '';
+    });
+
+    remaining.split(/\s+/).forEach(w => {
+      if (w.length > 0) {
+        if (w.startsWith('-') && w.length > 1) {
+          excludeWords.push(w.substring(1).toLowerCase());
+        } else if (!w.startsWith('-')) {
+          includeWords.push(w.toLowerCase());
+        }
+      }
+    });
+
+    if (
+      includePhrases.length === 0 &&
+      includeWords.length === 0 &&
+      excludePhrases.length === 0 &&
+      excludeWords.length === 0
+    ) {
+      return null;
+    }
+
+    return { includePhrases, includeWords, excludePhrases, excludeWords };
+  }
+
+  function matchesTrackerSearch(item, parsedQuery, searchDesc) {
+    if (!parsedQuery) return true;
+
+    const nameLower = (item.name || "").toLowerCase();
+    const idStr = String(item.id);
+    const effectLower = (item.effect || "").toLowerCase();
+    let descLower = "";
+    if (searchDesc && item.desc) {
+      const rawDesc = Array.isArray(item.desc) ? item.desc.join("\n") : String(item.desc);
+      descLower = rawDesc.replace(/\^[0-9A-Fa-f]{6}/g, "").toLowerCase();
+    }
+
+    const matchesTerm = (term) =>
+      nameLower.includes(term) ||
+      idStr.includes(term) ||
+      effectLower.includes(term) ||
+      (searchDesc && descLower.includes(term));
+
+    const { includePhrases, includeWords, excludePhrases, excludeWords } = parsedQuery;
+
+    for (let i = 0; i < includePhrases.length; i++) {
+      if (!matchesTerm(includePhrases[i])) return false;
+    }
+
+    for (let i = 0; i < includeWords.length; i++) {
+      if (!matchesTerm(includeWords[i])) return false;
+    }
+
+    for (let i = 0; i < excludeWords.length; i++) {
+      if (matchesTerm(excludeWords[i])) return false;
+    }
+
+    for (let i = 0; i < excludePhrases.length; i++) {
+      if (matchesTerm(excludePhrases[i])) return false;
+    }
+
+    return true;
+  }
+
   // ===== RENDER LIST VIEW =====
   function trackerRenderList(listName, subState) {
     checkTabChange(listName);
@@ -312,14 +393,10 @@
     });
     
     // Filter
+    const parsedSearchQuery = parseTrackerSearchQuery(currentSearchQuery);
     let filtered = items.filter(item => {
       // Search
-      const searchMatch = !currentSearchQuery || 
-        item.name.toLowerCase().includes(currentSearchQuery) || 
-        item.id.toString().includes(currentSearchQuery) ||
-        item.effect.toLowerCase().includes(currentSearchQuery);
-      
-      if (!searchMatch) return false;
+      if (!matchesTrackerSearch(item, parsedSearchQuery, currentSearchDesc)) return false;
       
       // Filter status
       const isHave = !!subState[item.id]?.have;
@@ -460,12 +537,19 @@
           </div>
           
           <div class="dt-toolbar">
-            <div class="dt-search-wrapper">
-              <span class="dt-search-icon">🔍</span>
-              <input type="text" class="dt-search-input" placeholder="Search by name or ID…" 
-                value="${currentSearchQuery}" oninput="window.handleTrackerSearch('${listName}', this.value)">
-              <button class="btn btn-sm" onclick="window.clearTrackerSearch('${listName}')" 
-                style="padding: 0 5px; height: 20px; line-height: 1; margin-left: 4px; flex-shrink: 0;" title="Clear search">×</button>
+            <div class="dt-search-group">
+              <div class="dt-search-wrapper">
+                <span class="dt-search-icon">🔍</span>
+                <input type="text" class="dt-search-input" placeholder="Search by name or ID…" 
+                  value="${currentSearchQuery.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;')}" oninput="window.handleTrackerSearch('${listName}', this.value)">
+                <button class="btn btn-sm" onclick="window.clearTrackerSearch('${listName}')" 
+                  style="padding: 0 5px; height: 20px; line-height: 1; margin-left: 4px; flex-shrink: 0;" title="Clear search">×</button>
+              </div>
+              <label class="checkbox-label dt-desc-toggle" title="Search item descriptions">
+                <input type="checkbox" class="dt-checkbox" ${currentSearchDesc ? 'checked' : ''} 
+                  onchange="window.toggleTrackerDescSearch('${listName}', this.checked)" autocomplete="off">
+                <span>Desc</span>
+              </label>
             </div>
             
             ${classFilterHtml}
@@ -566,20 +650,18 @@
 
   let searchTimeout = null;
   window.handleTrackerSearch = function(listName, query) {
-    currentSearchQuery = query.toLowerCase();
+    currentSearchQuery = query;
     if (searchTimeout) clearTimeout(searchTimeout);
     searchTimeout = setTimeout(() => {
       if (listName === "Deposit List") trackerRenderDeposits();
       else trackerRenderUnlocks();
-      
-      const input = document.querySelector('.dt-search-input');
-      if (input) {
-        input.focus();
-        const val = input.value;
-        input.value = '';
-        input.value = val;
-      }
     }, 200);
+  };
+
+  window.toggleTrackerDescSearch = function(listName, checked) {
+    currentSearchDesc = !!checked;
+    if (listName === "Deposit List") trackerRenderDeposits();
+    else trackerRenderUnlocks();
   };
 
   window.clearTrackerSearch = function(listName) {
