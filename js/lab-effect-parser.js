@@ -407,9 +407,10 @@ window.parseEffect = // Parse effect text into structured stats and unparsed det
       }
 
       // Target Resist (Reduce damage from X by Y%)
-      m = part.match(/Reduce(?:s)? damage(?: taken)? from ([A-Za-z]+)(?: monsters?)? by (\d+)%/i);
+      m = part.match(/Reduce(?:s)? damage(?: taken)? from (Demi[-\s]?Humans?|[A-Za-z]+)(?: monsters?)? by (\d+)%/i);
       if (m) {
         let type = m[1].toLowerCase();
+        if (/^demi[-\s]?humans?$/.test(type)) type = 'demihuman';
         let statName = type.charAt(0).toUpperCase() + type.slice(1);
         if (['small', 'medium', 'large'].includes(type)) statName += ' Monster Resist %';
         else if (['boss'].includes(type)) statName += ' Resist %';
@@ -422,11 +423,13 @@ window.parseEffect = // Parse effect text into structured stats and unparsed det
       }
 
       // Property/Size/Race Resists (e.g. Dark Resist, Demon Resist, Medium Resist)
-      m = part.match(/([A-Za-z]+)\s+Resist\s*\+\s*(\d+)%/i) ||
+      m = part.match(/(Demi[-\s]?Humans?|[A-Za-z]+)\s+Resist\s*\+\s*(\d+)%/i) ||
+          part.match(/Resistance\s+to\s+(Demi[-\s]?Humans?|[A-Za-z]+)(?:\s+Monsters?)?\s*\+\s*(\d+)%/i) ||
           part.match(/Increases? resistance against ([A-Za-z]+) elemental attacks? by (\d+)%/i);
       if (m) {
         let type = m[1].toLowerCase();
         if (type === 'deomn') type = 'demon'; // Typo handler
+        if (/^demi[-\s]?humans?$/.test(type)) type = 'demihuman';
         
         let properType = type.charAt(0).toUpperCase() + type.slice(1);
         
@@ -574,15 +577,6 @@ window.parseEffect = // Parse effect text into structured stats and unparsed det
       m = part.match(/Nullify\s+(\d+)%\s+magic\s+spells/i);
       if (m) {
         stats['Nullify Magic Spells %'] = (stats['Nullify Magic Spells %'] || 0) + parseInt(m[1]);
-        pendingStats.forEach(s => unparsed.push(s));
-        pendingStats = [];
-        continue;
-      }
-
-      // Reduce damage from Demihuman
-      m = part.match(/Reduce\s+damage\s+from\s+Demi-?Humans?\s+by\s+(\d+)%/i);
-      if (m) {
-        stats['Reduce damage from Demihuman %'] = (stats['Reduce damage from Demihuman %'] || 0) + parseInt(m[1]);
         pendingStats.forEach(s => unparsed.push(s));
         pendingStats = [];
         continue;
