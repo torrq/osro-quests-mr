@@ -648,6 +648,52 @@
     }
   };
 
+  function updateTrackerURL() {
+    if (window.state?.suppressUrlUpdate) return;
+    if (typeof updateURL === 'function' && (window.state?.currentTab === 'lab-tracker-deposits' || window.state?.currentTab === 'lab-tracker-unlocks')) {
+      updateURL(null, null, false);
+    }
+  }
+
+  window.syncTrackerStateFromURL = function(urlParams) {
+    const params = urlParams || new URLSearchParams(window.location.search);
+    const tab = params.get('tab');
+    if (tab === 'lab-tracker-deposits' || tab === 'lab-tracker-unlocks') {
+      lastTab = tab === 'lab-tracker-deposits' ? 'Deposit List' : 'Unlock List';
+      currentSearchQuery = params.get('ts') || "";
+      currentSearchDesc = params.get('td') === '1';
+      const tf = params.get('tf');
+      currentFilter = (tf === 'need' || tf === 'want' || tf === 'done') ? tf : 'all';
+      const tc = params.get('tc');
+      currentClassFilter = (tab === 'lab-tracker-deposits' && (tc === 'card' || tc === 'equip/costume')) ? tc : 'all';
+    }
+  };
+
+  window.applyTrackerURLParams = function(url) {
+    const isTrackerListTab = window.state && (
+      window.state.currentTab === 'lab-tracker-deposits' ||
+      window.state.currentTab === 'lab-tracker-unlocks'
+    );
+    if (isTrackerListTab) {
+      if (currentSearchQuery) url.searchParams.set('ts', currentSearchQuery);
+      else url.searchParams.delete('ts');
+
+      if (currentSearchDesc) url.searchParams.set('td', '1');
+      else url.searchParams.delete('td');
+
+      if (currentFilter && currentFilter !== 'all') url.searchParams.set('tf', currentFilter);
+      else url.searchParams.delete('tf');
+
+      if (window.state.currentTab === 'lab-tracker-deposits' && currentClassFilter && currentClassFilter !== 'all') {
+        url.searchParams.set('tc', currentClassFilter);
+      } else {
+        url.searchParams.delete('tc');
+      }
+    } else {
+      ['ts', 'td', 'tf', 'tc'].forEach(k => url.searchParams.delete(k));
+    }
+  };
+
   let searchTimeout = null;
   window.handleTrackerSearch = function(listName, query) {
     currentSearchQuery = query;
@@ -655,6 +701,7 @@
     searchTimeout = setTimeout(() => {
       if (listName === "Deposit List") trackerRenderDeposits();
       else trackerRenderUnlocks();
+      updateTrackerURL();
     }, 200);
   };
 
@@ -662,6 +709,7 @@
     currentSearchDesc = !!checked;
     if (listName === "Deposit List") trackerRenderDeposits();
     else trackerRenderUnlocks();
+    updateTrackerURL();
   };
 
   window.clearTrackerSearch = function(listName) {
@@ -669,6 +717,7 @@
     if (searchTimeout) clearTimeout(searchTimeout);
     if (listName === "Deposit List") trackerRenderDeposits();
     else trackerRenderUnlocks();
+    updateTrackerURL();
   };
 
   window.trackerSelectAll = function(listName) {
@@ -714,11 +763,13 @@
     currentFilter = filter;
     if (listName === "Deposit List") trackerRenderDeposits();
     else trackerRenderUnlocks();
+    updateTrackerURL();
   };
 
   window.setTrackerClassFilter = function(listName, filter) {
     currentClassFilter = filter;
     trackerRenderDeposits();
+    updateTrackerURL();
   };
 
   window.handleTrackerSort = function(listName, key) {
