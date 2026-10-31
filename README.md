@@ -51,7 +51,7 @@ Browser → Cloudflare Worker (osro-push-worker + D1) → Upstash QStash → Web
 - **`sw.js`** (repo root): Service worker handling `push` events and `notificationclick` routing to `?tab=lab-*`.
 - **`js/store.js` & `js/sync.js`**: Centralized `osroStore` wrapper tracking per-key dirty flags and timestamps, plus debounced cloud sync and granular item-level merge resolution for timers and tracker state.
 - **`js/main.js`**: Exposes `osroScheduleCloudPush(timerId, delaySeconds, payload)`, `osroCancelCloudPush(messageId)`, `osroEnsureNotifyPermission()`, and `osroNotifyTitle(section)`.
-- **Cloudflare Worker (`osro-push-worker`)**: Separate repo providing `/schedule`, `/cancel`, `/webhook`, `/auth/*`, `/sync`, and `/devices` routes backed by Cloudflare D1 and Upstash QStash.
+- **Cloudflare Worker ([`osro-push-worker`](https://github.com/torrq/osro-push-worker))**: Separate repo providing `/schedule`, `/cancel`, `/webhook`, `/auth/*`, `/sync`, and `/devices` routes backed by Cloudflare D1 and Upstash QStash.
 
 ## 🛠️ Development
 
@@ -91,7 +91,7 @@ Browser → Cloudflare Worker (osro-push-worker + D1) → Upstash QStash → Web
 - **HTML5 & CSS3**: Responsive Grid/Flexbox layout with CSS custom properties and dynamic theme variables
 - **Vanilla JavaScript**: Zero build step, no framework dependencies
 - **Web Workers & MiniSearch**: Off-main-thread full-text indexing and search (`js/search-worker.js`)
-- **Cloudflare Workers + D1**: Serverless cloud sync & multi-device push fan-out (`osro-push-worker`)
+- **Cloudflare Workers + D1**: Serverless cloud sync & multi-device push fan-out ([`osro-push-worker`](https://github.com/torrq/osro-push-worker))
 - **Upstash QStash & Web Push API**: Delayed message scheduling and Service Worker notifications
 
 ## 📝 License

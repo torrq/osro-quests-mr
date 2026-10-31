@@ -59,7 +59,7 @@ image/
   osro_quests_logo_mr_v3.png — header and notification preview image
 ```
 
-**`osro-push-worker`** is a separate Cloudflare Worker repo (not here). It handles `/schedule`, `/cancel`, `/webhook`, `/auth/*`, `/sync`, and `/devices` routes with Cloudflare D1 persistence.
+[**`osro-push-worker`**](https://github.com/torrq/osro-push-worker) is a separate Cloudflare Worker repo (not here). It handles `/schedule`, `/cancel`, `/webhook`, `/auth/*`, `/sync`, and `/devices` routes with Cloudflare D1 persistence.
 
 ---
 
