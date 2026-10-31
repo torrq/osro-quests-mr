@@ -6526,6 +6526,101 @@ a.bm-main-name:hover {
   color: var(--accent);
 }
 
+.dt-subfilter-bar {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: -4px 10px 12px 10px;
+}
+
+.dt-select-group {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0 8px;
+  height: 30px;
+  min-width: 0;
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.dt-select-group:hover:not(.disabled) {
+  border-color: var(--border-light);
+}
+
+.dt-select-group.active {
+  background: var(--accent-bg);
+  border-color: var(--accent);
+}
+
+.dt-select-group.disabled {
+  opacity: 0.45;
+  pointer-events: none;
+}
+
+.dt-select-label {
+  font-size: 11px;
+  color: var(--text-muted);
+  white-space: nowrap;
+  user-select: none;
+}
+
+.dt-select-group.active .dt-select-label {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.dt-filter-select {
+  background: transparent;
+  border: none;
+  color: var(--text);
+  font-size: 12px;
+  padding: 4px 2px;
+  cursor: pointer;
+  min-width: 0;
+  outline: none;
+}
+
+.dt-filter-select option {
+  background: var(--panel);
+  color: var(--text);
+}
+
+.dt-subfilter-clear {
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: 11px;
+  height: 30px;
+  padding: 0 10px;
+  transition: all 0.15s;
+  white-space: nowrap;
+}
+
+.dt-subfilter-clear:hover {
+  background: var(--panel-hover);
+  color: var(--text);
+  border-color: var(--accent);
+}
+
+@media (max-width: 600px) {
+  .dt-subfilter-bar {
+    gap: 6px;
+  }
+  .dt-select-group {
+    flex: 1 1 130px;
+  }
+  .dt-filter-select {
+    flex: 1;
+    width: 100%;
+  }
+}
+
 .dt-unparsed-list {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -6637,6 +6732,52 @@ a.bm-main-name:hover {
   background: var(--panel-hover);
   color: var(--text);
   border-color: rgba(255, 255, 255, 0.25);
+}
+
+.dt-footer-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 0 10px 16px 10px;
+}
+
+.dt-footer-group {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.dt-footer-btn {
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: 11px;
+  padding: 5px 10px;
+  transition: all 0.15s;
+  white-space: nowrap;
+  opacity: 0.75;
+}
+
+.dt-footer-btn:hover {
+  opacity: 1;
+  background: var(--panel-hover);
+  color: var(--text);
+  border-color: var(--border-light);
+}
+
+.dt-footer-btn--select:hover {
+  color: #50e3c2;
+  border-color: rgba(80, 227, 194, 0.4);
+}
+
+.dt-footer-btn--clear:hover {
+  color: var(--danger, #ff6b6b);
+  border-color: rgba(255, 107, 107, 0.4);
 }
 
 /* ===== AUTOLOOT: sibling tabs, overflow menu, row actions ===== */

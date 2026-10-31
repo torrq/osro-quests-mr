@@ -10,6 +10,8 @@
   let currentSearchDesc = false;
   let currentFilter = "all"; // 'all' | 'need' | 'want' | 'done'
   let currentClassFilter = "all"; // 'all' | 'card' | 'equip/costume'
+  let currentSourceFilter = "all";
+  let currentLocationFilter = "all";
   
   let sortState = {
     key: "default", // 'default', 'have', 'want', 'name', 'effect', 'class'
@@ -24,6 +26,8 @@
       currentSearchDesc = false;
       currentFilter = "all";
       currentClassFilter = "all";
+      currentSourceFilter = "all";
+      currentLocationFilter = "all";
       sortState = { key: "default", dir: "asc" };
     }
   }
@@ -62,6 +66,71 @@
     }
     
     return "Equip/Costume";
+  }
+
+  const SOURCE_GROUPS_ORDER = [
+    "Halloween Event",
+    "Donate",
+    "Quest",
+    "Lotti Girl",
+    "Christmas Event",
+    "Valentine Event",
+    "Quest/Donate",
+    "Monster Arena",
+    "Gacha Machine",
+    "Socket Enchantment",
+    "Headgear Points",
+    "Bonus Point Shop"
+  ];
+
+  const LOCATION_GROUPS_ORDER = [
+    "Upper",
+    "Mid",
+    "Lower",
+    "Garment",
+    "Costume Weapon"
+  ];
+
+  function getItemSource(desc) {
+    if (!desc) return "";
+    const rawDesc = Array.isArray(desc) ? desc.join("\n") : String(desc);
+    const cleanDesc = rawDesc.replace(/\^[0-9A-Fa-f]{6}/g, "");
+    const m = cleanDesc.match(/Source\s*:\s*([^\r\n]+)/i);
+    if (!m) return "";
+    const raw = m[1].trim();
+    const lower = raw.toLowerCase();
+    if (!lower || lower === "?" || lower === "unknown") return "";
+    if (lower === "halloween event") return "Halloween Event";
+    if (lower === "christmas event" || lower === "christmas 2025" || lower === "2024 christmas" || lower === "2025 christmas") return "Christmas Event";
+    if (lower === "valentine event") return "Valentine Event";
+    if (lower === "donation exclusive" || lower === "donation shop" || lower === "donate shop" || lower === "donate exclusive" || lower === "donate") return "Donate";
+    if (lower === "quest shop" || lower === "quest item" || lower === "quest") return "Quest";
+    if (lower === "quest/donate" || lower === "quest, donate") return "Quest/Donate";
+    if (lower === "lotti girl") return "Lotti Girl";
+    if (lower === "monster arena") return "Monster Arena";
+    if (lower === "gacha machine") return "Gacha Machine";
+    if (lower === "socket enchantment") return "Socket Enchantment";
+    if (lower === "headgear points") return "Headgear Points";
+    if (lower === "bonus point shop") return "Bonus Point Shop";
+    return raw;
+  }
+
+  function getItemLocation(itemId, itemClass, itemName, desc) {
+    if (getItemCategory(itemId, itemClass, itemName) === "Card") return "";
+    if (!desc) return "";
+    const rawDesc = Array.isArray(desc) ? desc.join("\n") : String(desc);
+    const cleanDesc = rawDesc.replace(/\^[0-9A-Fa-f]{6}/g, "");
+    const m = cleanDesc.match(/(?:Equipped\s+On|Location)\s*:\s*([^\r\n]+)/i)
+      || cleanDesc.match(/(?:Head\s+)?Position\s*:\s*([^\r\n]+)/i);
+    if (!m) return "";
+    const raw = m[1].trim();
+    const lower = raw.toLowerCase();
+    if (lower === "upper" || lower === "top") return "Upper";
+    if (lower === "mid" || lower === "middle") return "Mid";
+    if (lower === "lower" || lower === "low") return "Lower";
+    if (lower === "garment") return "Garment";
+    if (lower === "shadow weapon") return "Costume Weapon";
+    return "";
   }
 
   // Aggregate stats from checked items in both lists
@@ -383,12 +452,17 @@
     // Resolve all item details
     const items = listData.items.map(id => {
       const itemInfo = DATA.items[id];
+      const name = itemInfo ? itemInfo.name : `Item #${id}`;
+      const desc = itemInfo ? itemInfo.desc : "";
+      const cls = listData.classes?.[id] || "";
       return {
         id: id,
-        name: itemInfo ? itemInfo.name : `Item #${id}`,
-        desc: itemInfo ? itemInfo.desc : "",
+        name: name,
+        desc: desc,
         effect: listData.effects?.[id] || "",
-        class: listData.classes?.[id] || ""
+        class: cls,
+        source: isDeposit ? getItemSource(desc) : "",
+        location: isDeposit ? getItemLocation(id, cls, name, desc) : ""
       };
     });
     
@@ -414,6 +488,14 @@
       if (isDeposit && currentClassFilter !== "all") {
         const cat = getItemCategory(item.id, item.class, item.name).toLowerCase();
         if (cat !== currentClassFilter) return false;
+      }
+
+      // Filter Source & Location (only for Deposits)
+      if (isDeposit && currentSourceFilter !== "all") {
+        if (item.source !== currentSourceFilter) return false;
+      }
+      if (isDeposit && currentLocationFilter !== "all") {
+        if (item.location !== currentLocationFilter) return false;
       }
       
       return true;
@@ -503,6 +585,7 @@
     }).join('');
 
     let classFilterHtml = "";
+    let subfilterHtml = "";
     if (isDeposit) {
       classFilterHtml = `
         <div class="dt-class-filters">
@@ -511,29 +594,60 @@
           <button class="dt-class-btn ${currentClassFilter === 'equip/costume' ? 'active' : ''}" onclick="window.setTrackerClassFilter('Deposit List', 'equip/costume')">Equip/Costume</button>
         </div>
       `;
+
+      const sourceCounts = {};
+      const locationCounts = {};
+      items.forEach(item => {
+        if (item.source) sourceCounts[item.source] = (sourceCounts[item.source] || 0) + 1;
+        if (item.location) locationCounts[item.location] = (locationCounts[item.location] || 0) + 1;
+      });
+
+      const sourceOptions = SOURCE_GROUPS_ORDER
+        .filter(g => sourceCounts[g])
+        .sort((a, b) => sourceCounts[b] - sourceCounts[a])
+        .map(g => `<option value="${g}" ${currentSourceFilter === g ? 'selected' : ''}>${g} (${sourceCounts[g]})</option>`)
+        .join('');
+
+      const locationOptions = LOCATION_GROUPS_ORDER
+        .filter(g => locationCounts[g])
+        .map(g => `<option value="${g}" ${currentLocationFilter === g ? 'selected' : ''}>${g} (${locationCounts[g]})</option>`)
+        .join('');
+
+      const isCardClass = currentClassFilter === 'card';
+      const hasSubfilter = currentSourceFilter !== 'all' || currentLocationFilter !== 'all';
+
+      subfilterHtml = `
+        <div class="dt-subfilter-bar">
+          <div class="dt-select-group ${currentSourceFilter !== 'all' ? 'active' : ''}">
+            <span class="dt-select-label">Source</span>
+            <select class="dt-filter-select" onchange="window.setTrackerSourceFilter('Deposit List', this.value)" aria-label="Filter by Source">
+              <option value="all">All</option>
+              ${sourceOptions}
+            </select>
+          </div>
+          <div class="dt-select-group ${currentLocationFilter !== 'all' ? 'active' : ''} ${isCardClass ? 'disabled' : ''}">
+            <span class="dt-select-label">Location</span>
+            <select class="dt-filter-select" ${isCardClass ? 'disabled title="Location does not apply to Cards"' : ''} onchange="window.setTrackerLocationFilter('Deposit List', this.value)" aria-label="Filter by Location">
+              <option value="all">All</option>
+              ${locationOptions}
+            </select>
+          </div>
+          ${hasSubfilter ? `
+            <button class="dt-subfilter-clear" onclick="window.clearTrackerSubfilters('Deposit List')" title="Reset Source & Location filters">× Reset</button>
+          ` : ''}
+        </div>
+      `;
     }
 
     mainContainer.innerHTML = `
       <div class="lab-main">
         <div class="lab-section">
-          <div class="lab-section-header" style="position: relative; display: flex; flex-direction: row; justify-content: space-between; align-items: flex-start; gap: 16px; width: 100%;">
-            <div style="display: flex; flex-direction: column; gap: 3px; flex-grow: 1;">
-              <span class="lab-section-title">
-                <span class="lab-section-icon" data-svg-icon="tracker14"></span>
-                ${isDeposit ? "Equipment & Costume Deposits" : "Card Unlocks"}
-              </span>
-              <span class="lab-section-meta">${counts.have} of ${counts.total} collected (${pct}%) — ${counts.want} wanted</span>
-            </div>
-            <div style="display: flex; gap: 8px; align-self: flex-start; margin-top: 2px; align-items: center;">
-              <span style="font-size: 11px; cursor: pointer; color: #50e3c2; text-decoration: underline;" onclick="window.trackerSelectAll('${listName}')" title="Mark all items as Have">Select All</span>
-              <span style="font-size: 11px; cursor: pointer; color: #ff6b6b; text-decoration: underline;" onclick="window.trackerClearAll('${listName}')" title="Mark all items as Not Have">Clear All</span>
-              <button class="dt-export-btn" onclick="window.importTrackerFromCsv('${listName}')">
-                Import CSV
-              </button>
-              <button class="dt-export-btn" onclick="window.exportTrackerToCsv('${listName}')">
-                Export CSV
-              </button>
-            </div>
+          <div class="lab-section-header">
+            <span class="lab-section-title">
+              <span class="lab-section-icon" data-svg-icon="tracker14"></span>
+              ${isDeposit ? "Equipment & Costume Deposits" : "Card Unlocks"}
+            </span>
+            <span class="lab-section-meta">${counts.have} of ${counts.total} collected (${pct}%) — ${counts.want} wanted</span>
           </div>
           
           <div class="dt-toolbar">
@@ -562,6 +676,8 @@
             </div>
           </div>
           
+          ${subfilterHtml}
+          
           <div class="dt-table-wrapper">
             <table class="dt-table">
               <thead>
@@ -579,6 +695,25 @@
                 ${tableRows || `<tr><td colspan="${isDeposit ? 7 : 6}" class="empty-msg-centered">No items found matching the filter.</td></tr>`}
               </tbody>
             </table>
+          </div>
+
+          <div class="dt-footer-actions">
+            <div class="dt-footer-group">
+              <button class="dt-footer-btn" onclick="window.importTrackerFromCsv('${listName}')" title="Import progress from CSV">
+                ↑ Import CSV
+              </button>
+              <button class="dt-footer-btn" onclick="window.exportTrackerToCsv('${listName}')" title="Export progress to CSV">
+                ↓ Export CSV
+              </button>
+            </div>
+            <div class="dt-footer-group">
+              <button class="dt-footer-btn dt-footer-btn--select" onclick="window.trackerSelectAll('${listName}')" title="Mark all items as Have">
+                ✓ Select All
+              </button>
+              <button class="dt-footer-btn dt-footer-btn--clear" onclick="window.trackerClearAll('${listName}')" title="Mark all items as Not Have">
+                ✕ Clear All
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -666,6 +801,10 @@
       currentFilter = (tf === 'need' || tf === 'want' || tf === 'done') ? tf : 'all';
       const tc = params.get('tc');
       currentClassFilter = (tab === 'lab-tracker-deposits' && (tc === 'card' || tc === 'equip/costume')) ? tc : 'all';
+      const tsrc = params.get('tsrc');
+      currentSourceFilter = (tab === 'lab-tracker-deposits' && tsrc && SOURCE_GROUPS_ORDER.includes(tsrc)) ? tsrc : 'all';
+      const tloc = params.get('tloc');
+      currentLocationFilter = (tab === 'lab-tracker-deposits' && currentClassFilter !== 'card' && tloc && LOCATION_GROUPS_ORDER.includes(tloc)) ? tloc : 'all';
     }
   };
 
@@ -689,8 +828,20 @@
       } else {
         url.searchParams.delete('tc');
       }
+
+      if (window.state.currentTab === 'lab-tracker-deposits' && currentSourceFilter && currentSourceFilter !== 'all') {
+        url.searchParams.set('tsrc', currentSourceFilter);
+      } else {
+        url.searchParams.delete('tsrc');
+      }
+
+      if (window.state.currentTab === 'lab-tracker-deposits' && currentLocationFilter && currentLocationFilter !== 'all') {
+        url.searchParams.set('tloc', currentLocationFilter);
+      } else {
+        url.searchParams.delete('tloc');
+      }
     } else {
-      ['ts', 'td', 'tf', 'tc'].forEach(k => url.searchParams.delete(k));
+      ['ts', 'td', 'tf', 'tc', 'tsrc', 'tloc'].forEach(k => url.searchParams.delete(k));
     }
   };
 
@@ -768,6 +919,28 @@
 
   window.setTrackerClassFilter = function(listName, filter) {
     currentClassFilter = filter;
+    if (filter === 'card') {
+      currentLocationFilter = 'all';
+    }
+    trackerRenderDeposits();
+    updateTrackerURL();
+  };
+
+  window.setTrackerSourceFilter = function(listName, source) {
+    currentSourceFilter = source || 'all';
+    trackerRenderDeposits();
+    updateTrackerURL();
+  };
+
+  window.setTrackerLocationFilter = function(listName, location) {
+    currentLocationFilter = location || 'all';
+    trackerRenderDeposits();
+    updateTrackerURL();
+  };
+
+  window.clearTrackerSubfilters = function(listName) {
+    currentSourceFilter = 'all';
+    currentLocationFilter = 'all';
     trackerRenderDeposits();
     updateTrackerURL();
   };
