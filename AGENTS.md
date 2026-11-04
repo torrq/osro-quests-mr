@@ -40,6 +40,7 @@ js/
   lab-gem.js                — Gem Quest timer (24h, per-account)
   lab-effect-parser.js      — parses item deposit/unlock effect strings into structured stat bonuses
   lab-tracker.js            — Deposit & Unlock Tracker (Summary dashboard, Deposit List, Unlock List)
+  lab-missions.js           — Mission Guide (Prontera, Morocc, Payon missions, monster/item DB links)
   lib/
     minisearch.min.js       — MiniSearch library (loaded inside search-worker.js)
     qrcode.min.js           — QR code generator for Sync Code modal

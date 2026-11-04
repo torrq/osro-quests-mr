@@ -35,6 +35,7 @@ The **Lab** tab hosts persistent background timers and the **Deposit & Unlock Tr
 | **Guild Contribution** | `lab-gc` | 6-hour rotation timer & required item reference |
 | **Gem Quest** | `lab-gem` | 24-hour per-account cooldown timer |
 | **Credit Agent** | `lab-credit` | 24-hour per-account cooldown timer |
+| **Mission Guide** | `lab-missions` | Quick reference for Prontera, Morocc & Payon missions with monster DB links & item autoloot copy |
 
 ### Deposit & Unlock Tracker
 - **Summary Dashboard (`lab-tracker`)**: Parses checked item effects (`js/lab-effect-parser.js`) into aggregated character stats and special effects, with expandable per-stat item breakdowns.

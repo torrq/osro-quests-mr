@@ -125,6 +125,18 @@
     '<rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 9.9-1"></path>'
   );
 
+  // Mission Guide icon (14px): target / bounty crosshair
+  const mission14 = svg(
+    'width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"',
+    '<circle cx="12" cy="12" r="9"></circle><circle cx="12" cy="12" r="4"></circle><line x1="12" y1="2" x2="12" y2="5"></line><line x1="12" y1="19" x2="12" y2="22"></line><line x1="2" y1="12" x2="5" y2="12"></line><line x1="19" y1="12" x2="22" y2="12"></line>'
+  );
+
+  // Mission Guide icon (18px): target / bounty crosshair for section header
+  const mission18 = svg(
+    'width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"',
+    '<circle cx="12" cy="12" r="9"></circle><circle cx="12" cy="12" r="4"></circle><line x1="12" y1="2" x2="12" y2="5"></line><line x1="12" y1="19" x2="12" y2="22"></line><line x1="2" y1="12" x2="5" y2="12"></line><line x1="19" y1="12" x2="22" y2="12"></line>'
+  );
+
   window.SVG_ICONS = {
     tabLab: labTab,
     tabBookmarks,
@@ -144,6 +156,8 @@
     summary14,
     deposit14,
     unlock14,
+    mission14,
+    mission18,
   };
 
   window.applySvgIcons = function applySvgIcons(root = document) {
