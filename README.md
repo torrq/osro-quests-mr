@@ -1,4 +1,4 @@
-<p align="center"><img width="60%" alt="OSRO Quests: MR" src="https://raw.githubusercontent.com/torrq/osro-quests-mr/refs/heads/main/image/osro_quests_logo_dark.svg" /></p>
+<p align="center"><img width="80%" alt="OSRO Quests: MR" src="https://raw.githubusercontent.com/torrq/osro-quests-mr/refs/heads/main/image/osro_quests_logo_dark.svg" /></p>
 
 # OSRO Quests (MR)
 
