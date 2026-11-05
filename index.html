@@ -13,16 +13,14 @@
       <div class="sidebar" id="sidebar">
         <div class="sidebar-header">
           <h1>
-            <img id="osro-quests-logo" src="image/osro_quests_logo_mr_v3.png" width="170" height="53" title="OSRO Quests (Midrate)" alt="OSRO Quests Logo" />
+            <img id="osro-quests-logo" src="image/osro_quests_logo_dark.svg" width="228" title="OSRO Quests (Midrate)" alt="OSRO Quests Logo" />
             <div class="header-right-group">
-              <!-- Remove the old editor toggle div, keep only the github link -->
               <div class="header-controls-row">
                 <button class="header-icon-btn" id="themeToggleBtn" title="Toggle theme" onclick="toggleTheme()">☀</button>
                 <button class="header-icon-btn" id="settingsGearBtn" title="Settings" onclick="toggleSettingsPanel()">
                   ⚙<span class="sync-status-indicator status--unlinked" id="syncStatusIndicator"></span>
                 </button>
               </div>
-              <div id="header-version-tag"></div>
             </div>
           </h1>
           <div class="tab-bar">
@@ -151,10 +149,21 @@
               <div id="cloudSyncSection"></div>
             </div>
             <div class="settings-row">
+              <div>
+                <div class="settings-label">Editor Mode</div>
+                <div class="settings-sublabel">Enable quest, shop &amp; group editing</div>
+              </div>
+              <label class="setting-toggle">
+                <input type="checkbox" id="settingEditorMode" onchange="toggleEditorMode(this.checked)">
+                <span class="setting-toggle-slider"></span>
+              </label>
+            </div>
+            <div class="settings-row">
               <a href="https://github.com/torrq/osro-quests-mr" class="settings-link" target="_blank" rel="noopener">
                 <img src="image/github.png" alt="GitHub" width="20" height="20" />
                 GitHub
               </a>
+              <span id="settingsVersionTag" class="settings-version-tag"></span>
             </div>
           </div>
           <div id="questsSearch" class="search-section">

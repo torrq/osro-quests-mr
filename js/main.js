@@ -110,42 +110,6 @@ window.iconCache = {
   }
 };
 
-// Secret editor mode activation
-const SECRET_TOGGLE_CONFIG = {
-  taps: 4,           // Number of taps required
-  windowMs: 2000,    // Time window in milliseconds
-};
-
-let secretTapTimestamps = [];
-
-function initSecretEditorToggle() {
-  const versionTag = document.getElementById('header-version-tag');
-  if (!versionTag) return;
-  
-  versionTag.style.cursor = 'default';
-  versionTag.style.userSelect = 'none';
-  
-  versionTag.addEventListener('click', () => {
-    const now = Date.now();
-    secretTapTimestamps.push(now);
-    
-    // Remove taps outside the time window
-    secretTapTimestamps = secretTapTimestamps.filter(
-      time => now - time < SECRET_TOGGLE_CONFIG.windowMs
-    );
-    
-    // Check if we have enough taps
-    if (secretTapTimestamps.length >= SECRET_TOGGLE_CONFIG.taps) {
-      toggleEditorMode(!state.editorMode);
-      secretTapTimestamps = []; // Reset
-      
-      // Visual feedback (optional)
-      versionTag.style.opacity = '0.5';
-      setTimeout(() => versionTag.style.opacity = '1', 100);
-    }
-  });
-}
-
 
 
 // ===== VALUE / DISCOUNT HELPERS =====
@@ -346,6 +310,15 @@ function toggleTheme() {
   updateThemeIcon(next);
 }
 
+function updateHeaderLogo(theme) {
+  const logoEl = document.getElementById('osro-quests-logo');
+  if (logoEl) {
+    logoEl.src = theme === 'light'
+      ? 'image/osro_quests_logo_light.svg'
+      : 'image/osro_quests_logo_dark.svg';
+  }
+}
+
 function applyTheme(theme) {
   const head = document.head;
   
@@ -360,6 +333,7 @@ function applyTheme(theme) {
   link.id = 'theme-stylesheet';
   link.rel = 'stylesheet';
   link.href = `css/style_${theme}.css`;
+  updateHeaderLogo(theme);
   applyCustomTheme(theme);
   syncCustomThemeUI(theme);
   head.appendChild(link);
@@ -1798,10 +1772,12 @@ function isMobileSidebarMode() {
 })();
 
 function toggleEditorMode(enabled) {
-  state.editorMode = enabled;
-  document.body.classList.toggle("viewer-mode", !enabled);
+  state.editorMode = !!enabled;
+  document.body.classList.toggle("viewer-mode", !state.editorMode);
+  const toggle = document.getElementById("settingEditorMode");
+  if (toggle) toggle.checked = state.editorMode;
   
-  if (!enabled && state.currentTab === "groups") {
+  if (!state.editorMode && state.currentTab === "groups") {
     switchTab("quests");
   }
   
@@ -2266,9 +2242,9 @@ document.addEventListener("DOMContentLoaded", () => {
         logo.title = `OSRO Quests v${VERSION} (${FLAVOR})`;
   }
 
-  const versionTag = document.getElementById("header-version-tag");
-  if (versionTag) {
-        versionTag.textContent = `${FLAVOR}`;
+  const settingsVersion = document.getElementById("settingsVersionTag");
+  if (settingsVersion) {
+    settingsVersion.textContent = `v${VERSION}`;
   }
 
   const iInput = document.getElementById("itemSearchInput");
@@ -2352,7 +2328,6 @@ document.addEventListener("DOMContentLoaded", () => {
   initTheme();
   initSettings();
   initializeData();
-  initSecretEditorToggle();
 });
 
 // ===== SHARED VIEWER HEADER =====

@@ -477,23 +477,29 @@ body.force-mobile-view .desc-box-icon {
   padding: 4px 4px 4px 4px;
   border-bottom: 1px solid var(--border);
   background-image: var(--header-bg-image);
-  background-size: cover;
-  background-position: center;
+  background-size: 100% auto;
+  background-position: top center;
   background-repeat: no-repeat;
   display: flex;
   flex-direction: column;
 }
 
 .sidebar-header h1 {
-  margin-bottom: 6px;
+  margin-bottom: 0;
   margin-top: 0;
   display: flex;
+  align-items: center;
   justify-content: space-between;
+}
+
+#osro-quests-logo {
+  display: block;
+  margin-left: 5px;
 }
 
 
 .header-right-group {
-  width: 100px;
+  flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -501,18 +507,13 @@ body.force-mobile-view .desc-box-icon {
   gap: 4px;
 }
 
-/* The row containing the Toggle and Github Icon */
+/* The row containing the Toggle and Settings Icon */
 .header-controls-row {
   display: flex;
-  align-items: flex;
-  gap: 8px; /* Space between toggle and github icon */
-}
-
-div#header-version-tag {
-  font-size: 14pt;
-  color: var(--version-tag);
-  font-family: monospace;
-  text-align: center;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
 }
 
 .github-link {
@@ -3881,6 +3882,12 @@ body.viewer-mode .editor-quest select {
 
 .settings-link:hover img {
   opacity: 1;
+}
+
+.settings-version-tag {
+  font-size: 11px;
+  font-family: monospace;
+  color: var(--text-muted);
 }
 
 .settings-row--block {
