@@ -39,7 +39,7 @@ The **Lab** tab hosts persistent background timers and the **Deposit & Unlock Tr
 
 ### Deposit & Unlock Tracker
 - **Summary Dashboard (`lab-tracker`)**: Parses checked item effects (`js/lab-effect-parser.js`) into aggregated character stats and special effects, with expandable per-stat item breakdowns.
-- **Deposit List (`lab-tracker-deposits`)**: Filter by status (`All` / `Need` / `Want` / `Done`), class (`All` / `Cards` / `Equip/Costume`), normalized **Source** (e.g. `Halloween Event`, `Donate`, `Quest`, `Christmas Event`), and normalized **Location** (`Upper`, `Mid`, `Lower`, `Garment`, `Costume Weapon`).
+- **Deposit List (`lab-tracker-deposits`)**: Filter by status (`All` / `Need` / `Want` / `Have`), class (`All` / `Cards` / `Equip/Costume`), normalized **Source** (e.g. `Halloween Event`, `Donate`, `Quest`, `Christmas Event`), and normalized **Location** (`Upper`, `Mid`, `Lower`, `Garment`, `Costume Weapon`).
 - **Unlock List (`lab-tracker-unlocks`)**: Track card unlock progress and wanted cards.
 - **Search & Shareable URLs**: Supports multi-word queries, `"exact phrases"`, `-excluded` terms, optional description search (`Desc`), and persists active filters in URL query parameters (`ts`, `td`, `tf`, `tc`, `tsrc`, `tloc`).
 

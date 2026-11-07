@@ -829,7 +829,7 @@
         <span class="mg-qty">×${mob.count.toLocaleString()}</span>
         <div class="mg-obj-main">
           <a class="mg-mob-name" href="${primaryUrl}" target="_blank" rel="noopener"${altHint}>${escapeHtml(mob.name)}</a>
-          <span class="mg-id-tag">#${mob.id}</span>
+          <button type="button" class="mg-id-tag mg-id-copy-btn" onclick="window.mgCopyMobIds('${mob.id}')" title="Click to copy monster ID (${mob.id})">#${mob.id}</button>
         </div>
       </div>`;
   }
@@ -958,11 +958,13 @@
           <div class="mg-rewards-row">
             <span class="mg-reward-chip mg-reward-chip--zeny" title="${m.zeny.toLocaleString()} Zeny">
               ${zenyIcon}
-              <span class="mg-reward-label">${formatCompactNumber(m.zeny)} Zeny</span>
+              <span class="mg-reward-qty">${formatCompactNumber(m.zeny)}</span>
+              <span class="mg-reward-label">Zeny</span>
             </span>
             <span class="mg-reward-chip mg-reward-chip--ap" title="${m.activityPts} Activity Points">
               ${apIcon}
-              <span class="mg-reward-label">${m.activityPts} Activity Points</span>
+              <span class="mg-reward-qty">${m.activityPts}×</span>
+              <span class="mg-reward-label">Activity Points</span>
             </span>
             ${m.rewards.map(r => renderRewardItemChip(r)).join('')}
           </div>
@@ -1396,6 +1398,22 @@
   window.mgNavigateToItem = function (itemId) {
     if (typeof navigateToItem === 'function') {
       navigateToItem(itemId);
+    }
+  };
+
+  window.mgCopyMobIds = function (idsStr) {
+    if (!idsStr) return;
+    const label = String(idsStr).trim().includes(' ') ? 'monster IDs' : 'monster ID';
+    if (navigator.clipboard?.writeText) {
+      navigator.clipboard.writeText(String(idsStr)).then(() => {
+        if (typeof showToast === 'function') showToast(`Copied ${label}: ${idsStr}`, 'success', 2000);
+      }).catch(() => {
+        if (typeof showToast === 'function') showToast(`Failed to copy ${label}`, 'error', 2000);
+      });
+    } else if (typeof gemCopyText === 'function') {
+      gemCopyText(String(idsStr)).then(() => {
+        if (typeof showToast === 'function') showToast(`Copied ${label}: ${idsStr}`, 'success', 2000);
+      });
     }
   };
 

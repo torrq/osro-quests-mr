@@ -124,7 +124,7 @@ Registered under `lab-tracker` with three views:
 - `lab-tracker-unlocks` (**Unlock List**): Tracks card unlocks.
 
 ### Filtering & Normalization (`Deposit List`)
-- **Status filter (`tf`):** `all` | `need` | `want` | `done`
+- **Status filter (`tf`):** `all` | `need` | `want` | `have`
 - **Category filter (`tc`):** `all` | `card` | `equip/costume`
 - **Source filter (`tsrc`) & Location filter (`tloc`):** Extracted from item descriptions (`DATA.items[id].desc`) after stripping RO color codes (`/\^[0-9A-Fa-f]{6}/g`) and merged into normalized groups:
 - **MR Normalized `Source` Groups:** `Donate` (`Donation Exclusive`, `Donation Shop`, `Donate`), `Halloween Event`, `Quest` (`Quest`, `Quest Shop`), `Lotti Girl`, `Christmas Event` (`2024 Christmas`, `2025 Christmas`), `Valentine Event`, `Quest/Donate` (`Quest/Donate`, `Quest, Donate`), `Monster Arena`, `Gacha Machine`, `Socket Enchantment`, `Bonus Point Shop`.

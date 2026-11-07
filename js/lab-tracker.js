@@ -8,7 +8,7 @@
   
   let currentSearchQuery = "";
   let currentSearchDesc = false;
-  let currentFilter = "all"; // 'all' | 'need' | 'want' | 'done'
+  let currentFilter = "all"; // 'all' | 'need' | 'want' | 'have'
   let currentClassFilter = "all"; // 'all' | 'card' | 'equip/costume'
   let currentSourceFilter = "all";
   let currentLocationFilter = "all";
@@ -480,7 +480,7 @@
         if (isHave) return false;
       } else if (currentFilter === "want") {
         if (!isWant) return false;
-      } else if (currentFilter === "done") {
+      } else if (currentFilter === "have") {
         if (!isHave) return false;
       }
       
@@ -672,7 +672,7 @@
               <button class="dt-filter-btn ${currentFilter === 'all' ? 'active' : ''}" onclick="window.setTrackerFilter('${listName}', 'all')">All</button>
               <button class="dt-filter-btn ${currentFilter === 'need' ? 'active' : ''}" onclick="window.setTrackerFilter('${listName}', 'need')">Need</button>
               <button class="dt-filter-btn ${currentFilter === 'want' ? 'active' : ''}" onclick="window.setTrackerFilter('${listName}', 'want')">Want</button>
-              <button class="dt-filter-btn ${currentFilter === 'done' ? 'active' : ''}" onclick="window.setTrackerFilter('${listName}', 'done')">Done</button>
+              <button class="dt-filter-btn ${currentFilter === 'have' ? 'active' : ''}" onclick="window.setTrackerFilter('${listName}', 'have')">Have</button>
             </div>
           </div>
           
@@ -798,7 +798,7 @@
       currentSearchQuery = params.get('ts') || "";
       currentSearchDesc = params.get('td') === '1';
       const tf = params.get('tf');
-      currentFilter = (tf === 'need' || tf === 'want' || tf === 'done') ? tf : 'all';
+      currentFilter = (tf === 'need' || tf === 'want' || tf === 'have') ? tf : 'all';
       const tc = params.get('tc');
       currentClassFilter = (tab === 'lab-tracker-deposits' && (tc === 'card' || tc === 'equip/costume')) ? tc : 'all';
       const tsrc = params.get('tsrc');
