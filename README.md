@@ -1,4 +1,4 @@
-<p align="center"><img width="400" height="160" alt="osro_quests_logo_400" src="https://github.com/user-attachments/assets/c4f844d5-b2f8-439a-84cf-293d97cba0c6" /></p>
+<p align="center"><img width="80%" alt="OSRO Quests: MR" src="https://raw.githubusercontent.com/torrq/osro-quests-mr/refs/heads/main/image/osro_quests_logo_dark.svg" /></p>
 
 # OSRO Quests (MR)
 
@@ -9,7 +9,7 @@ A web-based quest, shop, material, autoloot, timer, and collection tracker tool 
 </h1>
 <p>&nbsp;</p>
 <p align="center">
-  <img width="1311" height="578" alt="OSRO Quests Midrate" src="https://github.com/user-attachments/assets/07a6e8ab-7610-470e-8bb0-62fb0e7f5ad6" />
+   <img width="2457" height="940" alt="OSRO Quests Midrate" src="https://github.com/user-attachments/assets/42209d71-0cea-4799-b33e-ef94482cc719" />
 </p>
 
 ## ✨ Features
