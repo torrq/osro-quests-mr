@@ -8500,9 +8500,28 @@ body.force-mobile-view .ss-stats { margin-left: 0; width: 100%; }
   border-radius: 10px;
 }
 
+.rotd-mobile-sort-group {
+  display: none;
+}
+
+.rotd-mobile-sort-controls {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex: 1;
+  min-width: 0;
+}
+
+.rotd-mobile-sort-dir {
+  flex-shrink: 0;
+  min-width: 28px;
+  text-align: center;
+}
+
 @media (max-width: 768px) {
   .rotd-table-wrap { display: none; }
   .rotd-cards-list { display: flex; }
+  .rotd-mobile-sort-group { display: flex; }
   .rotd-filter-row {
     flex-direction: column;
     align-items: stretch;
@@ -8520,6 +8539,7 @@ body.force-mobile-view .ss-stats { margin-left: 0; width: 100%; }
 
 body.force-mobile-view .rotd-table-wrap { display: none; }
 body.force-mobile-view .rotd-cards-list { display: flex; }
+body.force-mobile-view .rotd-mobile-sort-group { display: flex; }
 body.force-mobile-view .rotd-filter-row {
   flex-direction: column;
   align-items: stretch;

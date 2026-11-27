@@ -527,6 +527,16 @@
       headers[i].classList.toggle('active-asc', active && rotdState.sortDir === 'asc');
       headers[i].classList.toggle('active-desc', active && rotdState.sortDir === 'desc');
     }
+    const mobileSortEl = document.getElementById('rotdMobileSortKey');
+    if (mobileSortEl) {
+      const val = rotdState.sortKey === 'index' ? 'map' : rotdState.sortKey;
+      if (mobileSortEl.value !== val) mobileSortEl.value = val;
+    }
+    const mobileDirEl = document.getElementById('rotdMobileSortDir');
+    if (mobileDirEl) {
+      mobileDirEl.textContent = rotdState.sortDir === 'asc' ? '↑' : '↓';
+      mobileDirEl.title = rotdState.sortDir === 'asc' ? 'Ascending (click to reverse)' : 'Descending (click to reverse)';
+    }
   }
 
   function createWarpBtn(mapName) {
@@ -903,6 +913,8 @@
     const instantBtn = document.getElementById('rotdInstantBtn');
     const resetBtn = document.getElementById('rotdResetBtn');
     const raceChipsEl = document.getElementById('rotdRaceChips');
+    const mobileSortEl = document.getElementById('rotdMobileSortKey');
+    const mobileDirEl = document.getElementById('rotdMobileSortDir');
 
     attachTooltipDelegation(document.getElementById('rotdResultBody'));
     attachTooltipDelegation(document.getElementById('rotdCardsList'));
@@ -999,6 +1011,22 @@
         updateRaceChipActive();
         rebuildMobFilter();
         applyAutoSort();
+        renderRotdTable();
+      });
+    }
+
+    if (mobileSortEl) {
+      mobileSortEl.addEventListener('change', () => {
+        rotdState.manualSort = true;
+        rotdState.sortKey = mobileSortEl.value;
+        renderRotdTable();
+      });
+    }
+
+    if (mobileDirEl) {
+      mobileDirEl.addEventListener('click', () => {
+        rotdState.manualSort = true;
+        rotdState.sortDir = rotdState.sortDir === 'asc' ? 'desc' : 'asc';
         renderRotdTable();
       });
     }
@@ -1117,6 +1145,21 @@
               <label for="rotdDelayValue">Max Delay:</label>
               <input id="rotdDelayValue" type="number" min="0" step="1" placeholder="sec">
               <span class="rotd-delay-unit">s</span>
+            </div>
+            <div class="rotd-filter-group rotd-mobile-sort-group">
+              <label for="rotdMobileSortKey">Sort:</label>
+              <div class="rotd-mobile-sort-controls">
+                <select id="rotdMobileSortKey">
+                  <option value="density">Map Density</option>
+                  <option value="filterDensity">Filter Density</option>
+                  <option value="filteredMonsters">Filtered Mobs</option>
+                  <option value="monsters">Mean Mobs</option>
+                  <option value="walkable">Walkable Cells</option>
+                  <option value="map">Map Name</option>
+                  <option value="race">Race &amp; Mobs</option>
+                </select>
+                <button type="button" id="rotdMobileSortDir" class="btn btn-sm rotd-mobile-sort-dir" title="Descending (click to reverse)">↓</button>
+              </div>
             </div>
           </div>
         </section>
