@@ -65,8 +65,8 @@ window.state = {
   activeLabExperiment: null,   // last active lab sub-tab (e.g. 'lab-credit')
   customTheme: {
     enabled: false,
-    dark:  { accent: '#ffd700', bg: '#030101', panel: '#080303', text: '#e6e6e6', scrollbar: '#3a1c1c', textMuted: '#c2c2c2', border: '#2a1414', hover: '#140707', codeText: '#ffa3a3', success: '#3fb950' },
-    light: { accent: '#d1242f', bg: '#f6f8fa', panel: '#ffffff', text: '#24292f', scrollbar: '#e1e4e8', textMuted: '#57606a', border: '#d0d7de', hover: '#eceff3', codeText: '#a40e26', success: '#1a7f37' }
+    dark:  { accent: '#ffd700', bg: '#030101', panel: '#080303', text: '#e6e6e6', scrollbar: '#3a1c1c', textMuted: '#c2c2c2', border: '#2a1414', hover: '#140707', codeText: '#ffa3a3', success: '#3fb950', warning: '#d29922', danger: '#ff4d4d', zeny: '#00ff22', bound: '#ffd900', tree: '#2a1414' },
+    light: { accent: '#d1242f', bg: '#f6f8fa', panel: '#ffffff', text: '#24292f', scrollbar: '#e1e4e8', textMuted: '#57606a', border: '#d0d7de', hover: '#eceff3', codeText: '#a40e26', success: '#1a7f37', warning: '#bf8700', danger: '#d1242f', zeny: '#0969da', bound: '#2b2b2b', tree: '#c4b89a' }
   },
 };
 
@@ -339,11 +339,11 @@ function applyTheme(theme) {
   head.appendChild(link);
 }
 
-const CUSTOM_THEME_KEYS = ['accent', 'bg', 'panel', 'text', 'scrollbar', 'textMuted', 'border', 'hover', 'codeText', 'success'];
+const CUSTOM_THEME_KEYS = ['accent', 'bg', 'panel', 'text', 'scrollbar', 'textMuted', 'border', 'hover', 'codeText', 'success', 'warning', 'danger', 'zeny', 'bound', 'tree'];
 
 const CUSTOM_THEME_DEFAULTS = {
-  dark:  { accent: '#ffd700', bg: '#030101', panel: '#080303', text: '#e6e6e6', scrollbar: '#3a1c1c', textMuted: '#c2c2c2', border: '#2a1414', hover: '#140707', codeText: '#ffa3a3', success: '#3fb950' },
-  light: { accent: '#d1242f', bg: '#f6f8fa', panel: '#ffffff', text: '#24292f', scrollbar: '#e1e4e8', textMuted: '#57606a', border: '#d0d7de', hover: '#eceff3', codeText: '#a40e26', success: '#1a7f37' }
+  dark:  { accent: '#ffd700', bg: '#030101', panel: '#080303', text: '#e6e6e6', scrollbar: '#3a1c1c', textMuted: '#c2c2c2', border: '#2a1414', hover: '#140707', codeText: '#ffa3a3', success: '#3fb950', warning: '#d29922', danger: '#ff4d4d', zeny: '#00ff22', bound: '#ffd900', tree: '#2a1414' },
+  light: { accent: '#d1242f', bg: '#f6f8fa', panel: '#ffffff', text: '#24292f', scrollbar: '#e1e4e8', textMuted: '#57606a', border: '#d0d7de', hover: '#eceff3', codeText: '#a40e26', success: '#1a7f37', warning: '#bf8700', danger: '#d1242f', zeny: '#0969da', bound: '#2b2b2b', tree: '#c4b89a' }
 };
 
 const CUSTOM_THEME_PRESETS = {
@@ -483,8 +483,14 @@ function ctDeriveExtras(accent, bg, panel, text, mode) {
   const codeText = isDarkSurface
     ? ctHslToHex(acHsl.h, Math.max(acHsl.s, 0.55), Math.max(acHsl.l, 0.68))
     : ctHslToHex(acHsl.h, Math.max(acHsl.s, 0.55), Math.min(acHsl.l, 0.36));
-  const success = CUSTOM_THEME_DEFAULTS[mode]?.success || '#3fb950';
-  return { scrollbar, textMuted, border, hover, codeText, success };
+  const defMode = CUSTOM_THEME_DEFAULTS[mode] || CUSTOM_THEME_DEFAULTS.dark;
+  const success = defMode.success;
+  const warning = defMode.warning;
+  const danger  = defMode.danger;
+  const zeny    = defMode.zeny;
+  const bound   = defMode.bound;
+  const tree    = ctMix(border, accent, 0.24);
+  return { scrollbar, textMuted, border, hover, codeText, success, warning, danger, zeny, bound, tree };
 }
 
 function buildCustomThemeCss(palette, mode) {
@@ -499,6 +505,11 @@ function buildCustomThemeCss(palette, mode) {
   const hover     = ctNormalizeHex(palette?.hover,     def.hover);
   const codeText  = ctNormalizeHex(palette?.codeText,  def.codeText);
   const success   = ctNormalizeHex(palette?.success,   def.success);
+  const warning   = ctNormalizeHex(palette?.warning,   def.warning);
+  const danger    = ctNormalizeHex(palette?.danger,    def.danger);
+  const zeny      = ctNormalizeHex(palette?.zeny,      def.zeny);
+  const bound     = ctNormalizeHex(palette?.bound,     def.bound);
+  const tree      = ctNormalizeHex(palette?.tree,      def.tree);
 
   const coreIsDefault = accent === def.accent && bg === def.bg && panel === def.panel && text === def.text;
   if (coreIsDefault) {
@@ -523,6 +534,28 @@ function buildCustomThemeCss(palette, mode) {
       const isDark = ctRelativeLuminance(panel) < 0.35;
       const sHover = isDark ? ctShiftLightness(success, 0.10) : ctShiftLightness(success, 0.08);
       vars.push(`  --success: ${success};`, `  --success-hover: ${sHover};`, `  --success-shadow: ${ctRgba(success, 0.35)};`);
+    }
+    if (warning !== def.warning) {
+      vars.push(`  --warning: ${warning};`, `  --warning-bg: ${ctRgba(warning, 0.14)};`);
+    }
+    if (danger !== def.danger) {
+      const isDark = ctRelativeLuminance(panel) < 0.35;
+      const dHover = isDark ? ctShiftLightness(danger, 0.08) : ctShiftLightness(danger, -0.08);
+      vars.push(`  --danger: ${danger};`, `  --danger-hover: ${dHover};`);
+    }
+    if (zeny !== def.zeny) {
+      const isDark = ctRelativeLuminance(panel) < 0.35;
+      const zBg = isDark ? ctMix(panel, zeny, 0.14) : ctMix('#ffffff', zeny, 0.14);
+      const zBorder = ctMix(zeny, border, 0.35);
+      vars.push(`  --zeny-icon: ${zeny};`, `  --zeny-bg: ${zBg};`, `  --zeny-border: ${zBorder};`);
+    }
+    if (bound !== def.bound) {
+      const isDark = ctRelativeLuminance(panel) < 0.35;
+      const bShadow = isDark ? ctShiftLightness(bound, -0.18) : ctRgba(bound, 0.35);
+      vars.push(`  --bound-text: ${bound};`, `  --bound-shadow: ${bShadow};`);
+    }
+    if (tree !== def.tree) {
+      vars.push(`  --mat-connector: ${tree};`);
     }
     if (scrollbar !== def.scrollbar) {
       vars.push(`  --scrollbar: ${scrollbar};`);
@@ -579,13 +612,18 @@ function buildCustomThemeCss(palette, mode) {
     : panel;
 
   const placeholderBg = ctMix(panel, text, 0.10);
-  const matConnector = ctMix(border, accent, 0.24);
+  const matConnector = tree;
   const subtleOverlay = ctRgba(text, 0.08);
   const imgFile = mode === 'light' ? 'image/osromr_light.jpg' : 'image/osromr_dark.jpg';
   const headerOverlayEnd = ctMix(panel, accent, isDarkSurface ? 0.24 : 0.18);
   const headerBgImage = `linear-gradient(135deg, ${ctRgba(bg, 0.84)} 0%, ${ctRgba(headerOverlayEnd, 0.76)} 100%), url("${imgFile}")`;
   const successHover = isDarkSurface ? ctShiftLightness(success, 0.10) : ctShiftLightness(success, 0.08);
   const successShadow = ctRgba(success, 0.35);
+  const dangerHover = isDarkSurface ? ctShiftLightness(danger, 0.08) : ctShiftLightness(danger, -0.08);
+  const warningBg = ctRgba(warning, 0.14);
+  const zenyBg = isDarkSurface ? ctMix(panel, zeny, 0.14) : ctMix('#ffffff', zeny, 0.14);
+  const zenyBorder = ctMix(zeny, border, 0.35);
+  const boundShadow = isDarkSurface ? ctShiftLightness(bound, -0.18) : ctRgba(bound, 0.35);
 
   return `html:root {
   --bg: ${bg};
@@ -627,6 +665,15 @@ function buildCustomThemeCss(palette, mode) {
   --success: ${success};
   --success-hover: ${successHover};
   --success-shadow: ${successShadow};
+  --warning: ${warning};
+  --warning-bg: ${warningBg};
+  --danger: ${danger};
+  --danger-hover: ${dangerHover};
+  --zeny-icon: ${zeny};
+  --zeny-bg: ${zenyBg};
+  --zeny-border: ${zenyBorder};
+  --bound-text: ${bound};
+  --bound-shadow: ${boundShadow};
 }
 * { scrollbar-color: ${scrollbar} transparent; }
 ::-webkit-scrollbar-thumb { background: ${scrollbar}; }

@@ -89,7 +89,10 @@
     return displayDelay(minMs) + '~' + displayDelay(maxMs);
   }
 
-  function getRmsMapUrl(mapName) {
+  function getMapUrl(mapName, db) {
+    if (db === 'koko') {
+      return `https://ro.kokotewa.com/db/map_info?id=${encodeURIComponent(mapName)}`;
+    }
     return `https://ratemyserver.net/npc_shop_warp.php?map=${encodeURIComponent(mapName)}&s_block=mob_block&small=1`;
   }
 
@@ -372,18 +375,15 @@
   function populateFilterDropdowns() {
     if (!dataset) return;
     const mobs = dataset.mobs || [];
-    const raceEl = document.getElementById('rotdRaceFilter');
     const elemEl = document.getElementById('rotdElementFilter');
     const races = uniqueSorted(mobs.map(m => toText(m[2], 'Unknown')));
 
-    setSelectOptions(raceEl, races, 'All races');
     setSelectOptions(
       elemEl,
       uniqueSorted(mobs.map(m => toText(m[3], 'Unknown'))),
       'All elements'
     );
 
-    if (raceEl) raceEl.value = rotdState.race;
     if (elemEl) elemEl.value = rotdState.element;
     renderRaceChips(races);
     rebuildMobFilter();
@@ -545,12 +545,14 @@
   }
 
   function createMapLink(mapName, extraClass) {
+    const db = getMobDbPref();
+    const dbLabel = db === 'koko' ? 'Kokotewa' : 'RateMyServer';
     const mapLink = document.createElement('a');
     mapLink.className = extraClass ? `rotd-map-link ${extraClass}` : 'rotd-map-link';
-    mapLink.href = getRmsMapUrl(mapName);
+    mapLink.href = getMapUrl(mapName, db);
     mapLink.target = '_blank';
     mapLink.rel = 'noopener';
-    mapLink.title = `Open ${mapName} on RateMyServer`;
+    mapLink.title = `Open ${mapName} on ${dbLabel}`;
     const mapIcon = window.SVG_ICONS?.map13 || '';
     if (mapIcon) {
       const iconSpan = document.createElement('span');
@@ -895,7 +897,6 @@
   function bindRotdEvents() {
     const searchEl = document.getElementById('rotdMapSearch');
     const clearSearchBtn = document.getElementById('rotdClearSearchBtn');
-    const raceEl = document.getElementById('rotdRaceFilter');
     const elemEl = document.getElementById('rotdElementFilter');
     const mobEl = document.getElementById('rotdMobFilter');
     const delayEl = document.getElementById('rotdDelayValue');
@@ -934,23 +935,12 @@
       });
     }
 
-    if (raceEl) {
-      raceEl.addEventListener('change', () => {
-        rotdState.race = raceEl.value;
-        updateRaceChipActive();
-        rebuildMobFilter();
-        applyAutoSort();
-        renderRotdTable();
-      });
-    }
-
     if (raceChipsEl) {
       raceChipsEl.addEventListener('click', e => {
         const btn = e.target.closest('.ss-chip');
         if (!btn) return;
         const race = btn.dataset.race || 'ALL';
         rotdState.race = rotdState.race === race && race !== 'ALL' ? 'ALL' : race;
-        if (raceEl) raceEl.value = rotdState.race;
         updateRaceChipActive();
         rebuildMobFilter();
         applyAutoSort();
@@ -1003,7 +993,6 @@
         rotdState.instantOnly = false;
         rotdState.manualSort = false;
         if (searchEl) searchEl.value = '';
-        if (raceEl) raceEl.value = 'ALL';
         if (elemEl) elemEl.value = 'ALL';
         if (delayEl) delayEl.value = '';
         if (instantBtn) instantBtn.classList.remove('active');
@@ -1052,8 +1041,8 @@
         </div>
 
         <div class="mg-header-controls">
-          <div class="mg-toggle-group" title="Default database when clicking monster names">
-            <span class="mg-toggle-label">Mob Click:</span>
+          <div class="mg-toggle-group" title="Default database when clicking map or monster names">
+            <span class="mg-toggle-label">Map/Mob Click:</span>
             <button type="button" class="mg-toggle-btn rotd-db-btn ${mobDb === 'rms' ? 'active' : ''}" data-db="rms">RMS</button>
             <button type="button" class="mg-toggle-btn rotd-db-btn ${mobDb === 'koko' ? 'active' : ''}" data-db="koko">Kokotewa</button>
           </div>
@@ -1116,10 +1105,6 @@
           <div class="rotd-race-chips" id="rotdRaceChips" aria-label="Quick ROTD Race Filter"></div>
 
           <div class="rotd-filter-row">
-            <div class="rotd-filter-group">
-              <label for="rotdRaceFilter">Race:</label>
-              <select id="rotdRaceFilter"></select>
-            </div>
             <div class="rotd-filter-group">
               <label for="rotdElementFilter">Element:</label>
               <select id="rotdElementFilter"></select>
