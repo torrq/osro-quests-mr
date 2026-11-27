@@ -161,6 +161,30 @@
     '<rect x="3" y="3" width="18" height="18" rx="3"></rect><path d="M3 12h18M12 3v18" opacity="0.3"></path><circle cx="8" cy="8" r="1.5" fill="currentColor" stroke="none"></circle><circle cx="15.5" cy="8.5" r="1.8" fill="currentColor" stroke="none"></circle><circle cx="16.5" cy="15" r="1.5" fill="currentColor" stroke="none"></circle><circle cx="8.5" cy="16" r="1.2" fill="currentColor" stroke="none"></circle><circle cx="13" cy="14" r="1.2" fill="currentColor" stroke="none"></circle>'
   );
 
+  // Folded map icon (13px, Lucide "map"): used next to map links
+  const map13 = svg(
+    'width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"',
+    '<polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"></polygon><line x1="9" y1="3" x2="9" y2="18"></line><line x1="15" y1="6" x2="15" y2="21"></line>'
+  );
+
+  // Copy icon (11px, Lucide "copy"): used on compact copy buttons
+  const copy11 = svg(
+    'width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"',
+    '<rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>'
+  );
+
+  // Zap icon (12px, Lucide "zap"): used on Instant Spawn chip
+  const zap12 = svg(
+    'width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"',
+    '<polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>'
+  );
+
+  // Reset icon (12px, Lucide "rotate-ccw"): used on Reset button
+  const rotateCcw12 = svg(
+    'width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"',
+    '<path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><path d="M3 3v5h5"></path>'
+  );
+
   window.SVG_ICONS = {
     tabLab: labTab,
     tabBookmarks,
@@ -186,6 +210,10 @@
     slaves18,
     rotd14,
     rotd18,
+    map13,
+    copy11,
+    zap12,
+    rotateCcw12,
   };
 
   window.applySvgIcons = function applySvgIcons(root = document) {
