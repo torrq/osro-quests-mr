@@ -65,8 +65,8 @@ window.state = {
   activeLabExperiment: null,   // last active lab sub-tab (e.g. 'lab-credit')
   customTheme: {
     enabled: false,
-    dark:  { accent: '#ffd700', bg: '#030101', panel: '#080303', text: '#e6e6e6' },
-    light: { accent: '#d1242f', bg: '#f6f8fa', panel: '#ffffff', text: '#24292f' }
+    dark:  { accent: '#ffd700', bg: '#030101', panel: '#080303', text: '#e6e6e6', scrollbar: '#3a1c1c', textMuted: '#c2c2c2', border: '#2a1414', hover: '#140707', codeText: '#ffa3a3', success: '#3fb950' },
+    light: { accent: '#d1242f', bg: '#f6f8fa', panel: '#ffffff', text: '#24292f', scrollbar: '#e1e4e8', textMuted: '#57606a', border: '#d0d7de', hover: '#eceff3', codeText: '#a40e26', success: '#1a7f37' }
   },
 };
 
@@ -339,9 +339,11 @@ function applyTheme(theme) {
   head.appendChild(link);
 }
 
+const CUSTOM_THEME_KEYS = ['accent', 'bg', 'panel', 'text', 'scrollbar', 'textMuted', 'border', 'hover', 'codeText', 'success'];
+
 const CUSTOM_THEME_DEFAULTS = {
-  dark:  { accent: '#ffd700', bg: '#030101', panel: '#080303', text: '#e6e6e6' },
-  light: { accent: '#d1242f', bg: '#f6f8fa', panel: '#ffffff', text: '#24292f' }
+  dark:  { accent: '#ffd700', bg: '#030101', panel: '#080303', text: '#e6e6e6', scrollbar: '#3a1c1c', textMuted: '#c2c2c2', border: '#2a1414', hover: '#140707', codeText: '#ffa3a3', success: '#3fb950' },
+  light: { accent: '#d1242f', bg: '#f6f8fa', panel: '#ffffff', text: '#24292f', scrollbar: '#e1e4e8', textMuted: '#57606a', border: '#d0d7de', hover: '#eceff3', codeText: '#a40e26', success: '#1a7f37' }
 };
 
 const CUSTOM_THEME_PRESETS = {
@@ -462,18 +464,41 @@ function ctRelativeLuminance(hex) {
 function isDefaultCustomPalette(palette, mode) {
   const def = CUSTOM_THEME_DEFAULTS[mode] || CUSTOM_THEME_DEFAULTS.dark;
   if (!palette) return true;
-  return ctNormalizeHex(palette.accent) === def.accent
-      && ctNormalizeHex(palette.bg)     === def.bg
-      && ctNormalizeHex(palette.panel)  === def.panel
-      && ctNormalizeHex(palette.text)   === def.text;
+  return CUSTOM_THEME_KEYS.every(k => ctNormalizeHex(palette[k], def[k]) === def[k]);
+}
+
+function ctDeriveExtras(accent, bg, panel, text, mode) {
+  const isDarkSurface = ctRelativeLuminance(panel) < 0.35;
+  const acHsl = ctHexToHsl(accent);
+  const border = isDarkSurface
+    ? ctMix(ctMix(panel, text, 0.18), accent, 0.12)
+    : ctMix(ctMix(panel, text, 0.16), accent, 0.10);
+  const scrollbar = isDarkSurface
+    ? ctMix(ctMix(panel, text, 0.26), accent, 0.16)
+    : ctMix(ctMix(panel, text, 0.10), accent, 0.08);
+  const hover = isDarkSurface
+    ? ctMix(ctShiftLightness(panel, 0.09), accent, 0.16)
+    : ctMix(ctShiftLightness(panel, -0.05), accent, 0.12);
+  const textMuted = ctMix(ctMix(text, panel, 0.42), accent, 0.06);
+  const codeText = isDarkSurface
+    ? ctHslToHex(acHsl.h, Math.max(acHsl.s, 0.55), Math.max(acHsl.l, 0.68))
+    : ctHslToHex(acHsl.h, Math.max(acHsl.s, 0.55), Math.min(acHsl.l, 0.36));
+  const success = CUSTOM_THEME_DEFAULTS[mode]?.success || '#3fb950';
+  return { scrollbar, textMuted, border, hover, codeText, success };
 }
 
 function buildCustomThemeCss(palette, mode) {
   const def = CUSTOM_THEME_DEFAULTS[mode] || CUSTOM_THEME_DEFAULTS.dark;
-  const accent = ctNormalizeHex(palette?.accent, def.accent);
-  const bg     = ctNormalizeHex(palette?.bg,     def.bg);
-  const panel  = ctNormalizeHex(palette?.panel,  def.panel);
-  const text   = ctNormalizeHex(palette?.text,   def.text);
+  const accent    = ctNormalizeHex(palette?.accent,    def.accent);
+  const bg        = ctNormalizeHex(palette?.bg,        def.bg);
+  const panel     = ctNormalizeHex(palette?.panel,     def.panel);
+  const text      = ctNormalizeHex(palette?.text,      def.text);
+  const scrollbar = ctNormalizeHex(palette?.scrollbar, def.scrollbar);
+  const textMuted = ctNormalizeHex(palette?.textMuted, def.textMuted);
+  const border    = ctNormalizeHex(palette?.border,    def.border);
+  const hover     = ctNormalizeHex(palette?.hover,     def.hover);
+  const codeText  = ctNormalizeHex(palette?.codeText,  def.codeText);
+  const success   = ctNormalizeHex(palette?.success,   def.success);
 
   const isDarkSurface = ctRelativeLuminance(panel) < 0.35;
   const acHsl = ctHexToHsl(accent);
@@ -488,24 +513,17 @@ function buildCustomThemeCss(palette, mode) {
     ? ctMix(ctMix(panel, text, 0.07), accent, 0.07)
     : ctMix(ctMix(bg, text, 0.04), accent, 0.05);
 
-  const panelHover = isDarkSurface
-    ? ctMix(ctShiftLightness(panel, 0.09), accent, 0.16)
-    : ctMix(ctShiftLightness(panel, -0.05), accent, 0.12);
+  const panelHover = hover;
   const buttonHover = isDarkSurface
-    ? ctMix(ctShiftLightness(panel, 0.13), accent, 0.20)
-    : ctMix(ctShiftLightness(panel, -0.08), accent, 0.15);
+    ? ctShiftLightness(hover, 0.04)
+    : ctShiftLightness(hover, -0.03);
 
-  const border = isDarkSurface
-    ? ctMix(ctMix(panel, text, 0.18), accent, 0.12)
-    : ctMix(ctMix(panel, text, 0.16), accent, 0.10);
   const borderLight = isDarkSurface
-    ? ctMix(ctMix(panel, text, 0.26), accent, 0.16)
-    : ctMix(ctMix(panel, text, 0.10), accent, 0.08);
+    ? ctShiftLightness(border, 0.06)
+    : ctShiftLightness(border, -0.04);
   const groupBorder = isDarkSurface
-    ? ctMix(ctMix(panel, accent, 0.18), text, 0.08)
+    ? ctMix(border, accent, 0.14)
     : border;
-
-  const textMuted = ctMix(ctMix(text, panel, 0.42), accent, 0.06);
 
   const accentHover = isDarkSurface
     ? (acHsl.l > 0.80 ? ctShiftLightness(accent, -0.10, 0.05) : ctShiftLightness(accent, 0.10, 0.05))
@@ -522,9 +540,6 @@ function buildCustomThemeCss(palette, mode) {
   const codeBlockBg = isDarkSurface
     ? 'rgba(0, 0, 0, 0.32)'
     : ctRgba(ctMix(text, accent, 0.25), 0.12);
-  const codeText = isDarkSurface
-    ? ctHslToHex(acHsl.h, Math.max(acHsl.s, 0.55), Math.max(acHsl.l, 0.68))
-    : ctHslToHex(acHsl.h, Math.max(acHsl.s, 0.55), Math.min(acHsl.l, 0.36));
   const autocompleteBg = isDarkSurface
     ? ctMix(ctShiftLightness(panel, 0.05), accent, 0.10)
     : panel;
@@ -535,6 +550,8 @@ function buildCustomThemeCss(palette, mode) {
   const imgFile = mode === 'light' ? 'image/osromr_light.jpg' : 'image/osromr_dark.jpg';
   const headerOverlayEnd = ctMix(panel, accent, isDarkSurface ? 0.24 : 0.18);
   const headerBgImage = `linear-gradient(135deg, ${ctRgba(bg, 0.84)} 0%, ${ctRgba(headerOverlayEnd, 0.76)} 100%), url("${imgFile}")`;
+  const successHover = isDarkSurface ? ctShiftLightness(success, 0.10) : ctShiftLightness(success, 0.08);
+  const successShadow = ctRgba(success, 0.35);
 
   return `html:root {
   --bg: ${bg};
@@ -548,6 +565,7 @@ function buildCustomThemeCss(palette, mode) {
   --bg-hover: ${buttonHover};
   --border: ${border};
   --border-light: ${borderLight};
+  --scrollbar: ${scrollbar};
   --group-border: ${groupBorder};
   --text: ${text};
   --text-muted: ${textMuted};
@@ -572,7 +590,13 @@ function buildCustomThemeCss(palette, mode) {
   --mat-connector: ${matConnector};
   --mat-connector-opts: ${border};
   --subtle-overlay: ${subtleOverlay};
-}`;
+  --success: ${success};
+  --success-hover: ${successHover};
+  --success-shadow: ${successShadow};
+}
+* { scrollbar-color: ${scrollbar} transparent; }
+::-webkit-scrollbar-thumb { background: ${scrollbar}; }
+::-webkit-scrollbar-thumb:hover { background: ${accent}; }`;
 }
 
 function getCurrentThemeMode() {
@@ -603,20 +627,17 @@ function applyCustomTheme(modeOverride) {
 
 function initCustomThemeFromConfig(cfg) {
   const ct = cfg?.customTheme || {};
+  const normalizePalette = (src, def) => {
+    const out = {};
+    CUSTOM_THEME_KEYS.forEach(k => {
+      out[k] = ctNormalizeHex(src?.[k], def[k]);
+    });
+    return out;
+  };
   state.customTheme = {
     enabled: !!ct.enabled,
-    dark: {
-      accent: ctNormalizeHex(ct.dark?.accent, CUSTOM_THEME_DEFAULTS.dark.accent),
-      bg:     ctNormalizeHex(ct.dark?.bg,     CUSTOM_THEME_DEFAULTS.dark.bg),
-      panel:  ctNormalizeHex(ct.dark?.panel,  CUSTOM_THEME_DEFAULTS.dark.panel),
-      text:   ctNormalizeHex(ct.dark?.text,   CUSTOM_THEME_DEFAULTS.dark.text),
-    },
-    light: {
-      accent: ctNormalizeHex(ct.light?.accent, CUSTOM_THEME_DEFAULTS.light.accent),
-      bg:     ctNormalizeHex(ct.light?.bg,     CUSTOM_THEME_DEFAULTS.light.bg),
-      panel:  ctNormalizeHex(ct.light?.panel,  CUSTOM_THEME_DEFAULTS.light.panel),
-      text:   ctNormalizeHex(ct.light?.text,   CUSTOM_THEME_DEFAULTS.light.text),
-    }
+    dark:  normalizePalette(ct.dark,  CUSTOM_THEME_DEFAULTS.dark),
+    light: normalizePalette(ct.light, CUSTOM_THEME_DEFAULTS.light),
   };
   syncCustomThemeUI();
   applyCustomTheme();
@@ -639,7 +660,7 @@ function syncCustomThemeUI(modeOverride) {
   if (lightBtn) lightBtn.classList.toggle('active', mode === 'light');
 
   const palette = ct[mode] || CUSTOM_THEME_DEFAULTS[mode];
-  ['accent', 'bg', 'panel', 'text'].forEach(key => {
+  CUSTOM_THEME_KEYS.forEach(key => {
     const val = ctNormalizeHex(palette[key], CUSTOM_THEME_DEFAULTS[mode][key]);
     const input = document.getElementById(`ctInput_${key}`);
     const preview = document.getElementById(`ctPreview_${key}`);
@@ -690,7 +711,7 @@ function customThemeSelectMode(mode) {
 }
 
 function customThemeSetColor(key, value, commit = false) {
-  if (!['accent', 'bg', 'panel', 'text'].includes(key)) return;
+  if (!CUSTOM_THEME_KEYS.includes(key)) return;
   const mode = getCurrentThemeMode();
   const hex = ctNormalizeHex(value, state.customTheme[mode][key]);
   state.customTheme[mode][key] = hex;
@@ -708,12 +729,17 @@ function customThemeApplyPreset(presetId) {
   const presets = CUSTOM_THEME_PRESETS[mode] || [];
   const found = presets.find(p => p.id === presetId);
   if (!found) return;
-  state.customTheme[mode] = {
-    accent: found.accent,
-    bg:     found.bg,
-    panel:  found.panel,
-    text:   found.text,
-  };
+  if (presetId === 'default') {
+    state.customTheme[mode] = { ...CUSTOM_THEME_DEFAULTS[mode] };
+  } else {
+    state.customTheme[mode] = {
+      accent: found.accent,
+      bg:     found.bg,
+      panel:  found.panel,
+      text:   found.text,
+      ...ctDeriveExtras(found.accent, found.bg, found.panel, found.text, mode),
+    };
+  }
   applyCustomTheme(mode);
   syncCustomThemeUI(mode);
   scheduleSaveCustomTheme(true);
@@ -724,18 +750,26 @@ function customThemeAutoTint() {
   const accent = ctNormalizeHex(state.customTheme[mode]?.accent, CUSTOM_THEME_DEFAULTS[mode].accent);
   const { h, s } = ctHexToHsl(accent);
   if (mode === 'dark') {
+    const bg    = ctHslToHex(h, Math.min(s * 0.48, 0.38), 0.035);
+    const panel = ctHslToHex(h, Math.min(s * 0.45, 0.40), 0.075);
+    const text  = ctHslToHex(h, Math.min(s * 0.25, 0.25), 0.93);
     state.customTheme.dark = {
       accent,
-      bg:    ctHslToHex(h, Math.min(s * 0.48, 0.38), 0.035),
-      panel: ctHslToHex(h, Math.min(s * 0.45, 0.40), 0.075),
-      text:  ctHslToHex(h, Math.min(s * 0.25, 0.25), 0.93),
+      bg,
+      panel,
+      text,
+      ...ctDeriveExtras(accent, bg, panel, text, 'dark'),
     };
   } else {
+    const bg    = ctHslToHex(h, Math.min(s * 0.40, 0.35), 0.955);
+    const panel = ctHslToHex(h, Math.min(s * 0.20, 0.18), 0.995);
+    const text  = ctHslToHex(h, Math.min(s * 0.35, 0.30), 0.15);
     state.customTheme.light = {
       accent,
-      bg:    ctHslToHex(h, Math.min(s * 0.40, 0.35), 0.955),
-      panel: ctHslToHex(h, Math.min(s * 0.20, 0.18), 0.995),
-      text:  ctHslToHex(h, Math.min(s * 0.35, 0.30), 0.15),
+      bg,
+      panel,
+      text,
+      ...ctDeriveExtras(accent, bg, panel, text, 'light'),
     };
   }
   applyCustomTheme(mode);
