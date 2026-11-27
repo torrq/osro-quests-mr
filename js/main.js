@@ -1560,7 +1560,7 @@ const TAB_ELEMENTS = {
     sidebar: "labList",
     render: ["renderLabSidebar", "renderLabMain"]
   },
-  'lab-rotd': {
+  'lab-mob-density': {
     sidebar: "labList",
     render: ["renderLabSidebar", "renderLabMain"]
   },

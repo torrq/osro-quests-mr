@@ -1,4 +1,4 @@
-// lab-rotd.js — Lab Tab: Mob Density (ROTD)
+// lab-mob-density.js — Lab Tab: Mob Density (ROTD)
 // Ported from Ragnarok Online Map Analyzer by Synom (https://synomnom.github.io/Ragnarok-Online-Map-Analyzer/)
 
 (function () {
@@ -697,12 +697,12 @@
 
       ensureDatasetLoaded()
         .then(() => {
-          if (window.state?.currentTab === 'lab-rotd') {
+          if (window.state?.currentTab === 'lab-mob-density') {
             renderRotdMain();
           }
         })
         .catch(() => {
-          if (window.state?.currentTab === 'lab-rotd') {
+          if (window.state?.currentTab === 'lab-mob-density') {
             renderRotdMain();
           }
         });
@@ -771,8 +771,8 @@
     renderRotdTable();
   }
 
-  window.registerLabExperiment?.('lab-rotd', {
-    tabId:        'lab-rotd',
+  window.registerLabExperiment?.('lab-mob-density', {
+    tabId:        'lab-mob-density',
     title:        'Mob Density (ROTD)',
     sidebarLabel: 'Mob Density (ROTD)',
     sidebarIcon:  window.SVG_ICONS?.rotd14 || '',
