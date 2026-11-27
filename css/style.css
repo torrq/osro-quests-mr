@@ -8013,3 +8013,440 @@ body.force-mobile-view .mg-search-wrapper {
 body.force-mobile-view .ss-table-wrap { display: none; }
 body.force-mobile-view .ss-cards-list { display: flex; }
 body.force-mobile-view .ss-stats { margin-left: 0; width: 100%; }
+
+/* ── Lab: Mob Density (ROTD) ─────────────────────────────────────────────── */
+.rotd-page {
+  gap: 14px;
+}
+
+.rotd-credit-link {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.rotd-credit-link:hover {
+  text-decoration: underline;
+}
+
+.rotd-status-box {
+  padding: 28px 16px;
+  text-align: center;
+  color: var(--text-muted);
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+
+.rotd-status-error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.rotd-controls-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 12px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+
+.rotd-search-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.rotd-search-wrapper {
+  flex: 1;
+  min-width: 0;
+  max-width: none;
+}
+
+.rotd-clear-btn {
+  display: none;
+  padding: 0 5px;
+  height: 20px;
+  line-height: 1;
+  margin-left: 4px;
+  flex-shrink: 0;
+}
+
+.rotd-clear-btn.visible {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.rotd-filter-row {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 10px;
+}
+
+.rotd-filter-group {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  min-width: 0;
+  flex: 1 1 0;
+}
+
+.rotd-filter-group--delay {
+  flex: 0 0 auto;
+}
+
+.rotd-filter-group label {
+  font-weight: 600;
+  color: var(--text-muted);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.rotd-filter-group select,
+.rotd-filter-group input {
+  padding: 6px 8px;
+  font-size: 12px;
+  color: var(--text);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+}
+
+.rotd-filter-group select {
+  width: 100%;
+  min-width: 0;
+}
+
+.rotd-filter-group input[type="number"] {
+  width: 64px;
+}
+
+.rotd-filter-group select:focus,
+.rotd-filter-group input:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.rotd-delay-unit {
+  color: var(--text-muted);
+  font-size: 12px;
+}
+
+.rotd-table-wrap {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow-x: auto;
+}
+
+.rotd-table-wrap.rotd-is-empty {
+  display: none;
+}
+
+.rotd-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12.5px;
+}
+
+.rotd-table thead th {
+  padding: 0;
+  text-align: right;
+  background: var(--bg-subtle, rgba(0, 0, 0, 0.18));
+  border-bottom: 1px solid var(--border);
+  vertical-align: bottom;
+}
+
+.rotd-table thead th:nth-child(1),
+.rotd-table thead th:nth-child(2),
+.rotd-table thead th:nth-child(6) {
+  text-align: left;
+}
+
+.rotd-table th button {
+  width: 100%;
+  padding: 9px 8px;
+  text-align: inherit;
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  line-height: 1.25;
+  color: var(--text-muted);
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+}
+
+.rotd-table th button:hover {
+  color: var(--text);
+  background: var(--panel-hover);
+}
+
+.rotd-sort-indicator {
+  margin-left: 3px;
+  color: var(--text-muted);
+}
+
+.rotd-table th.active-asc .rotd-sort-indicator::after {
+  content: "↑";
+  color: var(--accent);
+}
+
+.rotd-table th.active-desc .rotd-sort-indicator::after {
+  content: "↓";
+  color: var(--accent);
+}
+
+.rotd-table td {
+  padding: 8px 8px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+
+.rotd-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.rotd-table tbody tr:hover {
+  background: var(--panel-hover);
+}
+
+.rotd-col-num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.rotd-col-map {
+  text-align: left;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.rotd-col-race {
+  text-align: left;
+  color: var(--warning);
+  line-height: 1.45;
+}
+
+.rotd-density {
+  font-weight: 700;
+  color: var(--success);
+}
+
+.rotd-filter-density {
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.rotd-race-mobs {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.rotd-race-mob-amount {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.rotd-race-mob {
+  position: relative;
+  cursor: help;
+}
+
+.rotd-spawn-tooltip {
+  display: none;
+  position: absolute;
+  left: 0;
+  top: 100%;
+  z-index: 1000;
+  white-space: pre-wrap;
+  min-width: 200px;
+  max-width: min(320px, 75vw);
+  padding: 7px 9px;
+  border: 1px solid var(--accent);
+  border-radius: 6px;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.45;
+  box-shadow: 0 6px 16px var(--shadow);
+}
+
+.rotd-race-mob:hover .rotd-spawn-tooltip,
+.rotd-race-mob:focus .rotd-spawn-tooltip {
+  display: block;
+}
+
+.rotd-tooltip-title {
+  display: block;
+  margin-bottom: 4px;
+}
+
+.rotd-tooltip-amount {
+  color: var(--danger);
+}
+
+.rotd-element-fire { color: #f97316; }
+.rotd-element-wind { color: #eab308; }
+.rotd-element-water { color: #38bdf8; }
+.rotd-element-earth { color: #84cc16; }
+.rotd-element-poison { color: #c084fc; }
+.rotd-element-dark { color: #a855f7; }
+.rotd-element-ghost { color: #94a3b8; }
+.rotd-element-undead { color: #f43f5e; }
+.rotd-element-neutral { color: var(--text-muted); }
+.rotd-element-holy { color: #ca8a04; }
+
+.rotd-cards-list {
+  display: none;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.rotd-m-card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.rotd-m-card-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.rotd-m-title {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  min-width: 0;
+}
+
+.rotd-m-rank {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-muted);
+}
+
+.rotd-m-map {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.rotd-m-badges {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.rotd-m-badge {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 4px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  padding: 3px 8px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.rotd-m-badge--density {
+  color: var(--success);
+}
+
+.rotd-m-badge--filter {
+  color: var(--accent);
+}
+
+.rotd-m-badge-label {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.rotd-m-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 14px;
+  font-size: 12px;
+  color: var(--text-muted);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 6px 10px;
+}
+
+.rotd-m-stats strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.rotd-m-races {
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.rotd-empty {
+  text-align: center;
+  padding: 36px 16px;
+  color: var(--text-muted);
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+
+@media (max-width: 768px) {
+  .rotd-table-wrap { display: none; }
+  .rotd-cards-list { display: flex; }
+  .rotd-filter-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+  .rotd-filter-group {
+    justify-content: space-between;
+  }
+  .rotd-filter-group select,
+  .rotd-filter-group input[type="number"] {
+    flex: 1;
+    max-width: none;
+  }
+}
+
+body.force-mobile-view .rotd-table-wrap { display: none; }
+body.force-mobile-view .rotd-cards-list { display: flex; }
+body.force-mobile-view .rotd-filter-row {
+  flex-direction: column;
+  align-items: stretch;
+  gap: 8px;
+}
+body.force-mobile-view .rotd-filter-group {
+  justify-content: space-between;
+}
+body.force-mobile-view .rotd-filter-group select,
+body.force-mobile-view .rotd-filter-group input[type="number"] {
+  flex: 1;
+  max-width: none;
+}

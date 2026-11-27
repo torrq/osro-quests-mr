@@ -1560,6 +1560,10 @@ const TAB_ELEMENTS = {
     sidebar: "labList",
     render: ["renderLabSidebar", "renderLabMain"]
   },
+  'lab-rotd': {
+    sidebar: "labList",
+    render: ["renderLabSidebar", "renderLabMain"]
+  },
   bookmarks: {
     sidebar: "bookmarksList",
     render: ["renderBookmarksSidebar", "renderBookmarksMain"]

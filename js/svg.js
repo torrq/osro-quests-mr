@@ -149,6 +149,18 @@
     '<circle cx="12" cy="12" r="7.5" stroke-dasharray="3 2"></circle><circle cx="12" cy="12" r="2.5"></circle><circle cx="12" cy="3.5" r="1.6" fill="currentColor" stroke="none"></circle><circle cx="19.4" cy="16.2" r="1.6" fill="currentColor" stroke="none"></circle><circle cx="4.6" cy="16.2" r="1.6" fill="currentColor" stroke="none"></circle>'
   );
 
+  // Mob Density (ROTD) icon (14px): map grid with clustered spawn-density dots
+  const rotd14 = svg(
+    'width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"',
+    '<rect x="3" y="3" width="18" height="18" rx="3"></rect><path d="M3 12h18M12 3v18" opacity="0.3"></path><circle cx="8" cy="8" r="1.5" fill="currentColor" stroke="none"></circle><circle cx="15.5" cy="8.5" r="1.8" fill="currentColor" stroke="none"></circle><circle cx="16.5" cy="15" r="1.5" fill="currentColor" stroke="none"></circle><circle cx="8.5" cy="16" r="1.2" fill="currentColor" stroke="none"></circle><circle cx="13" cy="14" r="1.2" fill="currentColor" stroke="none"></circle>'
+  );
+
+  // Mob Density (ROTD) icon (18px): map grid with clustered spawn-density dots
+  const rotd18 = svg(
+    'width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"',
+    '<rect x="3" y="3" width="18" height="18" rx="3"></rect><path d="M3 12h18M12 3v18" opacity="0.3"></path><circle cx="8" cy="8" r="1.5" fill="currentColor" stroke="none"></circle><circle cx="15.5" cy="8.5" r="1.8" fill="currentColor" stroke="none"></circle><circle cx="16.5" cy="15" r="1.5" fill="currentColor" stroke="none"></circle><circle cx="8.5" cy="16" r="1.2" fill="currentColor" stroke="none"></circle><circle cx="13" cy="14" r="1.2" fill="currentColor" stroke="none"></circle>'
+  );
+
   window.SVG_ICONS = {
     tabLab: labTab,
     tabBookmarks,
@@ -172,6 +184,8 @@
     mission18,
     slaves14,
     slaves18,
+    rotd14,
+    rotd18,
   };
 
   window.applySvgIcons = function applySvgIcons(root = document) {
