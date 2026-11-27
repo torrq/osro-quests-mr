@@ -500,6 +500,40 @@ function buildCustomThemeCss(palette, mode) {
   const codeText  = ctNormalizeHex(palette?.codeText,  def.codeText);
   const success   = ctNormalizeHex(palette?.success,   def.success);
 
+  const coreIsDefault = accent === def.accent && bg === def.bg && panel === def.panel && text === def.text;
+  if (coreIsDefault) {
+    const vars = [];
+    if (textMuted !== def.textMuted) {
+      vars.push(`  --text-muted: ${textMuted};`, `  --placeholder-text: ${textMuted};`, `  --placeholder-icon: ${textMuted};`);
+    }
+    if (border !== def.border) {
+      const isDark = ctRelativeLuminance(panel) < 0.35;
+      const bLight = isDark ? ctShiftLightness(border, 0.06) : ctShiftLightness(border, -0.04);
+      vars.push(`  --border: ${border};`, `  --border-light: ${bLight};`, `  --group-border: ${border};`, `  --mat-connector-opts: ${border};`);
+    }
+    if (hover !== def.hover) {
+      const isDark = ctRelativeLuminance(panel) < 0.35;
+      const btnHov = isDark ? ctShiftLightness(hover, 0.04) : ctShiftLightness(hover, -0.03);
+      vars.push(`  --panel-hover: ${hover};`, `  --button-hover: ${btnHov};`, `  --bg-hover: ${btnHov};`);
+    }
+    if (codeText !== def.codeText) {
+      vars.push(`  --code-text: ${codeText};`);
+    }
+    if (success !== def.success) {
+      const isDark = ctRelativeLuminance(panel) < 0.35;
+      const sHover = isDark ? ctShiftLightness(success, 0.10) : ctShiftLightness(success, 0.08);
+      vars.push(`  --success: ${success};`, `  --success-hover: ${sHover};`, `  --success-shadow: ${ctRgba(success, 0.35)};`);
+    }
+    if (scrollbar !== def.scrollbar) {
+      vars.push(`  --scrollbar: ${scrollbar};`);
+    }
+    let css = vars.length ? `html:root {\n${vars.join('\n')}\n}\n` : '';
+    if (scrollbar !== def.scrollbar) {
+      css += `* { scrollbar-color: ${scrollbar} transparent; }\n::-webkit-scrollbar-thumb { background: ${scrollbar}; }\n::-webkit-scrollbar-thumb:hover { background: ${accent}; }`;
+    }
+    return css;
+  }
+
   const isDarkSurface = ctRelativeLuminance(panel) < 0.35;
   const acHsl = ctHexToHsl(accent);
 
