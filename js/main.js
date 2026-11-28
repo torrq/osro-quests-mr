@@ -614,7 +614,7 @@ function buildCustomThemeCss(palette, mode) {
   const placeholderBg = ctMix(panel, text, 0.10);
   const matConnector = tree;
   const subtleOverlay = ctRgba(text, 0.08);
-  const imgFile = mode === 'light' ? 'image/osromr_light.jpg' : 'image/osromr_dark.jpg';
+  const imgFile = mode === 'light' ? '../image/osromr_light.jpg' : '../image/osromr_dark.jpg';
   const headerOverlayEnd = ctMix(panel, accent, isDarkSurface ? 0.24 : 0.18);
   const headerBgImage = `linear-gradient(135deg, ${ctRgba(bg, 0.84)} 0%, ${ctRgba(headerOverlayEnd, 0.76)} 100%), url("${imgFile}")`;
   const successHover = isDarkSurface ? ctShiftLightness(success, 0.10) : ctShiftLightness(success, 0.08);

@@ -2,6 +2,7 @@
 // Ported from Ragnarok Online Map Analyzer by Synom (https://synomnom.github.io/Ragnarok-Online-Map-Analyzer/)
 
 (function () {
+  // HR vs MR difference: MR has no `@warp` command, so HR-only `@warp` copy buttons are disabled here.
   const IS_HR = false;
 
   let dataset = null;       // { maps, mobs, spawns }

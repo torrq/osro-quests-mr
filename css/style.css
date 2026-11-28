@@ -5334,8 +5334,96 @@ body.viewer-mode .editor-quest select {
 }
 
 .ca-passport--gem {
-  border-color: rgba(34, 197, 94, 0.28);
-  background-color: rgba(34, 197, 94, 0.055);
+  align-items: stretch;
+  text-align: left;
+  padding: 14px;
+  gap: 12px;
+  border-color: color-mix(in srgb, var(--success) 30%, var(--border));
+  background-color: color-mix(in srgb, var(--success) 5%, var(--panel));
+}
+
+.gem-guide-header {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+}
+
+.gem-guide-header--callout {
+  border-left: 3px solid var(--success);
+  padding-left: 11px;
+}
+
+.gem-guide-header-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.gem-guide-title-row {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: var(--success);
+  flex-wrap: wrap;
+}
+
+.gem-guide-title {
+  font-size: 14.5px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.gem-guide-cooldown {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+.gem-npc-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  appearance: none;
+  border: 1px solid color-mix(in srgb, var(--accent) 45%, var(--border));
+  background: var(--accent-bg);
+  color: var(--accent);
+  border-radius: 6px;
+  padding: 3px 8px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  font-size: 11.5px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.gem-npc-btn:hover {
+  border-color: var(--accent);
+  background: var(--panel-hover);
+}
+
+.gem-guide-sub {
+  font-size: 12px;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+.gem-guide-sub strong {
+  color: var(--text);
+}
+
+.gem-db-toggle {
+  flex-shrink: 0;
+}
+
+.gem-guide-footer {
+  display: flex;
+  justify-content: center;
+  padding-top: 2px;
 }
 
 .gem-grid {
@@ -5343,41 +5431,45 @@ body.viewer-mode .editor-quest select {
   margin: 0 auto;
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 12px;
+  gap: 10px;
 }
 
-@media (max-width: 640px) {
+@media (max-width: 768px) {
   .gem-grid {
     grid-template-columns: 1fr;
   }
 }
 
+body.force-mobile-view .gem-grid {
+  grid-template-columns: 1fr;
+}
+
 .gem-card {
-  background: color-mix(in srgb, var(--panel) 92%, transparent);
-  border: 1px solid color-mix(in srgb, var(--border) 80%, transparent);
+  background: var(--panel);
+  border: 1px solid var(--border);
   border-radius: 10px;
-  padding: 10px 10px 8px 10px;
+  padding: 11px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  transition: border-color 0.15s ease;
 }
 
-.gem-locs {
-  margin-top: 6px;
+.gem-card:hover {
+  border-color: var(--border-light);
 }
 
-.gem-line {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) clamp(180px, 32%, 420px);
-  gap: 12px;
+.gem-card-top {
+  display: flex;
   align-items: center;
-}
-
-.gem-line + .gem-line {
-  margin-top: 8px;
-}
-
-.gem-line-left {
-  display: inline-flex;
+  justify-content: space-between;
   gap: 8px;
+}
+
+.gem-card-item {
+  display: flex;
   align-items: center;
+  gap: 8px;
   min-width: 0;
 }
 
@@ -5386,52 +5478,173 @@ body.viewer-mode .editor-quest select {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  display: inline-block;
-}
-
-.gem-line--item .ca-passport-req-name {
+  font-weight: 600;
+  font-size: 13.5px;
   color: var(--text);
 }
 
-.gem-line-note {
+.gem-item-link:hover {
+  color: var(--accent);
+}
+
+.gem-item-id {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  font-size: 11px;
+  font-weight: 600;
   color: var(--text-muted);
+  flex-shrink: 0;
+}
+
+.gem-card-badges {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  flex-shrink: 0;
+}
+
+.gem-amt-pill {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--warning);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 2px 6px;
+}
+
+.gem-source-pill {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  border-radius: 6px;
+  padding: 2px 6px;
+  border: 1px solid var(--border);
+}
+
+.gem-source-pill--mob {
+  color: var(--accent);
+  background: var(--accent-bg);
+  border-color: color-mix(in srgb, var(--accent) 40%, var(--border));
+}
+
+.gem-source-pill--npc {
+  color: var(--success);
+  background: color-mix(in srgb, var(--success) 12%, transparent);
+  border-color: color-mix(in srgb, var(--success) 40%, var(--border));
+}
+
+.gem-card-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-top: 8px;
+  border-top: 1px solid var(--border);
+}
+
+.gem-detail-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  min-width: 0;
+}
+
+.gem-detail-label {
+  width: 38px;
+  flex-shrink: 0;
+  padding-top: 4px;
+  font-size: 10.5px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+}
+
+.gem-detail-row--note .gem-detail-label {
+  padding-top: 1px;
+}
+
+.gem-detail-val {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 5px;
+  min-width: 0;
+  flex: 1;
+}
+
+.gem-mob-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 8px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text);
   font-size: 12px;
-  line-height: 1.2;
-  text-align: right;
-  justify-self: end;
-  width: 100%;
-  white-space: normal;
-  overflow-wrap: anywhere;
+  font-weight: 600;
+  text-decoration: none;
+  transition: border-color 0.15s ease, color 0.15s ease, background 0.15s ease;
 }
 
-.gem-line--loc {
-  margin-top: 6px;
+.gem-mob-pill:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--panel-hover);
 }
 
-.gem-copy-btn {
-  padding: 4px 8px;
+.gem-mob-id {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  font-size: 10.5px;
+  font-weight: 600;
+  color: var(--code-text);
 }
 
 .gem-map-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
   appearance: none;
   border: 1px solid var(--border);
-  background: color-mix(in srgb, var(--panel) 92%, transparent);
-  color: var(--text);
-  border-radius: 8px;
-  padding: 6px 8px;
+  background: var(--bg);
+  color: var(--code-text);
+  border-radius: 6px;
+  padding: 4px 8px;
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
-  font-size: 12px;
+  font-size: 11.5px;
+  font-weight: 600;
   cursor: pointer;
+  transition: border-color 0.15s ease, color 0.15s ease, background 0.15s ease;
 }
 
 .gem-map-btn:hover {
   border-color: var(--accent);
+  color: var(--accent);
+  background: var(--panel-hover);
+}
+
+.gem-map-btn-icon {
+  display: inline-flex;
+  align-items: center;
+  color: var(--text-muted);
+}
+
+.gem-map-btn:hover .gem-map-btn-icon {
+  color: var(--accent);
 }
 
 .gem-map-sep {
-  margin: 0 6px;
+  margin: 0 2px;
   color: var(--text-muted);
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  font-size: 12px;
+}
+
+.gem-note-text {
+  font-size: 12px;
+  line-height: 1.35;
+  color: var(--text-muted);
 }
 
 .gem-req-icon--missing {

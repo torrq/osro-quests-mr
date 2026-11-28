@@ -5,55 +5,82 @@
 const GEM_TIMER_MS    = 24 * 60 * 60 * 1000;
 const GEM_STORAGE_KEY = (typeof LOCAL_STORAGE !== 'undefined' && LOCAL_STORAGE.lab_gem) || 'osromr_lab_gem_v1';
 
+// HR vs MR differences:
+// - HR (GEM_IS_HR = true): enables `@warp <map [x y]>` copy buttons, omits walking-direction `mrNote`s,
+//   and uses `hrMobs` / `hrLocations` where higher HR drop rates change the optimal farm spot.
+// - MR (GEM_IS_HR = false): copies bare `<map [x y]>` without `@warp`, displays `mrNote` portal/navigation tips,
+//   and uses `mobs` / `locations`.
+// - `note` is shown on both HR and MR (e.g. NPC shop reminders).
+const GEM_IS_HR = typeof FLAVOR === 'string' && FLAVOR.toLowerCase().includes('highrate');
+
 const GEM_ITEMS = [
   {
-    id: 720, name: 'Aquamarine', amount: 50,
-    note: 'MOB 1065 — iz_dun02 → @navi iz_dun04',
+    id: 720, name: 'Aquamarine', amount: 50, source: 'mob',
+    mobs: [{ id: 1065, name: 'Strouf' }],
+    hrMobs: [
+      { id: 1158, name: 'Phen' },
+      { id: 1045, name: 'Marc' },
+      { id: 1142, name: 'Marine Sphere' },
+      { id: 1264, name: 'Merman' },
+    ],
+    mrNote: 'iz_dun02 → @navi iz_dun04',
     locations: [{ map: 'iz_dun04' }],
+    hrLocations: [{ map: 'iz_dun03' }],
   },
   {
-    id: 719, name: 'Amethyst', amount: 50,
-    note: 'MOBs 1216, 1111 — Clock Tower B2 → Top Right portal',
+    id: 719, name: 'Amethyst', amount: 50, source: 'mob',
+    mobs: [{ id: 1216, name: 'Penomena' }, { id: 1111, name: 'Drainliar' }],
+    hrMobs: [{ id: 1099, name: 'Argiope' }],
+    mrNote: 'Clock Tower B2 → Top Right portal',
     locations: [{ map: 'mjolnir_05' }],
   },
   {
-    id: 725, name: 'Sardonyx', amount: 50,
-    note: 'MOB 1111',
+    id: 725, name: 'Sardonyx', amount: 50, source: 'mob',
+    mobs: [{ id: 1111, name: 'Drainliar' }],
     locations: [{ map: 'alde_dun03' }],
   },
   {
-    id: 722, name: 'Pearl', amount: 50,
-    note: 'MOB 1323 — cmd_fild03 → 6 o\'clock portal',
+    id: 722, name: 'Pearl', amount: 50, source: 'mob',
+    mobs: [{ id: 1323, name: 'Sea Otter' }],
+    hrMobs: [{ id: 1148, name: 'Medusa' }],
+    mrNote: 'cmd_fild03 → 6 o\'clock portal',
     locations: [{ map: 'cmd_fild04' }],
+    hrLocations: [{ map: 'beach_dun' }],
   },
   {
-    id: 726, name: 'Sapphire', amount: 50,
-    note: 'NPC shop',
+    id: 726, name: 'Sapphire', amount: 50, source: 'npc',
+    mobs: [],
+    note: 'Buy from NPC shop',
     locations: [{ map: 'lhz_in02 105 21' }],
   },
   {
-    id: 718, name: 'Garnet', amount: 50,
-    note: 'MOB 1703 — tha_t03 → climb up; kill all as you go',
-    locations: [{ map: 'tha_t08 / tha_t09', maps: ['tha_t08', 'tha_t09'] }],
+    id: 718, name: 'Garnet', amount: 50, source: 'mob',
+    mobs: [{ id: 1703, name: 'Lady Solace' }],
+    mrNote: 'tha_t03 → climb up; kill all as you go',
+    locations: [{ map: 'tha_t07–tha_t12', maps: ['tha_t07', 'tha_t08', 'tha_t09', 'tha_t10', 'tha_t11', 'tha_t12'] }],
   },
   {
-    id: 732, name: '3-Carat Diamond', amount: 50,
+    id: 732, name: '3-Carat Diamond', amount: 50, source: 'npc',
+    mobs: [],
     note: 'Buy from NPC (500 at a time)',
     locations: [{ map: 'mjolnir_02 85 364' }],
   },
   {
-    id: 729, name: 'Zircon', amount: 50,
-    note: 'NPC shop',
+    id: 729, name: 'Zircon', amount: 50, source: 'npc',
+    mobs: [],
+    note: 'Buy from NPC shop',
     locations: [{ map: 'lhz_in02 105 21' }],
   },
   {
-    id: 723, name: 'Ruby', amount: 50,
-    note: 'NPC shop',
+    id: 723, name: 'Ruby', amount: 50, source: 'npc',
+    mobs: [],
+    note: 'Buy from NPC shop',
     locations: [{ map: 'lhz_in02 105 21' }],
   },
   {
-    id: 728, name: 'Topaz', amount: 50,
-    note: 'NPC shop',
+    id: 728, name: 'Topaz', amount: 50, source: 'npc',
+    mobs: [],
+    note: 'Buy from NPC shop',
     locations: [{ map: 'lhz_in02 105 21' }],
   },
 ];
@@ -180,10 +207,10 @@ function gemTimerCard(t) {
 
 function gemWarpCommand(mapStr) {
   const m = (mapStr || '').trim().match(/^([A-Za-z0-9_]+)\s+(\d+)\s+(\d+)$/);
-  if (m) return `${m[1]} ${m[2]} ${m[3]}`;
+  if (m) return GEM_IS_HR ? `@warp ${m[1]} ${m[2]} ${m[3]}` : `${m[1]} ${m[2]} ${m[3]}`;
 
   const mapOnly = (mapStr || '').trim().match(/^([A-Za-z0-9_]+)$/);
-  if (mapOnly) return `${mapOnly[1]}`;
+  if (mapOnly) return GEM_IS_HR ? `@warp ${mapOnly[1]}` : `${mapOnly[1]}`;
 
   return null;
 }
@@ -220,7 +247,7 @@ async function gemCopyWarp(mapStr) {
   if (!cmd) return;
   try {
     await gemCopyText(cmd);
-    if (typeof showToast === 'function') showToast('Copied!', 'success', 1200);
+    if (typeof showToast === 'function') showToast(`Copied: ${cmd}`, 'success', 1500);
   } catch {
     if (typeof showToast === 'function') showToast('Copy failed', 'error', 2500);
   }
@@ -228,52 +255,148 @@ async function gemCopyWarp(mapStr) {
 
 window.gemCopyWarp = gemCopyWarp;
 
+async function gemCopyCmd(cmd) {
+  if (!cmd) return;
+  try {
+    await gemCopyText(cmd);
+    if (typeof showToast === 'function') showToast(`Copied: ${cmd}`, 'success', 1500);
+  } catch {
+    if (typeof showToast === 'function') showToast('Copy failed', 'error', 2500);
+  }
+}
+
+window.gemCopyCmd = gemCopyCmd;
+
+function gemGetMobDbPref() {
+  try {
+    const data = typeof loadLabData === 'function' ? loadLabData() : {};
+    return data.gemMobDb === 'koko' ? 'koko' : 'rms';
+  } catch {
+    return 'rms';
+  }
+}
+
+function gemMobUrl(mobId, db) {
+  if (db === 'koko') {
+    return `https://ro.kokotewa.com/db/mon_info?id=${encodeURIComponent(mobId)}`;
+  }
+  return `https://ratemyserver.net/index.php?page=mob_db&mob_id=${encodeURIComponent(mobId)}`;
+}
+
+function gemSetMobDb(db) {
+  const val = db === 'koko' ? 'koko' : 'rms';
+  if (typeof saveLabData === 'function') {
+    saveLabData({ gemMobDb: val });
+  }
+  document.querySelectorAll('#gemMobDbToggle .mg-toggle-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.db === val);
+  });
+  const guideEl = document.getElementById('gemGuideSection');
+  if (guideEl) {
+    guideEl.outerHTML = gemHowTo();
+  }
+}
+
+window.gemSetMobDb = gemSetMobDb;
+
+function gemRenderMapBtn(mapStr) {
+  const enc = encodeURIComponent(mapStr);
+  const cmd = gemWarpCommand(mapStr) || mapStr;
+  const copyIcon = window.SVG_ICONS?.copy11 || '';
+  return `<button type="button" class="gem-map-btn" onclick="gemCopyWarp(decodeURIComponent('${enc}'))" title="Copy ${escapeHtml(cmd)}">${copyIcon ? `<span class="gem-map-btn-icon">${copyIcon}</span>` : ''}<span>${escapeHtml(cmd)}</span></button>`;
+}
+
 function gemHowTo() {
   const sorted = [...GEM_ITEMS].sort((a, b) => a.name.localeCompare(b.name));
+  const mobDb = gemGetMobDbPref();
+  const dbLabel = mobDb === 'koko' ? 'Kokotewa' : 'RateMyServer';
+  const copyIcon = window.SVG_ICONS?.copy11 || '';
+
   return `
-    <div class="ca-passport ca-passport--gem">
-      <div class="ca-passport-title">Gem Quest Guide</div>
-      <div class="ca-passport-meta">
-        Gem Quest can be completed <strong>once every 24 hours per account</strong>.
-        Type <code class="gem-map">@npc gem</code> to reach the NPC, then submit <strong>10 gem types</strong> (<strong>50</strong> each).
-        Rewards <strong>50–100 Activity Points</strong> total (random 5–10 per gem).
-        Cooldown is <strong>independent of the game timer</strong> and begins only after you submit the <strong>10th</strong> item (the announcement).
-      </div>
-      <div class="gem-grid">
-        ${sorted.map(g => `
-          <div class="gem-card">
-            <div class="gem-line gem-line--item">
-              <div class="gem-line-left">
-                ${renderItemIcon(g.id, 24)}
-                <span class="ca-passport-req-amt">×${g.amount}</span>
-                <a class="item-link ca-passport-req-name gem-item-link" onclick="navigateToItem(${g.id})" title="${g.name}">${g.name}</a>
-              </div>
-              <div class="gem-line-note">${escapeHtml(g.note || '')}</div>
-            </div>
-            <div class="gem-locs">
-              ${g.locations.map(l => `
-                <div class="gem-line gem-line--loc">
-                  <div class="gem-line-left">
-                    ${(() => {
-                      const maps = Array.isArray(l.maps) ? l.maps : null;
-                      if (maps) {
-                        return maps.map((m, idx) => {
-                          const encMap = encodeURIComponent(m);
-                          const label = m.replace(/^tha_/, '').toUpperCase();
-                          const sep = idx === 0 ? '' : '<span class="gem-map-sep">/</span>';
-                          return `${sep}<button class="gem-map-btn" onclick="gemCopyWarp(decodeURIComponent('${encMap}'))" title="Copy ${m}">${m}</button>`;
-                        }).join('');
-                      }
-                      const enc = encodeURIComponent(l.map);
-                      return `<button class="gem-map-btn" onclick="gemCopyWarp(decodeURIComponent('${enc}'))" title="Copy ${l.map}">${l.map}</button>`;
-                    })()}
-                  </div>
-                  <div class="gem-line-note"></div>
-                </div>
-              `).join('')}
-            </div>
+    <div class="ca-passport ca-passport--gem" id="gemGuideSection">
+      <div class="gem-guide-header gem-guide-header--callout">
+        <div class="gem-guide-header-top">
+          <div class="gem-guide-title-row">
+            ${window.SVG_ICONS?.gem18 || ''}
+            <span class="gem-guide-title">Gem Quest Guide</span>
           </div>
-        `).join('')}
+          <button type="button" class="gem-npc-btn" onclick="gemCopyCmd('@npc gem')" title="Copy @npc gem">${copyIcon ? `<span class="gem-map-btn-icon">${copyIcon}</span>` : ''}<span>@npc gem</span></button>
+        </div>
+        <div class="gem-guide-sub">
+          Submit <strong>10 gems × 50</strong> for <strong>50–100 Activity Points</strong> (5–10 per gem). Cooldown begins on the <strong>10th</strong> submit · <strong>24h</strong> / account.
+        </div>
+      </div>
+
+      <div class="gem-grid">
+        ${sorted.map(g => {
+          const isNpc = g.source === 'npc';
+          const locs = (GEM_IS_HR && Array.isArray(g.hrLocations)) ? g.hrLocations : g.locations;
+          const mobs = (GEM_IS_HR && Array.isArray(g.hrMobs)) ? g.hrMobs : g.mobs;
+
+          const locsHtml = locs.map(l => {
+            const maps = Array.isArray(l.maps) ? l.maps : null;
+            if (maps) {
+              return maps.map(m => gemRenderMapBtn(m)).join('');
+            }
+            return gemRenderMapBtn(l.map);
+          }).join('');
+
+          const mobsHtml = Array.isArray(mobs) && mobs.length
+            ? mobs.map(m => `
+                <a class="gem-mob-pill" href="${gemMobUrl(m.id, mobDb)}" target="_blank" rel="noopener" title="Open ${escapeHtml(m.name)} [${m.id}] on ${dbLabel}">
+                  <span class="gem-mob-name">${escapeHtml(m.name)}</span>
+                  <span class="gem-mob-id">#${m.id}</span>
+                </a>
+              `).join('')
+            : '';
+
+          return `
+            <div class="gem-card">
+              <div class="gem-card-top">
+                <div class="gem-card-item">
+                  ${renderItemIcon(g.id, 24)}
+                  <a class="item-link ca-passport-req-name gem-item-link" onclick="navigateToItem(${g.id})" title="${escapeHtml(g.name)}">${escapeHtml(g.name)}</a>
+                  <span class="gem-item-id">#${g.id}</span>
+                </div>
+                <div class="gem-card-badges">
+                  <span class="gem-amt-pill">×${g.amount}</span>
+                  <span class="gem-source-pill ${isNpc ? 'gem-source-pill--npc' : 'gem-source-pill--mob'}">${isNpc ? 'NPC' : 'Mob'}</span>
+                </div>
+              </div>
+
+              <div class="gem-card-rows">
+                ${mobsHtml ? `
+                  <div class="gem-detail-row">
+                    <span class="gem-detail-label">Mobs</span>
+                    <div class="gem-detail-val gem-mobs-list">${mobsHtml}</div>
+                  </div>
+                ` : ''}
+
+                <div class="gem-detail-row">
+                  <span class="gem-detail-label">${GEM_IS_HR ? 'Warp' : 'Map'}</span>
+                  <div class="gem-detail-val gem-locs-list">${locsHtml}</div>
+                </div>
+
+                ${(() => {
+                  const displayNote = GEM_IS_HR ? (g.note || '') : (g.mrNote || g.note || '');
+                  return displayNote ? `
+                  <div class="gem-detail-row gem-detail-row--note">
+                    <span class="gem-detail-label">Note</span>
+                    <div class="gem-detail-val gem-note-text">${escapeHtml(displayNote)}</div>
+                  </div>
+                ` : '';
+                })()}
+              </div>
+            </div>
+          `;
+        }).join('')}
+      </div>
+      <div class="gem-guide-footer">
+        <div class="mg-toggle-group gem-db-toggle" id="gemMobDbToggle" title="Default database when clicking monster names">
+          <span class="mg-toggle-label">Mob Click:</span>
+          <button type="button" class="mg-toggle-btn ${mobDb === 'rms' ? 'active' : ''}" data-db="rms" onclick="gemSetMobDb('rms')">RMS</button>
+          <button type="button" class="mg-toggle-btn ${mobDb === 'koko' ? 'active' : ''}" data-db="koko" onclick="gemSetMobDb('koko')">Kokotewa</button>
+        </div>
       </div>
     </div>`;
 }
@@ -339,7 +462,7 @@ async function gemStartTimer(id) {
       const msgId = await osroScheduleCloudPush(id, GEM_TIMER_MS / 1000, {
         title: osroNotifyTitle('Gem Quest'),
         body:  `${t.name || 'Account'} is ready.`,
-        url: 'https://torrq.github.io/osro-quests-mr/?tab=lab-gem',
+        url: 'https://torrq.github.io/osro-quests-hr/?tab=lab-gem',
       });
       if (msgId) t.cloudMessageId = msgId;
     }
@@ -488,7 +611,7 @@ function gemSliderCommit(id, val) {
           osroScheduleCloudPush(id, Math.ceil(remaining / 1000), {
             title: osroNotifyTitle('Gem Quest'),
             body:  `${t.name || 'Account'} is ready.`,
-            url: 'https://torrq.github.io/osro-quests-mr/?tab=lab-gem',
+            url: 'https://torrq.github.io/osro-quests-hr/?tab=lab-gem',
           }).then(msgId => {
             if (msgId) {
               const d = gemLoad();
@@ -537,7 +660,7 @@ async function gemStartTimerFromDisplay(id) {
       const msgId = await osroScheduleCloudPush(id, delayInSeconds, {
         title: osroNotifyTitle('Gem Quest'),
         body:  `${t.name || 'Account'} is ready.`,
-        url: 'https://torrq.github.io/osro-quests-mr/?tab=lab-gem',
+        url: 'https://torrq.github.io/osro-quests-hr/?tab=lab-gem',
       });
       if (msgId) t.cloudMessageId = msgId;
     }
@@ -565,7 +688,7 @@ function gemMaybeNotifyDone(t, finishedAt) {
     window.osroNotifyReady({
       section: 'Gem Quest',
       body:    `${t.name || 'Account'} is ready.`,
-      tag:     `osromr_gem_${t.id}`,
+      tag:     `osrohr_gem_${t.id}`,
       url:     '?tab=lab-gem',
     });
   }
@@ -595,7 +718,7 @@ async function gemSetNotifyOnDone(id, enabled, el) {
         const msgId = await osroScheduleCloudPush(id, Math.ceil(remaining / 1000), {
           title: osroNotifyTitle('Gem Quest'),
           body:  `${t.name || 'Account'} is ready.`,
-          url: 'https://torrq.github.io/osro-quests-mr/?tab=lab-gem',
+          url: 'https://torrq.github.io/osro-quests-hr/?tab=lab-gem',
         });
         if (msgId) t.cloudMessageId = msgId;
       }
